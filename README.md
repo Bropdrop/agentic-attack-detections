@@ -72,34 +72,13 @@ Last run: Suricata 8.0.8 and Zeek 9.0.1, all expected alerts and notices, no hit
 
 The pcap is synthetic. No rule in this repository has been tested against a captured ARTEX intrusion, so treat every rule as experimental until it has run on your own data.
 
-## Sources
-
-Indicators and behaviors come from these reports. Each row in `iocs/indicators.csv` names its own source.
-
-- Microsoft, [Storm-0940 and the ConnectWise supply chain compromise](https://www.microsoft.com/en-us/security/blog/2026/10/21/storm-0940-uses-artex-agentic-ai-connectwise-supply-chain-compromise/) (October 21, 2026) and [ARTEX abuse expands as cybercriminals target the financial sector](https://www.microsoft.com/en-us/security/blog/2026/11/06/artex-abuse-expands-as-cybercriminals-target-financial-sector/) (November 6, 2026)
-- FBI, [FLASH-20261113-001](https://www.ic3.gov/CSA/2026/261113.pdf) (November 13, 2026)
-- Google Threat Intelligence Group and Mandiant, [ARTEX and Friends](https://cloud.google.com/blog/topics/threat-intelligence/artex-and-friends-enter-agentic-offensive-frameworks)
-- CrowdStrike, [South Korean finance](https://www.crowdstrike.com/en-us/blog/unknown-threat-actor-uses-artex-to-target-south-korean-finance/) (October 7, 2026) and [VAPOR PANDA](https://www.crowdstrike.com/en-us/blog/vapor-panda-uses-artex-to-scale-global-campaign/) (October 29, 2026)
-- Wiz, [ARTEX in the wild](https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors) (October 22, 2026)
-- Censys, [ARTEX: Agentic Asbestos](https://censys.com/blog/artex-agentic-asbestos/) (November 5, 2026)
-- Datadog Security Labs, [ARTEX in AWS environments](https://securitylabs.datadoghq.com/articles/artex-agentic-attacks-aws-environments/) (November 9, 2026)
-- Elastic Security Labs, [Five AI attack frameworks](https://www.elastic.co/security-labs/threat-command/agentic-offensive-frameworks-detection-artex) (November 13, 2026)
-- Cisco Talos, [ARTEX and beyond](https://blog.talosintelligence.com/artex-and-beyond/) (November 13, 2026). Snort users can also enable Talos SIDs 1:67494 to 1:67496 and 7:76 to 7:78
-- ExtraHop, [Inside an agentic attack framework](https://www.extrahop.com/blog/artext-inside-an-agentic-attack-framework) (November 15, 2026)
-- ReversingLabs, [Detection strategies for ARTEX and related forks](https://www.reversinglabs.com/blog/threat-researchers-notebook-detection-strategies-for-artex-and-related-forks) (November 18, 2026)
-- MalwareMustDie, [MMD-072-2026](https://blog.malwaremustdie.org/2026/11/mmd-072-2026-artex-detection-signature.html) (November 13 to 17, 2026), for community-reported markers marked medium or low
-- Fortinet FortiGuard Labs, [T-SQL being abused to deliver malware on compromised MS SQL servers](https://www.fortinet.com/blog/threat-research/t-sql-being-abused-to-deliver-malware-on-compromised-ms-sql-servers) (November 12, 2026), for the SQL Server toolkit hosts and payload hashes
-- BadByte, via [e2e-assure](https://e2e-assure.com/guide/artex-attacks), for the backdoored container images
-
-The rules, queries and scripts here are original work. No rule text was copied from other packs.
-
 ## Contributing
 
-Pull requests are welcome. Add new indicators to `iocs/indicators.csv` with a public source, run `python3 tools/build_feeds.py` and `python3 tools/validate.py`, and commit the regenerated files. Report false positives as issues, with the rule name and the shape of the event (no customer data).
+Pull requests are welcome. Add new indicators to `iocs/indicators.csv` with their source, run `python3 tools/build_feeds.py` and `python3 tools/validate.py`, and commit the regenerated files. Report false positives as issues, with the rule name and the shape of the event (no customer data).
 
 ## License
 
-MIT. See [LICENSE](LICENSE). The indicators are facts reported by the sources above. Use them in your own products and feeds.
+MIT. See [LICENSE](LICENSE). Each indicator names its source in `iocs/indicators.csv`. Use them in your own products and feeds.
 
 ## Disclaimer
 
