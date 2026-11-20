@@ -1,0 +1,3 @@
+# Entra ID Sign-In Failure
+# Sigma id 71a8ff91-4a7d-58dc-a90f-c3d6c1e676a2, pipeline splunk_windows
+ResultType IN (50126, 50053, 50055, 50056)

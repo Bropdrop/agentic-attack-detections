@@ -1,0 +1,22 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install tools
+        run: pip install -r tools/requirements.txt
+      - name: Validate rules, queries and feeds
+        run: python tools/validate.py
+      - name: Convert Sigma to Splunk, Sentinel and Elastic
+        run: python tools/convert.py
+      - name: Check generated conversions are committed
+        run: git diff --exit-code generated/ || (echo "Run tools/convert.py and commit generated/" && exit 1)

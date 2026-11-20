@@ -1,0 +1,3 @@
+# Azure Resource Manager Deployment Validate Call
+# Sigma id 23860b80-c26e-59f0-b81c-30e044e29324, pipeline ecs_windows
+from * metadata _id, _index, _version | where ends_with(operationName, "/deployments/validate/action")
