@@ -1,0 +1,33 @@
+title: Coding Agent CLI Calling a Third-Party Model Gateway
+id: 74762d35-ef5c-5ea1-8d02-bd4cc43548f6
+status: experimental
+description: |
+    Detects Claude Code, Codex exec or Pi calling DeepSeek, Alibaba DashScope or OpenRouter, the model endpoints in
+    Cairn's example configuration and in Cairn operations NorForge and Gambit Security reported. Normal on developer
+    machines; review it from servers, container hosts and build agents.
+references:
+    - https://github.com/oritera/Cairn
+    - https://norforge.com/blog/inside_cairn
+author: ThreatDefence
+date: 2026-11-21
+tags:
+    - attack.command-and-control
+    - attack.t1071.001
+logsource:
+    category: proxy
+detection:
+    selection_ua:
+        c-useragent|startswith:
+            - 'claude-cli/'
+            - 'codex_exec/'
+            - 'pi/0.'
+    selection_host:
+        cs-host|contains:
+            - 'api.deepseek.com'
+            - 'dashscope.aliyuncs.com'
+            - 'dashscope-intl.aliyuncs.com'
+            - 'openrouter.ai'
+    condition: all of selection_*
+falsepositives:
+    - Developers using coding agents with these model providers
+level: medium

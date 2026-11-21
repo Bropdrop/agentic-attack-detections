@@ -1,3 +1,0 @@
-# Entra ID Sign-In Failure
-# Sigma id 71a8ff91-4a7d-58dc-a90f-c3d6c1e676a2, pipeline ecs_windows
-ResultType:(50126 OR 50053 OR 50055 OR 50056)

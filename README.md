@@ -1,72 +1,68 @@
-# ARTEX Detections
+# Agentic Attack Detections
 
-Detection rules, hunting queries and indicators for **ARTEX**, the open-source agentic AI penetration testing framework that state-aligned and criminal groups have used in real intrusions since August 2026. Includes its renamed builds and forks: ScopeWeaver, LUCK, Guanlan SEC, AntiFox and ARTEX PRO.
+Detection rules, hunting queries and indicators for agentic attack frameworks: open-source tools that hand an intrusion to AI agents, which plan, run real attack tools and keep going until they reach a goal. Each framework gets its own folder, built from a review of its source code and the public reporting on its use. The behaviors they share, such as coding agents running attack tools with their safety prompts off, bursts of tools from one source and probing through rotating proxies, have their own folder, so one rule covers every framework.
 
-Maintained by [ThreatDefence](https://threatdefence.com). The full advisory, with how ARTEX works, who uses it and what each hunt looks for, is at
-**https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting**
+Maintained by [ThreatDefence](https://threatdefence.com).
 
-| | |
+> This repository was `artex-detections`. GitHub redirects the old address. The ARTEX rules moved from the root to [`frameworks/artex/`](frameworks/artex); `iocs/indicators.csv` and `feeds/` kept their paths.
+
+## Frameworks
+
+| Framework | What it is | Folder | Reporting |
+|---|---|---|---|
+| ARTEX | Go planner and worker agents with a web console, released July 2026, used by Storm-0940, Storm-3358, VAPOR PANDA and criminal groups against Microsoft 365, Okta, AWS, Azure, web applications and Active Directory | [`frameworks/artex/`](frameworks/artex) | [ARTEX advisory](https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting), [ARTEX deep hunting](https://threatdefence.com/article/artex-source-code-signals-deep-hunting) |
+| Cairn | Python engine that drives Claude Code, Codex and Pi coding agents in Kali containers, used against online retailers, payment sites, Japanese web applications and WSUS servers | [`frameworks/cairn/`](frameworks/cairn) | [What Cairn leaves behind](frameworks/cairn/source-code-signals.md) |
+
+## Behaviors shared by agentic frameworks
+
+[`behaviors/`](behaviors) holds rules that do not depend on any one framework:
+
+| Behavior | Rules |
 |---|---|
-| Actors | Storm-0940, Storm-3358, VAPOR PANDA, an unattributed actor targeting South Korean finance, and financially motivated operators |
-| Targets | Microsoft 365 and Entra ID, Okta, AWS, Azure, web applications, Active Directory |
-| Platforms | Sigma, Microsoft Sentinel and Defender XDR, Splunk, Elastic, Zeek, Suricata, YARA, osquery, STIX 2.1 |
-| Status | Experimental. Tested for syntax, conversion and against a synthetic pcap. Baseline every rule on your own data before alerting |
+| Coding-agent CLIs (Claude Code, Codex, Pi) in bypass mode starting attack tools | KQL hunt, Sentinel analytics rule, Sigma |
+| Coding-agent CLIs calling third-party model gateways from servers | KQL hunt, Sigma |
+| Claude Code's page reader on your application next to scanning from the same address | KQL hunt, Sigma, Suricata |
+| One site probed through hundreds of rotating proxy addresses | KQL hunt |
+| Configuration and backup file theft, and probes of WSUS administration services | KQL hunt, Sentinel analytics rule, Sigma, Suricata |
+| Kerberos user enumeration and SMB or WinRM fan-out from one address | KQL hunt |
 
-## What's new in 1.1.0
+The ARTEX folder also carries behavior hunts written before this split: user agent family bursts (hunt 17), web and database services starting shells (hunt 11), servers calling webhook and tunnel services (hunt 12), scripts written into web folders (hunt 13) and Kerberoasting, DCSync and WinRM fan-out (hunt 16). They apply to every framework.
 
-Version 1.1.0 adds detections drawn from the ARTEX source code itself, not only from reported intrusions. [`docs/source-code-signals.md`](docs/source-code-signals.md) lists every signal with the file it comes from, the log source that sees it and how easily an operator can remove it. The article that explains them is at **https://threatdefence.com/article/artex-source-code-signals-deep-hunting**.
+## Shared indicators and feeds
 
-- **Hunts 23 to 30:** norma page reads and the Go enrichment probe, the ARTEX container toolchain seen from one source, request rates that match the ARTEX noise profiles, headless browser sign-ins and relayed MFA, accounts registered while probing, ARTEX running on a monitored host, console traffic in proxy logs, and bracketed-paste bytes in shell input.
-- **Two analytics rules:** ARTEX code-default user agents, and the ARTEX agent shell or proxy credential on a host.
-- **31 indicators** with the source file for each, and corrected context for `norma/0.4` and the `spa-api-recon` user agents.
-
-The branded user agents, markers and file paths in the 1.0.0 indicators (for example `artex-pentest/1.0`, `X-ARTX-KEY` and `C:\ProgramData\artx5v\`) do not appear in the public ARTEX code. They come from reporting on intrusions, where the agents chose them at run time, and each one now names the publication it first appeared in ([where the branded strings come from](docs/source-code-signals.md#where-the-branded-strings-come-from)). Keep hunting for them, and expect a careful operator to look like the signals in 1.1.0.
-
-See [`CHANGELOG.md`](CHANGELOG.md) for the full list.
-
-## What is in the repository
-
-| Folder | Contents |
+| Path | Contents |
 |---|---|
-| [`iocs/indicators.csv`](iocs/indicators.csv) | 215 indicators: user agents, request artifacts, host artifacts, strings from the ARTEX source code, hashes, favicon hashes, domains, URLs and addresses. Each row has its source, confidence and a review date for addresses. This file is the single source for every feed |
-| [`feeds/`](feeds) | Generated from the CSV: STIX 2.1 bundle, Sentinel watchlist and plain lists of addresses, domains, URLs, user agents and hashes |
-| [`sigma/`](sigma) | 31 Sigma rules and 5 Sigma correlations for web, proxy, process, file, DNS, AWS, Azure, Entra ID and Okta logs |
-| [`generated/`](generated) | The Sigma rules converted to Splunk SPL, Sentinel ASIM KQL and Elastic ES\|QL and Lucene. [`SUMMARY.md`](generated/SUMMARY.md) shows which rule converted to which backend |
-| [`sentinel/hunting/`](sentinel/hunting) | 30 KQL hunts for Microsoft Sentinel and Defender XDR advanced hunting. Hunts 23 to 30 come from a review of the ARTEX source code ([`docs/source-code-signals.md`](docs/source-code-signals.md)) |
-| [`sentinel/analytics/`](sentinel/analytics) | 7 scheduled analytics rules in the Sentinel template format |
-| [`splunk/`](splunk) | A Splunk app: 15 saved searches (disabled by default), macros for your indexes and the indicator lookup |
-| [`elastic/`](elastic) | 9 ES\|QL hunts and 5 detection rules in the Elastic detection-rules TOML format |
-| [`zeek/`](zeek) | A detection script that raises notices for ARTEX traffic, and an Intel framework file |
-| [`suricata/`](suricata) | 27 rules for user agents, probe artifacts, console pages, C2 domains and toolkit payload hosts, plus generated address rules |
-| [`yara/`](yara) | 4 rules for ARTEX binaries, console assets, the backdoored console and probe files |
-| [`osquery/`](osquery) | A pack for probe files and accounts, web service child shells, listening consoles and container images |
-| [`docs/`](docs) | [Where to start](docs/hunting-order.md), the [coverage matrix](docs/coverage.md) and the [signals in the ARTEX source code](docs/source-code-signals.md) |
+| [`iocs/indicators.csv`](iocs/indicators.csv) | 286 indicators across all frameworks. Each row has its source, confidence, a review date for addresses and a `framework` column (`artex`, `cairn`, or both). This file is the single source for every feed |
+| [`feeds/`](feeds) | Generated from the CSV for all frameworks: STIX 2.1 bundle with one tool per framework, Sentinel watchlist and plain lists of addresses, domains, URLs, user agents and hashes. [`feeds/by-framework/`](feeds/by-framework) has the plain lists per framework |
+| [`generated/`](generated) | Every Sigma rule converted to Splunk SPL, Sentinel ASIM KQL and Elastic ES\|QL and Lucene, by framework. [`SUMMARY.md`](generated/SUMMARY.md) shows which rule converted to which backend |
 | [`tools/`](tools) | Feed builder, Sigma converter and validator |
-| [`tests/`](tests) | A synthetic pcap and the Zeek and Suricata tests |
+| [`docs/`](docs) | [Adding a framework](docs/adding-a-framework.md) |
+
+Each framework folder has its own Zeek intel file and Suricata address rules, generated from the same CSV.
 
 ## Quick start
 
-**Microsoft Sentinel.** Upload `feeds/sentinel-watchlist.csv` as a watchlist with the alias `ARTEX_IOCs` and the search key `value`, then run `sentinel/hunting/21-watchlist-indicator-sweep.kql`. Import the analytics rules from `sentinel/analytics/`. The hunts also run in Defender XDR advanced hunting where the tables exist.
+**Microsoft Sentinel.** Upload `feeds/sentinel-watchlist.csv` as a watchlist with the alias `AGENTIC_IOCs` and the search key `value`. The watchlist sweep in each framework folder filters it to that framework's rows. Import the analytics rules from `frameworks/*/sentinel/analytics/` and `behaviors/sentinel/analytics/`. The hunts also run in Defender XDR advanced hunting where the tables exist.
 
-**Splunk.** Copy `splunk/` into `$SPLUNK_HOME/etc/apps/TA-artex-detections`, point the macros in `default/macros.conf` at your indexes, run each saved search over 30 days, then enable it. The endpoint, web, authentication and network searches use the CIM data models.
+**Suricata.** Add the `.rules` files from `frameworks/*/suricata/` and `behaviors/suricata/`. HTTP rules need cleartext or decrypted traffic. DNS and TLS SNI rules work on encrypted traffic.
 
-**Elastic.** Paste the ES|QL hunts into Discover. Load the TOML rules with Elastic's detection-rules tooling, or recreate them in Kibana from the query and settings in each file. Fields follow ECS and the AWS, Azure and Elastic Defend integrations.
+**Zeek.** Load `frameworks/*/zeek/intel/*.intel` through the Intel framework, and the ARTEX script in `frameworks/artex/zeek/artex/`.
 
-**Zeek.** Add `@load /path/to/zeek/artex` to `local.zeek`, and load `zeek/intel/artex.intel` through the Intel framework (see [`zeek/README.md`](zeek/README.md)).
+**YARA.** Scan container layers, home folders, `/tmp` and web roots with the files in `frameworks/*/yara/`.
 
-**Suricata.** Add `suricata/artex.rules` and `suricata/artex-ip.rules` to your rule files. HTTP rules need cleartext or decrypted traffic. DNS and TLS SNI rules work on encrypted traffic.
+**Sigma.** Convert the rules in `frameworks/*/sigma/` and `behaviors/sigma/` with `sigma convert`, or use the conversions in `generated/`.
 
-**Sigma.** Convert with `sigma convert -t <backend> -p <pipeline> sigma/`, or use the conversions in `generated/`.
+**Splunk and Elastic.** The ARTEX folder has a Splunk app and Elastic rules. For the other frameworks use the conversions in `generated/`.
 
-**Threat intelligence platforms.** Import `feeds/stix2.1-bundle.json`.
+**Threat intelligence platforms.** Import `feeds/stix2.1-bundle.json`, or the per-framework lists in `feeds/by-framework/`.
 
 ## Confidence
 
 | Level | Meaning | How to use it |
 |---|---|---|
-| High | Specific to ARTEX: a user agent naming it, its probe artifacts, reported C2 domains, file hashes | Alert |
-| Medium | Seen in ARTEX activity but changeable or shared: reported addresses, generic agent SDK user agents, community-reported markers | Alert after baselining, or hunt |
-| Low | Legitimate services ARTEX uses: webhook.site, DNS log services, geolocation and AI model APIs | Context for another finding only |
+| High | Specific to a framework or its campaigns: its user agents, command lines, paths, prompt strings, probe artifacts, reported C2 and skimmer domains, file hashes | Alert |
+| Medium | Seen in a framework's activity but changeable or shared: reported addresses, generic agent user agents, prompt text shared with similar tools | Alert after baselining, or hunt |
+| Low | Common or legitimate: AI model APIs, request-collection services, agent CLI user agents, hosting ASNs, proxy providers | Context for another finding only |
 
 Addresses from cloud and VPS providers are reassigned. Every address has a `review_by` date 180 days after it was reported. Check before you block.
 
@@ -74,19 +70,16 @@ Addresses from cloud and VPS providers are reassigned. Every address has a `revi
 
 ```bash
 pip install -r tools/requirements.txt
-python3 tools/validate.py            # Sigma, KQL, ES|QL, TOML, Splunk, Suricata SIDs, YARA, osquery, feeds
-python3 tools/convert.py             # regenerate generated/
-python3 tests/make_pcap.py           # regenerate the synthetic pcap
-bash tests/run_network_tests.sh      # needs zeek and suricata on the PATH
+python3 tools/validate.py                              # Sigma, KQL, ES|QL, TOML, Splunk, Suricata SIDs, YARA, osquery, feeds
+python3 tools/convert.py                               # regenerate generated/
+bash frameworks/artex/tests/run_network_tests.sh       # needs zeek and suricata on the PATH
 ```
 
-Last run: Suricata 8.0.8 and Zeek 9.0.1, all expected alerts and notices, no hit on the benign traffic in the pcap.
-
-The pcap is synthetic. No rule in this repository has been tested against a captured ARTEX intrusion, so treat every rule as experimental until it has run on your own data.
+No rule in this repository has been tested against a captured intrusion, so treat every rule as experimental until it has run on your own data.
 
 ## Contributing
 
-Pull requests are welcome. Add new indicators to `iocs/indicators.csv` with their source, run `python3 tools/build_feeds.py` and `python3 tools/validate.py`, and commit the regenerated files. Report false positives as issues, with the rule name and the shape of the event (no customer data).
+Pull requests are welcome. Add new indicators to `iocs/indicators.csv` with their source and framework, run `python3 tools/build_feeds.py` and `python3 tools/validate.py`, and commit the regenerated files. To add a framework, follow [docs/adding-a-framework.md](docs/adding-a-framework.md). Report false positives as issues, with the rule name and the shape of the event (no customer data).
 
 ## License
 

@@ -1,0 +1,32 @@
+// Claude Code's page reader on your application, next to scanning from the same source
+// Agentic attack detections by ThreatDefence (cross-framework behavior, first written for Cairn). Source: https://github.com/ThreatDefence/agentic-attack-detections
+// Example hunt for Microsoft Sentinel. Test and baseline before alerting.
+// From the CLI packages Cairn pins. Its Claude Code workers (the worker type NorForge saw in the AIA0001 panels,
+// claudecode_deepseek-v4.1-flash) read pages with Claude Code's WebFetch tool, which sends
+// "Claude-User (claude-code/2.1.98; +https://support.anthropic.com/)" with "Accept: text/markdown, text/html, */*" and
+// follows no redirects. Most other requests come from curl, Python and Kali tools run through the agent's shell.
+// Ordinary Claude Code users send the same page-reader string, so a Claude-User hit alone means little. The same address
+// sending Claude-User reads and attack tooling or payloads against one host is a coding agent attacking that host.
+// The version changes with each CLI release; "Claude-User (claude-code/" stays.
+
+let Window = 14d;
+let Web = union isfuzzy=true
+    (CommonSecurityLog | where TimeGenerated > ago(Window) and isnotempty(RequestURL)
+        | project TimeGenerated, Src=SourceIP, Host=DestinationHostName, Url=RequestURL, UA=RequestClientApplication),
+    (W3CIISLog | where TimeGenerated > ago(Window)
+        | project TimeGenerated, Src=cIP, Host=csHost, Url=strcat(csUriStem, "?", csUriQuery), UA=replace_string(csUserAgent, "+", " "));
+let Readers = Web
+    | where UA contains "Claude-User (claude-code/"
+    | summarize ReaderRequests=count(), ReaderUA=take_any(UA), ReaderFirst=min(TimeGenerated) by Src, Host;
+Web
+| where UA !contains "Claude-User"
+| extend Tool = case(UA startswith "curl/", "curl", UA startswith "python-requests/" or UA startswith "Python-urllib/", "python",
+    UA has_any ("sqlmap", "Nuclei", "nuclei", "Fuzz Faster U Fool", "Nikto", "dirsearch", "WPScan", "katana", "dalfox"), "scanner",
+    UA has "HeadlessChrome", "headless browser", "")
+| extend Payload = Url matches regex @"(?i)(union(\s|\+|%20)+select|sleep\(|\.\./|%2e%2e|/etc/passwd|<script|%3cscript|\$\{|\{\{|/\.git/|/\.env)"
+| where isnotempty(Tool) or Payload
+| summarize Requests=count(), Tools=make_set(Tool, 6), PayloadHits=countif(Payload), SampleURLs=make_set(Url, 8),
+    FirstSeen=min(TimeGenerated), LastSeen=max(TimeGenerated) by Src, Host
+| join kind=inner Readers on Src, Host
+| project Src, Host, ReaderUA, ReaderRequests, Requests, Tools, PayloadHits, SampleURLs, FirstSeen, LastSeen
+| order by PayloadHits desc, Requests desc

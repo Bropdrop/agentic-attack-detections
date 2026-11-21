@@ -1,0 +1,24 @@
+title: Claude Code WebFetch User Agent in Web Server Logs
+id: 4577e6ef-bed6-54e3-8414-5970cd3a36da
+status: experimental
+description: |
+    Detects requests from Claude Code's WebFetch tool. Cairn's Claude Code workers read target pages with it while
+    curl, Python and Kali tools do the rest. Ordinary Claude Code users send the same string, so treat a hit as context and
+    correlate with scanning from the same address.
+references:
+    - https://github.com/oritera/Cairn
+    - https://github.com/ThreatDefence/agentic-attack-detections
+author: ThreatDefence
+date: 2026-11-21
+tags:
+    - attack.reconnaissance
+    - attack.t1594
+logsource:
+    category: webserver
+detection:
+    selection:
+        cs-user-agent|contains: 'Claude-User (claude-code/'
+    condition: selection
+falsepositives:
+    - Developers and users of Claude Code reading public pages
+level: low

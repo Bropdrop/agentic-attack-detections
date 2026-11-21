@@ -1,3 +1,0 @@
-# EC2 DryRun Permission Test
-# Sigma id 7411689a-c171-519a-a539-429dbb24c823, pipeline ecs_windows
-from * metadata _id, _index, _version | where eventSource=="ec2.amazonaws.com" and errorCode=="Client.DryRunOperation"

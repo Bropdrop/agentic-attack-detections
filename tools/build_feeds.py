@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
-"""Build every indicator feed from iocs/indicators.csv, the single source of truth.
+"""Build every indicator feed from iocs/indicators.csv, the single source of truth for all frameworks.
 
     python3 tools/build_feeds.py
 
+Each row names the framework(s) it belongs to in the "framework" column (space separated, for example "artex cairn").
+
 Writes:
-    feeds/ipv4.txt, feeds/domains.txt, feeds/urls.txt, feeds/user_agents.txt, feeds/sha256.txt   plain lists, one value per line
-    feeds/sentinel-watchlist.csv      Microsoft Sentinel watchlist (alias ARTEX_IOCs, search key "value")
-    feeds/stix2.1-bundle.json         STIX 2.1 bundle: indicators, the ARTEX tool and the actors
-    splunk/lookups/artex_iocs.csv     Splunk lookup used by the "ARTEX - Indicator sweep" search
-    zeek/intel/artex.intel            Zeek Intel framework file
-    suricata/artex-ip.rules           Suricata rules for the reported addresses, one rule per actor
+    feeds/ipv4.txt, domains.txt, urls.txt, user_agents.txt, sha256.txt   plain lists for all frameworks
+    feeds/by-framework/<framework>/*.txt                                 the same lists per framework
+    feeds/sentinel-watchlist.csv      Microsoft Sentinel watchlist (alias AGENTIC_IOCs, search key "value")
+    feeds/stix2.1-bundle.json         STIX 2.1 bundle: indicators, one tool per framework and the actors
+    frameworks/<framework>/zeek/intel/<framework>.intel      Zeek Intel framework file
+    frameworks/<framework>/suricata/<framework>-ip.rules     Suricata rules for the reported addresses
+    frameworks/artex/splunk/lookups/artex_iocs.csv           Splunk lookup used by the ARTEX Splunk app
 
 Standard library only, so it runs anywhere Python 3.9+ does.
 """
@@ -23,9 +26,19 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "iocs" / "indicators.csv"
-NOW = "2026-11-20T00:00:00.000Z"
+NOW = "2026-11-21T00:00:00.000Z"
 NS = uuid.UUID("5b2d4b5e-6c3a-4f0e-9a1e-7d8c2f3a4b10")  # fixed namespace so STIX ids stay stable between builds
 
+FRAMEWORKS = {
+    "artex": {"name": "ARTEX", "sid": 9726500, "created": "2026_11_20",
+              "aliases": ["ScopeWeaver", "LUCK", "Guanlan SEC", "ARTEX PRO", "AntiFox"],
+              "description": "Open-source agentic AI penetration testing framework published by Autumn-27 in July 2026 and abused in real intrusions.",
+              "own_actor": "ARTEX operators"},
+    "cairn": {"name": "Cairn", "sid": 9727500, "created": "2026_11_21",
+              "aliases": ["oritera/Cairn"],
+              "description": "Open-source agentic problem-solving engine (oritera/Cairn, April 2026) that drives Claude Code, Codex and Pi coding agents in Kali containers; abused for web intrusions and payment-card theft since mid-2026.",
+              "own_actor": "Cairn operators"},
+}
 ZEEK_TYPES = {"ipv4": "Intel::ADDR", "domain": "Intel::DOMAIN", "user_agent": "Intel::SOFTWARE", "sha256": "Intel::FILE_HASH", "url": "Intel::URL"}
 
 
@@ -34,15 +47,23 @@ def load():
         return list(csv.DictReader(f))
 
 
+def fw_of(r):
+    return r.get("framework", "").split()
+
+
+def only(rows, fw):
+    return [r for r in rows if fw in fw_of(r)]
+
+
 def write(path, text):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8")
 
 
-def plain_lists(rows):
+def plain_lists(rows, folder):
     for kind, name in [("ipv4", "ipv4.txt"), ("domain", "domains.txt"), ("user_agent", "user_agents.txt"), ("sha256", "sha256.txt"), ("url", "urls.txt")]:
         values = sorted({r["value"] for r in rows if r["type"] == kind})
-        write(ROOT / "feeds" / name, "\n".join(values) + "\n")
+        write(folder / name, "\n".join(values) + "\n")
 
 
 def table_csv(rows, path, cols):
@@ -53,33 +74,36 @@ def table_csv(rows, path, cols):
         w.writerows(rows)
 
 
-def zeek_intel(rows):
+def zeek_intel(rows, fw):
+    label = FRAMEWORKS[fw]["name"]
     lines = ["#fields\tindicator\tindicator_type\tmeta.source\tmeta.desc\tmeta.url"]
     for r in rows:
         t = "Intel::SUBNET" if r["type"] == "ipv4" and "/" in r["value"] else ZEEK_TYPES.get(r["type"])
         if not t:
             continue
-        desc = f"ARTEX {r['confidence']}: {r['context']} ({r['actor']})".replace("\t", " ")
+        desc = f"{label} {r['confidence']}: {r['context']} ({r['actor']})".replace("\t", " ")
         value = r["value"].split("://", 1)[-1] if r["type"] == "url" else r["value"]  # Zeek URLs carry no scheme
-        lines.append("\t".join([value, t, "threatdefence-artex", desc, r["source_url"]]))
-    write(ROOT / "zeek" / "intel" / "artex.intel", "\n".join(lines) + "\n")
+        lines.append("\t".join([value, t, f"threatdefence-{fw}", desc, r["source_url"]]))
+    write(ROOT / "frameworks" / fw / "zeek" / "intel" / f"{fw}.intel", "\n".join(lines) + "\n")
 
 
-def suricata_ip(rows):
+def suricata_ip(rows, fw):
+    meta = FRAMEWORKS[fw]
+    label = meta["name"]
     by_actor = defaultdict(list)
     for r in rows:
         if r["type"] == "ipv4":
             by_actor[(r["actor"], r["context"])].append(r["value"])
     out = ["# Generated by tools/build_feeds.py from iocs/indicators.csv. Do not edit by hand.",
-           "# Reported ARTEX addresses. Cloud and VPS addresses are reassigned: check review_by in the CSV before blocking."]
-    sid = 9726500
+           f"# Reported {label} addresses. Cloud and VPS addresses are reassigned: check review_by in the CSV before blocking."]
+    sid = meta["sid"]
     for (actor, ctx), ips in sorted(by_actor.items()):
         group = "[" + ",".join(sorted(set(ips))) + "]"
-        msg = f"TD ARTEX reported address, {actor}, {ctx}".replace(";", ",").replace('"', "'")
-        out.append(f'alert ip $HOME_NET any -> {group} any (msg:"{msg} (outbound)"; classtype:trojan-activity; sid:{sid}; rev:1; metadata:created_at 2026_11_20, confidence Medium;)')
-        out.append(f'alert ip {group} any -> $HOME_NET any (msg:"{msg} (inbound)"; classtype:trojan-activity; sid:{sid + 1}; rev:1; metadata:created_at 2026_11_20, confidence Medium;)')
+        msg = f"TD {label} reported address, {actor}, {ctx}".replace(";", ",").replace('"', "'")
+        out.append(f'alert ip $HOME_NET any -> {group} any (msg:"{msg} (outbound)"; classtype:trojan-activity; sid:{sid}; rev:1; metadata:created_at {meta['created']}, confidence Medium;)')
+        out.append(f'alert ip {group} any -> $HOME_NET any (msg:"{msg} (inbound)"; classtype:trojan-activity; sid:{sid + 1}; rev:1; metadata:created_at {meta['created']}, confidence Medium;)')
         sid += 2
-    write(ROOT / "suricata" / "artex-ip.rules", "\n".join(out) + "\n")
+    write(ROOT / "frameworks" / fw / "suricata" / f"{fw}-ip.rules", "\n".join(out) + "\n")
 
 
 def sid_for(kind, value):
@@ -102,40 +126,46 @@ def stix_pattern(r):
 
 
 def stix(rows):
-    tool = {"type": "tool", "spec_version": "2.1", "id": sid_for("tool", "ARTEX"), "created": NOW, "modified": NOW,
-            "name": "ARTEX", "aliases": ["ScopeWeaver", "LUCK", "Guanlan SEC", "ARTEX PRO", "AntiFox"],
-            "description": "Open-source agentic AI penetration testing framework published by Autumn-27 in July 2026 and abused in real intrusions.",
-            "tool_types": ["exploitation", "vulnerability-scanning"]}
     identity = {"type": "identity", "spec_version": "2.1", "id": sid_for("identity", "ThreatDefence"), "created": NOW, "modified": NOW,
                 "name": "ThreatDefence", "identity_class": "organization"}
-    objects = [identity, tool]
-    actors = {}
+    tools = {}
+    for fw, meta in FRAMEWORKS.items():
+        tools[fw] = {"type": "tool", "spec_version": "2.1", "id": sid_for("tool", meta["name"]), "created": NOW, "modified": NOW,
+                     "name": meta["name"], "aliases": meta["aliases"], "description": meta["description"],
+                     "tool_types": ["exploitation", "vulnerability-scanning"]}
+    objects = [identity] + list(tools.values())
+    own = tuple(m["own_actor"] for m in FRAMEWORKS.values()) + ("Related", "Unknown", "Unattributed")
+    actors, uses = {}, set()
     for r in rows:
         a = r["actor"]
-        if a and a not in actors and not a.startswith(("ARTEX operators", "Related", "Unknown", "Unattributed")):
-            actors[a] = {"type": "intrusion-set", "spec_version": "2.1", "id": sid_for("intrusion-set", a), "created": NOW, "modified": NOW, "name": a}
+        if a and not a.startswith(own):
+            actors.setdefault(a, {"type": "intrusion-set", "spec_version": "2.1", "id": sid_for("intrusion-set", a), "created": NOW, "modified": NOW, "name": a})
+            for fw in fw_of(r):
+                uses.add((a, fw))
     objects += actors.values()
-    for a in actors.values():
-        objects.append({"type": "relationship", "spec_version": "2.1", "id": sid_for("relationship", a["name"] + "-uses-artex"),
-                        "created": NOW, "modified": NOW, "relationship_type": "uses", "source_ref": a["id"], "target_ref": tool["id"]})
+    for a, fw in sorted(uses):
+        name = actors[a]["name"]
+        objects.append({"type": "relationship", "spec_version": "2.1", "id": sid_for("relationship", name + "-uses-" + fw),
+                        "created": NOW, "modified": NOW, "relationship_type": "uses", "source_ref": actors[a]["id"], "target_ref": tools[fw]["id"]})
     for r in rows:
         pat = stix_pattern(r)
         if not pat:
             continue
         ind = {"type": "indicator", "spec_version": "2.1", "id": sid_for("indicator", r["type"] + r["value"]),
                "created": NOW, "modified": NOW, "created_by_ref": identity["id"],
-               "name": f"ARTEX {r['type']}: {r['value']}", "description": f"{r['context']}. Reported by {r['source']}.",
+               "name": f"{' and '.join(FRAMEWORKS[f]['name'] for f in fw_of(r))} {r['type']}: {r['value']}", "description": f"{r['context']}. Reported by {r['source']}.",
                "indicator_types": ["malicious-activity"] if r["confidence"] != "low" else ["anomalous-activity"],
                "pattern": pat, "pattern_type": "stix", "valid_from": f"{r['reported']}T00:00:00Z",
                "confidence": {"high": 85, "medium": 60, "low": 30}[r["confidence"]],
-               "labels": ["artex", r["confidence"]],
+               "labels": fw_of(r) + [r["confidence"]],
                "external_references": [{"source_name": r["source"], "url": r["source_url"]}]}
         if r.get("review_by"):
             ind["valid_until"] = f"{r['review_by']}T00:00:00Z"
         objects.append(ind)
-        target = actors.get(r["actor"], tool)
-        objects.append({"type": "relationship", "spec_version": "2.1", "id": sid_for("relationship", ind["id"] + target["id"]),
-                        "created": NOW, "modified": NOW, "relationship_type": "indicates", "source_ref": ind["id"], "target_ref": target["id"]})
+        targets = [actors[r["actor"]]] if r["actor"] in actors else [tools[f] for f in fw_of(r)]
+        for target in targets:
+            objects.append({"type": "relationship", "spec_version": "2.1", "id": sid_for("relationship", ind["id"] + target["id"]),
+                            "created": NOW, "modified": NOW, "relationship_type": "indicates", "source_ref": ind["id"], "target_ref": target["id"]})
     digest = hashlib.sha256(json.dumps(objects, sort_keys=True).encode()).hexdigest()
     bundle = {"type": "bundle", "id": f"bundle--{uuid.uuid5(NS, digest)}", "objects": objects}
     write(ROOT / "feeds" / "stix2.1-bundle.json", json.dumps(bundle, indent=1, ensure_ascii=False) + "\n")
@@ -153,12 +183,18 @@ def main():
         if r["confidence"] not in ("high", "medium", "low"):
             raise SystemExit(f"bad confidence for {key}")
         dt.date.fromisoformat(r["reported"])
-    plain_lists(rows)
-    cols = ["value", "type", "confidence", "context", "actor", "source", "source_url", "reported", "review_by"]
+        bad = [f for f in fw_of(r) if f not in FRAMEWORKS]
+        if not fw_of(r) or bad:
+            raise SystemExit(f"unknown or missing framework for {key}: {r.get('framework')!r}")
+    cols = ["value", "type", "confidence", "context", "actor", "source", "source_url", "reported", "review_by", "framework"]
+    plain_lists(rows, ROOT / "feeds")
     table_csv(rows, ROOT / "feeds" / "sentinel-watchlist.csv", cols)
-    table_csv(rows, ROOT / "splunk" / "lookups" / "artex_iocs.csv", cols)
-    zeek_intel(rows)
-    suricata_ip(rows)
+    for fw in FRAMEWORKS:
+        sub = only(rows, fw)
+        plain_lists(sub, ROOT / "feeds" / "by-framework" / fw)
+        zeek_intel(sub, fw)
+        suricata_ip(sub, fw)
+    table_csv(only(rows, "artex"), ROOT / "frameworks" / "artex" / "splunk" / "lookups" / "artex_iocs.csv", cols[:-1])
     n = stix(rows)
     print(f"{len(rows)} indicators, {n} STIX indicators, feeds written")
 

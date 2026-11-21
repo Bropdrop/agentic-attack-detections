@@ -38,7 +38,7 @@ def check_sigma():
     from sigma.validators.core import validators
     from sigma.validation import SigmaValidator
 
-    files = sorted((ROOT / "sigma").rglob("*.yml"))
+    files = sorted(p for d in list(ROOT.glob("frameworks/*/sigma")) + [ROOT / "behaviors" / "sigma"] for p in d.rglob("*.yml"))
     coll = SigmaCollection.load_ruleset([str(p) for p in files])
     ids = [str(r.id) for r in coll.rules]
     if len(ids) != len(set(ids)):
@@ -51,12 +51,16 @@ def check_sigma():
 
 
 def check_sentinel():
-    for p in sorted((ROOT / "sentinel" / "analytics").glob("*.yaml")):
+    ids = []
+    for p in sorted(ROOT.glob("*/**/sentinel/analytics/*.yaml")):
         d = yaml.safe_load(p.read_text())
         for k in ("id", "name", "severity", "query", "queryFrequency", "queryPeriod", "tactics", "kind"):
             if k not in d:
                 err(f"{p.name}: missing {k}")
-    hunts = sorted((ROOT / "sentinel" / "hunting").glob("*.kql"))
+        ids.append(d.get("id"))
+    if len(ids) != len(set(ids)):
+        err("duplicate Sentinel analytics ids")
+    hunts = sorted(ROOT.glob("*/**/sentinel/hunting/*.kql"))
     for p in hunts:
         if not re.search(r"^\s*[A-Za-z_(]", "\n".join(l for l in p.read_text().splitlines() if not l.startswith("//")), re.M):
             err(f"{p.name}: no query body")
@@ -65,12 +69,12 @@ def check_sentinel():
 
 def check_elastic():
     ids = []
-    for p in sorted((ROOT / "elastic" / "rules").glob("*.toml")):
+    for p in sorted(ROOT.glob("frameworks/*/elastic/rules/*.toml")):
         d = tomllib.loads(p.read_text())
         ids.append(d["rule"]["rule_id"])
     if len(ids) != len(set(ids)):
         err("duplicate Elastic rule_id")
-    for p in sorted((ROOT / "elastic" / "esql").glob("*.esql")):
+    for p in sorted(ROOT.glob("frameworks/*/elastic/esql/*.esql")):
         body = [l for l in p.read_text().splitlines() if l.strip() and not l.startswith("//")]
         if not body or not body[0].upper().startswith("FROM"):
             err(f"{p.name}: ES|QL must start with FROM")
@@ -78,7 +82,7 @@ def check_elastic():
 
 
 def check_splunk():
-    for p in sorted((ROOT / "splunk" / "default").glob("*.conf")):
+    for p in sorted(ROOT.glob("frameworks/*/splunk/default/*.conf")):
         cp = configparser.RawConfigParser(strict=False, interpolation=None)
         cp.optionxform = str
         cp.read_string(re.sub(r"\\\n", " ", p.read_text()))
@@ -91,7 +95,7 @@ def check_splunk():
 
 def check_suricata():
     sids = []
-    for p in sorted((ROOT / "suricata").glob("*.rules")):
+    for p in sorted(ROOT.glob("*/**/suricata/*.rules")):
         sids += re.findall(r"\bsid:(\d+);", p.read_text())
     dup = {s for s in sids if sids.count(s) > 1}
     if dup:
@@ -105,13 +109,13 @@ def check_yara():
     except ImportError:
         print("yara: skipped (yara-python not installed)")
         return
-    for p in sorted((ROOT / "yara").glob("*.yar")):
+    for p in sorted(ROOT.glob("*/**/yara/*.yar")):
         yara.compile(filepath=str(p))
     print("yara: compiled")
 
 
 def check_osquery():
-    for p in sorted((ROOT / "osquery").glob("*.conf")):
+    for p in sorted(ROOT.glob("frameworks/*/osquery/*.conf")):
         json.loads(p.read_text())
     print("osquery: json ok")
 
@@ -119,7 +123,7 @@ def check_osquery():
 def check_feeds():
     subprocess.run([sys.executable, str(ROOT / "tools" / "build_feeds.py")], check=True, capture_output=True)
     try:
-        diff = subprocess.run(["git", "status", "--porcelain", "feeds", "splunk/lookups", "zeek/intel", "suricata/artex-ip.rules"],
+        diff = subprocess.run(["git", "status", "--porcelain", "feeds", "frameworks"],
                               cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
     except (subprocess.CalledProcessError, FileNotFoundError):
         print("feeds: rebuilt (not a git checkout, drift not checked)")

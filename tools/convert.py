@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Convert every Sigma rule in sigma/ to Splunk SPL, Microsoft Sentinel / Defender KQL and Elastic ES|QL and Lucene.
+"""Convert every Sigma rule in frameworks/*/sigma/ and behaviors/sigma/ to Splunk SPL, Microsoft Sentinel / Defender KQL and Elastic ES|QL and Lucene.
 
     pip install -r tools/requirements.txt
-    python3 tools/convert.py            # writes generated/<backend>/<rule>.txt and generated/SUMMARY.md
+    python3 tools/convert.py            # writes generated/<backend>/<framework or behaviors>/<rule>.txt and generated/SUMMARY.md
 
 Each rule is tried against several pipelines per backend. The first pipeline that converts it wins.
 A rule that no pipeline can map for a backend is listed in SUMMARY.md, so you know to use the
@@ -19,7 +19,15 @@ from sigma.correlations import SigmaCorrelationRule
 from sigma.processing.pipeline import ProcessingPipeline
 
 ROOT = Path(__file__).resolve().parent.parent
-SIGMA = ROOT / "sigma"
+SIGMA_DIRS = sorted(ROOT.glob("frameworks/*/sigma")) + [ROOT / "behaviors" / "sigma"]
+
+
+def rel_of(path):
+    """frameworks/artex/sigma/web/x.yml -> artex/web/x.yml, behaviors/sigma/web/x.yml -> behaviors/web/x.yml"""
+    for d in SIGMA_DIRS:
+        if d in path.parents:
+            return Path(d.parent.name) / path.relative_to(d)
+    raise ValueError(path)
 OUT = ROOT / "generated"
 
 
@@ -50,7 +58,7 @@ def convert_one(backend_cls, pipeline, collection):
 
 
 def main():
-    files = sorted(p for p in SIGMA.rglob("*.yml"))
+    files = sorted(p for d in SIGMA_DIRS for p in d.rglob("*.yml"))
     base = SigmaCollection.load_ruleset([str(p) for p in files])
     results = {}
     targets = pipelines()
@@ -60,7 +68,7 @@ def main():
             coll = SigmaCollection([r.rule for r in rule.rules] + [rule])
         else:
             coll = SigmaCollection([rule])
-        rel = path.relative_to(SIGMA)
+        rel = rel_of(path)
         for name, (cls, plist) in targets.items():
             done = None
             for label, pipe in plist:

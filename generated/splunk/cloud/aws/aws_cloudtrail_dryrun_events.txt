@@ -1,3 +1,0 @@
-# EC2 DryRun Permission Test
-# Sigma id 7411689a-c171-519a-a539-429dbb24c823, pipeline splunk_windows
-eventSource="ec2.amazonaws.com" errorCode="Client.DryRunOperation"

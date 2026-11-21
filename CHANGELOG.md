@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.0.0, November 21, 2026
+
+The repository becomes Agentic Attack Detections and covers more than one framework. It was `artex-detections`; GitHub redirects the old address.
+
+- ARTEX rules moved from the root to `frameworks/artex/` (Sigma, Sentinel, Splunk, Elastic, Zeek, Suricata, YARA, osquery, tests and the ARTEX docs). `iocs/indicators.csv` and `feeds/` kept their paths.
+- Cairn added in `frameworks/cairn/`: 71 indicators, 6 KQL hunts, 2 analytics rules, 3 Sigma rules, Suricata and YARA, from a review of the Cairn source code and reporting by NorForge, Gambit Security, JPCERT/CC and Scutum.
+- New `behaviors/` folder for rules that do not depend on one framework: coding agents in bypass mode starting attack tools, agent CLIs calling model gateways from servers, Claude Code's page reader next to scanning, rotating-proxy probing, configuration and backup theft with WSUS probes, and Kerberos enumeration with SMB or WinRM fan-out.
+- `iocs/indicators.csv` gains a `framework` column as its last column. `38.244.50.120` is shared by ARTEX and Cairn reporting and carries both.
+- The Sentinel watchlist alias is now `AGENTIC_IOCs` for all frameworks; each framework's watchlist sweep filters it. Re-upload `feeds/sentinel-watchlist.csv` if you uploaded it as `ARTEX_IOCs`.
+- `feeds/by-framework/` has the plain lists per framework. The STIX bundle has one tool per framework.
+- Generated address rules and Zeek intel moved into each framework folder. `generated/` is now split by framework and `behaviors`.
+- `docs/adding-a-framework.md` describes the layout and number ranges for the next framework.
+
 ## Unreleased
 
 - Every branded indicator now names the publication it first appeared in: Datadog Security Labs (November 9, 2026) for the `artex-*` user agents and S3 placeholder names, Wiz Research (October 22) for `/zzz-nonexistent-xyz123`, `ReconProbe/1.0` and `norma/0.4`, Microsoft (October 21) for `azure-toolkit/1.0`, and Eye Security (November 12) for `X-ARTX-KEY`, `### ARTX-AGENT`, the probe markers and `ArtExVerify/1.0`. No indicator was removed.
