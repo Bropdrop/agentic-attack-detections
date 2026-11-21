@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.6.1, November 22, 2026
+
+- Removed the SHA-256 of the Windows Hades sample (`dwm_33b7.exe`) from the Thai Ministry of Finance case. Hunt.io printed it 63 characters long, so it could never match a file, and no other source has the full value. Reported in #1.
+- `tools/build_feeds.py` now rejects any `md5` or `sha256` value that is not 32 or 64 hex characters.
+- `tools/convert.py` and `tools/validate.py` work on Windows with non-UTF-8 code pages, and `.gitattributes` keeps the shell tests at LF (#2, by @jack51706).
+
 ## 2.6.0, November 21, 2026
 
 - Hermes Agent added in `frameworks/hermes/`: 4 KQL hunts, 2 analytics rules, 3 Sigma rules, Suricata and YARA for Hermes turned into an attack console (approvals off, the bundled godmode jailbreak skill, replaced personas, Telegram control) and for the Carbonato Docker botnet that installs it, from a review of the Hermes source (NousResearch/hermes-agent at 7c34e2db) and reporting by Unit 42, Hunt.io, Gambit Security and ThreatDown. The indicators include the Thai Ministry of Finance case (Hades and VShell hashes) and Carbonato's infrastructure; the Gambit campaign rows now carry `hermes` too.

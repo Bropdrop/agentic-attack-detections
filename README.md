@@ -41,7 +41,7 @@ The ARTEX folder also carries behavior hunts written before this split: user age
 
 | Path | Contents |
 |---|---|
-| [`iocs/indicators.csv`](iocs/indicators.csv) | 515 indicators across all frameworks. Each row has its source, confidence, a review date for addresses and a `framework` column (`artex`, `cairn`, `pentagi`, `hexstrike`, `cyberstrikeai`, `strix`, `hermes`, `agent-zero`, or several). This file is the single source for every feed |
+| [`iocs/indicators.csv`](iocs/indicators.csv) | 514 indicators across all frameworks. Each row has its source, confidence, a review date for addresses and a `framework` column (`artex`, `cairn`, `pentagi`, `hexstrike`, `cyberstrikeai`, `strix`, `hermes`, `agent-zero`, or several). This file is the single source for every feed |
 | [`feeds/`](feeds) | Generated from the CSV for all frameworks: STIX 2.1 bundle with one tool per framework, Sentinel watchlist and plain lists of IPv4 and IPv6 addresses, domains, URLs, user agents and SHA-256 and MD5 hashes. [`feeds/by-framework/`](feeds/by-framework) has the plain lists per framework |
 | [`generated/`](generated) | Every Sigma rule converted to Splunk SPL, Sentinel ASIM KQL and Elastic ES\|QL and Lucene, by framework. [`SUMMARY.md`](generated/SUMMARY.md) shows which rule converted to which backend |
 | [`tools/`](tools) | Feed builder, Sigma converter and validator |

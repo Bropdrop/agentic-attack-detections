@@ -1,6 +1,6 @@
 {
  "type": "bundle",
- "id": "bundle--57dfde42-2826-553f-9c98-fc7a6f2c4a8f",
+ "id": "bundle--cec8599c-a4c5-559f-bcc1-c3af77418f75",
  "objects": [
   {
    "type": "identity",
@@ -12480,7 +12480,7 @@
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "Hermes Agent sha256: d252ee7b348b7e43e432d8fb154465838f5cd5fb564905323460e6f0a0c7d1e2",
-   "description": "Hades Go implant, Linux (multipathd_04d0), C2 202.181.27.115:12443. Reported by Hunt.io.",
+   "description": "Hades Go implant, Linux (multipathd_04d0), C2 202.181.27.115:12443. The Windows sample (dwm_33b7.exe, C2 43.246.208.207:443) is left out: Hunt.io printed its SHA-256 one character short. Reported by Hunt.io.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -12507,43 +12507,6 @@
    "modified": "2026-11-21T00:00:00.000Z",
    "relationship_type": "indicates",
    "source_ref": "indicator--4600297f-42e7-5cc7-9c8c-d882b1122c9e",
-   "target_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d"
-  },
-  {
-   "type": "indicator",
-   "spec_version": "2.1",
-   "id": "indicator--40ba9bfe-e3b2-5124-858f-a8dee6fd2a62",
-   "created": "2026-11-21T00:00:00.000Z",
-   "modified": "2026-11-21T00:00:00.000Z",
-   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Hermes Agent sha256: c74010aa82e8164c8d4ca9e073ec6b9a762e53db67498b22f5ccaef3a82853f",
-   "description": "Hades Go implant, Windows (dwm_33b7.exe), C2 43.246.208.207:443. Reported by Hunt.io.",
-   "indicator_types": [
-    "malicious-activity"
-   ],
-   "pattern": "[file:hashes.'SHA-256' = 'c74010aa82e8164c8d4ca9e073ec6b9a762e53db67498b22f5ccaef3a82853f']",
-   "pattern_type": "stix",
-   "valid_from": "2026-07-23T00:00:00Z",
-   "confidence": 85,
-   "labels": [
-    "hermes",
-    "high"
-   ],
-   "external_references": [
-    {
-     "source_name": "Hunt.io",
-     "url": "https://hunt.io/blog/thailand-ministry-finance-targeted-with-hermes-ai-agent"
-    }
-   ]
-  },
-  {
-   "type": "relationship",
-   "spec_version": "2.1",
-   "id": "relationship--92f1ddc7-4b1a-5c43-a2f5-77fb618db335",
-   "created": "2026-11-21T00:00:00.000Z",
-   "modified": "2026-11-21T00:00:00.000Z",
-   "relationship_type": "indicates",
-   "source_ref": "indicator--40ba9bfe-e3b2-5124-858f-a8dee6fd2a62",
    "target_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d"
   },
   {

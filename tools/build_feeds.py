@@ -17,6 +17,7 @@ Writes:
 Standard library only, so it runs anywhere Python 3.9+ does.
 """
 import csv
+import re
 import datetime as dt
 import hashlib
 import json
@@ -208,6 +209,9 @@ def main():
         seen.add(key)
         if r["confidence"] not in ("high", "medium", "low"):
             raise SystemExit(f"bad confidence for {key}")
+        hash_len = {"md5": 32, "sha256": 64}.get(r["type"])
+        if hash_len and not re.fullmatch(f"[0-9a-fA-F]{{{hash_len}}}", r["value"]):
+            raise SystemExit(f"{r['type']} must be {hash_len} hex characters: {key}")
         dt.date.fromisoformat(r["reported"])
         bad = [f for f in fw_of(r) if f not in FRAMEWORKS]
         if not fw_of(r) or bad:
