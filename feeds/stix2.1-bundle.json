@@ -1,6 +1,6 @@
 {
  "type": "bundle",
- "id": "bundle--8e711e39-8781-5fc4-aaeb-67295b2cf537",
+ "id": "bundle--57dfde42-2826-553f-9c98-fc7a6f2c4a8f",
  "objects": [
   {
    "type": "identity",
@@ -117,6 +117,40 @@
    ]
   },
   {
+   "type": "tool",
+   "spec_version": "2.1",
+   "id": "tool--172e4205-c42d-550d-bc36-6257cdf18189",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "Hermes Agent",
+   "aliases": [
+    "NousResearch/hermes-agent",
+    "Hermes"
+   ],
+   "description": "Open-source general-purpose AI agent from Nous Research with persistent memory, self-written skills, a SOUL.md persona, a Telegram gateway and a yolo mode; used as the attack console by knaithe/KnYuan, the Gambit retail card-theft operator, the Carbonato Docker botnet and against Thailand's Ministry of Finance.",
+   "tool_types": [
+    "exploitation",
+    "vulnerability-scanning"
+   ]
+  },
+  {
+   "type": "tool",
+   "spec_version": "2.1",
+   "id": "tool--d2118b51-9a0c-5d1b-b458-dc8f1aa0b270",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "Agent Zero",
+   "aliases": [
+    "agent0ai/agent-zero",
+    "AgentZero"
+   ],
+   "description": "Open-source general-purpose AI agent framework that runs in a Kali-based container with a built-in hacker profile and a web UI; GTIG reported threat-actor experimentation with it in 2026.",
+   "tool_types": [
+    "exploitation",
+    "vulnerability-scanning"
+   ]
+  },
+  {
    "type": "intrusion-set",
    "spec_version": "2.1",
    "id": "intrusion-set--9190871e-0429-5d24-b777-e72a9e678d2c",
@@ -213,6 +247,46 @@
    "name": "FortiGate mass-exploitation actor"
   },
   {
+   "type": "intrusion-set",
+   "spec_version": "2.1",
+   "id": "intrusion-set--01936af9-5de9-5d9d-974c-b953efbb2372",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "AntiFox operators (IIS web shells and AWS secret theft)"
+  },
+  {
+   "type": "intrusion-set",
+   "spec_version": "2.1",
+   "id": "intrusion-set--44fc0578-1961-5b45-8a6e-ad21d028e1e8",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "AntiFox console operators"
+  },
+  {
+   "type": "intrusion-set",
+   "spec_version": "2.1",
+   "id": "intrusion-set--c884f04c-2ee7-5f6c-b04a-77f9daaf54b2",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "knaithe / KnYuan (Chinese-speaking, Zhuhai)"
+  },
+  {
+   "type": "intrusion-set",
+   "spec_version": "2.1",
+   "id": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "Hermes operator against Thailand's Ministry of Finance (Hades, VShell)"
+  },
+  {
+   "type": "intrusion-set",
+   "spec_version": "2.1",
+   "id": "intrusion-set--e3ca8dca-73fb-54ac-9f77-4c1fb631e256",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "Carbonato Docker botnet (Costa Rica, assessed)"
+  },
+  {
    "type": "relationship",
    "spec_version": "2.1",
    "id": "relationship--783ab86b-2178-590f-b139-9fec15e30ac8",
@@ -221,6 +295,36 @@
    "relationship_type": "uses",
    "source_ref": "intrusion-set--49e354d9-1b2e-5f62-b1df-3676af4653d5",
    "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--edbee542-c1e2-5896-9483-1f7aa7b0bf13",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "uses",
+   "source_ref": "intrusion-set--44fc0578-1961-5b45-8a6e-ad21d028e1e8",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--609a7f2d-f141-5f03-a462-cb624347f7d2",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "uses",
+   "source_ref": "intrusion-set--01936af9-5de9-5d9d-974c-b953efbb2372",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--21694d21-27a4-57a5-8ded-6b6fd6066943",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "uses",
+   "source_ref": "intrusion-set--e3ca8dca-73fb-54ac-9f77-4c1fb631e256",
+   "target_ref": "tool--172e4205-c42d-550d-bc36-6257cdf18189"
   },
   {
    "type": "relationship",
@@ -265,12 +369,32 @@
   {
    "type": "relationship",
    "spec_version": "2.1",
+   "id": "relationship--e6b74e08-b1ea-54c2-8469-9b91bd909cbc",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "uses",
+   "source_ref": "intrusion-set--eed808fe-1b6a-5373-9aff-dc3f9f9b46cb",
+   "target_ref": "tool--172e4205-c42d-550d-bc36-6257cdf18189"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
    "id": "relationship--17347808-b2b3-5f1b-9410-34eba56f105b",
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "relationship_type": "uses",
    "source_ref": "intrusion-set--eed808fe-1b6a-5373-9aff-dc3f9f9b46cb",
    "target_ref": "tool--e3b4336d-c8be-5dd0-a623-8b4af5bc69b4"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--b1f365db-ea5c-5dda-8074-ed9f4d8c6c03",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "uses",
+   "source_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d",
+   "target_ref": "tool--172e4205-c42d-550d-bc36-6257cdf18189"
   },
   {
    "type": "relationship",
@@ -341,6 +465,16 @@
    "relationship_type": "uses",
    "source_ref": "intrusion-set--9190871e-0429-5d24-b777-e72a9e678d2c",
    "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--a2f8ab80-6139-5b22-8f52-1f808d202e0c",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "uses",
+   "source_ref": "intrusion-set--c884f04c-2ee7-5f6c-b04a-77f9daaf54b2",
+   "target_ref": "tool--172e4205-c42d-550d-bc36-6257cdf18189"
   },
   {
    "type": "indicator",
@@ -7278,7 +7412,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix ipv4: 155.254.22.215",
+   "name": "Cairn and Strix and Hermes Agent ipv4: 155.254.22.215",
    "description": "Staging and command server, AI console. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7290,6 +7424,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "medium"
    ],
    "external_references": [
@@ -7317,7 +7452,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix ipv4: 209.126.4.170",
+   "name": "Cairn and Strix and Hermes Agent ipv4: 209.126.4.170",
    "description": "DNS exfiltration, catch-all mail, HTTP listeners. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7329,6 +7464,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "medium"
    ],
    "external_references": [
@@ -7356,7 +7492,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix ipv4: 213.21.239.62",
+   "name": "Cairn and Strix and Hermes Agent ipv4: 213.21.239.62",
    "description": "C2. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7368,6 +7504,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "medium"
    ],
    "external_references": [
@@ -7395,7 +7532,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix ipv4: 172.245.224.188",
+   "name": "Cairn and Strix and Hermes Agent ipv4: 172.245.224.188",
    "description": "C2. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7407,6 +7544,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "medium"
    ],
    "external_references": [
@@ -7434,7 +7572,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix ipv4: 172.245.89.137",
+   "name": "Cairn and Strix and Hermes Agent ipv4: 172.245.89.137",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7446,6 +7584,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "medium"
    ],
    "external_references": [
@@ -7473,7 +7612,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix domain: medbooksource.com",
+   "name": "Cairn and Strix and Hermes Agent domain: medbooksource.com",
    "description": "Operator console, also used for out-of-band and DNS exfiltration. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7485,6 +7624,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -7511,7 +7651,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix domain: traffic-analyzer.net",
+   "name": "Cairn and Strix and Hermes Agent domain: traffic-analyzer.net",
    "description": "C2. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7523,6 +7663,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -7549,7 +7690,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix domain: b8t.shop",
+   "name": "Cairn and Strix and Hermes Agent domain: b8t.shop",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7561,6 +7702,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -7587,7 +7729,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix domain: cdn.netlfjs.com",
+   "name": "Cairn and Strix and Hermes Agent domain: cdn.netlfjs.com",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7599,6 +7741,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -7625,7 +7768,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix domain: x1opay.co",
+   "name": "Cairn and Strix and Hermes Agent domain: x1opay.co",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7637,6 +7780,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -7663,7 +7807,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix domain: static-js.com",
+   "name": "Cairn and Strix and Hermes Agent domain: static-js.com",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7675,6 +7819,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -7701,7 +7846,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix domain: cdn.js-static.com",
+   "name": "Cairn and Strix and Hermes Agent domain: cdn.js-static.com",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7713,6 +7858,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -7739,7 +7885,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix domain: js-static.com",
+   "name": "Cairn and Strix and Hermes Agent domain: js-static.com",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7751,6 +7897,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -7777,7 +7924,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix domain: jsnetlify.com",
+   "name": "Cairn and Strix and Hermes Agent domain: jsnetlify.com",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7789,6 +7936,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -7815,7 +7963,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix domain: netlifyjs.com",
+   "name": "Cairn and Strix and Hermes Agent domain: netlifyjs.com",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7827,6 +7975,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -7853,7 +8002,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix domain: newssjs.com",
+   "name": "Cairn and Strix and Hermes Agent domain: newssjs.com",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7865,6 +8014,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -7891,7 +8041,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix url: https://b8t.shop/js/sby.js",
+   "name": "Cairn and Strix and Hermes Agent url: https://b8t.shop/js/sby.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7903,6 +8053,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -7929,7 +8080,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix url: https://cdn.netlfjs.com/js/cts.js",
+   "name": "Cairn and Strix and Hermes Agent url: https://cdn.netlfjs.com/js/cts.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7941,6 +8092,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -7967,7 +8119,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix url: https://cdn.netlfjs.com/js/vla.js",
+   "name": "Cairn and Strix and Hermes Agent url: https://cdn.netlfjs.com/js/vla.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7979,6 +8131,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -8005,7 +8158,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix url: https://x1opay.co/js/eut.js",
+   "name": "Cairn and Strix and Hermes Agent url: https://x1opay.co/js/eut.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -8017,6 +8170,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -8043,7 +8197,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix url: https://x1opay.co/js/l.js",
+   "name": "Cairn and Strix and Hermes Agent url: https://x1opay.co/js/l.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -8055,6 +8209,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -8081,7 +8236,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix url: https://static-js.com/js/bmws.js",
+   "name": "Cairn and Strix and Hermes Agent url: https://static-js.com/js/bmws.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -8093,6 +8248,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -8119,7 +8275,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix url: https://static-js.com/js/nrt.js",
+   "name": "Cairn and Strix and Hermes Agent url: https://static-js.com/js/nrt.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -8131,6 +8287,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -8157,7 +8314,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix url: https://cdn.js-static.com/js/tgo.js",
+   "name": "Cairn and Strix and Hermes Agent url: https://cdn.js-static.com/js/tgo.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -8169,6 +8326,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -8195,7 +8353,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix url: https://cdn.js-static.com/js/pps.js",
+   "name": "Cairn and Strix and Hermes Agent url: https://cdn.js-static.com/js/pps.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -8207,6 +8365,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "high"
    ],
    "external_references": [
@@ -8233,7 +8392,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn and Strix file_name: confirmation.php",
+   "name": "Cairn and Strix and Hermes Agent file_name: confirmation.php",
    "description": "Web shell name the operator asked about (confirmation.php code does not stand out). Reported by Gambit Security.",
    "indicator_types": [
     "anomalous-activity"
@@ -8245,6 +8404,7 @@
    "labels": [
     "cairn",
     "strix",
+    "hermes",
     "low"
    ],
    "external_references": [
@@ -11256,6 +11416,1880 @@
    "relationship_type": "indicates",
    "source_ref": "indicator--2883d7cb-1c38-5dd2-b4b1-c242f9fea56e",
    "target_ref": "tool--e3b4336d-c8be-5dd0-a623-8b4af5bc69b4"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--8808168e-7314-5884-8d74-8479c0d72edb",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX ipv4: 47.79.4.33",
+   "description": "AntiFox console on Alibaba Cloud, source of IIS web shell activity and AWS enumeration that read a production secret. Reported by Arctic Wolf Labs.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '47.79.4.33']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-10T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "artex",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Arctic Wolf Labs",
+     "url": "https://github.com/rtkwlf/wolf-tools/blob/main/pack_alerts/202611-antifox-alibaba-hosted-platforms-facilitate-web-cloud-intrusions/README.md"
+    }
+   ],
+   "valid_until": "2027-05-09T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--780ef4a0-52ae-5b36-a45c-e2f8be3c5fa1",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--8808168e-7314-5884-8d74-8479c0d72edb",
+   "target_ref": "intrusion-set--01936af9-5de9-5d9d-974c-b953efbb2372"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--11b49f43-7138-5b43-891a-d0fee2a499b3",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX ipv4: 8.208.101.210",
+   "description": "AntiFox console on Alibaba Cloud, source of IIS web shell activity and AWS enumeration that read a production secret. Reported by Arctic Wolf Labs.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '8.208.101.210']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-10T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "artex",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Arctic Wolf Labs",
+     "url": "https://github.com/rtkwlf/wolf-tools/blob/main/pack_alerts/202611-antifox-alibaba-hosted-platforms-facilitate-web-cloud-intrusions/README.md"
+    }
+   ],
+   "valid_until": "2027-05-09T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--6fbfca42-2ff3-520f-8770-554349042a16",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--11b49f43-7138-5b43-891a-d0fee2a499b3",
+   "target_ref": "intrusion-set--01936af9-5de9-5d9d-974c-b953efbb2372"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--76463716-8a1f-518c-8ff3-dbfb328f97c6",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX user_agent: Boto3/1.43.125",
+   "description": "SDK version the AntiFox operator's AWS calls carried. Legitimate scripts use it too: context only, next to a hosting-provider source and broad List/Get/Describe bursts. Reported by Arctic Wolf Labs.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'Boto3/1.43.125']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-10T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Arctic Wolf Labs",
+     "url": "https://github.com/rtkwlf/wolf-tools/blob/main/pack_alerts/202611-antifox-alibaba-hosted-platforms-facilitate-web-cloud-intrusions/README.md"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--fbf80c98-58f4-5b06-9be6-3157d7cf8fd3",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--76463716-8a1f-518c-8ff3-dbfb328f97c6",
+   "target_ref": "intrusion-set--01936af9-5de9-5d9d-974c-b953efbb2372"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--907c6816-fd81-5c40-a5ca-c6131fe3e927",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX user_agent: Botocore/1.43.125",
+   "description": "SDK version the AntiFox operator's AWS calls carried. Context only. Reported by Arctic Wolf Labs.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'Botocore/1.43.125']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-10T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Arctic Wolf Labs",
+     "url": "https://github.com/rtkwlf/wolf-tools/blob/main/pack_alerts/202611-antifox-alibaba-hosted-platforms-facilitate-web-cloud-intrusions/README.md"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--14f295ce-6dc8-5349-aa9a-f94ffc359a00",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--907c6816-fd81-5c40-a5ca-c6131fe3e927",
+   "target_ref": "intrusion-set--01936af9-5de9-5d9d-974c-b953efbb2372"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--08152e76-25fc-5b0a-bf96-ea311a7f1ae8",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX ipv4: 45.199.130.20",
+   "description": "Exposed AntiFox console (sample list). An exposed console is not proof of malicious use. Reported by Threat Landscape.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '45.199.130.20']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Threat Landscape",
+     "url": "https://threatlandscape.io/blog/antifox-artex-agentic-platform-iis-webshell-aws-secrets"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--29e74151-65b6-50de-a170-b7052f1405e3",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--08152e76-25fc-5b0a-bf96-ea311a7f1ae8",
+   "target_ref": "intrusion-set--44fc0578-1961-5b45-8a6e-ad21d028e1e8"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--05ef2eed-5e63-5d27-973d-fc259d19ed98",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX ipv4: 134.175.236.45",
+   "description": "Exposed AntiFox console (sample list). An exposed console is not proof of malicious use. Reported by Threat Landscape.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '134.175.236.45']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Threat Landscape",
+     "url": "https://threatlandscape.io/blog/antifox-artex-agentic-platform-iis-webshell-aws-secrets"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--db0791b5-c5af-5fa6-9de6-7fa0119d9379",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--05ef2eed-5e63-5d27-973d-fc259d19ed98",
+   "target_ref": "intrusion-set--44fc0578-1961-5b45-8a6e-ad21d028e1e8"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--14f7580d-f9a1-5d8a-9900-ccf78e18a24e",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX ipv4: 103.244.149.40",
+   "description": "Exposed AntiFox console (sample list). An exposed console is not proof of malicious use. Reported by Threat Landscape.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '103.244.149.40']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Threat Landscape",
+     "url": "https://threatlandscape.io/blog/antifox-artex-agentic-platform-iis-webshell-aws-secrets"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--a5b171d6-590b-54e0-991b-06388e15a348",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--14f7580d-f9a1-5d8a-9900-ccf78e18a24e",
+   "target_ref": "intrusion-set--44fc0578-1961-5b45-8a6e-ad21d028e1e8"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--86f88d38-37c9-5021-a29a-47220accb616",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX ipv4: 64.83.42.68",
+   "description": "Exposed AntiFox console (sample list). An exposed console is not proof of malicious use. Reported by Threat Landscape.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '64.83.42.68']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Threat Landscape",
+     "url": "https://threatlandscape.io/blog/antifox-artex-agentic-platform-iis-webshell-aws-secrets"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--b18d29e3-80d7-5a03-aa4a-c2ba2d25aca6",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--86f88d38-37c9-5021-a29a-47220accb616",
+   "target_ref": "intrusion-set--44fc0578-1961-5b45-8a6e-ad21d028e1e8"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--46214803-a789-51ad-867c-400d68b1f4ac",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX ipv4: 45.204.71.197",
+   "description": "Exposed AntiFox console (sample list). An exposed console is not proof of malicious use. Reported by Threat Landscape.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '45.204.71.197']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Threat Landscape",
+     "url": "https://threatlandscape.io/blog/antifox-artex-agentic-platform-iis-webshell-aws-secrets"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--b79175b5-d612-594b-94cf-d720d224f8f9",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--46214803-a789-51ad-867c-400d68b1f4ac",
+   "target_ref": "intrusion-set--44fc0578-1961-5b45-8a6e-ad21d028e1e8"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--91906bb7-6c9b-58c1-860d-3a2fcbb7b4de",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX ipv4: 64.83.41.91",
+   "description": "Exposed AntiFox console (sample list). An exposed console is not proof of malicious use. Reported by Threat Landscape.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '64.83.41.91']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Threat Landscape",
+     "url": "https://threatlandscape.io/blog/antifox-artex-agentic-platform-iis-webshell-aws-secrets"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--94322eb4-abc1-50c8-8fda-b6b027ad7d2b",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--91906bb7-6c9b-58c1-860d-3a2fcbb7b4de",
+   "target_ref": "intrusion-set--44fc0578-1961-5b45-8a6e-ad21d028e1e8"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--54688ed4-6fd8-574a-afd9-c29106527e30",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX ipv4: 149.104.29.60",
+   "description": "Exposed AntiFox console (sample list). An exposed console is not proof of malicious use. Reported by Threat Landscape.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '149.104.29.60']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Threat Landscape",
+     "url": "https://threatlandscape.io/blog/antifox-artex-agentic-platform-iis-webshell-aws-secrets"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--bb78f40b-bbcb-5ed0-87a2-e470a3cda67b",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--54688ed4-6fd8-574a-afd9-c29106527e30",
+   "target_ref": "intrusion-set--44fc0578-1961-5b45-8a6e-ad21d028e1e8"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--bda909b6-a0ed-5c23-b77f-05a68236c83f",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX ipv4: 38.76.182.7",
+   "description": "Exposed AntiFox console (sample list). An exposed console is not proof of malicious use. Reported by Threat Landscape.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '38.76.182.7']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Threat Landscape",
+     "url": "https://threatlandscape.io/blog/antifox-artex-agentic-platform-iis-webshell-aws-secrets"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--314b09ae-e5a3-5be2-9df3-c136259c0501",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--bda909b6-a0ed-5c23-b77f-05a68236c83f",
+   "target_ref": "intrusion-set--44fc0578-1961-5b45-8a6e-ad21d028e1e8"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--101a9a96-cdde-53e7-9e73-9313b49d5c2e",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX ipv4: 192.163.172.91",
+   "description": "Exposed AntiFox console (sample list). An exposed console is not proof of malicious use. Reported by Threat Landscape.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '192.163.172.91']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Threat Landscape",
+     "url": "https://threatlandscape.io/blog/antifox-artex-agentic-platform-iis-webshell-aws-secrets"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--13a1fb6f-4362-55ff-93d1-8d9be33b14fa",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--101a9a96-cdde-53e7-9e73-9313b49d5c2e",
+   "target_ref": "intrusion-set--44fc0578-1961-5b45-8a6e-ad21d028e1e8"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--624c1a32-9f79-54ef-9b79-f8526d205046",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX ipv4: 192.163.172.90",
+   "description": "Exposed AntiFox console (sample list). An exposed console is not proof of malicious use. Reported by Threat Landscape.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '192.163.172.90']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Threat Landscape",
+     "url": "https://threatlandscape.io/blog/antifox-artex-agentic-platform-iis-webshell-aws-secrets"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--f6f0c17d-c8b2-525c-9cd0-ac35515d3a83",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--624c1a32-9f79-54ef-9b79-f8526d205046",
+   "target_ref": "intrusion-set--44fc0578-1961-5b45-8a6e-ad21d028e1e8"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--b54b9bcb-43ac-5063-a51e-9d9fd0a2edf9",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX ipv4: 18.216.44.64",
+   "description": "Exposed AntiFox console (sample list). An exposed console is not proof of malicious use. Reported by Threat Landscape.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '18.216.44.64']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Threat Landscape",
+     "url": "https://threatlandscape.io/blog/antifox-artex-agentic-platform-iis-webshell-aws-secrets"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--30428c37-bd34-5dbc-b68a-e1eea7a87bdc",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--b54b9bcb-43ac-5063-a51e-9d9fd0a2edf9",
+   "target_ref": "intrusion-set--44fc0578-1961-5b45-8a6e-ad21d028e1e8"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--1297fe31-efa8-5774-99da-a2fca5746423",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX ipv4: 186.240.202.78",
+   "description": "Exposed AntiFox console (sample list). An exposed console is not proof of malicious use. Reported by Threat Landscape.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '186.240.202.78']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Threat Landscape",
+     "url": "https://threatlandscape.io/blog/antifox-artex-agentic-platform-iis-webshell-aws-secrets"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--d86a6322-af4f-53fc-ade3-7ef91bfc26ca",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--1297fe31-efa8-5774-99da-a2fca5746423",
+   "target_ref": "intrusion-set--44fc0578-1961-5b45-8a6e-ad21d028e1e8"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--a8360243-ec25-5f08-8458-77e6e27a4a2c",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX ipv4: 186.240.202.69",
+   "description": "Exposed AntiFox console (sample list). An exposed console is not proof of malicious use. Reported by Threat Landscape.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '186.240.202.69']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Threat Landscape",
+     "url": "https://threatlandscape.io/blog/antifox-artex-agentic-platform-iis-webshell-aws-secrets"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--4704574b-97d7-593b-8c6f-cfff7f55e035",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--a8360243-ec25-5f08-8458-77e6e27a4a2c",
+   "target_ref": "intrusion-set--44fc0578-1961-5b45-8a6e-ad21d028e1e8"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--2b2b6005-7bc3-514d-8722-a7f45fc5c8a2",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX user_agent: antifox-enrich/1.0",
+   "description": "AntiFox enrichment client, renamed from artex-enrich/1.0. Reported by ThreatDefence review of the AntiFox source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'antifox-enrich/1.0']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "artex",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the AntiFox source code",
+     "url": "https://github.com/AntiFox-AI/antifox"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--9c36d835-2c60-511d-8c4f-16a5d4f894e4",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--2b2b6005-7bc3-514d-8722-a7f45fc5c8a2",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--77003c5f-c0cf-5922-8f7f-5f2145f6b0e6",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX user_agent: antifox-selfupdate",
+   "description": "AntiFox self-update client to the GitHub API for AntiFox-AI/antifox releases (selfupdate/github.go:17). Reported by ThreatDefence review of the AntiFox source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'antifox-selfupdate']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "artex",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the AntiFox source code",
+     "url": "https://github.com/AntiFox-AI/antifox"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--16e2e472-19e8-5a68-bb4e-d8d96e1dabf3",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--77003c5f-c0cf-5922-8f7f-5f2145f6b0e6",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--603fd5bf-694e-5c44-90a4-693ca2060d7e",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX file_path: /tmp/antifox-fs",
+   "description": "AntiFox's seeded filesystem MCP default path (server/manager.go:188). Reported by ThreatDefence review of the AntiFox source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[directory:path = '/tmp/antifox-fs']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "artex",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the AntiFox source code",
+     "url": "https://github.com/AntiFox-AI/antifox"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--4b4d9387-f1ab-5d82-b600-6d3301f95415",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--603fd5bf-694e-5c44-90a4-693ca2060d7e",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--8d834f5a-cf0d-502b-8b02-f2d913f121e9",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent file_path: /.hermes/skills/security/godmode/",
+   "description": "Hermes' bundled jailbreak skill (G0DM0D3, Parseltongue) installed: scripts auto_jailbreak.py, load_godmode.py, parseltongue.py, godmode_race.py (optional-skills/security/godmode). Unit 42's actor used it. Reported by ThreatDefence review of the Hermes Agent source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[directory:path = '/.hermes/skills/security/godmode/']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hermes",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the Hermes Agent source code",
+     "url": "https://github.com/NousResearch/hermes-agent"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--e35ff6c3-cc4f-5179-8459-15d8e5108861",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--8d834f5a-cf0d-502b-8b02-f2d913f121e9",
+   "target_ref": "tool--172e4205-c42d-550d-bc36-6257cdf18189"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--7a24e99b-2109-5d11-9775-e2ea101d2b21",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent file_name: prefill.json",
+   "description": "Written to ~/.hermes/ by the godmode skill, with prefill_messages_file: \"prefill.json\" and a replaced agent.system_prompt in config.yaml. Reported by ThreatDefence review of the Hermes Agent source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:name LIKE 'prefill.json%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "hermes",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the Hermes Agent source code",
+     "url": "https://github.com/NousResearch/hermes-agent"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--21b91ed9-ef0a-5fac-9e2c-b6db5f0cc9b1",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--7a24e99b-2109-5d11-9775-e2ea101d2b21",
+   "target_ref": "tool--172e4205-c42d-550d-bc36-6257cdf18189"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--2d3a628e-61f2-5e3e-8d5b-f6029d39e5d7",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent domain: code.newcli.com",
+   "description": "Third-party proxy the actor used for Codex and Claude Code (code.newcli.com/codex/v1, /ultra); Hermes ran on DeepSeek directly. Reported by Unit 42.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[domain-name:value = 'code.newcli.com']",
+   "pattern_type": "stix",
+   "valid_from": "2026-07-30T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "hermes",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Unit 42",
+     "url": "https://unit42.paloaltonetworks.com/autonomous-ai-cyber-attack-campaign/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--0e6c8366-ef08-5345-ab8f-82859a34b18a",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--2d3a628e-61f2-5e3e-8d5b-f6029d39e5d7",
+   "target_ref": "intrusion-set--c884f04c-2ee7-5f6c-b04a-77f9daaf54b2"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--28eca46a-9a79-5499-a433-e3808fac61e5",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent ipv4: 43.246.208.207",
+   "description": "Staging server with open directories (Hermes results, Hades and VShell builds), VShell C2 on 21083, Hades Windows C2 on 443, Hermes web UI on 8878; AS132883 TOPIDC, Hong Kong. Reported by Hunt.io.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '43.246.208.207']",
+   "pattern_type": "stix",
+   "valid_from": "2026-07-23T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "hermes",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Hunt.io",
+     "url": "https://hunt.io/blog/thailand-ministry-finance-targeted-with-hermes-ai-agent"
+    }
+   ],
+   "valid_until": "2027-01-19T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--7053eee7-0df0-5cb6-9fe0-9bf75b28ac88",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--28eca46a-9a79-5499-a433-e3808fac61e5",
+   "target_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--f0b1e2aa-c388-5964-b15f-755869772dc1",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent ipv4: 103.97.0.57",
+   "description": "SSH client of the Hermes environment, connecting to 43.246.208.207; AS133073, Hong Kong. Reported by Hunt.io.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '103.97.0.57']",
+   "pattern_type": "stix",
+   "valid_from": "2026-07-23T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "hermes",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Hunt.io",
+     "url": "https://hunt.io/blog/thailand-ministry-finance-targeted-with-hermes-ai-agent"
+    }
+   ],
+   "valid_until": "2027-01-19T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--46e372c4-c3f8-5ca3-96cb-37c83df36620",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--f0b1e2aa-c388-5964-b15f-755869772dc1",
+   "target_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--8e608456-450f-589f-8a80-0bfa4bb2bd9e",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent ipv4: 118.107.222.232",
+   "description": "Same CN=www certificate family as the staging server; AS55720, Malaysia. Reported by Hunt.io.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '118.107.222.232']",
+   "pattern_type": "stix",
+   "valid_from": "2026-07-23T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "hermes",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Hunt.io",
+     "url": "https://hunt.io/blog/thailand-ministry-finance-targeted-with-hermes-ai-agent"
+    }
+   ],
+   "valid_until": "2027-01-19T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--b3d40ad9-3d08-544b-8cdd-9e58473789b4",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--8e608456-450f-589f-8a80-0bfa4bb2bd9e",
+   "target_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--fa0b7222-bb6d-55b9-8f54-3af09a5e607a",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent ipv4: 202.181.27.115",
+   "description": "Hades Linux C2 on 12443; AS134196, Hong Kong. Reported by Hunt.io.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '202.181.27.115']",
+   "pattern_type": "stix",
+   "valid_from": "2026-07-23T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "hermes",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Hunt.io",
+     "url": "https://hunt.io/blog/thailand-ministry-finance-targeted-with-hermes-ai-agent"
+    }
+   ],
+   "valid_until": "2027-01-19T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--59250fec-6fa3-5535-b818-922789419885",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--fa0b7222-bb6d-55b9-8f54-3af09a5e607a",
+   "target_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--c0921147-ec67-5637-986e-d1ea1b2a06d3",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent domain: redhatupdating432.dnsrd.com",
+   "description": "Resolves to the staging server 43.246.208.207 (predates the Hermes activity). Reported by Hunt.io.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[domain-name:value = 'redhatupdating432.dnsrd.com']",
+   "pattern_type": "stix",
+   "valid_from": "2026-07-23T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "hermes",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Hunt.io",
+     "url": "https://hunt.io/blog/thailand-ministry-finance-targeted-with-hermes-ai-agent"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--8513788c-214f-59e6-bf4b-222edd1240a0",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--c0921147-ec67-5637-986e-d1ea1b2a06d3",
+   "target_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--4600297f-42e7-5cc7-9c8c-d882b1122c9e",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent sha256: d252ee7b348b7e43e432d8fb154465838f5cd5fb564905323460e6f0a0c7d1e2",
+   "description": "Hades Go implant, Linux (multipathd_04d0), C2 202.181.27.115:12443. Reported by Hunt.io.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.'SHA-256' = 'd252ee7b348b7e43e432d8fb154465838f5cd5fb564905323460e6f0a0c7d1e2']",
+   "pattern_type": "stix",
+   "valid_from": "2026-07-23T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hermes",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Hunt.io",
+     "url": "https://hunt.io/blog/thailand-ministry-finance-targeted-with-hermes-ai-agent"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--a86de333-c007-5f6e-b479-de01449b37bf",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--4600297f-42e7-5cc7-9c8c-d882b1122c9e",
+   "target_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--40ba9bfe-e3b2-5124-858f-a8dee6fd2a62",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent sha256: c74010aa82e8164c8d4ca9e073ec6b9a762e53db67498b22f5ccaef3a82853f",
+   "description": "Hades Go implant, Windows (dwm_33b7.exe), C2 43.246.208.207:443. Reported by Hunt.io.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.'SHA-256' = 'c74010aa82e8164c8d4ca9e073ec6b9a762e53db67498b22f5ccaef3a82853f']",
+   "pattern_type": "stix",
+   "valid_from": "2026-07-23T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hermes",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Hunt.io",
+     "url": "https://hunt.io/blog/thailand-ministry-finance-targeted-with-hermes-ai-agent"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--92f1ddc7-4b1a-5c43-a2f5-77fb618db335",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--40ba9bfe-e3b2-5124-858f-a8dee6fd2a62",
+   "target_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--bb82ed7a-c6ad-5e1f-94fa-5d9d53f75a01",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent sha256: 0f8c905aa25c86f85454acb7e77bf5c50220c2a82e5b69a33741e55c8a85f2fc",
+   "description": "VShell stage 1, Linux. Reported by Hunt.io.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.'SHA-256' = '0f8c905aa25c86f85454acb7e77bf5c50220c2a82e5b69a33741e55c8a85f2fc']",
+   "pattern_type": "stix",
+   "valid_from": "2026-07-23T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hermes",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Hunt.io",
+     "url": "https://hunt.io/blog/thailand-ministry-finance-targeted-with-hermes-ai-agent"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--19fbdf96-7b9c-532c-9502-d8474c5434ca",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--bb82ed7a-c6ad-5e1f-94fa-5d9d53f75a01",
+   "target_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--eaa72f4e-b64a-55cb-ab43-583f77f61d6f",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent sha256: a9447ae174f4aa54f760b7d7cc985c1a970f31e151d3ff66fac247f99ba1b509",
+   "description": "VShell stage 1, Windows. Reported by Hunt.io.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.'SHA-256' = 'a9447ae174f4aa54f760b7d7cc985c1a970f31e151d3ff66fac247f99ba1b509']",
+   "pattern_type": "stix",
+   "valid_from": "2026-07-23T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hermes",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Hunt.io",
+     "url": "https://hunt.io/blog/thailand-ministry-finance-targeted-with-hermes-ai-agent"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--c681bcfd-188e-5748-b38d-db5259551db1",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--eaa72f4e-b64a-55cb-ab43-583f77f61d6f",
+   "target_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--080155ed-886b-5a3b-9739-db740a3938ef",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent sha256: ec7e9ab43a0cc65d29f0b84a93ba88c43d01fed3dec5c968525dc73c03cbfda2",
+   "description": "VShell stage 2, Linux. Reported by Hunt.io.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.'SHA-256' = 'ec7e9ab43a0cc65d29f0b84a93ba88c43d01fed3dec5c968525dc73c03cbfda2']",
+   "pattern_type": "stix",
+   "valid_from": "2026-07-23T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hermes",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Hunt.io",
+     "url": "https://hunt.io/blog/thailand-ministry-finance-targeted-with-hermes-ai-agent"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--ac9b10dc-bab8-5804-a5eb-f0a2abc0822a",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--080155ed-886b-5a3b-9739-db740a3938ef",
+   "target_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--888e8795-7470-5777-a223-44500c883c3f",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent sha256: b65b7ede835ebba36294d52d7780065523340ee09bb8b209ef2dc495e53dfd53",
+   "description": "VShell stage 2, Windows. Reported by Hunt.io.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.'SHA-256' = 'b65b7ede835ebba36294d52d7780065523340ee09bb8b209ef2dc495e53dfd53']",
+   "pattern_type": "stix",
+   "valid_from": "2026-07-23T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hermes",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Hunt.io",
+     "url": "https://hunt.io/blog/thailand-ministry-finance-targeted-with-hermes-ai-agent"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--dde60bb1-7ca1-505c-8f2e-3e30837f2c7b",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--888e8795-7470-5777-a223-44500c883c3f",
+   "target_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--67bd7748-67aa-5f3e-bde2-0ca231cf5cf0",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent uri_string: /assets/app.min.js",
+   "description": "Hades check-in path (also /assets/vendor.js for tasking and /assets/main.js for upload), POST with AES-GCM bodies. Reported by Hunt.io.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[url:value LIKE '%/assets/app.min.js%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-07-23T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "hermes",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Hunt.io",
+     "url": "https://hunt.io/blog/thailand-ministry-finance-targeted-with-hermes-ai-agent"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--89b0e388-5a11-5d2a-928c-905c04fa4938",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--67bd7748-67aa-5f3e-bde2-0ca231cf5cf0",
+   "target_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--62686ddd-abd2-5f08-b03f-b34d85eb7ee9",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent file_name: .journald-cache.php",
+   "description": "PHP web shell posing as a journal cache on a ministry web server (/storage/Counter/nine/.journald-cache.php). Reported by Hunt.io.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:name LIKE '.journald-cache.php%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-07-23T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hermes",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Hunt.io",
+     "url": "https://hunt.io/blog/thailand-ministry-finance-targeted-with-hermes-ai-agent"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--e0c8dfc4-1163-528d-871e-b0d3e4d15aef",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--62686ddd-abd2-5f08-b03f-b34d85eb7ee9",
+   "target_ref": "intrusion-set--5d761ba3-bc56-50a8-b9c3-a7fdf651ca9d"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--96e05b0d-6394-5130-b03d-45aafe6bd75c",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent ipv4: 45.79.183.61",
+   "description": "C2 hub (Linode). Reported by ThreatDown.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '45.79.183.61']",
+   "pattern_type": "stix",
+   "valid_from": "2026-09-22T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "hermes",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDown",
+     "url": "https://www.threatdown.com/blog/carbonato/"
+    }
+   ],
+   "valid_until": "2027-03-21T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--ddad1cb9-1186-5875-bfe3-d840992c347b",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--96e05b0d-6394-5130-b03d-45aafe6bd75c",
+   "target_ref": "intrusion-set--e3ca8dca-73fb-54ac-9f77-4c1fb631e256"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--bd4ea96c-c62e-593b-a208-1f84e17cafa3",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent ipv4: 91.99.195.164",
+   "description": "fsociety-era C2 (Hetzner). Reported by ThreatDown.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '91.99.195.164']",
+   "pattern_type": "stix",
+   "valid_from": "2026-09-22T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "hermes",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDown",
+     "url": "https://www.threatdown.com/blog/carbonato/"
+    }
+   ],
+   "valid_until": "2027-03-21T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--bececd97-467e-5c90-92e8-05cb5ab9087c",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--bd4ea96c-c62e-593b-a208-1f84e17cafa3",
+   "target_ref": "intrusion-set--e3ca8dca-73fb-54ac-9f77-4c1fb631e256"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--f869298e-4f27-556f-b24e-76606da93195",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent ipv4: 213.136.79.115",
+   "description": "Beacon and reverse shell, ports 8080 and 4444 (Contabo). Reported by ThreatDown.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '213.136.79.115']",
+   "pattern_type": "stix",
+   "valid_from": "2026-09-22T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "hermes",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDown",
+     "url": "https://www.threatdown.com/blog/carbonato/"
+    }
+   ],
+   "valid_until": "2027-03-21T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--47cb0f07-38ec-541c-a253-e71cbf997823",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--f869298e-4f27-556f-b24e-76606da93195",
+   "target_ref": "intrusion-set--e3ca8dca-73fb-54ac-9f77-4c1fb631e256"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--1000fc12-b552-5f1e-898c-f8dbef62fb44",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent ipv4: 213.136.83.197",
+   "description": "LLM gateway for the bots (Contabo). Reported by ThreatDown.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '213.136.83.197']",
+   "pattern_type": "stix",
+   "valid_from": "2026-09-22T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "hermes",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDown",
+     "url": "https://www.threatdown.com/blog/carbonato/"
+    }
+   ],
+   "valid_until": "2027-03-21T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--a7e939e8-c57a-50f3-8e27-41711fa7f18d",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--1000fc12-b552-5f1e-898c-f8dbef62fb44",
+   "target_ref": "intrusion-set--e3ca8dca-73fb-54ac-9f77-4c1fb631e256"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--6a37829a-8e1b-5c97-9b5f-e027893d90a1",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent ipv4: 190.211.124.187",
+   "description": "Reverse SSH tunnel sink, AS262145 Costa Rica. Reported by ThreatDown.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '190.211.124.187']",
+   "pattern_type": "stix",
+   "valid_from": "2026-09-22T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "hermes",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDown",
+     "url": "https://www.threatdown.com/blog/carbonato/"
+    }
+   ],
+   "valid_until": "2027-03-21T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--cbe9fbc3-23f9-51dc-a248-919b65f610cd",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--6a37829a-8e1b-5c97-9b5f-e027893d90a1",
+   "target_ref": "intrusion-set--e3ca8dca-73fb-54ac-9f77-4c1fb631e256"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--f66a2e2c-04b9-5790-9344-748b4742b5ef",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent domain: carbonato-proxy-drab.vercel.app",
+   "description": "Carbonato LLM proxy on Vercel (suspended). Reported by ThreatDown.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[domain-name:value = 'carbonato-proxy-drab.vercel.app']",
+   "pattern_type": "stix",
+   "valid_from": "2026-09-22T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hermes",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDown",
+     "url": "https://www.threatdown.com/blog/carbonato/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--43e38943-155f-5a48-9fe3-2d8dc102f4c4",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--f66a2e2c-04b9-5790-9344-748b4742b5ef",
+   "target_ref": "intrusion-set--e3ca8dca-73fb-54ac-9f77-4c1fb631e256"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--520f6f8d-9099-51f4-b942-0f0b9448a0df",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent domain: carbonato-proxy-zeta.vercel.app",
+   "description": "Carbonato LLM proxy on Vercel (suspended). Reported by ThreatDown.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[domain-name:value = 'carbonato-proxy-zeta.vercel.app']",
+   "pattern_type": "stix",
+   "valid_from": "2026-09-22T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hermes",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDown",
+     "url": "https://www.threatdown.com/blog/carbonato/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--2c0f23dd-67a0-59cb-8132-55caf33efb7a",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--520f6f8d-9099-51f4-b942-0f0b9448a0df",
+   "target_ref": "intrusion-set--e3ca8dca-73fb-54ac-9f77-4c1fb631e256"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--f77f8f20-b35b-509f-a926-468a7e34166f",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent domain: carbonato-proxy-zeta-2.vercel.app",
+   "description": "Carbonato LLM proxy on Vercel (suspended). Reported by ThreatDown.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[domain-name:value = 'carbonato-proxy-zeta-2.vercel.app']",
+   "pattern_type": "stix",
+   "valid_from": "2026-09-22T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hermes",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDown",
+     "url": "https://www.threatdown.com/blog/carbonato/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--a744a0c2-2876-51db-aa89-bb2bc90147e9",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--f77f8f20-b35b-509f-a926-468a7e34166f",
+   "target_ref": "intrusion-set--e3ca8dca-73fb-54ac-9f77-4c1fb631e256"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--944df08f-7e29-5492-ade8-09d00cc1b602",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent file_path: /root/.hermes/loot/",
+   "description": "Where Carbonato's Hermes persona stores stolen keys and credentials in plain text. Reported by ThreatDown.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[directory:path = '/root/.hermes/loot/']",
+   "pattern_type": "stix",
+   "valid_from": "2026-09-22T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hermes",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDown",
+     "url": "https://www.threatdown.com/blog/carbonato/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--2dfba810-f91d-55ce-8888-fc23ac647c6a",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--944df08f-7e29-5492-ade8-09d00cc1b602",
+   "target_ref": "intrusion-set--e3ca8dca-73fb-54ac-9f77-4c1fb631e256"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--5c610b1d-3d51-5217-a1b3-59b79d111d99",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent file_path: /usr/local/bin/.docker-network-monitor",
+   "description": "Carbonato watchdog that re-pulls its image. Reported by ThreatDown.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[directory:path = '/usr/local/bin/.docker-network-monitor']",
+   "pattern_type": "stix",
+   "valid_from": "2026-09-22T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hermes",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDown",
+     "url": "https://www.threatdown.com/blog/carbonato/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--3c437d53-b708-58a6-a5fe-bfcd7a032637",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--5c610b1d-3d51-5217-a1b3-59b79d111d99",
+   "target_ref": "intrusion-set--e3ca8dca-73fb-54ac-9f77-4c1fb631e256"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--5379ee02-df06-510a-b84d-adb59a444db9",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent file_path: /usr/sbin/systemd-logind",
+   "description": "Carbonato miner disguised as a system service (the real systemd-logind lives under /usr/lib/systemd/ or /lib/systemd/). Reported by ThreatDown.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[directory:path = '/usr/sbin/systemd-logind']",
+   "pattern_type": "stix",
+   "valid_from": "2026-09-22T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hermes",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDown",
+     "url": "https://www.threatdown.com/blog/carbonato/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--4b7296c5-f955-5bf5-a424-bc7e81bb3cd4",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--5379ee02-df06-510a-b84d-adb59a444db9",
+   "target_ref": "intrusion-set--e3ca8dca-73fb-54ac-9f77-4c1fb631e256"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--7b747bf8-601a-5e57-824f-9fc0b5d7decc",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Hermes Agent file_path: /opt/gh0st/",
+   "description": "Carbonato scripts: entry.sh and auto-persist-host.sh. Reported by ThreatDown.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[directory:path = '/opt/gh0st/']",
+   "pattern_type": "stix",
+   "valid_from": "2026-09-22T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hermes",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDown",
+     "url": "https://www.threatdown.com/blog/carbonato/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--6cce0536-9abc-5d66-9e83-07bb18687782",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--7b747bf8-601a-5e57-824f-9fc0b5d7decc",
+   "target_ref": "intrusion-set--e3ca8dca-73fb-54ac-9f77-4c1fb631e256"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--d8759649-82f8-5ef5-907f-3b88bc4a1fbf",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Agent Zero sha256: c1938a2903529c6fe7d86fc768bd953f9864ea14d7b0fe95a714669f64c896fc",
+   "description": "Agent Zero web UI favicon.svg. Reported by ThreatDefence review of the Agent Zero source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.'SHA-256' = 'c1938a2903529c6fe7d86fc768bd953f9864ea14d7b0fe95a714669f64c896fc']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "agent-zero",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the Agent Zero source code",
+     "url": "https://github.com/agent0ai/agent-zero"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--e0c76c00-ac43-57c8-90a2-95886db62b51",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--d8759649-82f8-5ef5-907f-3b88bc4a1fbf",
+   "target_ref": "tool--d2118b51-9a0c-5d1b-b458-dc8f1aa0b270"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--742c28cb-502e-58d2-acd0-f8d502499f01",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Agent Zero user_agent: agent-zero/",
+   "description": "Agent Zero's user agent prefix for its own OpenAI OAuth calls (plugins/_oauth/helpers/codex.py:607). Reported by ThreatDefence review of the Agent Zero source code.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'agent-zero/']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "agent-zero",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the Agent Zero source code",
+     "url": "https://github.com/agent0ai/agent-zero"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--e0f2f308-ddc6-5d95-a5fb-69339128f26d",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--742c28cb-502e-58d2-acd0-f8d502499f01",
+   "target_ref": "tool--d2118b51-9a0c-5d1b-b458-dc8f1aa0b270"
   }
  ]
 }

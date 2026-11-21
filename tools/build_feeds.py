@@ -54,6 +54,14 @@ FRAMEWORKS = {
               "aliases": ["usestrix/strix", "strix-agent"],
               "description": "Open-source Python AI penetration testing agent (usestrix/strix, August 2025) that runs teams of agents in a Kali sandbox container through a Caido proxy; used for vulnerability discovery in the 2026 retail card-theft campaign before Cairn exploitation.",
               "own_actor": "Strix operators"},
+    "hermes": {"name": "Hermes Agent", "sid": 9732500, "created": "2026_11_21",
+               "aliases": ["NousResearch/hermes-agent", "Hermes"],
+               "description": "Open-source general-purpose AI agent from Nous Research with persistent memory, self-written skills, a SOUL.md persona, a Telegram gateway and a yolo mode; used as the attack console by knaithe/KnYuan, the Gambit retail card-theft operator, the Carbonato Docker botnet and against Thailand's Ministry of Finance.",
+               "own_actor": "Hermes Agent operators"},
+    "agent-zero": {"name": "Agent Zero", "sid": 9733500, "created": "2026_11_21",
+                   "aliases": ["agent0ai/agent-zero", "AgentZero"],
+                   "description": "Open-source general-purpose AI agent framework that runs in a Kali-based container with a built-in hacker profile and a web UI; GTIG reported threat-actor experimentation with it in 2026.",
+                   "own_actor": "Agent Zero operators"},
 }
 ZEEK_TYPES = {"ipv4": "Intel::ADDR", "ipv6": "Intel::ADDR", "md5": "Intel::FILE_HASH", "domain": "Intel::DOMAIN", "user_agent": "Intel::SOFTWARE", "sha256": "Intel::FILE_HASH", "url": "Intel::URL"}
 

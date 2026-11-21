@@ -1,5 +1,7 @@
 ARTEX-worker/1.0
 ArtEx/1.0
+Boto3/1.43.125
+Botocore/1.43.125
 Claude-User (claude-code/2.1.98; +https://support.anthropic.com/)
 CyberStrikeAI-Docker-build
 CyberStrikeAI/1.0
@@ -21,6 +23,9 @@ Mozilla/5.0 (spa-api-recon spider)
 Mozilla/5.0 (spa-api-recon)
 Mozilla/5.0 ARTeX
 ReconProbe/1.0
+agent-zero/
+antifox-enrich/1.0
+antifox-selfupdate
 artex-audit/1.0
 artex-enrich/1.0
 artex-i21861-canary

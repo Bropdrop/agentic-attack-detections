@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.6.0, November 21, 2026
+
+- Hermes Agent added in `frameworks/hermes/`: 4 KQL hunts, 2 analytics rules, 3 Sigma rules, Suricata and YARA for Hermes turned into an attack console (approvals off, the bundled godmode jailbreak skill, replaced personas, Telegram control) and for the Carbonato Docker botnet that installs it, from a review of the Hermes source (NousResearch/hermes-agent at 7c34e2db) and reporting by Unit 42, Hunt.io, Gambit Security and ThreatDown. The indicators include the Thai Ministry of Finance case (Hades and VShell hashes) and Carbonato's infrastructure; the Gambit campaign rows now carry `hermes` too.
+- Agent Zero added in `frameworks/agent-zero/`: 2 KQL hunts, 1 Sigma rule, Suricata and YARA for its container, hacker profile, exposed UI and tunnels. GTIG reported threat-actor experimentation but published no indicators, so this folder holds software fingerprints.
+- AntiFox, the renamed ARTEX fork, in `frameworks/artex/`: hunt 31 for the IIS web shell to AWS enumeration sequence Arctic Wolf Labs reported, and indicators for its Alibaba Cloud consoles, exposed consoles, image, user agents and recording proxy.
+- 515 indicators in total.
+
 ## 2.5.0, November 21, 2026
 
 - Strix added in `frameworks/strix/`: 17 indicators, 3 KQL hunts, 1 analytics rule, 3 Sigma rules, Suricata and YARA, from a review of the Strix source code (usestrix/strix at a1ccf777) and reporting by Gambit Security, GitGuardian and PenTestIT. The Gambit retail campaign indicators are now tagged `cairn strix`: Strix found the flaws and Cairn exploited them.

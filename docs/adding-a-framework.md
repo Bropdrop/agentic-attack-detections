@@ -37,6 +37,8 @@ frameworks/<name>/
 | HexStrike | 9729001 to 9729499 | from 9729500 |
 | CyberStrikeAI | 9730001 to 9730499 | from 9730500 |
 | Strix | 9731001 to 9731499 | from 9731500 |
-| Next framework | 9732001 to 9732499 | from 9732500 |
+| Hermes Agent | 9732001 to 9732499 | from 9732500 |
+| Agent Zero | 9733001 to 9733499 | from 9733500 |
+| Next framework | 9734001 to 9734499 | from 9734500 |
 
 Rules in `behaviors/suricata/` keep the SID they were first published with. Sigma and Sentinel rule ids are UUIDv5 values derived from the file path, so they stay stable as long as a file is not renamed.

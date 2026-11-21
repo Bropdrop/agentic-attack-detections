@@ -1,6 +1,6 @@
 # Agentic Attack Detections
 
-Detection rules, hunting queries and indicators for agentic attack frameworks (ARTEX, Cairn, PentAGI, HexStrike, CyberStrikeAI and Strix so far): open-source tools that hand an intrusion to AI agents, which plan, run real attack tools and keep going until they reach a goal. Each framework gets its own folder, built from a review of its source code and the public reporting on its use. The behaviors they share, such as AI agents running attack tools with their approval prompts off, servers calling Chinese model APIs, bursts of tools from one source and probing through rotating proxies, have their own folder, so one rule covers every framework.
+Detection rules, hunting queries and indicators for agentic attack frameworks (ARTEX and its AntiFox fork, Cairn, PentAGI, HexStrike, CyberStrikeAI, Strix, Hermes Agent and Agent Zero so far): open-source tools that hand an intrusion to AI agents, which plan, run real attack tools and keep going until they reach a goal. Each framework gets its own folder, built from a review of its source code and the public reporting on its use. The behaviors they share, such as AI agents running attack tools with their approval prompts off, servers calling Chinese model APIs, bursts of tools from one source and probing through rotating proxies, have their own folder, so one rule covers every framework.
 
 Maintained by [ThreatDefence](https://threatdefence.com).
 
@@ -10,12 +10,14 @@ Maintained by [ThreatDefence](https://threatdefence.com).
 
 | Framework | What it is | Folder | Reporting |
 |---|---|---|---|
-| ARTEX | Go planner and worker agents with a web console, released July 2026, used by Storm-0940, Storm-3358, VAPOR PANDA and criminal groups against Microsoft 365, Okta, AWS, Azure, web applications and Active Directory | [`frameworks/artex/`](frameworks/artex) | [ARTEX advisory](https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting), [ARTEX deep hunting](https://threatdefence.com/article/artex-source-code-signals-deep-hunting) |
+| ARTEX | Go planner and worker agents with a web console, released July 2026 (AntiFox is the same code renamed), used by Storm-0940, Storm-3358, VAPOR PANDA and criminal groups against Microsoft 365, Okta, AWS, Azure, web applications and Active Directory | [`frameworks/artex/`](frameworks/artex) | [ARTEX advisory](https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting), [ARTEX deep hunting](https://threatdefence.com/article/artex-source-code-signals-deep-hunting) |
 | Cairn | Python engine that drives Claude Code, Codex and Pi coding agents in Kali containers, used against online retailers, payment sites, Japanese web applications and WSUS servers | [`frameworks/cairn/`](frameworks/cairn) | [What Cairn leaves behind](frameworks/cairn/source-code-signals.md) |
 | PentAGI | Go multi-agent platform from VXControl that runs Kali tools in a container per engagement, seen by GTIG and Mandiant in intrusions since August 2026 and on a PaperCut exploitation operator's infrastructure | [`frameworks/pentagi/`](frameworks/pentagi) | [What PentAGI leaves behind](frameworks/pentagi/source-code-signals.md) |
 | HexStrike | Python MCP tool server that gives any AI assistant about 150 security tools over an unauthenticated API on port 8888, discussed for NetScaler exploitation in 2025 and seen by GTIG and Mandiant in intrusions | [`frameworks/hexstrike/`](frameworks/hexstrike) | [What HexStrike leaves behind](frameworks/hexstrike/source-code-signals.md) |
 | CyberStrikeAI | Go operator console whose agents run about 90 tools and which builds its own implants, C2 listeners and webshell manager, tied to the FortiGate mass-exploitation infrastructure, an AWS intrusion and attacks on education organizations in Africa and Latin America | [`frameworks/cyberstrikeai/`](frameworks/cyberstrikeai) | [What CyberStrikeAI leaves behind](frameworks/cyberstrikeai/source-code-signals.md) |
 | Strix | Python AI pentest agent that runs teams of agents in a Kali sandbox through a Caido proxy, on any model; found the flaws Cairn exploited in the retail card-theft campaign Gambit reported | [`frameworks/strix/`](frameworks/strix) | [What Strix leaves behind](frameworks/strix/source-code-signals.md) |
+| Hermes Agent | Legitimate general-purpose agent turned into an attack console: approvals off, a bundled jailbreak skill, red-team personas and Telegram control. Used by knaithe/KnYuan, the Gambit retail operator, the Carbonato Docker botnet and inside Thailand's Ministry of Finance | [`frameworks/hermes/`](frameworks/hermes) | [What Hermes leaves behind](frameworks/hermes/source-code-signals.md) |
+| Agent Zero | General-purpose agent in a Kali container with a built-in hacker profile and an open web UI; GTIG reported threat-actor experimentation | [`frameworks/agent-zero/`](frameworks/agent-zero) | [Agent Zero folder](frameworks/agent-zero/README.md) |
 
 ## Behaviors shared by agentic frameworks
 
@@ -39,7 +41,7 @@ The ARTEX folder also carries behavior hunts written before this split: user age
 
 | Path | Contents |
 |---|---|
-| [`iocs/indicators.csv`](iocs/indicators.csv) | 434 indicators across all frameworks. Each row has its source, confidence, a review date for addresses and a `framework` column (`artex`, `cairn`, `pentagi`, `hexstrike`, `cyberstrikeai`, `strix`, or several). This file is the single source for every feed |
+| [`iocs/indicators.csv`](iocs/indicators.csv) | 515 indicators across all frameworks. Each row has its source, confidence, a review date for addresses and a `framework` column (`artex`, `cairn`, `pentagi`, `hexstrike`, `cyberstrikeai`, `strix`, `hermes`, `agent-zero`, or several). This file is the single source for every feed |
 | [`feeds/`](feeds) | Generated from the CSV for all frameworks: STIX 2.1 bundle with one tool per framework, Sentinel watchlist and plain lists of IPv4 and IPv6 addresses, domains, URLs, user agents and SHA-256 and MD5 hashes. [`feeds/by-framework/`](feeds/by-framework) has the plain lists per framework |
 | [`generated/`](generated) | Every Sigma rule converted to Splunk SPL, Sentinel ASIM KQL and Elastic ES\|QL and Lucene, by framework. [`SUMMARY.md`](generated/SUMMARY.md) shows which rule converted to which backend |
 | [`tools/`](tools) | Feed builder, Sigma converter and validator |

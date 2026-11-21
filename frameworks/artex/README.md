@@ -14,6 +14,10 @@ Maintained by [ThreatDefence](https://threatdefence.com). The full advisory, wit
 | Platforms | Sigma, Microsoft Sentinel and Defender XDR, Splunk, Elastic, Zeek, Suricata, YARA, osquery, STIX 2.1 |
 | Status | Experimental. Tested for syntax, conversion and against a synthetic pcap. Baseline every rule on your own data before alerting |
 
+## AntiFox (added in 2.6.0)
+
+AntiFox ([AntiFox-AI/antifox](https://github.com/AntiFox-AI/antifox)) is ARTEX 0.1.1 renamed and maintained as its own project, so every ARTEX rule applies to it. Arctic Wolf Labs tied AntiFox consoles on Alibaba Cloud to intrusions in which an IIS web shell read `web.config` secrets and stolen AWS keys were used for broad enumeration that read a production secret. **Hunt 31** covers that sequence. The indicators add the two Arctic Wolf addresses, exposed AntiFox consoles, the console title, image `ghcr.io/antifox-ai/antifox`, its `antifox-enrich/1.0` and `antifox-selfupdate` user agents, its unauthenticated recording proxy on 8788 and the web shell file patterns.
+
 ## What's new in 1.1.0
 
 Version 1.1.0 adds detections drawn from the ARTEX source code itself, not only from reported intrusions. [`docs/source-code-signals.md`](source-code-signals.md) lists every signal with the file it comes from, the log source that sees it and how easily an operator can remove it. The article that explains them is at **https://threatdefence.com/article/artex-source-code-signals-deep-hunting**.
