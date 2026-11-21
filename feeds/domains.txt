@@ -27,7 +27,9 @@ site.vietnam852.com
 sqlserver-sqlite.com
 staging.artex.lol
 static-js.com
+support.pentagi.com
 traffic-analyzer.net
+update.pentagi.com
 webhook.site
 www.ddduuuppp.com
 www.zhzy999.net

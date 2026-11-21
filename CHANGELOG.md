@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.0, November 21, 2026
+
+- PentAGI added in `frameworks/pentagi/`: 39 indicators, 5 KQL hunts, 2 analytics rules, 3 Sigma rules, Suricata and YARA, from a review of the PentAGI source code (vxcontrol/pentagi at cffed94) and reporting by GTIG, Elastic, Talos, Hunt.io, RST Cloud, GitGuardian and Threat Landscape.
+- New behavior hunt: a server calling back to the address that was probing it, which covers reverse shells to PentAGI's worker ports and to Cairn's host network.
+- Correction carried into the indicators: the PentAGI console certificate's issuer is `CN=PentAGI CA`; the server certificate itself is `CN=localhost`, `O=PentAGI`, SAN `pentagi.local`.
+- Three exposed consoles run ARTEX and PentAGI on one server and are tagged with both frameworks.
+
 ## 2.0.0, November 21, 2026
 
 The repository becomes Agentic Attack Detections and covers more than one framework. It was `artex-detections`; GitHub redirects the old address.

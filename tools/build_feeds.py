@@ -38,6 +38,10 @@ FRAMEWORKS = {
               "aliases": ["oritera/Cairn"],
               "description": "Open-source agentic problem-solving engine (oritera/Cairn, April 2026) that drives Claude Code, Codex and Pi coding agents in Kali containers; abused for web intrusions and payment-card theft since mid-2026.",
               "own_actor": "Cairn operators"},
+    "pentagi": {"name": "PentAGI", "sid": 9728500, "created": "2026_11_21",
+                "aliases": ["vxcontrol/pentagi", "Penetration Testing Artificial General Intelligence"],
+                "description": "Open-source and commercial multi-agent penetration testing platform by VXControl that runs its tools in Kali Linux containers; abused in the wild since at least August 2026.",
+                "own_actor": "PentAGI operators"},
 }
 ZEEK_TYPES = {"ipv4": "Intel::ADDR", "domain": "Intel::DOMAIN", "user_agent": "Intel::SOFTWARE", "sha256": "Intel::FILE_HASH", "url": "Intel::URL"}
 

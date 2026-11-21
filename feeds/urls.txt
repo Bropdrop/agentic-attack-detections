@@ -12,5 +12,6 @@ https://cdn.netlfjs.com/js/cts.js
 https://cdn.netlfjs.com/js/vla.js
 https://static-js.com/js/bmws.js
 https://static-js.com/js/nrt.js
+https://update.pentagi.com/api/v1/proxy/updates/pentagi/check
 https://x1opay.co/js/eut.js
 https://x1opay.co/js/l.js

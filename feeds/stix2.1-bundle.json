@@ -1,6 +1,6 @@
 {
  "type": "bundle",
- "id": "bundle--019a9ec3-30f9-514f-8c17-f829874f45f0",
+ "id": "bundle--17ede038-96a7-5fcd-8a96-f6cbd53eda3f",
  "objects": [
   {
    "type": "identity",
@@ -42,6 +42,23 @@
     "oritera/Cairn"
    ],
    "description": "Open-source agentic problem-solving engine (oritera/Cairn, April 2026) that drives Claude Code, Codex and Pi coding agents in Kali containers; abused for web intrusions and payment-card theft since mid-2026.",
+   "tool_types": [
+    "exploitation",
+    "vulnerability-scanning"
+   ]
+  },
+  {
+   "type": "tool",
+   "spec_version": "2.1",
+   "id": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "PentAGI",
+   "aliases": [
+    "vxcontrol/pentagi",
+    "Penetration Testing Artificial General Intelligence"
+   ],
+   "description": "Open-source and commercial multi-agent penetration testing platform by VXControl that runs its tools in Kali Linux containers; abused in the wild since at least August 2026.",
    "tool_types": [
     "exploitation",
     "vulnerability-scanning"
@@ -104,6 +121,14 @@
    "name": "Gambit retail card-theft operator (Hermes, Strix and Cairn)"
   },
   {
+   "type": "intrusion-set",
+   "spec_version": "2.1",
+   "id": "intrusion-set--eab51c7b-146c-5e93-a05a-b40340eabe47",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "PaperCut exploitation operator (Hunt.io)"
+  },
+  {
    "type": "relationship",
    "spec_version": "2.1",
    "id": "relationship--6c554da1-77fc-576e-871b-b8a8cd30cc2e",
@@ -142,6 +167,16 @@
    "relationship_type": "uses",
    "source_ref": "intrusion-set--171604af-a526-53ef-b51a-9b3ae16659f0",
    "target_ref": "tool--b3a597a5-b10d-57ec-b27d-638559aef3b1"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--99360097-96de-5b58-9698-393264223338",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "uses",
+   "source_ref": "intrusion-set--eab51c7b-146c-5e93-a05a-b40340eabe47",
+   "target_ref": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f"
   },
   {
    "type": "relationship",
@@ -8068,6 +8103,603 @@
    "relationship_type": "indicates",
    "source_ref": "indicator--3b8d15df-7e3a-54d3-b47e-a2d0e3e3a571",
    "target_ref": "intrusion-set--eed808fe-1b6a-5373-9aff-dc3f9f9b46cb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--57fd00c3-6405-5cb9-b47e-f471d5066396",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "PentAGI domain: update.pentagi.com",
+   "description": "PentAGI update service. Every installation POSTs an installation summary to /api/v1/proxy/updates/pentagi/check every 3 hours by default (backend/pkg/server/update/update.go:52, config.go:279-281). Legitimate vendor service: a hit means PentAGI runs on that host. Reported by ThreatDefence review of the PentAGI source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[domain-name:value = 'update.pentagi.com']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "pentagi",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the PentAGI source code",
+     "url": "https://github.com/vxcontrol/pentagi"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--e7f6a3b4-d86a-5f3e-b2ee-77d1c2dd2034",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--57fd00c3-6405-5cb9-b47e-f471d5066396",
+   "target_ref": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--a357c2cd-2e7d-5a8f-9569-6371c1632d83",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "PentAGI url: https://update.pentagi.com/api/v1/proxy/updates/pentagi/check",
+   "description": "PentAGI installation update check, every 3 hours by default. Reported by ThreatDefence review of the PentAGI source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[url:value = 'https://update.pentagi.com/api/v1/proxy/updates/pentagi/check']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "pentagi",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the PentAGI source code",
+     "url": "https://github.com/vxcontrol/pentagi"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--863f3b83-a046-533d-b03c-9b52176da428",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--a357c2cd-2e7d-5a8f-9569-6371c1632d83",
+   "target_ref": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--df31c261-a20b-52fa-9049-9f6f6451e755",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "PentAGI domain: support.pentagi.com",
+   "description": "PentAGI support service (config.go:283). Reported by ThreatDefence review of the PentAGI source code.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[domain-name:value = 'support.pentagi.com']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "pentagi",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the PentAGI source code",
+     "url": "https://github.com/vxcontrol/pentagi"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--a33646ee-b62b-5e73-8f22-576105d2ff0b",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--df31c261-a20b-52fa-9049-9f6f6451e755",
+   "target_ref": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--69c078d0-aa19-5919-a900-d1a9c09c3de7",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "PentAGI sha256: ec0eb56172d3c3fd926c7cee40c36624aee63369f3fab227408b5575756232bb",
+   "description": "PentAGI console favicon.ico. Reported by ThreatDefence review of the PentAGI source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.'SHA-256' = 'ec0eb56172d3c3fd926c7cee40c36624aee63369f3fab227408b5575756232bb']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "pentagi",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the PentAGI source code",
+     "url": "https://github.com/vxcontrol/pentagi"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--4602798b-ff03-5d53-8a52-aa740ad3c809",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--69c078d0-aa19-5919-a900-d1a9c09c3de7",
+   "target_ref": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--8aa777de-5c66-5b48-bd63-6c6abe6503c5",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "PentAGI sha256: 2a620e3c5f7b49dfc6f5278352607f7931f8c38ef9d4689908af65538dd95366",
+   "description": "PentAGI console favicon-96x96.png (Netlas favicon SHA-256). Reported by RST Cloud.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.'SHA-256' = '2a620e3c5f7b49dfc6f5278352607f7931f8c38ef9d4689908af65538dd95366']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "pentagi",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "RST Cloud",
+     "url": "https://www.rstcloud.com/hunting-ai-harnesses-cairn-artex-pentagi/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--b557da72-b98d-5055-a5f9-86d147860966",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--8aa777de-5c66-5b48-bd63-6c6abe6503c5",
+   "target_ref": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--ad59c9de-dd0a-519c-a553-4a2c34f79dd7",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "PentAGI ipv4: 45.142.193.132",
+   "description": "Orchestration host of a PaperCut exploitation operator; presented a PentAGI CA certificate on port 33333 from April 7 to July 6, 2026. Reported by Hunt.io.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '45.142.193.132']",
+   "pattern_type": "stix",
+   "valid_from": "2026-10-15T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "pentagi",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Hunt.io",
+     "url": "https://hunt.io/blog/papercut-attacker-ai-toolkit-exploit-code-second-rce"
+    }
+   ],
+   "valid_until": "2027-04-13T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--547ccea2-05de-5496-9342-54aeeb5c47db",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--ad59c9de-dd0a-519c-a553-4a2c34f79dd7",
+   "target_ref": "intrusion-set--eab51c7b-146c-5e93-a05a-b40340eabe47"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--5b8f6ee7-a775-5fb0-beb2-92521952d3b2",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "PentAGI sha256: 12603f7a89c66717661f4695e2f0d474036e42ee1631b2070aa88d590d1b79c3",
+   "description": "PentAGI certificate presented by 45.142.193.132 on port 33333. Reported by Hunt.io.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.'SHA-256' = '12603f7a89c66717661f4695e2f0d474036e42ee1631b2070aa88d590d1b79c3']",
+   "pattern_type": "stix",
+   "valid_from": "2026-10-15T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "pentagi",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Hunt.io",
+     "url": "https://hunt.io/blog/papercut-attacker-ai-toolkit-exploit-code-second-rce"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--678694f4-1c71-5801-977c-7c8fc3b26be3",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--5b8f6ee7-a775-5fb0-beb2-92521952d3b2",
+   "target_ref": "intrusion-set--eab51c7b-146c-5e93-a05a-b40340eabe47"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--5ff4c9ef-f063-55e6-8d6d-b7bf1238d9ec",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "PentAGI ipv4: 23.226.135.117",
+   "description": "Exposed PentAGI console renamed xhackai, port 8443. An exposed console is not proof of malicious use. Reported by RST Cloud.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '23.226.135.117']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "pentagi",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "RST Cloud",
+     "url": "https://www.rstcloud.com/hunting-ai-harnesses-cairn-artex-pentagi/"
+    }
+   ],
+   "valid_until": "2027-05-01T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--c0ccd611-66ed-5530-9441-60ea33db1172",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--5ff4c9ef-f063-55e6-8d6d-b7bf1238d9ec",
+   "target_ref": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--e1ad18f7-ff0f-5e8e-8736-3472edcb44da",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "PentAGI ipv4: 119.45.26.102",
+   "description": "Exposed renamed PentAGI console, port 18089. An exposed console is not proof of malicious use. Reported by RST Cloud.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '119.45.26.102']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "pentagi",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "RST Cloud",
+     "url": "https://www.rstcloud.com/hunting-ai-harnesses-cairn-artex-pentagi/"
+    }
+   ],
+   "valid_until": "2027-05-01T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--b2946b81-ffba-5b01-ab0c-d1290a757216",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--e1ad18f7-ff0f-5e8e-8736-3472edcb44da",
+   "target_ref": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--8e75b467-5f18-50b4-8c9f-21735f3bc456",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "PentAGI ipv4: 82.25.190.221",
+   "description": "Exposed PentAGI console, port 8443. An exposed console is not proof of malicious use. Reported by RST Cloud.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '82.25.190.221']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "pentagi",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "RST Cloud",
+     "url": "https://www.rstcloud.com/hunting-ai-harnesses-cairn-artex-pentagi/"
+    }
+   ],
+   "valid_until": "2027-05-01T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--4a5b1320-abb0-59a9-b5c9-ae3006595a3f",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--8e75b467-5f18-50b4-8c9f-21735f3bc456",
+   "target_ref": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--0b2f634d-7f9b-55a8-91a8-1a15a75fc470",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "PentAGI ipv4: 124.223.104.170",
+   "description": "Exposed PentAGI console, port 8443. An exposed console is not proof of malicious use. Reported by RST Cloud.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '124.223.104.170']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "pentagi",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "RST Cloud",
+     "url": "https://www.rstcloud.com/hunting-ai-harnesses-cairn-artex-pentagi/"
+    }
+   ],
+   "valid_until": "2027-05-01T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--6cf377c3-e7e8-5cdb-a290-f67c68e3bfee",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--0b2f634d-7f9b-55a8-91a8-1a15a75fc470",
+   "target_ref": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--a3629102-b17b-5bac-ba7b-3b5e596f4e48",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "PentAGI ipv4: 23.95.170.215",
+   "description": "Exposed PentAGI console, port 8443. An exposed console is not proof of malicious use. Reported by RST Cloud.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '23.95.170.215']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "pentagi",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "RST Cloud",
+     "url": "https://www.rstcloud.com/hunting-ai-harnesses-cairn-artex-pentagi/"
+    }
+   ],
+   "valid_until": "2027-05-01T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--a0d20eed-c047-5f7f-be5a-5a495b252895",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--a3629102-b17b-5bac-ba7b-3b5e596f4e48",
+   "target_ref": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--b5f6bdb8-7677-5397-858b-0956872bf3fe",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX and PentAGI ipv4: 1.14.104.208",
+   "description": "ARTEX and PentAGI consoles on one server, ports 8443 and 8787. An exposed console is not proof of malicious use. Reported by RST Cloud.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '1.14.104.208']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "pentagi",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "RST Cloud",
+     "url": "https://www.rstcloud.com/hunting-ai-harnesses-cairn-artex-pentagi/"
+    }
+   ],
+   "valid_until": "2027-05-01T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--1bbe7060-8341-5edf-9077-71a6dcb4ec69",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--b5f6bdb8-7677-5397-858b-0956872bf3fe",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--8490c9d0-6312-5a58-abb8-d3b2f29c4d21",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--b5f6bdb8-7677-5397-858b-0956872bf3fe",
+   "target_ref": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--eaec5804-c326-595e-bf97-36afe152ed36",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX and PentAGI ipv4: 51.158.154.152",
+   "description": "ARTEX and PentAGI consoles on one server, ports 8443 and 8787. An exposed console is not proof of malicious use. Reported by RST Cloud.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '51.158.154.152']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "pentagi",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "RST Cloud",
+     "url": "https://www.rstcloud.com/hunting-ai-harnesses-cairn-artex-pentagi/"
+    }
+   ],
+   "valid_until": "2027-05-01T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--ad936451-35fb-57c3-97a7-afc013f6bbbc",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--eaec5804-c326-595e-bf97-36afe152ed36",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--dd91cfd4-682d-55d4-8ca6-0ccc1d646018",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--eaec5804-c326-595e-bf97-36afe152ed36",
+   "target_ref": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--e41a1072-8f1c-5a38-9293-9b39723de038",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX and PentAGI ipv4: 84.247.152.233",
+   "description": "ARTEX and PentAGI consoles on one server, ports 8443 and 8787. An exposed console is not proof of malicious use. Reported by RST Cloud.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '84.247.152.233']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "pentagi",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "RST Cloud",
+     "url": "https://www.rstcloud.com/hunting-ai-harnesses-cairn-artex-pentagi/"
+    }
+   ],
+   "valid_until": "2027-05-01T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--12d8a4a6-a71b-5376-ba06-6c03fd55fae2",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--e41a1072-8f1c-5a38-9293-9b39723de038",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--f87d98e0-c409-552f-819c-fddacfe5d8ad",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--e41a1072-8f1c-5a38-9293-9b39723de038",
+   "target_ref": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f"
   }
  ]
 }
