@@ -14,7 +14,7 @@ Maintained by [ThreatDefence](https://threatdefence.com). The full advisory, wit
 
 ## What's new in 1.1.0
 
-Version 1.1.0 adds detections drawn from the ARTEX source code itself, not only from reported intrusions. [`docs/source-code-signals.md`](docs/source-code-signals.md) lists every signal with the file it comes from, the log source that sees it and how easily an operator can remove it.
+Version 1.1.0 adds detections drawn from the ARTEX source code itself, not only from reported intrusions. [`docs/source-code-signals.md`](docs/source-code-signals.md) lists every signal with the file it comes from, the log source that sees it and how easily an operator can remove it. The article that explains them is at **https://threatdefence.com/article/artex-source-code-signals-deep-hunting**.
 
 - **Hunts 23 to 30:** norma page reads and the Go enrichment probe, the ARTEX container toolchain seen from one source, request rates that match the ARTEX noise profiles, headless browser sign-ins and relayed MFA, accounts registered while probing, ARTEX running on a monitored host, console traffic in proxy logs, and bracketed-paste bytes in shell input.
 - **Two analytics rules:** ARTEX code-default user agents, and the ARTEX agent shell or proxy credential on a host.
