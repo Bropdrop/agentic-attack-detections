@@ -33,4 +33,12 @@ Which behavior each platform covers. S = Sigma rule (converted in `generated/`),
 | ARTEX console on your network | Network, EDR | | N | | | N | N |
 | Backdoored ARTEX container images | EDR, container inventory | | N | | | | |
 | SQL Server toolkit: xp_cmdshell, fake system binaries, Edge update task names, payload hosts | EDR, Sysmon, DNS, HTTP | S | N | | | I | N, I |
+| norma page reads and the Go enrichment probe | Web, WAF, proxy, sign-in, Graph | | N | | | | |
+| ARTEX container toolchain from one source | Web, WAF, proxy | | N | | | | |
+| Request rates matching the noise profiles | Web, WAF, proxy | | N | | | | |
+| Headless browser sign-ins and relayed MFA | Entra ID | | N | | | | |
+| Accounts registered while probing | Web, WAF | | N | | | | |
+| ARTEX agent shells, recording proxy, resolver fan-out, S3 archives | EDR, Defender TVM, CloudTrail | | N | | | | |
+| Console, update check and chat-ops alerts in proxy logs | Outbound proxy | | N | | | | |
+| Bracketed-paste bytes in shell input | Syslog, auditd, EDR | | N | | | | |
 | Files on disk | Disk, container layers | | | | | | YARA, osquery |

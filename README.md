@@ -16,19 +16,19 @@ Maintained by [ThreatDefence](https://threatdefence.com). The full advisory, wit
 
 | Folder | Contents |
 |---|---|
-| [`iocs/indicators.csv`](iocs/indicators.csv) | 184 indicators: user agents, request artifacts, host artifacts, hashes, favicon hashes, domains, URLs and addresses. Each row has its source, confidence and a review date for addresses. This file is the single source for every feed |
+| [`iocs/indicators.csv`](iocs/indicators.csv) | 215 indicators: user agents, request artifacts, host artifacts, strings from the ARTEX source code, hashes, favicon hashes, domains, URLs and addresses. Each row has its source, confidence and a review date for addresses. This file is the single source for every feed |
 | [`feeds/`](feeds) | Generated from the CSV: STIX 2.1 bundle, Sentinel watchlist and plain lists of addresses, domains, URLs, user agents and hashes |
 | [`sigma/`](sigma) | 31 Sigma rules and 5 Sigma correlations for web, proxy, process, file, DNS, AWS, Azure, Entra ID and Okta logs |
 | [`generated/`](generated) | The Sigma rules converted to Splunk SPL, Sentinel ASIM KQL and Elastic ES\|QL and Lucene. [`SUMMARY.md`](generated/SUMMARY.md) shows which rule converted to which backend |
-| [`sentinel/hunting/`](sentinel/hunting) | 22 KQL hunts for Microsoft Sentinel and Defender XDR advanced hunting |
-| [`sentinel/analytics/`](sentinel/analytics) | 5 scheduled analytics rules in the Sentinel template format |
+| [`sentinel/hunting/`](sentinel/hunting) | 30 KQL hunts for Microsoft Sentinel and Defender XDR advanced hunting. Hunts 23 to 30 come from a review of the ARTEX source code ([`docs/source-code-signals.md`](docs/source-code-signals.md)) |
+| [`sentinel/analytics/`](sentinel/analytics) | 7 scheduled analytics rules in the Sentinel template format |
 | [`splunk/`](splunk) | A Splunk app: 15 saved searches (disabled by default), macros for your indexes and the indicator lookup |
 | [`elastic/`](elastic) | 9 ES\|QL hunts and 5 detection rules in the Elastic detection-rules TOML format |
 | [`zeek/`](zeek) | A detection script that raises notices for ARTEX traffic, and an Intel framework file |
 | [`suricata/`](suricata) | 27 rules for user agents, probe artifacts, console pages, C2 domains and toolkit payload hosts, plus generated address rules |
 | [`yara/`](yara) | 4 rules for ARTEX binaries, console assets, the backdoored console and probe files |
 | [`osquery/`](osquery) | A pack for probe files and accounts, web service child shells, listening consoles and container images |
-| [`docs/`](docs) | [Where to start](docs/hunting-order.md) and the [coverage matrix](docs/coverage.md) |
+| [`docs/`](docs) | [Where to start](docs/hunting-order.md), the [coverage matrix](docs/coverage.md) and the [signals in the ARTEX source code](docs/source-code-signals.md) |
 | [`tools/`](tools) | Feed builder, Sigma converter and validator |
 | [`tests/`](tests) | A synthetic pcap and the Zeek and Suricata tests |
 

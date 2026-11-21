@@ -18,6 +18,7 @@ artex-i21861-canary
 artex-pentest/1.0
 artex-readonly/1.0
 artex-spawn/1
+artex-update-check
 artex-verify/1.0
 azure-toolkit/1.0
 norma/0.4

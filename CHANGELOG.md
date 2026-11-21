@@ -1,5 +1,22 @@
 # Changelog
 
+## Unreleased
+
+Detections drawn from a review of the ARTEX source code (BaaRai/ARTEX at f787b5f and the BaaRai/Norma v0.4.11 agent library it builds against). See [`docs/source-code-signals.md`](docs/source-code-signals.md).
+
+- 31 new indicators in `iocs/indicators.csv`, each with the file it comes from: the `artex-update-check` user agent, the `X-Keenable-Title: ARTEX` header, the recording proxy credential `artex-pace:artex-pace`, the `__artex-exec-drop` launcher argument and `artex-exec-` shim folder, prompt and envelope markers in model requests, more tool function names, the console title and icon hash, port 8788, skill script names and the S3 archive prefix. Feeds rebuilt.
+- Context of `norma/0.4` and both `spa-api-recon` user agents now points at the code that sends them.
+- New hunts:
+  - 23 norma page reads and the Go enrichment probe that follows them.
+  - 24 the ARTEX container toolchain seen from one source (refines 17).
+  - 25 request rates that match the ARTEX noise profiles.
+  - 26 headless browsers and ARTEX clients signing in, and the pause while a person relays the MFA code.
+  - 27 accounts registered by a source that is also probing the application.
+  - 28 ARTEX running on a monitored host (refines 20).
+  - 29 ARTEX console and side-channel traffic in outbound proxy logs.
+  - 30 bracketed-paste bytes in shell input.
+- New analytics rules: ARTEX code-default user agents, and the ARTEX agent shell or proxy credential on a host.
+
 ## 1.0.0, November 20, 2026
 
 First public release.

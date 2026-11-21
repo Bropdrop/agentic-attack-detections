@@ -1,6 +1,6 @@
 {
  "type": "bundle",
- "id": "bundle--56d37f24-11eb-5693-b027-ca793d20c92b",
+ "id": "bundle--7e8dd8ad-a8e2-5d6e-98c1-5a6f4ddba054",
  "objects": [
   {
    "type": "identity",
@@ -537,7 +537,7 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: Mozilla/5.0 (spa-api-recon)",
-   "description": "Single-page app API reconnaissance worker. Reported by ExtraHop.",
+   "description": "api-recon skill static harvester in upstream ARTEX (skills/api-recon/scripts/harvest_static.py:23). Reported by ExtraHop.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -574,7 +574,7 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: Mozilla/5.0 (spa-api-recon spider)",
-   "description": "AntiFox fork, seen in samples. Reported by ReversingLabs.",
+   "description": "api-recon skill page spider in upstream ARTEX (skills/api-recon/scripts/spider_mpa.py:22), also in the AntiFox fork. Reported by ReversingLabs.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -796,7 +796,7 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: norma/0.4",
-   "description": "Seen in ARTEX activity. norma is an agent SDK shared by other tools. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "WebFetch tool default, hard-coded in the agent library ARTEX builds against (BaaRai/Norma v0.4.11 tool/webfetch.go:236). GET only, never static assets. Shared by other norma-based agents. Reported by Multiple reports, compiled by ThreatDefence.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -6026,6 +6026,228 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "relationship_type": "indicates",
    "source_ref": "indicator--ed197429-1dfb-5e51-b6e8-bfda819c4e47",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--a057f450-6172-53fc-b270-ad1b4cf31d6f",
+   "created": "2026-11-20T00:00:00.000Z",
+   "modified": "2026-11-20T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX user_agent: artex-update-check",
+   "description": "Console update check to api.github.com, opt-in, at most once a day (server/update_check.go:69). Reported by ThreatDefence review of the ARTEX source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'artex-update-check']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "artex",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the ARTEX source code",
+     "url": "https://github.com/BaaRai/ARTEX"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--f49acb2b-0ea5-5874-a9ce-2b55ba1e9be2",
+   "created": "2026-11-20T00:00:00.000Z",
+   "modified": "2026-11-20T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--a057f450-6172-53fc-b270-ad1b4cf31d6f",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--61879450-a6d3-5082-abc8-de42f1fae645",
+   "created": "2026-11-20T00:00:00.000Z",
+   "modified": "2026-11-20T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX url: https://api.github.com/repos/BaaRai/ARTEX/releases/latest",
+   "description": "ARTEX update check endpoint. Visible in TLS-inspecting proxy logs. Also fetched by people browsing releases. Reported by ThreatDefence review of the ARTEX source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[url:value = 'https://api.github.com/repos/BaaRai/ARTEX/releases/latest']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "artex",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the ARTEX source code",
+     "url": "https://github.com/BaaRai/ARTEX"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--65347d7e-ee0d-5a87-b7b5-fac2950e8145",
+   "created": "2026-11-20T00:00:00.000Z",
+   "modified": "2026-11-20T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--61879450-a6d3-5082-abc8-de42f1fae645",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--57feb595-6f59-5ce5-8963-b935b561b8c8",
+   "created": "2026-11-20T00:00:00.000Z",
+   "modified": "2026-11-20T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX domain: api.keenable.ai",
+   "description": "Optional web search backend for the agents. Requests carry X-Keenable-Title: ARTEX (agent/worker.go:46). Reported by ThreatDefence review of the ARTEX source code.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[domain-name:value = 'api.keenable.ai']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "artex",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the ARTEX source code",
+     "url": "https://github.com/BaaRai/ARTEX"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--92355169-791c-54a1-bbbb-1fa424273cb0",
+   "created": "2026-11-20T00:00:00.000Z",
+   "modified": "2026-11-20T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--57feb595-6f59-5ce5-8963-b935b561b8c8",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--8876c403-11f3-5fc0-85ca-b1769912a9de",
+   "created": "2026-11-20T00:00:00.000Z",
+   "modified": "2026-11-20T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX file_name: harvest_static.py",
+   "description": "api-recon skill script on the ARTEX host. Reported by ThreatDefence review of the ARTEX source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:name LIKE 'harvest_static.py%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "artex",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the ARTEX source code",
+     "url": "https://github.com/BaaRai/ARTEX"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--04b8ee3e-b7ac-5c26-841f-884098a70c58",
+   "created": "2026-11-20T00:00:00.000Z",
+   "modified": "2026-11-20T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--8876c403-11f3-5fc0-85ca-b1769912a9de",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--d8afbe94-566c-5566-b156-30c8af87c5a6",
+   "created": "2026-11-20T00:00:00.000Z",
+   "modified": "2026-11-20T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX file_name: spider_mpa.py",
+   "description": "api-recon skill script on the ARTEX host. Reported by ThreatDefence review of the ARTEX source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:name LIKE 'spider_mpa.py%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "artex",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the ARTEX source code",
+     "url": "https://github.com/BaaRai/ARTEX"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--9290655b-888f-566e-a315-f3b7d307d62f",
+   "created": "2026-11-20T00:00:00.000Z",
+   "modified": "2026-11-20T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--d8afbe94-566c-5566-b156-30c8af87c5a6",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--4454430a-b893-59e3-9ad3-059e40fd7b86",
+   "created": "2026-11-20T00:00:00.000Z",
+   "modified": "2026-11-20T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX file_name: runtime_harvest.js",
+   "description": "api-recon skill script on the ARTEX host. Reported by ThreatDefence review of the ARTEX source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:name LIKE 'runtime_harvest.js%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "artex",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the ARTEX source code",
+     "url": "https://github.com/BaaRai/ARTEX"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--44d31813-9101-5512-a79b-30b896d7240c",
+   "created": "2026-11-20T00:00:00.000Z",
+   "modified": "2026-11-20T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--4454430a-b893-59e3-9ad3-059e40fd7b86",
    "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
   }
  ]

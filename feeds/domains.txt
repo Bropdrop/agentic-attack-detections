@@ -1,6 +1,7 @@
 api.anthropic.com
 api.db-ip.com
 api.deepseek.com
+api.keenable.ai
 api.x.ai
 artex.lol
 artex.noog2infra.site
