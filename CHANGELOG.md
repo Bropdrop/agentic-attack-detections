@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Every branded indicator now names the publication it first appeared in: Datadog Security Labs (November 9, 2026) for the `artex-*` user agents and S3 placeholder names, Wiz Research (October 22) for `/zzz-nonexistent-xyz123`, `ReconProbe/1.0` and `norma/0.4`, Microsoft (October 21) for `azure-toolkit/1.0`, and Eye Security (November 12) for `X-ARTX-KEY`, `### ARTX-AGENT`, the probe markers and `ArtExVerify/1.0`. No indicator was removed.
+- Context corrected: these strings are chosen at run time by the agents or the operator, which is why they are absent from the public code. 1.1.0 described them as coming from modified builds.
+- `Mozilla/5.0 (compatible; ArtExVerify/1.0)` raised to high confidence, from Eye Security's primary report.
+- New section in `docs/source-code-signals.md`: where the branded strings come from.
+
 ## 1.1.0, November 21, 2026
 
 Detections drawn from a review of the ARTEX source code (BaaRai/ARTEX at f787b5f and the BaaRai/Norma v0.4.11 agent library it builds against). See [`docs/source-code-signals.md`](docs/source-code-signals.md).

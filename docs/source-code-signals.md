@@ -56,6 +56,27 @@ Where outbound model traffic is inspected (an AI gateway, a TLS-inspecting proxy
 
 Model calls use Go's default user agent unless a profile sets one, and no `anthropic-beta` or SDK headers (`agent/provider.go`).
 
+## Where the branded strings come from
+
+The indicators that name ARTEX, such as `artex-pentest/1.0`, `X-ARTX-KEY` or the folder `C:\ProgramData\artx5v\`, come from reporting on ARTEX intrusions in the wild, not from the public code. None of them appears in the BaaRai/ARTEX tree or its history. The reports themselves explain why: Wiz saw a new user agent assigned to each password spray burst and more than 15 strings across victims, and Eye Security notes that "the agents label their own work". The worker agents write their own curl commands, web shells and test files, and the model often names them after the tool. That makes these strings real, worth hunting and easy to lose: the next run, model or operator can pick different ones.
+
+Every one of them stays in `iocs/indicators.csv` with the publication it first appeared in:
+
+| Strings | First published by | Context |
+|---|---|---|
+| `artex-readonly/1.0`, `artex-pentest/1.0`, `artex-audit/1.0`, `artex-verify/1.0`, `artex-spawn/1`, `ARTEX-worker/1.0`, `artex-i21861-canary`, `Mozilla/5.0 ARTeX`, `Mozilla/5.0 (Windows NT 10.0; Win64; x64) ARTeX-authorized-pentest`, `Mozilla/5.0 (X11; Linux x86_64) artex-verify/1.0` | Datadog Security Labs, "On the hunt for ARTEX: understanding agentic attacks in AWS environments", November 9, 2026 | IOC table from AWS intrusions. `Mozilla/5.0 ARTeX` was also on Cognito SignUp calls from 154.64.252.77 on October 26 and 27 |
+| `zzz_nonexistent_abc.txt`, `Notexist-xyz` | Datadog Security Labs, November 9, 2026 | Placeholder S3 object names requested before guessing |
+| `/zzz-nonexistent-xyz123` | Wiz Research, "ARTEX in the Wild: Storm-0940 Expands Targeting of IT and Software Vendors", October 22, 2026 | Requested before every fuzzing run to learn what not found looks like |
+| `ReconProbe/1.0` | Wiz Research, October 22, 2026 | Named in the text as a self-describing user agent, not in the IOC table |
+| `norma/0.4` | Wiz Research, October 22, 2026 | In the IOC table. It is also the hard-coded WebFetch default in the agent library |
+| `azure-toolkit/1.0` | Microsoft Threat Intelligence, "AI-driven, large-scale nation-state campaign using ARTEX enables supply chain compromise", October 21, 2026 | Storm-0940 sign-ins and Graph activity through compromised ConnectWise applications |
+| `C:\ProgramData\artx5v\`, `art18-` | CrowdStrike, "VAPOR PANDA Uses AI-Driven ARTEX to Grow Global Espionage Campaign", October 29, 2026 | Host and command-line markers in VAPOR PANDA intrusions |
+| `artex-probe-<five digits>`, `ArtexProbe` | Google Threat Intelligence Group, "ARTEX and Friends: Enter Agentic Offensive Frameworks", October 31, 2026 | Files and accounts the agents created while probing access |
+| `X-ARTX-KEY`, `### ARTX-AGENT`, `ARTEX_WRITE_PROBE`, `ARTX_PERSIST_OK`, `artex_control_marker_zz9q`, `ARTEX-PROBE-0001`, `Mozilla/5.0 (compatible; ArtExVerify/1.0)` | Eye Security, "How we defended against an AI-driven attack", November 12, 2026 | Web shell header and response marker, data markers and a user agent from one intrusion. Later compiled in MalwareMustDie MMD-072-2026 |
+| `artex-enrich/1.0`, `scopeweaver`, `Mozilla/5.0 (spa-api-recon)` | ExtraHop, "ARTEX: Inside an Agentic Attack Framework", November 15, 2026 | A renamed ARTEX build run in a lab. `spa-api-recon` is also in the public code's API recon skill |
+
+The public code and these reports describe two layers of the same tool. The code fixes what every run does, which is what the hunts in this repository's 1.1.0 release look for. The reports show what the agents chose to do in particular intrusions, which the 1.0.0 indicators cover. Hunt for both.
+
 ## What the code does not contain
 
 The Go code and the agent prompts have no Entra ID, Microsoft Graph, Okta or Azure tooling, no password spraying, Kerberos or lateral movement module, and no persistence step. Those behaviors come from what the operator and the model choose to run with the tools in the image. Hunts that depend on them stay valid, but their signals come from the operator, not from ARTEX itself.

@@ -20,7 +20,7 @@ Version 1.1.0 adds detections drawn from the ARTEX source code itself, not only 
 - **Two analytics rules:** ARTEX code-default user agents, and the ARTEX agent shell or proxy credential on a host.
 - **31 indicators** with the source file for each, and corrected context for `norma/0.4` and the `spa-api-recon` user agents.
 
-The branded user agents and file paths in the 1.0.0 indicators (for example `artex-pentest/1.0` and `C:\ProgramData\artx5v\`) do not appear in the upstream ARTEX code. They come from modified builds used in reported intrusions. Keep hunting for them, but expect an unmodified ARTEX to look like the signals in 1.1.0.
+The branded user agents, markers and file paths in the 1.0.0 indicators (for example `artex-pentest/1.0`, `X-ARTX-KEY` and `C:\ProgramData\artx5v\`) do not appear in the public ARTEX code. They come from reporting on intrusions, where the agents chose them at run time, and each one now names the publication it first appeared in ([where the branded strings come from](docs/source-code-signals.md#where-the-branded-strings-come-from)). Keep hunting for them, and expect a careful operator to look like the signals in 1.1.0.
 
 See [`CHANGELOG.md`](CHANGELOG.md) for the full list.
 

@@ -1,6 +1,6 @@
 {
  "type": "bundle",
- "id": "bundle--2c2103d6-51c8-54a8-8c4e-6fc1f33d0b37",
+ "id": "bundle--24c69ec9-4b27-59e6-9740-2ad70a6297e5",
  "objects": [
   {
    "type": "identity",
@@ -93,13 +93,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: artex-readonly/1.0",
-   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, in Datadog's IOC table from AWS intrusions. Not in the public ARTEX code: chosen at run time by the agents or the operator. Reported by Datadog Security Labs.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'artex-readonly/1.0']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-11-09T00:00:00Z",
    "confidence": 85,
    "labels": [
     "artex",
@@ -107,8 +107,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Datadog Security Labs",
+     "url": "https://securitylabs.datadoghq.com/articles/artex-agentic-attacks-aws-environments/"
     }
    ]
   },
@@ -130,13 +130,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: artex-pentest/1.0",
-   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, in Datadog's IOC table from AWS intrusions. Not in the public ARTEX code: chosen at run time by the agents or the operator. Reported by Datadog Security Labs.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'artex-pentest/1.0']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-11-09T00:00:00Z",
    "confidence": 85,
    "labels": [
     "artex",
@@ -144,8 +144,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Datadog Security Labs",
+     "url": "https://securitylabs.datadoghq.com/articles/artex-agentic-attacks-aws-environments/"
     }
    ]
   },
@@ -167,13 +167,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: artex-audit/1.0",
-   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, in Datadog's IOC table from AWS intrusions. Not in the public ARTEX code: chosen at run time by the agents or the operator. Reported by Datadog Security Labs.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'artex-audit/1.0']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-11-09T00:00:00Z",
    "confidence": 85,
    "labels": [
     "artex",
@@ -181,8 +181,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Datadog Security Labs",
+     "url": "https://securitylabs.datadoghq.com/articles/artex-agentic-attacks-aws-environments/"
     }
    ]
   },
@@ -204,13 +204,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: artex-verify/1.0",
-   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, in Datadog's IOC table from AWS intrusions. Not in the public ARTEX code: chosen at run time by the agents or the operator. Reported by Datadog Security Labs.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'artex-verify/1.0']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-11-09T00:00:00Z",
    "confidence": 85,
    "labels": [
     "artex",
@@ -218,8 +218,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Datadog Security Labs",
+     "url": "https://securitylabs.datadoghq.com/articles/artex-agentic-attacks-aws-environments/"
     }
    ]
   },
@@ -241,13 +241,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: artex-spawn/1",
-   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, in Datadog's IOC table from AWS intrusions. Not in the public ARTEX code: chosen at run time by the agents or the operator. Reported by Datadog Security Labs.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'artex-spawn/1']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-11-09T00:00:00Z",
    "confidence": 85,
    "labels": [
     "artex",
@@ -255,8 +255,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Datadog Security Labs",
+     "url": "https://securitylabs.datadoghq.com/articles/artex-agentic-attacks-aws-environments/"
     }
    ]
   },
@@ -278,13 +278,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: ARTEX-worker/1.0",
-   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, in Datadog's IOC table from AWS intrusions. Not in the public ARTEX code: chosen at run time by the agents or the operator. The public code only has it as console demo data. Reported by Datadog Security Labs.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'ARTEX-worker/1.0']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-11-09T00:00:00Z",
    "confidence": 85,
    "labels": [
     "artex",
@@ -292,8 +292,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Datadog Security Labs",
+     "url": "https://securitylabs.datadoghq.com/articles/artex-agentic-attacks-aws-environments/"
     }
    ]
   },
@@ -315,13 +315,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: artex-i21861-canary",
-   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, in Datadog's IOC table from AWS intrusions. Not in the public ARTEX code: chosen at run time by the agents or the operator. Reported by Datadog Security Labs.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'artex-i21861-canary']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-11-09T00:00:00Z",
    "confidence": 85,
    "labels": [
     "artex",
@@ -329,8 +329,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Datadog Security Labs",
+     "url": "https://securitylabs.datadoghq.com/articles/artex-agentic-attacks-aws-environments/"
     }
    ]
   },
@@ -352,13 +352,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: Mozilla/5.0 ARTeX",
-   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX. Datadog saw it on Cognito SignUp calls from 154.64.252.77 on October 26 and 27, 2026. Not in the public ARTEX code: chosen at run time by the agents or the operator. Reported by Datadog Security Labs.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'Mozilla/5.0 ARTeX']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-11-09T00:00:00Z",
    "confidence": 85,
    "labels": [
     "artex",
@@ -366,8 +366,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Datadog Security Labs",
+     "url": "https://securitylabs.datadoghq.com/articles/artex-agentic-attacks-aws-environments/"
     }
    ]
   },
@@ -389,13 +389,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) ARTeX-authorized-pentest",
-   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, in Datadog's IOC table from AWS intrusions. Not in the public ARTEX code: chosen at run time by the agents or the operator. Reported by Datadog Security Labs.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ARTeX-authorized-pentest']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-11-09T00:00:00Z",
    "confidence": 85,
    "labels": [
     "artex",
@@ -403,8 +403,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Datadog Security Labs",
+     "url": "https://securitylabs.datadoghq.com/articles/artex-agentic-attacks-aws-environments/"
     }
    ]
   },
@@ -426,13 +426,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: Mozilla/5.0 (X11; Linux x86_64) artex-verify/1.0",
-   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, in Datadog's IOC table from AWS intrusions. Not in the public ARTEX code: chosen at run time by the agents or the operator. Reported by Datadog Security Labs.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'Mozilla/5.0 (X11; Linux x86_64) artex-verify/1.0']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-11-09T00:00:00Z",
    "confidence": 85,
    "labels": [
     "artex",
@@ -440,8 +440,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Datadog Security Labs",
+     "url": "https://securitylabs.datadoghq.com/articles/artex-agentic-attacks-aws-environments/"
     }
    ]
   },
@@ -648,22 +648,22 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: Mozilla/5.0 (compatible; ArtExVerify/1.0)",
-   "description": "Community-reported ARTEX variant user agent. Reported by MalwareMustDie MMD-072-2026.",
+   "description": "Scripted check of whether a new WAF bypass works (Eye Security IOC list). Chosen by the agents, not in the public code. Reported by Eye Security.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'Mozilla/5.0 (compatible; ArtExVerify/1.0)']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-17T00:00:00Z",
-   "confidence": 60,
+   "valid_from": "2026-11-12T00:00:00Z",
+   "confidence": 85,
    "labels": [
     "artex",
-    "medium"
+    "high"
    ],
    "external_references": [
     {
-     "source_name": "MalwareMustDie MMD-072-2026",
-     "url": "https://blog.malwaremustdie.org/2026/11/mmd-072-2026-artex-detection-signature.html"
+     "source_name": "Eye Security",
+     "url": "https://labs.eye.security/how-we-defended-against-an-ai-driven-attack/"
     }
    ]
   },
@@ -759,13 +759,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: ReconProbe/1.0",
-   "description": "Seen in ARTEX activity. norma is an agent SDK shared by other tools. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "Self-describing user agent Wiz saw among more than 15 strings across victims, a new one per spray burst. In Wiz's text, not its IOC table. Likely chosen by the model, not in the public code. Reported by Wiz Research.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'ReconProbe/1.0']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-10-22T00:00:00Z",
    "confidence": 60,
    "labels": [
     "artex",
@@ -773,8 +773,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Wiz Research",
+     "url": "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors"
     }
    ]
   },
@@ -796,13 +796,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: norma/0.4",
-   "description": "WebFetch tool default, hard-coded in the agent library ARTEX builds against (BaaRai/Norma v0.4.11 tool/webfetch.go:236). GET only, never static assets. Shared by other norma-based agents. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "In Wiz's IOC table, and the WebFetch default hard-coded in the agent library ARTEX builds against (BaaRai/Norma v0.4.11 tool/webfetch.go:236). GET only, never static assets. Shared by other norma-based agents. Reported by Wiz Research.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'norma/0.4']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-10-22T00:00:00Z",
    "confidence": 60,
    "labels": [
     "artex",
@@ -810,8 +810,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Wiz Research",
+     "url": "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors"
     }
    ]
   },
@@ -833,13 +833,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: azure-toolkit/1.0",
-   "description": "Seen in ARTEX activity. norma is an agent SDK shared by other tools. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent in Storm-0940 sign-ins and Graph activity through compromised ConnectWise applications (Microsoft IOC table). Not in the public ARTEX code. Reported by Microsoft Threat Intelligence.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'azure-toolkit/1.0']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-10-21T00:00:00Z",
    "confidence": 60,
    "labels": [
     "artex",
@@ -847,8 +847,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Microsoft Threat Intelligence",
+     "url": "https://www.microsoft.com/en-us/security/blog/2026/10/21/storm-0940-uses-artex-agentic-ai-connectwise-supply-chain-compromise/"
     }
    ]
   },
@@ -981,13 +981,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX uri_string: /zzz-nonexistent-xyz123",
-   "description": "Placeholder path requested before a burst of guesses. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "Placeholder path requested before every fuzzing run to learn what not found looks like (Wiz, Storm-0940 attacks on IT and software vendors). Chosen by the agents, not in the public code. Reported by Wiz Research.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[url:value LIKE '%/zzz-nonexistent-xyz123%']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-10-22T00:00:00Z",
    "confidence": 85,
    "labels": [
     "artex",
@@ -995,8 +995,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Wiz Research",
+     "url": "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors"
     }
    ]
   },
@@ -1018,13 +1018,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX uri_string: zzz_nonexistent_abc.txt",
-   "description": "Placeholder object name in S3 probing. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "Placeholder object name in S3 probing, the same not-found check Wiz saw on web apps. Chosen by the agents, not in the public code. Reported by Datadog Security Labs.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[url:value LIKE '%zzz_nonexistent_abc.txt%']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-11-09T00:00:00Z",
    "confidence": 85,
    "labels": [
     "artex",
@@ -1032,8 +1032,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Datadog Security Labs",
+     "url": "https://securitylabs.datadoghq.com/articles/artex-agentic-attacks-aws-environments/"
     }
    ]
   },
@@ -1055,13 +1055,13 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX uri_string: Notexist-xyz",
-   "description": "Placeholder object name in S3 probing. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "Placeholder object name in S3 probing. Chosen by the agents, not in the public code. Reported by Datadog Security Labs.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[url:value LIKE '%Notexist-xyz%']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-11-09T00:00:00Z",
    "confidence": 85,
    "labels": [
     "artex",
@@ -1069,8 +1069,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Datadog Security Labs",
+     "url": "https://securitylabs.datadoghq.com/articles/artex-agentic-attacks-aws-environments/"
     }
    ]
   },
