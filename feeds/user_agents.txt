@@ -3,8 +3,11 @@ ArtEx/1.0
 Claude-User (claude-code/2.1.98; +https://support.anthropic.com/)
 Fuzz Faster U Fool v2.1.0-dev
 HexStrike-BrowserAgent/1.0
+HexStrike-BrowserAgent/1.0 (Security Testing)
 HexStrike-HTTP-Framework/1.0
+HexStrike-HTTP-Framework/1.0 (Advanced Security Testing)
 Mozilla/5.0 (ARTEX)
+Mozilla/5.0 (Compatible Exploit)
 Mozilla/5.0 (Windows NT 10.0; Win64; x64) ARTeX-authorized-pentest
 Mozilla/5.0 (X11; Linux x86_64) artex-verify/1.0
 Mozilla/5.0 (compatible; ArtEx/1.0)

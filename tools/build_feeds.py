@@ -42,6 +42,10 @@ FRAMEWORKS = {
                 "aliases": ["vxcontrol/pentagi", "Penetration Testing Artificial General Intelligence"],
                 "description": "Open-source and commercial multi-agent penetration testing platform by VXControl that runs its tools in Kali Linux containers; abused in the wild since at least August 2026.",
                 "own_actor": "PentAGI operators"},
+    "hexstrike": {"name": "HexStrike", "sid": 9729500, "created": "2026_11_21",
+                  "aliases": ["HexStrike AI", "0x4m4/hexstrike-ai"],
+                  "description": "Open-source MCP tool server that exposes about 150 security tools to any AI assistant over an unauthenticated HTTP API; discussed for NetScaler exploitation in 2025 and seen by GTIG and Mandiant in intrusions.",
+                  "own_actor": "HexStrike operators"},
 }
 ZEEK_TYPES = {"ipv4": "Intel::ADDR", "domain": "Intel::DOMAIN", "user_agent": "Intel::SOFTWARE", "sha256": "Intel::FILE_HASH", "url": "Intel::URL"}
 

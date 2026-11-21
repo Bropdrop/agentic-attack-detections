@@ -1,7 +1,5 @@
 ARTEX-worker/1.0
 ArtEx/1.0
-HexStrike-BrowserAgent/1.0
-HexStrike-HTTP-Framework/1.0
 Mozilla/5.0 (ARTEX)
 Mozilla/5.0 (Windows NT 10.0; Win64; x64) ARTeX-authorized-pentest
 Mozilla/5.0 (X11; Linux x86_64) artex-verify/1.0

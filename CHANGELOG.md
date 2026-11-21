@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.2.0, November 21, 2026
+
+- HexStrike added in `frameworks/hexstrike/`: 20 indicators, 4 KQL hunts, 2 analytics rules, 3 Sigma rules, Suricata and YARA, from a review of the HexStrike source code (0x4m4/hexstrike-ai at d689933) and reporting by Check Point, GTIG, Elastic and Threat Landscape.
+- The HexStrike user agents that 1.0.0 listed as a related framework under ARTEX now belong to the `hexstrike` framework.
+
 ## 2.1.0, November 21, 2026
 
 - PentAGI added in `frameworks/pentagi/`: 39 indicators, 5 KQL hunts, 2 analytics rules, 3 Sigma rules, Suricata and YARA, from a review of the PentAGI source code (vxcontrol/pentagi at cffed94) and reporting by GTIG, Elastic, Talos, Hunt.io, RST Cloud, GitGuardian and Threat Landscape.

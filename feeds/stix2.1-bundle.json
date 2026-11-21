@@ -1,6 +1,6 @@
 {
  "type": "bundle",
- "id": "bundle--17ede038-96a7-5fcd-8a96-f6cbd53eda3f",
+ "id": "bundle--8eb47992-88e4-58ff-9580-a4a2ecc301ab",
  "objects": [
   {
    "type": "identity",
@@ -59,6 +59,23 @@
     "Penetration Testing Artificial General Intelligence"
    ],
    "description": "Open-source and commercial multi-agent penetration testing platform by VXControl that runs its tools in Kali Linux containers; abused in the wild since at least August 2026.",
+   "tool_types": [
+    "exploitation",
+    "vulnerability-scanning"
+   ]
+  },
+  {
+   "type": "tool",
+   "spec_version": "2.1",
+   "id": "tool--e80d6769-dc7a-59ea-acb9-19fecf0b9dc9",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "HexStrike",
+   "aliases": [
+    "HexStrike AI",
+    "0x4m4/hexstrike-ai"
+   ],
+   "description": "Open-source MCP tool server that exposes about 150 security tools to any AI assistant over an unauthenticated HTTP API; discussed for NetScaler exploitation in 2025 and seen by GTIG and Mandiant in intrusions.",
    "tool_types": [
     "exploitation",
     "vulnerability-scanning"
@@ -127,6 +144,24 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "name": "PaperCut exploitation operator (Hunt.io)"
+  },
+  {
+   "type": "intrusion-set",
+   "spec_version": "2.1",
+   "id": "intrusion-set--60671650-9452-51b7-8246-4dd104ea42f1",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "Dark web actors discussing HexStrike"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--cbc3bfc2-122a-5050-9957-5af8f247cc3e",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "uses",
+   "source_ref": "intrusion-set--60671650-9452-51b7-8246-4dd104ea42f1",
+   "target_ref": "tool--e80d6769-dc7a-59ea-acb9-19fecf0b9dc9"
   },
   {
    "type": "relationship",
@@ -1029,18 +1064,18 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "ARTEX user_agent: HexStrike-HTTP-Framework/1.0",
-   "description": "Related agentic offensive framework (not ARTEX). Reported by Elastic Security Labs.",
+   "name": "HexStrike user_agent: HexStrike-HTTP-Framework/1.0",
+   "description": "HexStrike HTTP testing framework user agent prefix; full string HexStrike-HTTP-Framework/1.0 (Advanced Security Testing) (hexstrike_server.py:13287). Reported by Elastic Security Labs.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'HexStrike-HTTP-Framework/1.0']",
    "pattern_type": "stix",
    "valid_from": "2026-11-13T00:00:00Z",
-   "confidence": 60,
+   "confidence": 85,
    "labels": [
-    "artex",
-    "medium"
+    "hexstrike",
+    "high"
    ],
    "external_references": [
     {
@@ -1052,12 +1087,12 @@
   {
    "type": "relationship",
    "spec_version": "2.1",
-   "id": "relationship--f0435173-79fa-5b55-a3d7-6cdfdb059355",
+   "id": "relationship--3cf8b746-1a4d-55dc-b051-48ecaa21a0eb",
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "relationship_type": "indicates",
    "source_ref": "indicator--dec4e41f-949a-5719-896f-7f0faefa3da7",
-   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+   "target_ref": "tool--e80d6769-dc7a-59ea-acb9-19fecf0b9dc9"
   },
   {
    "type": "indicator",
@@ -1066,18 +1101,18 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "ARTEX user_agent: HexStrike-BrowserAgent/1.0",
-   "description": "Related agentic offensive framework (not ARTEX). Reported by Elastic Security Labs.",
+   "name": "HexStrike user_agent: HexStrike-BrowserAgent/1.0",
+   "description": "HexStrike Selenium browser agent user agent prefix; full string HexStrike-BrowserAgent/1.0 (Security Testing) (hexstrike_server.py:13644). Reported by Elastic Security Labs.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'HexStrike-BrowserAgent/1.0']",
    "pattern_type": "stix",
    "valid_from": "2026-11-13T00:00:00Z",
-   "confidence": 60,
+   "confidence": 85,
    "labels": [
-    "artex",
-    "medium"
+    "hexstrike",
+    "high"
    ],
    "external_references": [
     {
@@ -1089,12 +1124,12 @@
   {
    "type": "relationship",
    "spec_version": "2.1",
-   "id": "relationship--27cb3b52-cee3-5b29-aa1c-6ec702e74df6",
+   "id": "relationship--7ea0e852-3492-523e-b8f2-bc2226558526",
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "relationship_type": "indicates",
    "source_ref": "indicator--7c48a39f-d55d-58b7-aa62-3c79684aa895",
-   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+   "target_ref": "tool--e80d6769-dc7a-59ea-acb9-19fecf0b9dc9"
   },
   {
    "type": "indicator",
@@ -8700,6 +8735,339 @@
    "relationship_type": "indicates",
    "source_ref": "indicator--e41a1072-8f1c-5a38-9293-9b39723de038",
    "target_ref": "tool--e438750e-aa16-5e69-b548-a55c2d4b8e0f"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--21b0d977-75ec-53ce-815a-0867f9dd2f57",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "HexStrike user_agent: HexStrike-HTTP-Framework/1.0 (Advanced Security Testing)",
+   "description": "HexStrike HTTP testing framework requests session user agent (hexstrike_server.py:13287). Reported by ThreatDefence review of the HexStrike source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'HexStrike-HTTP-Framework/1.0 (Advanced Security Testing)']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hexstrike",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the HexStrike source code",
+     "url": "https://github.com/0x4m4/hexstrike-ai"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--0b03a28a-b30f-5c97-9e41-8de73a7828d3",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--21b0d977-75ec-53ce-815a-0867f9dd2f57",
+   "target_ref": "tool--e80d6769-dc7a-59ea-acb9-19fecf0b9dc9"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--211c1781-75d3-5160-8d67-037bac6dc4ec",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "HexStrike user_agent: HexStrike-BrowserAgent/1.0 (Security Testing)",
+   "description": "HexStrike headless Chrome browser agent user agent (hexstrike_server.py:13644). Reported by ThreatDefence review of the HexStrike source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'HexStrike-BrowserAgent/1.0 (Security Testing)']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hexstrike",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the HexStrike source code",
+     "url": "https://github.com/0x4m4/hexstrike-ai"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--761e76ab-6489-5488-9d1e-bb734ad9f709",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--211c1781-75d3-5160-8d67-037bac6dc4ec",
+   "target_ref": "tool--e80d6769-dc7a-59ea-acb9-19fecf0b9dc9"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--c7947a52-9e6c-507a-898a-4736d8572e8d",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "HexStrike user_agent: Mozilla/5.0 (Compatible Exploit)",
+   "description": "User agent in the CVE exploit scripts HexStrike generates (hexstrike_server.py:7098). Reported by ThreatDefence review of the HexStrike source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'Mozilla/5.0 (Compatible Exploit)']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "hexstrike",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the HexStrike source code",
+     "url": "https://github.com/0x4m4/hexstrike-ai"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--52f28d64-f38c-52f8-b380-aed0a9fe149e",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--c7947a52-9e6c-507a-898a-4736d8572e8d",
+   "target_ref": "tool--e80d6769-dc7a-59ea-acb9-19fecf0b9dc9"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--b2931485-488a-5ff3-98a7-cbe26561ddcc",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "HexStrike uri_string: hexstrikeXSSTest123",
+   "description": "HexStrike reflection probe value in query strings. Reported by ThreatDefence review of the HexStrike source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[url:value LIKE '%hexstrikeXSSTest123%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hexstrike",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the HexStrike source code",
+     "url": "https://github.com/0x4m4/hexstrike-ai"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--ee9aa0ca-8d96-5c56-b08f-8883ec34fe54",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--b2931485-488a-5ff3-98a7-cbe26561ddcc",
+   "target_ref": "tool--e80d6769-dc7a-59ea-acb9-19fecf0b9dc9"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--3c899f13-6c34-5ab7-84df-6f31d33c6ae6",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "HexStrike file_name: hexstrike_server.py",
+   "description": "HexStrike tool server script, the parent of every tool it runs. Reported by ThreatDefence review of the HexStrike source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:name LIKE 'hexstrike_server.py%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hexstrike",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the HexStrike source code",
+     "url": "https://github.com/0x4m4/hexstrike-ai"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--17a9a25e-44f2-5d10-b016-ec9101bc085f",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--3c899f13-6c34-5ab7-84df-6f31d33c6ae6",
+   "target_ref": "tool--e80d6769-dc7a-59ea-acb9-19fecf0b9dc9"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--f386b396-4208-5583-94bf-fcd99d47dee2",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "HexStrike file_name: hexstrike_mcp.py",
+   "description": "HexStrike MCP client that AI assistants launch, python3 hexstrike_mcp.py --server http://<host>:8888. Reported by ThreatDefence review of the HexStrike source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:name LIKE 'hexstrike_mcp.py%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hexstrike",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the HexStrike source code",
+     "url": "https://github.com/0x4m4/hexstrike-ai"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--66137adc-d90a-5bec-8378-9af7b54b97ca",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--f386b396-4208-5583-94bf-fcd99d47dee2",
+   "target_ref": "tool--e80d6769-dc7a-59ea-acb9-19fecf0b9dc9"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--b893f578-db7f-5b72-b633-cac40648510a",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "HexStrike file_name: hexstrike_screenshot_",
+   "description": "Screenshots of the HexStrike browser agent, /tmp/hexstrike_screenshot_<epoch>.png (hexstrike_server.py:13687). Reported by ThreatDefence review of the HexStrike source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:name LIKE 'hexstrike_screenshot_%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "hexstrike",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the HexStrike source code",
+     "url": "https://github.com/0x4m4/hexstrike-ai"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--6e6def59-09d9-5da8-8dcc-f7d04750ee33",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--b893f578-db7f-5b72-b633-cac40648510a",
+   "target_ref": "tool--e80d6769-dc7a-59ea-acb9-19fecf0b9dc9"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--df94b34f-5fbd-5e92-a484-b9e9625cfc6b",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "HexStrike file_name: hexstrike.log",
+   "description": "HexStrike server log in its working folder (hexstrike_server.py:79). Reported by ThreatDefence review of the HexStrike source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:name LIKE 'hexstrike.log%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "hexstrike",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the HexStrike source code",
+     "url": "https://github.com/0x4m4/hexstrike-ai"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--407c3e65-0ab7-5f7c-807d-667e50baeefc",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--df94b34f-5fbd-5e92-a484-b9e9625cfc6b",
+   "target_ref": "tool--e80d6769-dc7a-59ea-acb9-19fecf0b9dc9"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--74bf8e2a-f614-5541-b43a-b5b0959a7ba8",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "HexStrike file_path: /tmp/mcp_msf_resource.rc",
+   "description": "Metasploit resource file HexStrike writes before running msfconsole (hexstrike_server.py:11070). Reported by ThreatDefence review of the HexStrike source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[directory:path = '/tmp/mcp_msf_resource.rc']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "hexstrike",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the HexStrike source code",
+     "url": "https://github.com/0x4m4/hexstrike-ai"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--bbe6b09e-94b9-53d7-bcb8-4d08ab4414cf",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--74bf8e2a-f614-5541-b43a-b5b0959a7ba8",
+   "target_ref": "tool--e80d6769-dc7a-59ea-acb9-19fecf0b9dc9"
   }
  ]
 }

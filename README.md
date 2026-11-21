@@ -1,6 +1,6 @@
 # Agentic Attack Detections
 
-Detection rules, hunting queries and indicators for agentic attack frameworks (ARTEX, Cairn and PentAGI so far): open-source tools that hand an intrusion to AI agents, which plan, run real attack tools and keep going until they reach a goal. Each framework gets its own folder, built from a review of its source code and the public reporting on its use. The behaviors they share, such as coding agents running attack tools with their safety prompts off, bursts of tools from one source and probing through rotating proxies, have their own folder, so one rule covers every framework.
+Detection rules, hunting queries and indicators for agentic attack frameworks (ARTEX, Cairn, PentAGI and HexStrike so far): open-source tools that hand an intrusion to AI agents, which plan, run real attack tools and keep going until they reach a goal. Each framework gets its own folder, built from a review of its source code and the public reporting on its use. The behaviors they share, such as coding agents running attack tools with their safety prompts off, bursts of tools from one source and probing through rotating proxies, have their own folder, so one rule covers every framework.
 
 Maintained by [ThreatDefence](https://threatdefence.com).
 
@@ -13,6 +13,7 @@ Maintained by [ThreatDefence](https://threatdefence.com).
 | ARTEX | Go planner and worker agents with a web console, released July 2026, used by Storm-0940, Storm-3358, VAPOR PANDA and criminal groups against Microsoft 365, Okta, AWS, Azure, web applications and Active Directory | [`frameworks/artex/`](frameworks/artex) | [ARTEX advisory](https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting), [ARTEX deep hunting](https://threatdefence.com/article/artex-source-code-signals-deep-hunting) |
 | Cairn | Python engine that drives Claude Code, Codex and Pi coding agents in Kali containers, used against online retailers, payment sites, Japanese web applications and WSUS servers | [`frameworks/cairn/`](frameworks/cairn) | [What Cairn leaves behind](frameworks/cairn/source-code-signals.md) |
 | PentAGI | Go multi-agent platform from VXControl that runs Kali tools in a container per engagement, seen by GTIG and Mandiant in intrusions since August 2026 and on a PaperCut exploitation operator's infrastructure | [`frameworks/pentagi/`](frameworks/pentagi) | [What PentAGI leaves behind](frameworks/pentagi/source-code-signals.md) |
+| HexStrike | Python MCP tool server that gives any AI assistant about 150 security tools over an unauthenticated API on port 8888, discussed for NetScaler exploitation in 2025 and seen by GTIG and Mandiant in intrusions | [`frameworks/hexstrike/`](frameworks/hexstrike) | [What HexStrike leaves behind](frameworks/hexstrike/source-code-signals.md) |
 
 ## Behaviors shared by agentic frameworks
 
@@ -34,7 +35,7 @@ The ARTEX folder also carries behavior hunts written before this split: user age
 
 | Path | Contents |
 |---|---|
-| [`iocs/indicators.csv`](iocs/indicators.csv) | 325 indicators across all frameworks. Each row has its source, confidence, a review date for addresses and a `framework` column (`artex`, `cairn`, `pentagi`, or several). This file is the single source for every feed |
+| [`iocs/indicators.csv`](iocs/indicators.csv) | 345 indicators across all frameworks. Each row has its source, confidence, a review date for addresses and a `framework` column (`artex`, `cairn`, `pentagi`, `hexstrike`, or several). This file is the single source for every feed |
 | [`feeds/`](feeds) | Generated from the CSV for all frameworks: STIX 2.1 bundle with one tool per framework, Sentinel watchlist and plain lists of addresses, domains, URLs, user agents and hashes. [`feeds/by-framework/`](feeds/by-framework) has the plain lists per framework |
 | [`generated/`](generated) | Every Sigma rule converted to Splunk SPL, Sentinel ASIM KQL and Elastic ES\|QL and Lucene, by framework. [`SUMMARY.md`](generated/SUMMARY.md) shows which rule converted to which backend |
 | [`tools/`](tools) | Feed builder, Sigma converter and validator |
