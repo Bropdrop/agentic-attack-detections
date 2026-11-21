@@ -12,6 +12,7 @@
 | `Kerberos_Enumeration` | One address asks the KDC about 25 or more accounts with 10 or more unknown-name or bad-password errors | 06 | Kerberos on the wire |
 | `SMB_WinRM_Fan_Out` | One address opens SMB or WinRM to 10 or more hosts within 10 minutes | 06 | Connections only |
 | `Callback_To_Prober` | A server connects out to an address that connected to it at least 3 times in the last day, flagged when the port is in PentAGI's 28000 to 29999 range | 07 | Connections only |
+| `Out_Of_Band_Lookup` | A server looks up a name under an out-of-band testing service (interactsh `oast.*`, Burp Collaborator, dnslog.cn and others): a blind injection, SSRF or XXE payload ran on it | 09 | DNS |
 
 Hunt 01 (AI agents in auto-approve mode starting attack tools) is a process check and hunt 08 (AWS credentials at machine speed) reads CloudTrail, so neither has a network version.
 

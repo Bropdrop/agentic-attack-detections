@@ -50,6 +50,10 @@ FRAMEWORKS = {
                       "aliases": ["AIPentest/CyberStrikeAI", "Ed1s0nZ/CyberStrikeAI", "DarkAI"],
                       "description": "Open-source Go operator console (Ed1s0nZ, later AIPentest, November 2025) whose AI agents run about 90 security tools and which builds its own implants, C2 listeners and webshell manager; tied to the FortiGate mass-exploitation infrastructure, an AWS intrusion and attacks on education organizations.",
                       "own_actor": "CyberStrikeAI operators"},
+    "strix": {"name": "Strix", "sid": 9731500, "created": "2026_11_21",
+              "aliases": ["usestrix/strix", "strix-agent"],
+              "description": "Open-source Python AI penetration testing agent (usestrix/strix, August 2025) that runs teams of agents in a Kali sandbox container through a Caido proxy; used for vulnerability discovery in the 2026 retail card-theft campaign before Cairn exploitation.",
+              "own_actor": "Strix operators"},
 }
 ZEEK_TYPES = {"ipv4": "Intel::ADDR", "ipv6": "Intel::ADDR", "md5": "Intel::FILE_HASH", "domain": "Intel::DOMAIN", "user_agent": "Intel::SOFTWARE", "sha256": "Intel::FILE_HASH", "url": "Intel::URL"}
 

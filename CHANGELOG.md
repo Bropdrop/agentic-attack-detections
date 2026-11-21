@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.5.0, November 21, 2026
+
+- Strix added in `frameworks/strix/`: 17 indicators, 3 KQL hunts, 1 analytics rule, 3 Sigma rules, Suricata and YARA, from a review of the Strix source code (usestrix/strix at a1ccf777) and reporting by Gambit Security, GitGuardian and PenTestIT. The Gambit retail campaign indicators are now tagged `cairn strix`: Strix found the flaws and Cairn exploited them.
+- New behavior: servers looking up out-of-band testing domains (interactsh `oast.*`, Burp Collaborator, dnslog.cn and others), as a KQL hunt, Sigma, Suricata (SIDs 9727050 to 9727059) and a Zeek notice.
+
 ## 2.4.0, November 21, 2026
 
 - Zeek package for the cross-framework behaviors in `behaviors/zeek/agentic-behaviors/`: model API calls from servers, Claude Code's page reader next to attack traffic, rotating proxy probing, configuration and backup file theft, WSUS probes, Kerberos enumeration, SMB and WinRM fan-out, and servers calling back to the address that probed them. Tested against a synthetic pcap in `behaviors/zeek/tests/`.

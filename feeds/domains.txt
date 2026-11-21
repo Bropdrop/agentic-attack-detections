@@ -29,6 +29,7 @@ site.vietnam852.com
 sqlserver-sqlite.com
 staging.artex.lol
 static-js.com
+strix.gateway.scarf.sh
 support.pentagi.com
 traffic-analyzer.net
 update.pentagi.com

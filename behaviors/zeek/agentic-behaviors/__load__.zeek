@@ -5,3 +5,4 @@
 @load ./config-backup-and-wsus
 @load ./kerberos-enum-and-fan-out
 @load ./callback-to-prober
+@load ./out-of-band-lookups

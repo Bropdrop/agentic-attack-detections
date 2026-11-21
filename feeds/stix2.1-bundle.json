@@ -1,6 +1,6 @@
 {
  "type": "bundle",
- "id": "bundle--acf42125-098c-5a81-b71d-79709e5705d2",
+ "id": "bundle--8e711e39-8781-5fc4-aaeb-67295b2cf537",
  "objects": [
   {
    "type": "identity",
@@ -94,6 +94,23 @@
     "DarkAI"
    ],
    "description": "Open-source Go operator console (Ed1s0nZ, later AIPentest, November 2025) whose AI agents run about 90 security tools and which builds its own implants, C2 listeners and webshell manager; tied to the FortiGate mass-exploitation infrastructure, an AWS intrusion and attacks on education organizations.",
+   "tool_types": [
+    "exploitation",
+    "vulnerability-scanning"
+   ]
+  },
+  {
+   "type": "tool",
+   "spec_version": "2.1",
+   "id": "tool--e3b4336d-c8be-5dd0-a623-8b4af5bc69b4",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "Strix",
+   "aliases": [
+    "usestrix/strix",
+    "strix-agent"
+   ],
+   "description": "Open-source Python AI penetration testing agent (usestrix/strix, August 2025) that runs teams of agents in a Kali sandbox container through a Caido proxy; used for vulnerability discovery in the 2026 retail card-theft campaign before Cairn exploitation.",
    "tool_types": [
     "exploitation",
     "vulnerability-scanning"
@@ -244,6 +261,16 @@
    "relationship_type": "uses",
    "source_ref": "intrusion-set--eed808fe-1b6a-5373-9aff-dc3f9f9b46cb",
    "target_ref": "tool--b3a597a5-b10d-57ec-b27d-638559aef3b1"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--17347808-b2b3-5f1b-9410-34eba56f105b",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "uses",
+   "source_ref": "intrusion-set--eed808fe-1b6a-5373-9aff-dc3f9f9b46cb",
+   "target_ref": "tool--e3b4336d-c8be-5dd0-a623-8b4af5bc69b4"
   },
   {
    "type": "relationship",
@@ -7251,7 +7278,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn ipv4: 155.254.22.215",
+   "name": "Cairn and Strix ipv4: 155.254.22.215",
    "description": "Staging and command server, AI console. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7262,6 +7289,7 @@
    "confidence": 60,
    "labels": [
     "cairn",
+    "strix",
     "medium"
    ],
    "external_references": [
@@ -7289,7 +7317,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn ipv4: 209.126.4.170",
+   "name": "Cairn and Strix ipv4: 209.126.4.170",
    "description": "DNS exfiltration, catch-all mail, HTTP listeners. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7300,6 +7328,7 @@
    "confidence": 60,
    "labels": [
     "cairn",
+    "strix",
     "medium"
    ],
    "external_references": [
@@ -7327,7 +7356,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn ipv4: 213.21.239.62",
+   "name": "Cairn and Strix ipv4: 213.21.239.62",
    "description": "C2. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7338,6 +7367,7 @@
    "confidence": 60,
    "labels": [
     "cairn",
+    "strix",
     "medium"
    ],
    "external_references": [
@@ -7365,7 +7395,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn ipv4: 172.245.224.188",
+   "name": "Cairn and Strix ipv4: 172.245.224.188",
    "description": "C2. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7376,6 +7406,7 @@
    "confidence": 60,
    "labels": [
     "cairn",
+    "strix",
     "medium"
    ],
    "external_references": [
@@ -7403,7 +7434,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn ipv4: 172.245.89.137",
+   "name": "Cairn and Strix ipv4: 172.245.89.137",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7414,6 +7445,7 @@
    "confidence": 60,
    "labels": [
     "cairn",
+    "strix",
     "medium"
    ],
    "external_references": [
@@ -7441,7 +7473,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn domain: medbooksource.com",
+   "name": "Cairn and Strix domain: medbooksource.com",
    "description": "Operator console, also used for out-of-band and DNS exfiltration. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7452,6 +7484,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -7478,7 +7511,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn domain: traffic-analyzer.net",
+   "name": "Cairn and Strix domain: traffic-analyzer.net",
    "description": "C2. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7489,6 +7522,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -7515,7 +7549,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn domain: b8t.shop",
+   "name": "Cairn and Strix domain: b8t.shop",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7526,6 +7560,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -7552,7 +7587,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn domain: cdn.netlfjs.com",
+   "name": "Cairn and Strix domain: cdn.netlfjs.com",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7563,6 +7598,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -7589,7 +7625,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn domain: x1opay.co",
+   "name": "Cairn and Strix domain: x1opay.co",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7600,6 +7636,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -7626,7 +7663,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn domain: static-js.com",
+   "name": "Cairn and Strix domain: static-js.com",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7637,6 +7674,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -7663,7 +7701,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn domain: cdn.js-static.com",
+   "name": "Cairn and Strix domain: cdn.js-static.com",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7674,6 +7712,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -7700,7 +7739,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn domain: js-static.com",
+   "name": "Cairn and Strix domain: js-static.com",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7711,6 +7750,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -7737,7 +7777,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn domain: jsnetlify.com",
+   "name": "Cairn and Strix domain: jsnetlify.com",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7748,6 +7788,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -7774,7 +7815,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn domain: netlifyjs.com",
+   "name": "Cairn and Strix domain: netlifyjs.com",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7785,6 +7826,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -7811,7 +7853,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn domain: newssjs.com",
+   "name": "Cairn and Strix domain: newssjs.com",
    "description": "Skimmer host. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7822,6 +7864,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -7848,7 +7891,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn url: https://b8t.shop/js/sby.js",
+   "name": "Cairn and Strix url: https://b8t.shop/js/sby.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7859,6 +7902,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -7885,7 +7929,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn url: https://cdn.netlfjs.com/js/cts.js",
+   "name": "Cairn and Strix url: https://cdn.netlfjs.com/js/cts.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7896,6 +7940,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -7922,7 +7967,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn url: https://cdn.netlfjs.com/js/vla.js",
+   "name": "Cairn and Strix url: https://cdn.netlfjs.com/js/vla.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7933,6 +7978,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -7959,7 +8005,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn url: https://x1opay.co/js/eut.js",
+   "name": "Cairn and Strix url: https://x1opay.co/js/eut.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -7970,6 +8016,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -7996,7 +8043,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn url: https://x1opay.co/js/l.js",
+   "name": "Cairn and Strix url: https://x1opay.co/js/l.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -8007,6 +8054,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -8033,7 +8081,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn url: https://static-js.com/js/bmws.js",
+   "name": "Cairn and Strix url: https://static-js.com/js/bmws.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -8044,6 +8092,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -8070,7 +8119,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn url: https://static-js.com/js/nrt.js",
+   "name": "Cairn and Strix url: https://static-js.com/js/nrt.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -8081,6 +8130,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -8107,7 +8157,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn url: https://cdn.js-static.com/js/tgo.js",
+   "name": "Cairn and Strix url: https://cdn.js-static.com/js/tgo.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -8118,6 +8168,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -8144,7 +8195,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn url: https://cdn.js-static.com/js/pps.js",
+   "name": "Cairn and Strix url: https://cdn.js-static.com/js/pps.js",
    "description": "Skimmer script loaded into checkout pages. Reported by Gambit Security.",
    "indicator_types": [
     "malicious-activity"
@@ -8155,6 +8206,7 @@
    "confidence": 85,
    "labels": [
     "cairn",
+    "strix",
     "high"
    ],
    "external_references": [
@@ -8181,7 +8233,7 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "Cairn file_name: confirmation.php",
+   "name": "Cairn and Strix file_name: confirmation.php",
    "description": "Web shell name the operator asked about (confirmation.php code does not stand out). Reported by Gambit Security.",
    "indicator_types": [
     "anomalous-activity"
@@ -8192,6 +8244,7 @@
    "confidence": 30,
    "labels": [
     "cairn",
+    "strix",
     "low"
    ],
    "external_references": [
@@ -11055,6 +11108,154 @@
    "relationship_type": "indicates",
    "source_ref": "indicator--9396500d-3a9d-537d-be58-1e648eb11c28",
    "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--91e806f0-33d5-5ea6-a37a-596ab69916bb",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Strix domain: strix.gateway.scarf.sh",
+   "description": "Strix telemetry, on by default (STRIX_TELEMETRY): POST /scan_started/<version>, /finding_reported/<version>?severity=... and /scan_ended/<version> on every scan (strix/telemetry/scarf.py:29). Seen from your network, Strix ran from your network. Reported by ThreatDefence review of the Strix source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[domain-name:value = 'strix.gateway.scarf.sh']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "strix",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the Strix source code",
+     "url": "https://github.com/usestrix/strix"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--e8975cb4-14f1-5f47-9905-aa2b59bc0445",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--91e806f0-33d5-5ea6-a37a-596ab69916bb",
+   "target_ref": "tool--e3b4336d-c8be-5dd0-a623-8b4af5bc69b4"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--6769c0f1-e7c7-54a7-ac34-9fd4ab21570b",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Strix file_path: strix_runs/",
+   "description": "Folder Strix writes each run to in its working directory: run.json, agents.json, vulnerabilities.json, vulnerabilities.csv, coverage.json, findings.sarif and penetration_test_report.md (strix/core/paths.py:8, strix/report). Reported by ThreatDefence review of the Strix source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[directory:path = 'strix_runs/']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "strix",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the Strix source code",
+     "url": "https://github.com/usestrix/strix"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--a544ea5f-0e02-51d6-828c-dcd3219933a5",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--6769c0f1-e7c7-54a7-ac34-9fd4ab21570b",
+   "target_ref": "tool--e3b4336d-c8be-5dd0-a623-8b4af5bc69b4"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--eabe6883-cfb2-57d6-9ade-ff2331eda967",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Strix file_name: penetration_test_report.md",
+   "description": "Report Strix writes into strix_runs/<run>/ (strix/report). Reported by ThreatDefence review of the Strix source code.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[file:name LIKE 'penetration_test_report.md%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "strix",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the Strix source code",
+     "url": "https://github.com/usestrix/strix"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--a9c89bb6-8305-5d6d-88b1-ebb31e90d7c1",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--eabe6883-cfb2-57d6-9ade-ff2331eda967",
+   "target_ref": "tool--e3b4336d-c8be-5dd0-a623-8b4af5bc69b4"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--2883d7cb-1c38-5dd2-b4b1-c242f9fea56e",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "Strix sha256: a6d5ca4b84523e651c7151d0bcb6bc0c132ecc311566bb48ed2da6c82efcb9eb",
+   "description": "Strix results viewer icon logo.png. Reported by ThreatDefence review of the Strix source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.'SHA-256' = 'a6d5ca4b84523e651c7151d0bcb6bc0c132ecc311566bb48ed2da6c82efcb9eb']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "strix",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the Strix source code",
+     "url": "https://github.com/usestrix/strix"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--b4d13146-4fe1-5b34-b3e7-797465891811",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--2883d7cb-1c38-5dd2-b4b1-c242f9fea56e",
+   "target_ref": "tool--e3b4336d-c8be-5dd0-a623-8b4af5bc69b4"
   }
  ]
 }

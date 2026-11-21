@@ -6,7 +6,7 @@
 import os
 import struct
 from pathlib import Path
-from scapy.all import IP, TCP, UDP, Ether, wrpcap
+from scapy.all import IP, TCP, UDP, DNS, DNSQR, Ether, wrpcap
 from scapy.layers.kerberos import (Kerberos, KRB_AS_REQ, KRB_KDC_REQ_BODY, KRB_ERROR, PrincipalName,
                                    ASN1_GENERAL_STRING, ASN1_GENERALIZED_TIME, ASN1_INTEGER)
 
@@ -99,6 +99,9 @@ for i in range(12):
 for _ in range(3):
     session("203.0.113.40", WEB, nxt(), 80, req("/", "Mozilla/5.0"), resp("ok", "200 OK"))
 session(WEB, "203.0.113.40", nxt(), 28001, b"id\n")
+# 8. A server looks up an interactsh name (Out_Of_Band_Lookup), and an ordinary name (nothing expected)
+pkts.append(stamp(Ether() / IP(src=WEB, dst="10.0.0.53") / UDP(sport=nxt(), dport=53) / DNS(id=1, rd=1, qd=DNSQR(qname="c9k2xq7a1b3d.oast.fun"))))
+pkts.append(stamp(Ether() / IP(src=WEB, dst="10.0.0.53") / UDP(sport=nxt(), dport=53) / DNS(id=2, rd=1, qd=DNSQR(qname="www.example.org"))))
 # Benign: an ordinary visitor and an ordinary outbound call (nothing expected)
 session("198.51.100.99", WEB, nxt(), 80, req("/", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36"), resp("ok", "200 OK"))
 session(WEB, "198.51.100.100", nxt(), 443, client_hello("www.example.com"))

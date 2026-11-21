@@ -36,6 +36,7 @@ frameworks/<name>/
 | PentAGI | 9728001 to 9728499 | from 9728500 |
 | HexStrike | 9729001 to 9729499 | from 9729500 |
 | CyberStrikeAI | 9730001 to 9730499 | from 9730500 |
-| Next framework | 9731001 to 9731499 | from 9731500 |
+| Strix | 9731001 to 9731499 | from 9731500 |
+| Next framework | 9732001 to 9732499 | from 9732500 |
 
 Rules in `behaviors/suricata/` keep the SID they were first published with. Sigma and Sentinel rule ids are UUIDv5 values derived from the file path, so they stay stable as long as a file is not renamed.
