@@ -1,6 +1,10 @@
 ARTEX-worker/1.0
 ArtEx/1.0
 Claude-User (claude-code/2.1.98; +https://support.anthropic.com/)
+CyberStrikeAI-Docker-build
+CyberStrikeAI/1.0
+CyberStrikeAI/1.7.11
+CyberStrikeAI/1.7.4
 Fuzz Faster U Fool v2.1.0-dev
 HexStrike-BrowserAgent/1.0
 HexStrike-BrowserAgent/1.0 (Security Testing)

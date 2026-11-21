@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.3.0, November 21, 2026
+
+- CyberStrikeAI added in `frameworks/cyberstrikeai/`: 72 indicators, 5 KQL hunts, 2 analytics rules, 7 Sigma rules, Suricata and YARA, from a review of the CyberStrikeAI source code (AIPentest/CyberStrikeAI at af6cf750) and reporting by Team Cymru, Kaspersky, Elastic, Spectrum Security, PenTestIT, Huntback and the D4 Project. The YARA implant rule was tested against implants compiled from the stock template.
+- The CyberStrikeAI webshell user agent that 1.0.0 listed as a related framework under ARTEX now belongs to the `cyberstrikeai` framework.
+- New behavior hunt: AWS credentials used at machine speed from one outside address, from Elastic's CyberStrikeAI intrusion report.
+- The feeds now carry IPv6 addresses (`ipv6.txt`) and MD5 hashes (`md5.txt`), in the STIX bundle and Zeek intel as well.
+- The watchlist sweeps in the Cairn, PentAGI and HexStrike folders no longer call it the Cairn watchlist.
+
 ## 2.2.0, November 21, 2026
 
 - HexStrike added in `frameworks/hexstrike/`: 20 indicators, 4 KQL hunts, 2 analytics rules, 3 Sigma rules, Suricata and YARA, from a review of the HexStrike source code (0x4m4/hexstrike-ai at d689933) and reporting by Check Point, GTIG, Elastic and Threat Landscape.

@@ -12,11 +12,13 @@ cdn.js-static.com
 cdn.netlfjs.com
 dnslog.cn
 down.zhzy999.net
+fastcdn.bar
 ftp.vietnam852.com
 ftp.zhzy999.net
 js-static.com
 jsnetlify.com
 medbooksource.com
+media.fastcdn.bar
 netlifyjs.com
 newssjs.com
 nginxmysql.com

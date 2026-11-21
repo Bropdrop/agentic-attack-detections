@@ -1,6 +1,6 @@
 {
  "type": "bundle",
- "id": "bundle--8eb47992-88e4-58ff-9580-a4a2ecc301ab",
+ "id": "bundle--acf42125-098c-5a81-b71d-79709e5705d2",
  "objects": [
   {
    "type": "identity",
@@ -82,6 +82,24 @@
    ]
   },
   {
+   "type": "tool",
+   "spec_version": "2.1",
+   "id": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "CyberStrikeAI",
+   "aliases": [
+    "AIPentest/CyberStrikeAI",
+    "Ed1s0nZ/CyberStrikeAI",
+    "DarkAI"
+   ],
+   "description": "Open-source Go operator console (Ed1s0nZ, later AIPentest, November 2025) whose AI agents run about 90 security tools and which builds its own implants, C2 listeners and webshell manager; tied to the FortiGate mass-exploitation infrastructure, an AWS intrusion and attacks on education organizations.",
+   "tool_types": [
+    "exploitation",
+    "vulnerability-scanning"
+   ]
+  },
+  {
    "type": "intrusion-set",
    "spec_version": "2.1",
    "id": "intrusion-set--9190871e-0429-5d24-b777-e72a9e678d2c",
@@ -154,6 +172,50 @@
    "name": "Dark web actors discussing HexStrike"
   },
   {
+   "type": "intrusion-set",
+   "spec_version": "2.1",
+   "id": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "CyberStrikeAI attacks on education organizations (Africa, Latin America)"
+  },
+  {
+   "type": "intrusion-set",
+   "spec_version": "2.1",
+   "id": "intrusion-set--49e354d9-1b2e-5f62-b1df-3676af4653d5",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "AI-run AWS intrusion from a CyberStrikeAI server"
+  },
+  {
+   "type": "intrusion-set",
+   "spec_version": "2.1",
+   "id": "intrusion-set--6d330a8d-8f61-589c-b5e3-a01821aefe27",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "name": "FortiGate mass-exploitation actor"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--783ab86b-2178-590f-b139-9fec15e30ac8",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "uses",
+   "source_ref": "intrusion-set--49e354d9-1b2e-5f62-b1df-3676af4653d5",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--ffa01a6d-58f0-51cc-8aa5-526530b5bc30",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "uses",
+   "source_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
    "type": "relationship",
    "spec_version": "2.1",
    "id": "relationship--cbc3bfc2-122a-5050-9957-5af8f247cc3e",
@@ -162,6 +224,16 @@
    "relationship_type": "uses",
    "source_ref": "intrusion-set--60671650-9452-51b7-8246-4dd104ea42f1",
    "target_ref": "tool--e80d6769-dc7a-59ea-acb9-19fecf0b9dc9"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--097161a5-89a9-59e4-9c6f-46b6ed5613ff",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "uses",
+   "source_ref": "intrusion-set--6d330a8d-8f61-589c-b5e3-a01821aefe27",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
   },
   {
    "type": "relationship",
@@ -1027,18 +1099,18 @@
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
-   "name": "ARTEX user_agent: Mozilla/5.0 (compatible; CyberStrikeAI-WebShell/1.0)",
-   "description": "Related agentic offensive framework (not ARTEX). Reported by Elastic Security Labs.",
+   "name": "CyberStrikeAI user_agent: Mozilla/5.0 (compatible; CyberStrikeAI-WebShell/1.0)",
+   "description": "User agent CyberStrikeAI's webshell manager sends on every command, file and OS probe request to a planted webshell (internal/handler/webshell.go:799, webshell_probe.go:93). Reported by Elastic Security Labs.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'Mozilla/5.0 (compatible; CyberStrikeAI-WebShell/1.0)']",
    "pattern_type": "stix",
    "valid_from": "2026-11-13T00:00:00Z",
-   "confidence": 60,
+   "confidence": 85,
    "labels": [
-    "artex",
-    "medium"
+    "cyberstrikeai",
+    "high"
    ],
    "external_references": [
     {
@@ -1050,12 +1122,12 @@
   {
    "type": "relationship",
    "spec_version": "2.1",
-   "id": "relationship--39e43c3e-563a-59d8-87e7-32ba31fd2c1a",
+   "id": "relationship--ff8d206e-43fe-5ba7-9296-599f2935b1d1",
    "created": "2026-11-21T00:00:00.000Z",
    "modified": "2026-11-21T00:00:00.000Z",
    "relationship_type": "indicates",
    "source_ref": "indicator--3f009f98-814b-5f20-977e-e9006eb7251c",
-   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
   },
   {
    "type": "indicator",
@@ -9068,6 +9140,1921 @@
    "relationship_type": "indicates",
    "source_ref": "indicator--74bf8e2a-f614-5541-b43a-b5b0959a7ba8",
    "target_ref": "tool--e80d6769-dc7a-59ea-acb9-19fecf0b9dc9"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--8b8a9688-4431-5f2d-95cd-e6e98cfe5088",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI user_agent: CyberStrikeAI/1.7.4",
+   "description": "User agent the CyberStrikeAI console sends to FOFA, ZoomEye, Quake and Shodan search APIs (internal/handler/fofa.go:654, 1078). Seen in your proxy logs it means a console runs behind your proxy. Reported by ThreatDefence review of the CyberStrikeAI source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'CyberStrikeAI/1.7.4']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "cyberstrikeai",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the CyberStrikeAI source code",
+     "url": "https://github.com/AIPentest/CyberStrikeAI"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--1dcde069-2460-50ad-bf5c-b883e82acf97",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--8b8a9688-4431-5f2d-95cd-e6e98cfe5088",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--4df430e3-e06e-5073-b5e2-157a76df375f",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI user_agent: CyberStrikeAI/1.0",
+   "description": "User agent of CyberStrikeAI's WeChat iLink bot client to ilinkai.weixin.qq.com (internal/robot/ilink/client.go:21). Reported by ThreatDefence review of the CyberStrikeAI source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'CyberStrikeAI/1.0']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "cyberstrikeai",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the CyberStrikeAI source code",
+     "url": "https://github.com/AIPentest/CyberStrikeAI"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--3af97d7f-4110-5a1e-ad30-2718f3be6e29",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--4df430e3-e06e-5073-b5e2-157a76df375f",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--5b900189-0975-5356-96a8-8ed8ff539453",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI user_agent: CyberStrikeAI/1.7.11",
+   "description": "User agent of the ramon-victor/CyberStrikeAI fork (English translation and Burp Suite plugin). Watch for any value starting with CyberStrikeAI/. Reported by PenTestIT.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'CyberStrikeAI/1.7.11']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-14T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "cyberstrikeai",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "PenTestIT",
+     "url": "https://pentestit.com/ai-pentesting-frameworks-abuse-lineage-fingerprints/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--658c01e1-78a9-5e53-8a02-40b4cd8cbcd3",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--5b900189-0975-5356-96a8-8ed8ff539453",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--c5ee55bd-efd6-535a-8fef-2a6ec06d54a0",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI user_agent: CyberStrikeAI-Docker-build",
+   "description": "User agent of the ramon-victor/CyberStrikeAI fork's Docker build. Reported by PenTestIT.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'CyberStrikeAI-Docker-build']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-14T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "cyberstrikeai",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "PenTestIT",
+     "url": "https://pentestit.com/ai-pentesting-frameworks-abuse-lineage-fingerprints/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--be81df00-d32b-5e77-987a-40b976eaf7f3",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--c5ee55bd-efd6-535a-8fef-2a6ec06d54a0",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--4865a3ca-31f7-5864-bcd4-6bd815ca38ef",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI uri_string: /check_in",
+   "description": "Default CyberStrikeAI implant check-in path, POST every 5 seconds with no jitter by default; /tasks?session_id=, /result, /upload and /file/ follow (internal/c2/types.go:151-157). Configurable. Reported by ThreatDefence review of the CyberStrikeAI source code.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[url:value LIKE '%/check_in%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the CyberStrikeAI source code",
+     "url": "https://github.com/AIPentest/CyberStrikeAI"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--311a3a98-a8e1-5cbf-9bd4-bf1f80cc09b0",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--4865a3ca-31f7-5864-bcd4-6bd815ca38ef",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--7abf15d2-da6a-502b-b8fc-ccb5c537d466",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI uri_string: /tasks?session_id=",
+   "description": "CyberStrikeAI implant task poll (GET), sent right after each /check_in (beacon.go.tmpl:546, payload_oneliner.go:197). Reported by ThreatDefence review of the CyberStrikeAI source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[url:value LIKE '%/tasks?session_id=%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "cyberstrikeai",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the CyberStrikeAI source code",
+     "url": "https://github.com/AIPentest/CyberStrikeAI"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--c4cc223b-db46-5e08-b9f8-1d5f070658c1",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--7abf15d2-da6a-502b-b8fc-ccb5c537d466",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--5e807015-4f28-5fb0-84de-9d72aa2a1ea8",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI file_name: com.apple.systemupdate.plist",
+   "description": "LaunchAgent the CyberStrikeAI implant writes to ~/Library/LaunchAgents on macOS, label com.apple.systemupdate, KeepAlive (beacon.go.tmpl:1308). Reported by ThreatDefence review of the CyberStrikeAI source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:name LIKE 'com.apple.systemupdate.plist%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "cyberstrikeai",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the CyberStrikeAI source code",
+     "url": "https://github.com/AIPentest/CyberStrikeAI"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--fc4cfca4-bef4-5766-8703-c52766a05f82",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--5e807015-4f28-5fb0-84de-9d72aa2a1ea8",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--30226502-445a-5b13-95c8-f13acd8a0bc2",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI sha256: 483ddc84a99698971d21d4ac6eb6057fbedb575ab12d7cff51434b305665d4b7",
+   "description": "CyberStrikeAI console favicon.ico (ONYPHE and Plum favicon SHA-256). Reported by D4 Project Plum.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.'SHA-256' = '483ddc84a99698971d21d4ac6eb6057fbedb575ab12d7cff51434b305665d4b7']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-20T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "cyberstrikeai",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "D4 Project Plum",
+     "url": "https://github.com/D4-project/Plum-Antibodies/issues/530"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--b8671e07-9510-572b-8b11-3f051df10f71",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--30226502-445a-5b13-95c8-f13acd8a0bc2",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--be93a8d4-3d40-53cf-9d76-8b157715e383",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI file_path: data/conversations.db",
+   "description": "CyberStrikeAI's SQLite store of conversations, tool runs, C2 sessions and webshell connections, relative to its working folder. Huntback recovered one from an exposed workspace. Reported by ThreatDefence review of the CyberStrikeAI source code.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[directory:path = 'data/conversations.db']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the CyberStrikeAI source code",
+     "url": "https://github.com/AIPentest/CyberStrikeAI"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--6c7e675e-4a37-56de-9323-290fdf267780",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--be93a8d4-3d40-53cf-9d76-8b157715e383",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--a63b5074-3ccf-59ca-a796-98dfb9868706",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI file_name: cyberstrike-ai",
+   "description": "Binary name of the CyberStrikeAI console built by run.sh (run.sh:93). Reported by ThreatDefence review of the CyberStrikeAI source code.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:name LIKE 'cyberstrike-ai%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-21T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "cyberstrikeai",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "ThreatDefence review of the CyberStrikeAI source code",
+     "url": "https://github.com/AIPentest/CyberStrikeAI"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--1bcf2339-73bc-51a9-9135-85d04f984501",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--a63b5074-3ccf-59ca-a796-98dfb9868706",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--1e2aabba-5265-5a1c-b78d-58536f777990",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 185.186.245.144",
+   "description": "C2 for the CyberStrikeAI Windows beacon and target of the p1.ps1 reverse shell on port 5501. Reported by Kaspersky.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '185.186.245.144']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "cyberstrikeai",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Kaspersky",
+     "url": "https://securelist.com/cyberstrikeai-attacks/121715/"
+    }
+   ],
+   "valid_until": "2027-05-01T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--201c91cf-45f8-5e5a-a23b-2d257723068f",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--1e2aabba-5265-5a1c-b78d-58536f777990",
+   "target_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--45f144b6-3d5f-5910-a246-0bb712fbe754",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 104.234.26.163",
+   "description": "C2 for payload delivery and the CyberStrikeAI Linux beacon. Reported by Kaspersky.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '104.234.26.163']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "cyberstrikeai",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Kaspersky",
+     "url": "https://securelist.com/cyberstrikeai-attacks/121715/"
+    }
+   ],
+   "valid_until": "2027-05-01T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--552698e7-5de9-5e4f-b9fe-cae9f597d5bf",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--45f144b6-3d5f-5910-a246-0bb712fbe754",
+   "target_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--1c885936-8754-559d-9330-dcbfc6d20aa4",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI domain: fastcdn.bar",
+   "description": "C2 for the CyberStrikeAI Windows beacon. Reported by Kaspersky.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[domain-name:value = 'fastcdn.bar']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "cyberstrikeai",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Kaspersky",
+     "url": "https://securelist.com/cyberstrikeai-attacks/121715/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--124c951a-6714-5967-a267-848cca8d98ff",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--1c885936-8754-559d-9330-dcbfc6d20aa4",
+   "target_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--e51e1c03-e1c3-59e0-8b92-0514210a302f",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI domain: media.fastcdn.bar",
+   "description": "C2 for the CyberStrikeAI Linux beacon. Reported by Kaspersky.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[domain-name:value = 'media.fastcdn.bar']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "cyberstrikeai",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Kaspersky",
+     "url": "https://securelist.com/cyberstrikeai-attacks/121715/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--83874633-5359-58b3-9f5a-bc9ad0786958",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--e51e1c03-e1c3-59e0-8b92-0514210a302f",
+   "target_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--76395ced-6251-5398-b14d-61b612d23e6a",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI md5: d726a8b4886c636f76ca6d30ef6a6ff4",
+   "description": "CyberStrikeAI Windows beacon, c:\\windows\\temp\\svchosts.exe. Reported by Kaspersky.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.MD5 = 'd726a8b4886c636f76ca6d30ef6a6ff4']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "cyberstrikeai",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Kaspersky",
+     "url": "https://securelist.com/cyberstrikeai-attacks/121715/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--05abffed-3ab6-56ab-b2b1-0f6938cfd79d",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--76395ced-6251-5398-b14d-61b612d23e6a",
+   "target_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--286d2545-5e4e-575f-8843-eba58bda911d",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI md5: 2770562d104391b92b42671c270079bb",
+   "description": "File at c:\\windows\\temp\\svcmon32.exe and c:\\programdata\\svcmon32.exe, listed with the Windows beacon. Reported by Kaspersky.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.MD5 = '2770562d104391b92b42671c270079bb']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "cyberstrikeai",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Kaspersky",
+     "url": "https://securelist.com/cyberstrikeai-attacks/121715/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--0e292ca7-2e99-5bbb-a394-b853c43d72b4",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--286d2545-5e4e-575f-8843-eba58bda911d",
+   "target_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--80a0b118-b54b-5b13-9a0f-b19e405ec70e",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI md5: 09e1da2afa1216ecc55648ec8e122d2a",
+   "description": "CyberStrikeAI Linux beacon. Reported by Kaspersky.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.MD5 = '09e1da2afa1216ecc55648ec8e122d2a']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "cyberstrikeai",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Kaspersky",
+     "url": "https://securelist.com/cyberstrikeai-attacks/121715/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--2101931f-6624-5454-b2d6-ab04dbe3a3ea",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--80a0b118-b54b-5b13-9a0f-b19e405ec70e",
+   "target_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--5407b585-2261-53ac-8079-014f57358d81",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI md5: 805b9e4ae74c903787416800999b8418",
+   "description": "CyberStrikeAI Linux beacon. Reported by Kaspersky.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.MD5 = '805b9e4ae74c903787416800999b8418']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "cyberstrikeai",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Kaspersky",
+     "url": "https://securelist.com/cyberstrikeai-attacks/121715/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--56bb89db-12ff-5972-9a9a-7ce85e78e73c",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--5407b585-2261-53ac-8079-014f57358d81",
+   "target_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--f9aa29a1-e461-5230-8a72-0d6334b47e67",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI md5: 29efd64dd3c7fe1e2b022b7ad73a1ba5",
+   "description": "Renamed mimikatz, C:\\Windows\\Temp\\wdiag2.exe, used for DCSync and Golden Ticket. Reported by Kaspersky.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.MD5 = '29efd64dd3c7fe1e2b022b7ad73a1ba5']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "cyberstrikeai",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Kaspersky",
+     "url": "https://securelist.com/cyberstrikeai-attacks/121715/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--7ec5991b-ddb5-5f1e-9dd5-5348e2b1d622",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--f9aa29a1-e461-5230-8a72-0d6334b47e67",
+   "target_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--bd806b7b-727c-5c4b-8d02-771286d82979",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI md5: 74f57b3e897a4960dcdd5b7e8a54f9df",
+   "description": "RogueWinRM, c:\\rwx\\RogueWinRM.exe. Reported by Kaspersky.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.MD5 = '74f57b3e897a4960dcdd5b7e8a54f9df']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "cyberstrikeai",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Kaspersky",
+     "url": "https://securelist.com/cyberstrikeai-attacks/121715/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--b2924cb2-344f-5c6f-8a3e-9289785e9209",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--bd806b7b-727c-5c4b-8d02-771286d82979",
+   "target_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--e9f67c3d-609a-58c9-8ca0-c4f95473a186",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI md5: 0bbd08af95f877f1d568b03de2eb76b4",
+   "description": "Reverse shell PowerShell script c:\\ProgramData\\p1.ps1, spread over WMI with local admin accounts. Reported by Kaspersky.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:hashes.MD5 = '0bbd08af95f877f1d568b03de2eb76b4']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "cyberstrikeai",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Kaspersky",
+     "url": "https://securelist.com/cyberstrikeai-attacks/121715/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--7d2ff21f-cbd6-5f6d-96bc-397a13542d1d",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--e9f67c3d-609a-58c9-8ca0-c4f95473a186",
+   "target_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--1a87b14c-d3df-50bf-875f-8850cf96e237",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI file_name: svchosts.exe",
+   "description": "CyberStrikeAI Windows beacon named to pass for svchost.exe, in C:\\Windows\\Temp. Reported by Kaspersky.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:name LIKE 'svchosts.exe%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "cyberstrikeai",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Kaspersky",
+     "url": "https://securelist.com/cyberstrikeai-attacks/121715/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--c8b30f05-e036-531a-8622-30a76e65253c",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--1a87b14c-d3df-50bf-875f-8850cf96e237",
+   "target_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--e7f59794-0857-5554-a769-61819ced9799",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI file_name: svcmon32.exe",
+   "description": "Dropped in C:\\Windows\\Temp and C:\\ProgramData next to the CyberStrikeAI beacon. Reported by Kaspersky.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:name LIKE 'svcmon32.exe%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "cyberstrikeai",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Kaspersky",
+     "url": "https://securelist.com/cyberstrikeai-attacks/121715/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--1ba6e2aa-4008-56b4-967f-c739f9e6776a",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--e7f59794-0857-5554-a769-61819ced9799",
+   "target_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--15cd10d0-105b-5c1a-a5ce-dd11d95700f8",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI file_name: wdiag2.exe",
+   "description": "Renamed mimikatz in C:\\Windows\\Temp. Reported by Kaspersky.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[file:name LIKE 'wdiag2.exe%']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "cyberstrikeai",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Kaspersky",
+     "url": "https://securelist.com/cyberstrikeai-attacks/121715/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--d6fafe85-9fee-5c5c-b43b-f9ad72e97af3",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--15cd10d0-105b-5c1a-a5ce-dd11d95700f8",
+   "target_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--14848574-95e8-58ab-9a23-a5084049d41b",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI file_path: C:\\ProgramData\\dsn_line.txt",
+   "description": "Database connection string copied from rsreportserver.config and decrypted with DPAPI. Reported by Kaspersky.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[directory:path = 'C:\\\\ProgramData\\\\dsn_line.txt']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-02T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "cyberstrikeai",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Kaspersky",
+     "url": "https://securelist.com/cyberstrikeai-attacks/121715/"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--4e3099b7-896d-552b-8b03-2b2214fd1253",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--14848574-95e8-58ab-9a23-a5084049d41b",
+   "target_ref": "intrusion-set--80a47fac-8104-5043-bcb8-133fe6634c37"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--833d059f-c355-585c-8a88-63c249c7eb57",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 43.240.29.11",
+   "description": "CyberStrikeAI console (CN=CyberStrikeAI certificate, title CyberStrikeAI, port 8080) and source of every AWS API call in an intrusion that used eight AWS identities across four accounts, Sep 30 to Oct 16, 2026 (AS133199, Hong Kong). Reported by Elastic Security Labs.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '43.240.29.11']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "cyberstrikeai",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Elastic Security Labs",
+     "url": "https://www.elastic.co/security-labs/threat-command/cyberstrikeai-aws-cloudtrail-intrusion"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--481edecc-0cdb-54df-a090-710866886889",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--833d059f-c355-585c-8a88-63c249c7eb57",
+   "target_ref": "intrusion-set--49e354d9-1b2e-5f62-b1df-3676af4653d5"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--c468d2a2-5b2f-5c76-ab46-6006b4df9404",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 43.240.29.28",
+   "description": "CyberStrikeAI console in the same /24 serving the same certificate as 43.240.29.11; not seen in the AWS activity. Reported by Elastic Security Labs.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '43.240.29.28']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Elastic Security Labs",
+     "url": "https://www.elastic.co/security-labs/threat-command/cyberstrikeai-aws-cloudtrail-intrusion"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--526918bd-7436-5c69-b51b-82a3cc28f4f9",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--c468d2a2-5b2f-5c76-ab46-6006b4df9404",
+   "target_ref": "intrusion-set--49e354d9-1b2e-5f62-b1df-3676af4653d5"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--b940645f-fda4-51b6-b60b-c941e715d19e",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 43.240.29.33",
+   "description": "CyberStrikeAI console in the same /24 serving the same certificate as 43.240.29.11; not seen in the AWS activity. Reported by Elastic Security Labs.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '43.240.29.33']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-13T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Elastic Security Labs",
+     "url": "https://www.elastic.co/security-labs/threat-command/cyberstrikeai-aws-cloudtrail-intrusion"
+    }
+   ],
+   "valid_until": "2027-05-12T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--37ecc02a-9cd5-552a-8286-2e7d85bbd296",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--b940645f-fda4-51b6-b60b-c941e715d19e",
+   "target_ref": "intrusion-set--49e354d9-1b2e-5f62-b1df-3676af4653d5"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--008ff070-94b3-5315-88aa-aa732ee75e6f",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 212.11.64.250",
+   "description": "CyberStrikeAI banner on port 8080 and NetFlow to FortiGate devices targeted in the campaign that compromised more than 600 FortiGate firewalls in 55 countries; the address Amazon shared from that campaign, also hosting DecryptVeeamPasswords.ps1. Last seen running CyberStrikeAI Jan 30, 2026. Reported by Team Cymru.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '212.11.64.250']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 60,
+   "labels": [
+    "cyberstrikeai",
+    "medium"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--83d16b9b-fbf0-58ca-87ee-f4435a119b95",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--008ff070-94b3-5315-88aa-aa732ee75e6f",
+   "target_ref": "intrusion-set--6d330a8d-8f61-589c-b5e3-a01821aefe27"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--7e3d83c1-82a1-50c5-b91e-0eee54293155",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 103.164.81.110",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Feb 2, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '103.164.81.110']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--4f7ae6a7-b8d4-57aa-bb18-4ef8fbb36a50",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--7e3d83c1-82a1-50c5-b91e-0eee54293155",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--9a273af3-2d3d-54d8-9bba-0ece03de85fe",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 106.52.47.65",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Feb 25, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '106.52.47.65']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--40ab3821-de74-53e6-a899-b5ad22ce0db0",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--9a273af3-2d3d-54d8-9bba-0ece03de85fe",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--8ef0b4fc-f0f0-5caa-8f90-45fd5182182a",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 115.120.233.95",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Feb 26, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '115.120.233.95']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--53ef4a6d-808f-54a1-9220-55d7607f5d29",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--8ef0b4fc-f0f0-5caa-8f90-45fd5182182a",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--b12507e7-9aba-5402-95b1-4cec2e54e6e2",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 117.72.103.145",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Feb 23, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '117.72.103.145']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--77e3130d-1658-5662-b56d-026fc47d10d6",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--b12507e7-9aba-5402-95b1-4cec2e54e6e2",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--c90fa805-520b-573e-8b05-5d59585e9f47",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 118.25.186.119",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Feb 24, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '118.25.186.119']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--fa9e3fdb-0f84-5de8-ab3c-985021435f2b",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--c90fa805-520b-573e-8b05-5d59585e9f47",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--5144dce5-71ce-5ecf-a986-8c44f1dcc664",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 142.171.160.137",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Jan 29, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '142.171.160.137']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--169d5d90-a984-59c1-8c99-312129303321",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--5144dce5-71ce-5ecf-a986-8c44f1dcc664",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--248ee23b-a7ba-5052-9547-7caedf23830b",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 144.31.224.253",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Feb 26, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '144.31.224.253']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--22055cd9-a889-547f-8b13-a215290d17b8",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--248ee23b-a7ba-5052-9547-7caedf23830b",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--8b480835-04ac-5d85-ba5e-0cfae171b076",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 146.190.195.154",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Jan 23, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '146.190.195.154']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--ffaa55e0-6ccd-56eb-9daf-801b919989c7",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--8b480835-04ac-5d85-ba5e-0cfae171b076",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--91d4a940-a0f4-5497-b414-3a9d50374642",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 146.190.82.132",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Jan 24, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '146.190.82.132']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--75a29924-1c4b-55d8-a17d-0b158ae273e7",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--91d4a940-a0f4-5497-b414-3a9d50374642",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--c5f08e07-d734-53bd-b2ea-a3d7f93bde72",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 154.219.114.92",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Feb 12, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '154.219.114.92']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--f138582f-8ace-5b1e-85a0-1948b72f1029",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--c5f08e07-d734-53bd-b2ea-a3d7f93bde72",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--bdc0c891-5d2c-5f1d-a9de-67236be768df",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 38.38.250.182",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Jan 25, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '38.38.250.182']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--8ede1765-9755-5444-b3ff-9218ecff8fd0",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--bdc0c891-5d2c-5f1d-a9de-67236be768df",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--dfafa05b-18b5-523b-a45d-ac86236a2d32",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 43.106.25.225",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Jan 31, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '43.106.25.225']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--2ecb550a-72db-5eb3-bfe3-bf6ddf3f1b55",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--dfafa05b-18b5-523b-a45d-ac86236a2d32",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--3a9338bd-2b68-5718-bcd2-efd44bcb1e11",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 43.167.237.212",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Feb 1, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '43.167.237.212']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--c8ecf5f6-1eb2-5dbc-8ca7-8f650d5837f2",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--3a9338bd-2b68-5718-bcd2-efd44bcb1e11",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--c4fea223-e73b-5325-99df-d016a9346f83",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 47.101.186.156",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Feb 25, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '47.101.186.156']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--9a7e38ba-ab2c-5bea-bbdf-6034e05cd2a0",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--c4fea223-e73b-5325-99df-d016a9346f83",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--aa48da58-d217-5571-8f57-b065b51a1d6d",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 47.95.33.207",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Feb 26, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '47.95.33.207']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--dc1a7532-39df-5bb8-a479-68c958b173c2",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--aa48da58-d217-5571-8f57-b065b51a1d6d",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--efdf1431-9453-53b9-861d-73af3638309c",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 60.204.227.64",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Feb 8, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '60.204.227.64']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--051e42cb-41cb-5d9a-9027-e2035506c71f",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--efdf1431-9453-53b9-861d-73af3638309c",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--be877224-9ba0-53e3-b404-b551cc376b0e",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 62.234.61.215",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Feb 25, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '62.234.61.215']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--3d4e0495-abb6-5577-8c32-26fabc4b5ccb",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--be877224-9ba0-53e3-b404-b551cc376b0e",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--a8000440-ec38-509d-9541-6ef60dad30c9",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 64.176.48.93",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Feb 24, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '64.176.48.93']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--59273153-9bcd-538a-a923-d2aa907f2a89",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--a8000440-ec38-509d-9541-6ef60dad30c9",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--4f434e6a-a2d1-5503-b49d-ea7ec13644b9",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 81.70.144.252",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Feb 26, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '81.70.144.252']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--427aeecd-0cb0-5b2c-9b16-d515c8b80fd4",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--4f434e6a-a2d1-5503-b49d-ea7ec13644b9",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--7d0ec393-0eae-5730-9e02-6ffa10591232",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv6: 2400:d321:2308:1461::1",
+   "description": "CyberStrikeAI server, one of 21 Team Cymru saw from Jan 20 to Feb 26, 2026; last seen Feb 26, 2026. Historical: check current use before acting. Reported by Team Cymru.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv6-addr:value = '2400:d321:2308:1461::1']",
+   "pattern_type": "stix",
+   "valid_from": "2026-03-02T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Team Cymru",
+     "url": "https://www.team-cymru.com/post/tracking-cyberstrikeai-usage"
+    }
+   ],
+   "valid_until": "2026-08-29T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--4135d45d-13f0-5fb6-883d-19d805f93004",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--7d0ec393-0eae-5730-9e02-6ffa10591232",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--3f100f97-1070-577d-ac3e-ca05229d67cd",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 158.220.114.59",
+   "description": "CyberStrikeAI console seen by ONYPHE (favicon SHA-256 and title match). An exposed console is not proof of malicious use. Reported by D4 Project Plum.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '158.220.114.59']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-20T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "D4 Project Plum",
+     "url": "https://github.com/D4-project/Plum-Antibodies/issues/530"
+    }
+   ],
+   "valid_until": "2027-05-19T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--97d5afaa-5cbe-5b35-95c4-d12a5048288d",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--3f100f97-1070-577d-ac3e-ca05229d67cd",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--9396500d-3a9d-537d-be58-1e648eb11c28",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "CyberStrikeAI ipv4: 38.76.169.207",
+   "description": "Exposed CyberStrikeAI workspace served on TCP 8010 (/CyberStrikeAI/data/conversations.db) after a session of 221 tool runs with the approval gate turned off, Nov 16, 2026. The operator and authorization are unknown. Reported by Huntback.",
+   "indicator_types": [
+    "anomalous-activity"
+   ],
+   "pattern": "[ipv4-addr:value = '38.76.169.207']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-17T00:00:00Z",
+   "confidence": 30,
+   "labels": [
+    "cyberstrikeai",
+    "low"
+   ],
+   "external_references": [
+    {
+     "source_name": "Huntback",
+     "url": "https://huntback.io/blog/inside-cyberstrikeai-221-tool-executions-disabled-approval-gate"
+    }
+   ],
+   "valid_until": "2027-05-16T00:00:00Z"
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--062f9ffc-bc06-5966-8e6f-03a4c2be6dad",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--9396500d-3a9d-537d-be58-1e648eb11c28",
+   "target_ref": "tool--c64c9b04-1bbe-50d4-a979-9a576e785dfb"
   }
  ]
 }
