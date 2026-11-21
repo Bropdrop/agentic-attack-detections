@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.4.0, November 21, 2026
+
+- Zeek package for the cross-framework behaviors in `behaviors/zeek/agentic-behaviors/`: model API calls from servers, Claude Code's page reader next to attack traffic, rotating proxy probing, configuration and backup file theft, WSUS probes, Kerberos enumeration, SMB and WinRM fan-out, and servers calling back to the address that probed them. Tested against a synthetic pcap in `behaviors/zeek/tests/`.
+- `tools/validate.py` parses every Zeek package when Zeek is installed.
+
 ## 2.3.0, November 21, 2026
 
 - CyberStrikeAI added in `frameworks/cyberstrikeai/`: 72 indicators, 5 KQL hunts, 2 analytics rules, 7 Sigma rules, Suricata and YARA, from a review of the CyberStrikeAI source code (AIPentest/CyberStrikeAI at af6cf750) and reporting by Team Cymru, Kaspersky, Elastic, Spectrum Security, PenTestIT, Huntback and the D4 Project. The YARA implant rule was tested against implants compiled from the stock template.

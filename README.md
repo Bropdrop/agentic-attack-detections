@@ -23,12 +23,12 @@ Maintained by [ThreatDefence](https://threatdefence.com).
 | Behavior | Rules |
 |---|---|
 | Coding-agent CLIs (Claude Code, Codex, Pi) in bypass mode starting attack tools | KQL hunt, Sentinel analytics rule, Sigma |
-| Coding-agent CLIs calling third-party model gateways from servers | KQL hunt, Sigma |
-| Claude Code's page reader on your application next to scanning from the same address | KQL hunt, Sigma, Suricata |
-| One site probed through hundreds of rotating proxy addresses | KQL hunt |
-| Configuration and backup file theft, and probes of WSUS administration services | KQL hunt, Sentinel analytics rule, Sigma, Suricata |
-| Kerberos user enumeration and SMB or WinRM fan-out from one address | KQL hunt |
-| A server calling back to the address that was probing it, including PentAGI's worker ports 28000 to 29999 | KQL hunt, Suricata (PentAGI ports) |
+| Coding-agent CLIs calling third-party model gateways from servers | KQL hunt, Sigma, Zeek |
+| Claude Code's page reader on your application next to scanning from the same address | KQL hunt, Sigma, Suricata, Zeek |
+| One site probed through hundreds of rotating proxy addresses | KQL hunt, Zeek |
+| Configuration and backup file theft, and probes of WSUS administration services | KQL hunt, Sentinel analytics rule, Sigma, Suricata, Zeek |
+| Kerberos user enumeration and SMB or WinRM fan-out from one address | KQL hunt, Zeek |
+| A server calling back to the address that was probing it, including PentAGI's worker ports 28000 to 29999 | KQL hunt, Suricata (PentAGI ports), Zeek |
 | AWS credentials used at machine speed: several identities checked from one address, bulk user data reads, instance role keys used from outside | KQL hunt |
 
 The ARTEX folder also carries behavior hunts written before this split: user agent family bursts (hunt 17), web and database services starting shells (hunt 11), servers calling webhook and tunnel services (hunt 12), scripts written into web folders (hunt 13) and Kerberoasting, DCSync and WinRM fan-out (hunt 16). They apply to every framework.
@@ -51,7 +51,7 @@ Each framework folder has its own Zeek intel file and Suricata address rules, ge
 
 **Suricata.** Add the `.rules` files from `frameworks/*/suricata/` and `behaviors/suricata/`. HTTP rules need cleartext or decrypted traffic. DNS and TLS SNI rules work on encrypted traffic.
 
-**Zeek.** Load `frameworks/*/zeek/intel/*.intel` through the Intel framework, and the ARTEX script in `frameworks/artex/zeek/artex/`.
+**Zeek.** Load the behavior package in `behaviors/zeek/agentic-behaviors/` ([setup](behaviors/zeek/README.md)), the ARTEX script in `frameworks/artex/zeek/artex/`, and `frameworks/*/zeek/intel/*.intel` through the Intel framework.
 
 **YARA.** Scan container layers, home folders, `/tmp` and web roots with the files in `frameworks/*/yara/`.
 
@@ -78,6 +78,7 @@ pip install -r tools/requirements.txt
 python3 tools/validate.py                              # Sigma, KQL, ES|QL, TOML, Splunk, Suricata SIDs, YARA, osquery, feeds
 python3 tools/convert.py                               # regenerate generated/
 bash frameworks/artex/tests/run_network_tests.sh       # needs zeek and suricata on the PATH
+bash behaviors/zeek/tests/run_tests.sh                 # needs zeek on the PATH
 ```
 
 No rule in this repository has been tested against a captured intrusion, so treat every rule as experimental until it has run on your own data.

@@ -11,6 +11,7 @@ Checks:
     Splunk      .conf files parse, every saved search ships disabled
     Suricata    SIDs are unique across both rule files
     YARA        rules compile (when yara-python is installed)
+    Zeek        every Zeek package parses (when zeek is installed)
     osquery     pack is valid JSON
     Feeds       regenerating from iocs/indicators.csv changes nothing
 """
@@ -114,6 +115,19 @@ def check_yara():
     print("yara: compiled")
 
 
+def check_zeek():
+    import shutil
+    if not shutil.which("zeek"):
+        print("zeek: skipped (zeek not installed)")
+        return
+    pkgs = sorted(p.parent for p in ROOT.glob("*/**/zeek/*/__load__.zeek"))
+    for pkg in pkgs:
+        r = subprocess.run(["zeek", "-a", str(pkg)], capture_output=True, text=True)
+        if r.returncode or r.stderr.strip():
+            err(f"zeek {pkg.relative_to(ROOT)}: {r.stderr.strip()}")
+    print(f"zeek: {len(pkgs)} packages parsed")
+
+
 def check_osquery():
     for p in sorted(ROOT.glob("frameworks/*/osquery/*.conf")):
         json.loads(p.read_text())
@@ -134,7 +148,7 @@ def check_feeds():
         print("feeds: up to date")
 
 
-for check in (check_sigma, check_sentinel, check_elastic, check_splunk, check_suricata, check_yara, check_osquery, check_feeds):
+for check in (check_sigma, check_sentinel, check_elastic, check_splunk, check_suricata, check_yara, check_zeek, check_osquery, check_feeds):
     try:
         check()
     except Exception as exc:  # noqa: BLE001
