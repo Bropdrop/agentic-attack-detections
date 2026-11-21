@@ -4,6 +4,7 @@
 
 - Zeek package for the cross-framework behaviors in `behaviors/zeek/agentic-behaviors/`: model API calls from servers, Claude Code's page reader next to attack traffic, rotating proxy probing, configuration and backup file theft, WSUS probes, Kerberos enumeration, SMB and WinRM fan-out, and servers calling back to the address that probed them. Tested against a synthetic pcap in `behaviors/zeek/tests/`.
 - `tools/validate.py` parses every Zeek package when Zeek is installed.
+- The agent behaviors now detect agentic AI used for attack whatever the model, instead of centring on Claude Code. Hunt 02 reports servers calling any AI model API, with Chinese models (DeepSeek, Qwen, GLM, Kimi, MiniMax, Doubao, SiliconFlow and others) and model gateways ranked first, and no longer drops consoles calling from Go or Python. Hunt 01 and its analytics and Sigma rules add Qwen Code and Kimi CLI in auto-approve mode. Hunt 03, Sigma, Suricata (SIDs 9727012 to 9727014) and Zeek add the Qwen Code, Kimi CLI and opencode user agents. Endpoints and user agents come from the Qwen Code, Kimi CLI and opencode source. Hunts 01 to 03 have new file names; Sigma and analytics rules keep their paths and ids.
 
 ## 2.3.0, November 21, 2026
 

@@ -1,25 +1,27 @@
-// Claude Code's page reader on your application, next to scanning from the same source
+// An AI agent's page reader on your application, next to attack traffic from the same source
 // Agentic attack detections by ThreatDefence (cross-framework behavior, first written for Cairn). Source: https://github.com/ThreatDefence/agentic-attack-detections
 // Example hunt for Microsoft Sentinel. Test and baseline before alerting.
-// From the CLI packages Cairn pins. Its Claude Code workers (the worker type NorForge saw in the AIA0001 panels,
-// claudecode_deepseek-v4.1-flash) read pages with Claude Code's WebFetch tool, which sends
-// "Claude-User (claude-code/2.1.98; +https://support.anthropic.com/)" with "Accept: text/markdown, text/html, */*" and
-// follows no redirects. Most other requests come from curl, Python and Kali tools run through the agent's shell.
-// Ordinary Claude Code users send the same page-reader string, so a Claude-User hit alone means little. The same address
-// sending Claude-User reads and attack tooling or payloads against one host is a coding agent attacking that host.
-// The version changes with each CLI release; "Claude-User (claude-code/" stays.
-
+// Agent CLIs read pages with their own fetch tools, which send their own user agents, while the attack itself goes
+// through curl, Python and Kali tools in the agent's shell:
+//  - Qwen Code web fetch: "QwenCode/<version> (<os>; <arch>)" (packages/core/src/tools/web-fetch.ts)
+//  - Kimi CLI search: "KimiCLI/<version>" (src/kimi_cli/constant.py); its page fetch poses as Chrome 91
+//  - opencode: "opencode/<channel>/<version>/<name>" (packages/core/src/app.ts)
+//  - Claude Code WebFetch, which Cairn's workers use with DeepSeek behind it:
+//    "Claude-User (claude-code/<version>; +https://support.anthropic.com/)"
+// Ordinary users of these tools send the same strings, so a reader hit alone means little. The same address reading
+// pages with an agent and sending attack tooling or payloads to the same host is an AI agent attacking that host.
 let Window = 14d;
+let AgentReader = @"(Claude-User \(claude-code/|^QwenCode/|^KimiCLI/|^opencode/)";
 let Web = union isfuzzy=true
     (CommonSecurityLog | where TimeGenerated > ago(Window) and isnotempty(RequestURL)
         | project TimeGenerated, Src=SourceIP, Host=DestinationHostName, Url=RequestURL, UA=RequestClientApplication),
     (W3CIISLog | where TimeGenerated > ago(Window)
         | project TimeGenerated, Src=cIP, Host=csHost, Url=strcat(csUriStem, "?", csUriQuery), UA=replace_string(csUserAgent, "+", " "));
 let Readers = Web
-    | where UA contains "Claude-User (claude-code/"
+    | where UA matches regex AgentReader
     | summarize ReaderRequests=count(), ReaderUA=take_any(UA), ReaderFirst=min(TimeGenerated) by Src, Host;
 Web
-| where UA !contains "Claude-User"
+| where not(UA matches regex AgentReader)
 | extend Tool = case(UA startswith "curl/", "curl", UA startswith "python-requests/" or UA startswith "Python-urllib/", "python",
     UA has_any ("sqlmap", "Nuclei", "nuclei", "Fuzz Faster U Fool", "Nikto", "dirsearch", "WPScan", "katana", "dalfox"), "scanner",
     UA has "HeadlessChrome", "headless browser", "")

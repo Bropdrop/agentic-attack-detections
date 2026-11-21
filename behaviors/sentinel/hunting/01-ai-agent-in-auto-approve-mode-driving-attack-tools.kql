@@ -1,20 +1,16 @@
-// A coding-agent CLI in bypass mode driving attack tools
+// An AI agent in auto-approve mode driving attack tools
 // Agentic attack detections by ThreatDefence (cross-framework behavior, first written for Cairn). Source: https://github.com/ThreatDefence/agentic-attack-detections
 // Example hunt for Defender XDR advanced hunting. Test and baseline before alerting.
-// From the Cairn source code. Cairn has no tools of its own: every worker is a coding agent started with its safety
-// prompts switched off and the whole task prompt on the command line.
-//  - Claude Code: claude --session-id <uuid> --dangerously-skip-permissions -p -- <prompt>, then claude -r <uuid> ...
-//    for the conclude phase (dispatcher/workers/adapters/claudecode.py:38-62)
-//  - Codex: codex exec --dangerously-bypass-approvals-and-sandbox ... -c model_provider="cairn"
-//    (dispatcher/workers/adapters/codex.py:37-71)
-//  - Pi: pi --provider cairn --mode json --session-dir /tmp/cairn-pi/<worker>/sessions --no-extensions --no-skills
-//    --tools read,write,edit,bash,grep,find,ls -p <prompt> (dispatcher/workers/adapters/pi.py)
-// The agent then runs the attack tools as child processes. In local mode (runtime.execution: local) this happens
-// directly on the host with the user's own permissions and no container, so a developer laptop or build server can be
-// the attacker. Any of these agents in bypass mode starting scanners, Kerberos or SMB tools, or exploit kits is worth a
-// look whether Cairn is involved or not. The flags are product options, so they are hard to hide while still using the
-// stock CLIs.
-
+// Agent CLIs run shell commands for the model, and attackers switch their approval prompts off so the agent never
+// stops to ask. The model behind them is usually DeepSeek, Qwen, GLM or Kimi; the client is whichever CLI works with it:
+//  - Qwen Code: qwen --yolo, -y or --approval-mode yolo (QwenLM/qwen-code, packages/cli/src/config/config.ts)
+//  - Kimi CLI: kimi --yolo, --yes, -y or --auto-approve (MoonshotAI/kimi-cli, src/kimi_cli/cli/__init__.py)
+//  - Claude Code pointed at another model (Cairn runs it on DeepSeek): claude --dangerously-skip-permissions
+//  - Codex: codex exec --dangerously-bypass-approvals-and-sandbox, or Cairn's -c model_provider="cairn"
+//  - Pi: pi --provider cairn ... (Cairn's third worker type)
+// The agent then runs scanners, Kerberos and SMB tools or exploit kits through its shell. In Cairn's local mode this
+// happens on the host with the user's own permissions, so a developer laptop or build server can be the attacker.
+// The flags are product options, so they are hard to hide while still using the stock CLIs.
 let Window = 30d;
 let AttackTools = dynamic(["nmap", "naabu", "masscan", "nuclei", "katana", "dalfox", "ffuf", "gobuster", "feroxbuster",
     "dirsearch", "nikto", "sqlmap", "wpscan", "hydra", "medusa", "kerbrute", "netexec", "nxc", "crackmapexec",
@@ -26,7 +22,11 @@ let AgentParents = DeviceProcessEvents
         or ProcessCommandLine contains "--dangerously-bypass-approvals-and-sandbox"
         or ProcessCommandLine contains "model_provider=\"cairn\"" or ProcessCommandLine contains "--provider cairn"
         or ProcessCommandLine contains "/tmp/cairn-pi/"
-    | extend Agent = case(ProcessCommandLine contains "claude", "Claude Code", ProcessCommandLine contains "codex", "Codex",
+        // Qwen Code and Kimi CLI in auto-approve mode (the -y short flag only next to the CLI name)
+        or (ProcessCommandLine matches regex @'(^|[/\\\s])(qwen|kimi)(\.exe|\.cmd|\.js)?(\s|"|$)|@qwen-code/|kimi[-_]cli' and
+            ProcessCommandLine matches regex @"(\s--yolo\b|\s-y\b|\s--yes\b|\s--auto-approve\b|--approval-mode[\s=]+yolo)")
+    | extend Agent = case(ProcessCommandLine contains "qwen", "Qwen Code", ProcessCommandLine contains "kimi", "Kimi CLI",
+        ProcessCommandLine contains "claude", "Claude Code", ProcessCommandLine contains "codex", "Codex",
         ProcessCommandLine contains "pi", "Pi", "other")
     | project AgentTime=Timestamp, DeviceId, DeviceName, AgentPid=ProcessId, Agent, AgentAccount=AccountName,
         CairnMarker = ProcessCommandLine contains "cairn", AgentCmd=substring(ProcessCommandLine, 0, 300);
@@ -38,9 +38,9 @@ DeviceProcessEvents
 | join kind=inner AgentParents on DeviceId
 | where Timestamp between (AgentTime .. (AgentTime + 2h))
 | where InitiatingProcessParentId == AgentPid or InitiatingProcessId == AgentPid
-    or InitiatingProcessParentFileName in~ ("claude", "codex", "pi", "node")
+    or InitiatingProcessParentFileName in~ ("claude", "codex", "pi", "qwen", "kimi", "node", "python", "python3")
 | summarize Tools=make_set(FileName, 20), Commands=make_set(substring(ProcessCommandLine, 0, 200), 15),
     FirstTool=min(Timestamp), LastTool=max(Timestamp), CairnMarker=max(toint(CairnMarker))
     by DeviceName, Agent, AgentAccount, AgentCmd
-| extend Strength = iff(CairnMarker == 1, "Cairn worker command line", "coding agent in bypass mode running attack tools")
+| extend Strength = iff(CairnMarker == 1, "Cairn worker command line", "AI agent in auto-approve mode running attack tools")
 | order by CairnMarker desc, array_length(Tools) desc

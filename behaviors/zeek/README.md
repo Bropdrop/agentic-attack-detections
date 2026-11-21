@@ -4,8 +4,8 @@
 
 | Notice | Behavior | Hunt | Needs |
 |---|---|---|---|
-| `Model_API_From_Server` | A server, container host or build agent opens TLS to a model API or third-party model gateway (DeepSeek, DashScope, OpenRouter, Anthropic, OpenAI and others) | 02 | TLS server name only |
-| `Coding_Agent_Attacking_Site` | One address reads a site with Claude Code's page reader and sends it attack tool traffic or payloads | 03 | Cleartext HTTP |
+| `Model_API_From_Server` | A server, container host or build agent opens TLS to a model API: Chinese models (DeepSeek, Qwen on DashScope, GLM, Kimi, MiniMax, Doubao, SiliconFlow and others), gateways such as OpenRouter, or OpenAI, Anthropic and Google | 02 | TLS server name only |
+| `AI_Agent_Attacking_Site` | One address reads a site with an AI agent's page reader (Qwen Code, Kimi CLI, opencode, Claude Code) and sends it attack tool traffic or payloads | 03 | Cleartext HTTP |
 | `Rotating_Proxy_Probing` | 50 or more outside addresses, 10 requests or fewer each, send payloads or login and admin requests to one site within 40 minutes | 04 | Cleartext HTTP |
 | `Backup_File_Served`, `Backup_Path_Sweep` | A server answers 200 or 206 to a configuration or backup file, or one address asks for 5 or more such paths | 05 | Cleartext HTTP |
 | `WSUS_Admin_From_Internet`, `WSUS_Port_From_Internet` | An outside address reaches a WSUS admin or sync web service, or ports 8530 and 8531 | 05 | Cleartext HTTP for the path, nothing for the port |
@@ -13,7 +13,7 @@
 | `SMB_WinRM_Fan_Out` | One address opens SMB or WinRM to 10 or more hosts within 10 minutes | 06 | Connections only |
 | `Callback_To_Prober` | A server connects out to an address that connected to it at least 3 times in the last day, flagged when the port is in PentAGI's 28000 to 29999 range | 07 | Connections only |
 
-Hunt 01 (coding agents in bypass mode starting attack tools) is a process check and hunt 08 (AWS credentials at machine speed) reads CloudTrail, so neither has a network version.
+Hunt 01 (AI agents in auto-approve mode starting attack tools) is a process check and hunt 08 (AWS credentials at machine speed) reads CloudTrail, so neither has a network version.
 
 ## Load and tune
 

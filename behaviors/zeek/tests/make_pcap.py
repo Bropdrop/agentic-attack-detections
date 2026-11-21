@@ -63,11 +63,14 @@ def nxt():
     return port[0]
 
 
-# 1. Model API from a server (Model_API_From_Server)
+# 1. Model APIs from a server (Model_API_From_Server): DeepSeek, and Qwen on a DashScope subdomain
 session(SRV, "198.51.100.80", nxt(), 443, client_hello("api.deepseek.com"))
-# 2. Claude Code page reader plus attack traffic from one address (Coding_Agent_Attacking_Site)
-session("203.0.113.20", WEB, nxt(), 80, req("/products", "Claude-User (claude-code/2.1.98; +https://support.anthropic.com/)"), resp("ok", "200 OK"))
+session(SRV, "198.51.100.81", nxt(), 443, client_hello("coding.dashscope.aliyuncs.com"))
+# 2. Qwen Code page reader plus attack traffic from one address (AI_Agent_Attacking_Site)
+session("203.0.113.20", WEB, nxt(), 80, req("/products", "QwenCode/0.6.1 (linux; x64)"), resp("ok", "200 OK"))
 session("203.0.113.20", WEB, nxt(), 80, req("/download?f=../../etc/passwd", "curl/8.5.0"), resp())
+# A Claude Code reader alone, with no attack traffic (nothing expected)
+session("203.0.113.21", WEB, nxt(), 80, req("/docs", "Claude-User (claude-code/2.1.98; +https://support.anthropic.com/)"), resp("ok", "200 OK"))
 # 3. Rotating proxies: 60 addresses, two login requests each (Rotating_Proxy_Probing)
 for i in range(60):
     for _ in range(2):

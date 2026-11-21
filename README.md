@@ -1,6 +1,6 @@
 # Agentic Attack Detections
 
-Detection rules, hunting queries and indicators for agentic attack frameworks (ARTEX, Cairn, PentAGI, HexStrike and CyberStrikeAI so far): open-source tools that hand an intrusion to AI agents, which plan, run real attack tools and keep going until they reach a goal. Each framework gets its own folder, built from a review of its source code and the public reporting on its use. The behaviors they share, such as coding agents running attack tools with their safety prompts off, bursts of tools from one source and probing through rotating proxies, have their own folder, so one rule covers every framework.
+Detection rules, hunting queries and indicators for agentic attack frameworks (ARTEX, Cairn, PentAGI, HexStrike and CyberStrikeAI so far): open-source tools that hand an intrusion to AI agents, which plan, run real attack tools and keep going until they reach a goal. Each framework gets its own folder, built from a review of its source code and the public reporting on its use. The behaviors they share, such as AI agents running attack tools with their approval prompts off, servers calling Chinese model APIs, bursts of tools from one source and probing through rotating proxies, have their own folder, so one rule covers every framework.
 
 Maintained by [ThreatDefence](https://threatdefence.com).
 
@@ -22,9 +22,9 @@ Maintained by [ThreatDefence](https://threatdefence.com).
 
 | Behavior | Rules |
 |---|---|
-| Coding-agent CLIs (Claude Code, Codex, Pi) in bypass mode starting attack tools | KQL hunt, Sentinel analytics rule, Sigma |
-| Coding-agent CLIs calling third-party model gateways from servers | KQL hunt, Sigma, Zeek |
-| Claude Code's page reader on your application next to scanning from the same address | KQL hunt, Sigma, Suricata, Zeek |
+| AI agent CLIs in auto-approve mode starting attack tools (Qwen Code, Kimi CLI, Claude Code, Codex, Pi), whatever model is behind them | KQL hunt, Sentinel analytics rule, Sigma |
+| Servers calling AI model APIs: Chinese models (DeepSeek, Qwen, GLM, Kimi, MiniMax, Doubao), gateways such as OpenRouter, and Western APIs | KQL hunt, Sigma, Zeek |
+| An AI agent's page reader (Qwen Code, Kimi CLI, opencode, Claude Code) on your application next to attack traffic from the same address | KQL hunt, Sigma, Suricata, Zeek |
 | One site probed through hundreds of rotating proxy addresses | KQL hunt, Zeek |
 | Configuration and backup file theft, and probes of WSUS administration services | KQL hunt, Sentinel analytics rule, Sigma, Suricata, Zeek |
 | Kerberos user enumeration and SMB or WinRM fan-out from one address | KQL hunt, Zeek |
