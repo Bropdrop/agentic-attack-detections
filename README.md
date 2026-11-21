@@ -12,6 +12,18 @@ Maintained by [ThreatDefence](https://threatdefence.com). The full advisory, wit
 | Platforms | Sigma, Microsoft Sentinel and Defender XDR, Splunk, Elastic, Zeek, Suricata, YARA, osquery, STIX 2.1 |
 | Status | Experimental. Tested for syntax, conversion and against a synthetic pcap. Baseline every rule on your own data before alerting |
 
+## What's new in 1.1.0
+
+Version 1.1.0 adds detections drawn from the ARTEX source code itself, not only from reported intrusions. [`docs/source-code-signals.md`](docs/source-code-signals.md) lists every signal with the file it comes from, the log source that sees it and how easily an operator can remove it.
+
+- **Hunts 23 to 30:** norma page reads and the Go enrichment probe, the ARTEX container toolchain seen from one source, request rates that match the ARTEX noise profiles, headless browser sign-ins and relayed MFA, accounts registered while probing, ARTEX running on a monitored host, console traffic in proxy logs, and bracketed-paste bytes in shell input.
+- **Two analytics rules:** ARTEX code-default user agents, and the ARTEX agent shell or proxy credential on a host.
+- **31 indicators** with the source file for each, and corrected context for `norma/0.4` and the `spa-api-recon` user agents.
+
+The branded user agents and file paths in the 1.0.0 indicators (for example `artex-pentest/1.0` and `C:\ProgramData\artx5v\`) do not appear in the upstream ARTEX code. They come from modified builds used in reported intrusions. Keep hunting for them, but expect an unmodified ARTEX to look like the signals in 1.1.0.
+
+See [`CHANGELOG.md`](CHANGELOG.md) for the full list.
+
 ## What is in the repository
 
 | Folder | Contents |

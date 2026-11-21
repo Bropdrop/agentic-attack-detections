@@ -1,6 +1,6 @@
 {
  "type": "bundle",
- "id": "bundle--7e8dd8ad-a8e2-5d6e-98c1-5a6f4ddba054",
+ "id": "bundle--2c2103d6-51c8-54a8-8c4e-6fc1f33d0b37",
  "objects": [
   {
    "type": "identity",
@@ -93,7 +93,7 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: artex-readonly/1.0",
-   "description": "User agent that names ARTEX. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -130,7 +130,7 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: artex-pentest/1.0",
-   "description": "User agent that names ARTEX. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -167,7 +167,7 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: artex-audit/1.0",
-   "description": "User agent that names ARTEX. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -204,7 +204,7 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: artex-verify/1.0",
-   "description": "User agent that names ARTEX. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -241,7 +241,7 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: artex-spawn/1",
-   "description": "User agent that names ARTEX. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -278,7 +278,7 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: ARTEX-worker/1.0",
-   "description": "User agent that names ARTEX. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -315,7 +315,7 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: artex-i21861-canary",
-   "description": "User agent that names ARTEX. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -352,7 +352,7 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: Mozilla/5.0 ARTeX",
-   "description": "User agent that names ARTEX. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -389,7 +389,7 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) ARTeX-authorized-pentest",
-   "description": "User agent that names ARTEX. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -426,7 +426,7 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: Mozilla/5.0 (X11; Linux x86_64) artex-verify/1.0",
-   "description": "User agent that names ARTEX. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "User agent that names ARTEX, from modified builds. Not in the upstream ARTEX code. Reported by Multiple reports, compiled by ThreatDefence.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -463,7 +463,7 @@
    "modified": "2026-11-20T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: artex-enrich/1.0",
-   "description": "ARTEX enrichment worker. Reported by ExtraHop.",
+   "description": "Reported as the enrichment worker user agent in modified builds. Upstream ARTEX enrichment sends Go-http-client/1.1. Reported by ExtraHop.",
    "indicator_types": [
     "malicious-activity"
    ],
