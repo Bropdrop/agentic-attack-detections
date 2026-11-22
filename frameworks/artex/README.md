@@ -54,7 +54,7 @@ See [`CHANGELOG.md`](../../CHANGELOG.md) for the full list.
 
 **Microsoft Sentinel.** Upload `feeds/sentinel-watchlist.csv` as a watchlist with the alias `AGENTIC_IOCs` and the search key `value`, then run `sentinel/hunting/21-watchlist-indicator-sweep.kql` (it filters the watchlist to ARTEX rows). Import the analytics rules from `sentinel/analytics/`. The hunts also run in Defender XDR advanced hunting where the tables exist.
 
-**Splunk.** Copy `frameworks/artex/splunk/` into `$SPLUNK_HOME/etc/apps/TA-artex-detections`, point the macros in `default/macros.conf` at your indexes, run each saved search over 30 days, then enable it. The endpoint, web, authentication and network searches use the CIM data models.
+**Splunk.** Copy `frameworks/artex/splunk/` into `$SPLUNK_HOME/etc/apps/TA-agentic-attack-detections`, point the macros in `default/macros.conf` at your indexes, run each saved search over 30 days, then enable it. The endpoint, web, authentication and network searches use the CIM data models.
 
 **Elastic.** Paste the ES|QL hunts into Discover. Load the TOML rules with Elastic's detection-rules tooling, or recreate them in Kibana from the query and settings in each file. Fields follow ECS and the AWS, Azure and Elastic Defend integrations.
 
