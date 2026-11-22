@@ -45,7 +45,7 @@ The capture is test traffic written from the framework source code and published
 | Microsoft Sentinel | Upload `feeds/sentinel-watchlist.csv` as a watchlist with the alias `AGENTIC_IOCs` and the search key `value`. Import the analytics rules from `frameworks/*/sentinel/analytics/` and `behaviors/sentinel/analytics/`. Run the hunts in each folder's `hunting-order.md` order |
 | Defender XDR | Run the hunts from `frameworks/*/sentinel/hunting/` in advanced hunting. They work where the tables exist |
 | Suricata | Add the `.rules` files from `frameworks/*/suricata/` and `behaviors/suricata/`. HTTP rules need cleartext or decrypted traffic. DNS and TLS SNI rules work on encrypted traffic |
-| Zeek | Load `behaviors/zeek/agentic-behaviors/`, set `server_nets` to your server ranges ([setup](behaviors/zeek/README.md)), load `frameworks/artex/zeek/artex/`, and feed `frameworks/*/zeek/intel/*.intel` to the Intel framework |
+| Zeek | Install the behaviors package with `zkg install https://github.com/ThreatDefence/agentic-attack-detections` (or load `behaviors/zeek/agentic-behaviors/` by path), set `server_nets` to your server ranges ([setup](behaviors/zeek/README.md)), load `frameworks/artex/zeek/artex/`, and feed `frameworks/*/zeek/intel/*.intel` to the Intel framework |
 | YARA | Scan container layers, home folders, `/tmp` and web roots with `frameworks/*/yara/` |
 | Any SIEM with Sigma | Convert `frameworks/*/sigma/` and `behaviors/sigma/` with `sigma convert`, or take the conversions in [`generated/`](generated) |
 | Splunk or Elastic | The ARTEX folder has a Splunk app and Elastic rules. For the other frameworks use [`generated/`](generated) |

@@ -18,8 +18,16 @@ Hunt 01 (AI agents in auto-approve mode starting attack tools) is a process chec
 
 ## Load and tune
 
+Install with the Zeek package manager, which also runs the package's tests:
+
+```bash
+zkg install https://github.com/ThreatDefence/agentic-attack-detections
+```
+
+Then load it and set your networks. Without `zkg`, load the folder by path instead.
+
 ```zeek
-@load /path/to/behaviors/zeek/agentic-behaviors
+@load packages                                    # or: @load /path/to/behaviors/zeek/agentic-behaviors
 
 # Your servers, container hosts and build agents. Required for the server checks.
 redef AgenticBehaviors::server_nets += { 10.20.0.0/16 };

@@ -1,0 +1,15 @@
+[package]
+summary = Zeek notices for behaviors shared by AI agent attack frameworks
+description = Network detections for what agentic attack frameworks (ARTEX, Cairn,
+    PentAGI, HexStrike, CyberStrikeAI, Strix, Hermes Agent) have in common: servers
+    calling AI model APIs, an AI agent's page reader followed by attack traffic,
+    rotating proxy probing, backup files served and WSUS exposed, Kerberos
+    enumeration, SMB and WinRM fan-out, callbacks to a prober, and out-of-band
+    lookups. Each check raises a notice. Set AgenticBehaviors::server_nets after
+    loading. Tested on Zeek 9.0. The package is the behaviors/zeek folder of the
+    Agentic Attack Detections repository, which also has Suricata, Sigma, KQL and
+    YARA rules for the same frameworks.
+tags = detection, notice, ai agents, agentic attack, llm, lateral movement, kerberos, dns, http, wsus
+script_dir = behaviors/zeek/agentic-behaviors
+test_command = bash behaviors/zeek/tests/run_tests.sh
+credits = ThreatDefence and contributors

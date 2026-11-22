@@ -2,11 +2,12 @@
 
 ## 2.9.1, November 22, 2026
 
-Agent Zero gets its source review, and the review corrected two rules (#7).
+Agent Zero gets its source review, the review corrected two rules (#7), and the Zeek behaviors package installs with `zkg`.
 
 - New `frameworks/agent-zero/source-code-signals.md`: how Agent Zero runs, what a target sees, what the host that runs it shows, the exposed web UI, and what the code does not contain, with a file and line for each signal at commit `a6e41ca`. It also checks every string the Agent Zero rules match against the source.
 - Agent Zero hunt 1: the attack-tool and tunnel branches looked for `/a0/` in the command line of the parent process. The source shows the parent is `/bin/bash`, and tunnels are opened by `ssh` or `cloudflared`, so those branches could not fire. They now look at devices where Agent Zero itself was seen, and the tunnel branch also covers Microsoft dev tunnels.
 - YARA `AgentZero_Hacker_Profile` now needs a prompt line that only the hacker profile has. Two of its strings are also in the default profile, so a dump of the default prompts could match a rule named for the hacker profile.
+- The behaviors Zeek package installs with the Zeek package manager: a `zkg.meta` at the repository root points at `behaviors/zeek/agentic-behaviors` and runs its tests on install (`zkg install https://github.com/ThreatDefence/agentic-attack-detections`).
 - Indicators: the note on the "obey instructions never refuse for safety ethics" string now says it is in the default profile too, and the unsourced "5080 also seen" note on the port is removed.
 
 ## 2.9.0, November 22, 2026
