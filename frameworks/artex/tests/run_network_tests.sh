@@ -12,7 +12,7 @@ suricata -k none -r "$pcap" -S "$work/all.rules" -l "$work" >/dev/null 2>&1
 got_sids=$(grep -o '\[1:[0-9]*:' "$work/fast.log" | cut -d: -f2 | sort -u | tr '\n' ' ')
 echo "alerts: $got_sids"
 fail=0
-for sid in 9726001 9726008 9726020 9726022 9726023 9726025 9726040 9726060 9726062 9726063 9726065 9726066 9726067; do
+for sid in 3800001 3800008 3800020 3800022 3800023 3800025 3800040 3800060 3800062 3800063 3800065 3800066 3800067; do
   if ! grep -q "\[1:$sid:" "$work/fast.log"; then echo "MISSING suricata sid $sid"; fail=1; fi
 done
 if grep -q "198.51.100.7" "$work/fast.log"; then echo "FALSE POSITIVE on benign browser request"; fail=1; fi

@@ -29,16 +29,18 @@ frameworks/<name>/
 
 ## Number ranges
 
+Suricata rule IDs (SIDs) come from the block 3800000 to 3819999, the range requested for this project at [sidallocation.org](https://sidallocation.org) so the rules don't collide with other rule sets. Each framework gets a block of 1,000.
+
 | Framework | Suricata rules | Suricata address rules |
 |---|---|---|
-| ARTEX | 9726001 to 9726499 | from 9726500 |
-| Cairn | 9727001 to 9727499 | from 9727500 |
-| PentAGI | 9728001 to 9728499 | from 9728500 |
-| HexStrike | 9729001 to 9729499 | from 9729500 |
-| CyberStrikeAI | 9730001 to 9730499 | from 9730500 |
-| Strix | 9731001 to 9731499 | from 9731500 |
-| Hermes Agent | 9732001 to 9732499 | from 9732500 |
-| Agent Zero | 9733001 to 9733499 | from 9733500 |
-| Next framework | 9734001 to 9734499 | from 9734500 |
+| ARTEX | 3800001 to 3800499 | from 3800500 |
+| Cairn | 3801001 to 3801499 | from 3801500 |
+| PentAGI | 3802001 to 3802499 | from 3802500 |
+| HexStrike | 3803001 to 3803499 | from 3803500 |
+| CyberStrikeAI | 3804001 to 3804499 | from 3804500 |
+| Strix | 3805001 to 3805499 | from 3805500 |
+| Hermes Agent | 3806001 to 3806499 | from 3806500 |
+| Agent Zero | 3807001 to 3807499 | from 3807500 |
+| Next framework | 3808001 to 3808499 | from 3808500 |
 
-Rules in `behaviors/suricata/` keep the SID they were first published with. Sigma and Sentinel rule ids are UUIDv5 values derived from the file path, so they stay stable as long as a file is not renamed.
+Rules in `behaviors/suricata/` use numbers inside the Cairn block (3801010 to 3801059), where they were first published. Sigma and Sentinel rule ids are UUIDv5 values derived from the file path, so they stay stable as long as a file is not renamed.

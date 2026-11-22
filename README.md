@@ -31,9 +31,9 @@ cat out/fast.log
 You should see alerts such as:
 
 ```text
-[1:9726001:1] TD ARTEX user agent artex-<role>/1.0
-[1:9726020:1] TD ARTEX placeholder probe path
-[1:9726023:2] TD Unsigned alg none JWT in URI
+[1:3800001:1] TD ARTEX user agent artex-<role>/1.0
+[1:3800020:1] TD ARTEX placeholder probe path
+[1:3800023:2] TD Unsigned alg none JWT in URI
 ```
 
 The capture is test traffic written from the framework source code and published reports. It is not a recorded intrusion.
@@ -106,7 +106,7 @@ The ARTEX folder also carries behavior hunts that apply to every framework: user
 | Path | Contents |
 |---|---|
 | [`iocs/indicators.csv`](iocs/indicators.csv) | 516 indicators. Each row has its source, confidence, a review date for addresses and the framework it belongs to. This file is the single source for every feed |
-| [`feeds/`](feeds) | Generated from the CSV: a STIX 2.1 bundle, a Sentinel watchlist, and plain lists of addresses, domains, URLs, user agents and hashes. [`feeds/by-framework/`](feeds/by-framework) has the lists per framework |
+| [`feeds/`](feeds) | Generated from the CSV: a STIX 2.1 bundle, a Sentinel watchlist, and plain lists of addresses, domains, URLs, user agents and hashes. The plain lists carry medium and high confidence rows only. Low confidence rows, which include legitimate services such as AI model APIs, need their context, so they stay in the CSV, the watchlist and the STIX bundle. [`feeds/by-framework/`](feeds/by-framework) has the lists per framework |
 | [`generated/`](generated) | Every Sigma rule converted to Splunk SPL, Sentinel and Defender XDR KQL, and Elastic ES\|QL and Lucene. [`SUMMARY.md`](generated/SUMMARY.md) shows which rule converted to which backend |
 | [`waf/`](waf) | Cloudflare, AWS WAF and Azure WAF rules built from [`waf/signatures.yaml`](waf/signatures.yaml) and the CSV. The [README](waf/README.md) covers when a WAF helps and how to deploy |
 | [`tools/`](tools) | Feed builder, WAF builder, release file builder, Sigma converter and validator |

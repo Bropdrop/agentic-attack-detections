@@ -28,7 +28,7 @@ groups:
     title: Agentic framework user agents
     tier: block
     frameworks: [artex, hexstrike, cyberstrikeai]
-    suricata: [9726001, 9726002, 9726003, 9726009, 9726004, 9726005, 9726006, 9726007, 9726008, 9729001, 9729002, 9730001]
+    suricata: [3800001, 3800002, 3800003, 3800009, 3800004, 3800005, 3800006, 3800007, 3800008, 3803001, 3803002, 3804001]
     sigma: [web_artex_user_agent.yml, web_hexstrike_user_agent_or_xss_probe.yml, web_cyberstrikeai_webshell_manager.yml]
     matchers:
       - field: user_agent
@@ -56,7 +56,7 @@ groups:
         op: contains
         nocase: false
         values:
-          # Case-sensitive, like Suricata 9726006. Lowercased, "artex/1.0" would also block any product whose
+          # Case-sensitive, like Suricata 3800006. Lowercased, "artex/1.0" would also block any product whose
           # name ends in "artex", such as "Cartex/1.0".
           - ArtExVerify/1.0
           - ArtEx/1.0
@@ -74,7 +74,7 @@ groups:
     title: Framework probe markers in the URL and framework request headers
     tier: block
     frameworks: [artex, hexstrike, cyberstrikeai]
-    suricata: [9726020, 9726021, 9726022, 9726025, 9726026, 9726027, 9729004, 9730002]
+    suricata: [3800020, 3800021, 3800022, 3800025, 3800026, 3800027, 3803004, 3804002]
     sigma: [web_artex_placeholder_probe_paths.yml, web_artex_probe_header.yml, web_oauth_callback_probe.yml, web_hexstrike_user_agent_or_xss_probe.yml, web_cyberstrikeai_webshell_manager.yml]
     matchers:
       - field: uri
@@ -101,7 +101,7 @@ groups:
     title: Unsigned alg none JWT in the URL or Authorization header
     tier: block
     frameworks: [artex]
-    suricata: [9726023, 9726024, 9726030, 9726031, 9726032, 9726033]
+    suricata: [3800023, 3800024, 3800030, 3800031, 3800032, 3800033]
     sigma: [web_jwt_alg_none_probe.yml]
     note: Blocks every unsigned token, whoever sends it. If one of your applications accepts unsigned JWTs by design, keep this rule in log or count.
     matchers:
@@ -123,7 +123,7 @@ groups:
     title: CyberStrikeAI webshell OS probe in the request body
     tier: block
     frameworks: [cyberstrikeai]
-    suricata: [9730003]
+    suricata: [3804003]
     note: Body inspection. On Cloudflare it needs an Enterprise plan with Advanced application security, so the rule ships disabled there.
     matchers:
       - field: body
@@ -136,7 +136,7 @@ groups:
     title: Attack tool user agents seen with agentic frameworks (medium confidence)
     tier: challenge
     frameworks: [artex, cairn, hexstrike]
-    suricata: [9727011, 9729003]
+    suricata: [3801011, 3803003]
     matchers:
       - field: user_agent
         op: contains
@@ -160,7 +160,7 @@ groups:
     title: AI agent page readers (also legitimate use)
     tier: log
     frameworks: [cairn, agent-zero]
-    suricata: [9727010, 9727012, 9727013, 9727014]
+    suricata: [3801010, 3801012, 3801013, 3801014]
     sigma: [web_claude_code_webfetch_user_agent.yml]
     note: People use these agents for real work. Log them so the SIEM hunt that pairs a page reader with attack traffic from the same address can run. Never block by default.
     matchers:
@@ -182,7 +182,7 @@ groups:
     title: Hermes results folder requested
     tier: log
     frameworks: [hermes]
-    suricata: [9732012]
+    suricata: [3806012]
     matchers:
       - field: uri
         op: contains
@@ -194,7 +194,7 @@ groups:
     title: WSUS administration and sync web services requested from the internet
     tier: opt-in
     frameworks: [cairn]
-    suricata: [9727040]
+    suricata: [3801040]
     sigma: [web_wsus_admin_api_from_internet.yml]
     note: Turn on for sites that front a WSUS server. These services should never be reachable from the internet.
     matchers:

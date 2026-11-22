@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.9.0, November 22, 2026
+
+Two changes that affect anyone who already uses the Suricata rules or the plain indicator lists.
+
+- **Suricata rule IDs renumbered.** Every SID moved from 9726001-9734999 to 3800001-3808999: subtract 5,926,000 from the old number (9726001 is now 3800001, 9727057 is now 3801057). The old numbers sat inside a range registered to another rule set at sidallocation.org, so the two could collide. The new block, 3800000 to 3819999, has been requested there for this project. If you suppress, threshold or reference these rules by SID, update the numbers. Rule content and revisions are unchanged. The WAF rule mapping, the tests and the docs use the new numbers; older entries in this changelog keep the numbers they were written with.
+- **Plain indicator lists carry medium and high confidence only.** `feeds/*.txt` and `feeds/by-framework/` no longer include low confidence rows. Many of those are legitimate services that only mean something in context, such as `api.anthropic.com`, `api.x.ai`, `webhook.site` and the `Boto3` user agent, and a bare list cannot carry that context. They remain in `iocs/indicators.csv`, the Sentinel watchlist, the STIX bundle and the Zeek intel files. The lists now hold 115 IPv4 addresses (was 162), 30 domains (was 45) and 37 user agents (was 44).
+
 ## 2.8.1, November 22, 2026
 
 No detection changes. Releases now come with ready-made downloads.

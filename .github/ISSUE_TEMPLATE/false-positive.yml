@@ -11,7 +11,7 @@ body:
     attributes:
       label: Rule
       description: File path, Suricata SID, Sigma title or Zeek notice name.
-      placeholder: behaviors/suricata/behaviors.rules, SID 9727057
+      placeholder: behaviors/suricata/behaviors.rules, SID 3801057
     validations:
       required: true
   - type: textarea

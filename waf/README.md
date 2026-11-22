@@ -16,15 +16,15 @@ Every file here is generated from [`signatures.yaml`](signatures.yaml) and `iocs
 
 | Group | Tier | Cloudflare | AWS WAF (default) | Azure (default) | Mirrors |
 |---|---|---|---|---|---|
-| Framework user agents (ARTEX, AntiFox, ScopeWeaver, HexStrike, CyberStrikeAI) | block | block | count, or block with a switch | Block | Suricata 9726001-9726009, 9729001-2, 9730001 |
-| Probe markers in the URL, plus the `X-ARTX-KEY` and `X-ARTEX-Replay-Nonce` headers | block | block | count, or block | Block | Suricata 9726020-9726027, 9729004, 9730002 |
-| Unsigned `alg:none` JWT in the URL or Authorization header | block | block | count, or block | Block | Suricata 9726023-9726033 |
-| CyberStrikeAI webshell OS probe in the request body | block | off (needs Enterprise) | count, or block | Block | Suricata 9730003 |
-| Scanner user agents (ffuf from Kali, HexStrike exploits, ReconProbe, norma, azure-toolkit) | challenge | managed challenge | count, challenge or CAPTCHA | Log | Suricata 9727011, 9729003 |
+| Framework user agents (ARTEX, AntiFox, ScopeWeaver, HexStrike, CyberStrikeAI) | block | block | count, or block with a switch | Block | Suricata 3800001-3800009, 3803001-2, 3804001 |
+| Probe markers in the URL, plus the `X-ARTX-KEY` and `X-ARTEX-Replay-Nonce` headers | block | block | count, or block | Block | Suricata 3800020-3800027, 3803004, 3804002 |
+| Unsigned `alg:none` JWT in the URL or Authorization header | block | block | count, or block | Block | Suricata 3800023-3800033 |
+| CyberStrikeAI webshell OS probe in the request body | block | off (needs Enterprise) | count, or block | Block | Suricata 3804003 |
+| Scanner user agents (ffuf from Kali, HexStrike exploits, ReconProbe, norma, azure-toolkit) | challenge | managed challenge | count, challenge or CAPTCHA | Log | Suricata 3801011, 3803003 |
 | Reported addresses (low and medium confidence) | challenge | managed challenge | count, challenge or CAPTCHA | Log | `iocs/indicators.csv` |
-| AI agent page readers (Claude Code, Qwen Code, Kimi CLI, opencode, Agent Zero) | log | off (log needs Enterprise) | count | Log | Suricata 9727010-9727014 |
-| Hermes results folder requested | log | off | count | Log | Suricata 9732012 |
-| WSUS admin and sync services from the internet | opt-in | off | count, or block | Log | Suricata 9727040 |
+| AI agent page readers (Claude Code, Qwen Code, Kimi CLI, opencode, Agent Zero) | log | off (log needs Enterprise) | count | Log | Suricata 3801010-3801014 |
+| Hermes results folder requested | log | off | count | Log | Suricata 3806012 |
+| WSUS admin and sync services from the internet | opt-in | off | count, or block | Log | Suricata 3801040 |
 
 - **Block** tier: fingerprints with no legitimate use. Safe to block. The one to check first is the unsigned JWT rule: it blocks every `alg:none` token, so keep it in log or count if an application of yours accepts unsigned tokens by design.
 - **Challenge** tier: hostile tooling at medium confidence, and addresses. Hosting addresses get reused, so addresses are **never blocked by default**. Rows past their `review_by` date are left out.
