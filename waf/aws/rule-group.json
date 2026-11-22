@@ -1,0 +1,510 @@
+{
+  "Name": "td-agentic-attack",
+  "Scope": "REGIONAL",
+  "Capacity": 350,
+  "Description": "Agentic attack detections by ThreatDefence: framework fingerprints and reported addresses",
+  "Rules": [
+    {
+      "Name": "td-framework-user-agents",
+      "Priority": 0,
+      "Statement": {
+        "OrStatement": {
+          "Statements": [
+            {
+              "RegexMatchStatement": {
+                "RegexString": "artex-readonly/|artex-pentest/|artex-audit/|artex-verify/|artex-spawn/|artex-enrich/|artex-worker/|artex-i21861-canary|artex-authorized-pentest|mozilla/5\\.0 artex|mozilla/5\\.0 \\(artex\\)|scopeweaver",
+                "FieldToMatch": {
+                  "SingleHeader": {
+                    "Name": "user-agent"
+                  }
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "LOWERCASE"
+                  }
+                ]
+              }
+            },
+            {
+              "RegexMatchStatement": {
+                "RegexString": "spa-api-recon|antifox-enrich/|hexstrike-http-framework/|hexstrike-browseragent/|cyberstrikeai-webshell/",
+                "FieldToMatch": {
+                  "SingleHeader": {
+                    "Name": "user-agent"
+                  }
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "LOWERCASE"
+                  }
+                ]
+              }
+            },
+            {
+              "RegexMatchStatement": {
+                "RegexString": "ArtExVerify/1\\.0|ArtEx/1\\.0",
+                "FieldToMatch": {
+                  "SingleHeader": {
+                    "Name": "user-agent"
+                  }
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "NONE"
+                  }
+                ]
+              }
+            },
+            {
+              "RegexMatchStatement": {
+                "RegexString": "^CyberStrikeAI/|^artex-agent|^artex-judge-",
+                "FieldToMatch": {
+                  "SingleHeader": {
+                    "Name": "user-agent"
+                  }
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "NONE"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "Action": {
+        "Count": {}
+      },
+      "RuleLabels": [
+        {
+          "Name": "td:agentic:block:framework-user-agents"
+        }
+      ],
+      "VisibilityConfig": {
+        "SampledRequestsEnabled": true,
+        "CloudWatchMetricsEnabled": true,
+        "MetricName": "td-framework-user-agents"
+      }
+    },
+    {
+      "Name": "td-probe-markers",
+      "Priority": 1,
+      "Statement": {
+        "OrStatement": {
+          "Statements": [
+            {
+              "RegexMatchStatement": {
+                "RegexString": "zzz-nonexistent-xyz123|zzz_nonexistent_abc\\.txt|notexist-xyz|artex_write_probe|artx_persist_ok|artex_control_marker_zz9q|artex-probe-|code=aaaa&state=notvalidb64!!|hexstrikexsstest123|osprobe_",
+                "FieldToMatch": {
+                  "UriPath": {}
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "URL_DECODE"
+                  },
+                  {
+                    "Priority": 1,
+                    "Type": "LOWERCASE"
+                  }
+                ]
+              }
+            },
+            {
+              "RegexMatchStatement": {
+                "RegexString": "zzz-nonexistent-xyz123|zzz_nonexistent_abc\\.txt|notexist-xyz|artex_write_probe|artx_persist_ok|artex_control_marker_zz9q|artex-probe-|code=aaaa&state=notvalidb64!!|hexstrikexsstest123|osprobe_",
+                "FieldToMatch": {
+                  "QueryString": {}
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "URL_DECODE"
+                  },
+                  {
+                    "Priority": 1,
+                    "Type": "LOWERCASE"
+                  }
+                ]
+              }
+            },
+            {
+              "RegexMatchStatement": {
+                "RegexString": "x-artx-key|x-artex-replay-nonce",
+                "FieldToMatch": {
+                  "Headers": {
+                    "MatchPattern": {
+                      "All": {}
+                    },
+                    "MatchScope": "KEY",
+                    "OversizeHandling": "CONTINUE"
+                  }
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "LOWERCASE"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "Action": {
+        "Count": {}
+      },
+      "RuleLabels": [
+        {
+          "Name": "td:agentic:block:probe-markers"
+        }
+      ],
+      "VisibilityConfig": {
+        "SampledRequestsEnabled": true,
+        "CloudWatchMetricsEnabled": true,
+        "MetricName": "td-probe-markers"
+      }
+    },
+    {
+      "Name": "td-jwt-alg-none",
+      "Priority": 2,
+      "Statement": {
+        "OrStatement": {
+          "Statements": [
+            {
+              "RegexMatchStatement": {
+                "RegexString": "eyJhbGciOiJub25lI|eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lI|eyJhbGciOiJOb25lI|eyJhbGciOiJOT05FI",
+                "FieldToMatch": {
+                  "UriPath": {}
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "URL_DECODE"
+                  }
+                ]
+              }
+            },
+            {
+              "RegexMatchStatement": {
+                "RegexString": "eyJhbGciOiJub25lI|eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lI|eyJhbGciOiJOb25lI|eyJhbGciOiJOT05FI",
+                "FieldToMatch": {
+                  "QueryString": {}
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "URL_DECODE"
+                  }
+                ]
+              }
+            },
+            {
+              "RegexMatchStatement": {
+                "RegexString": "eyJhbGciOiJub25lI|eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lI|eyJhbGciOiJOb25lI|eyJhbGciOiJOT05FI",
+                "FieldToMatch": {
+                  "SingleHeader": {
+                    "Name": "authorization"
+                  }
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "NONE"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "Action": {
+        "Count": {}
+      },
+      "RuleLabels": [
+        {
+          "Name": "td:agentic:block:jwt-alg-none"
+        }
+      ],
+      "VisibilityConfig": {
+        "SampledRequestsEnabled": true,
+        "CloudWatchMetricsEnabled": true,
+        "MetricName": "td-jwt-alg-none"
+      }
+    },
+    {
+      "Name": "td-webshell-probe-body",
+      "Priority": 3,
+      "Statement": {
+        "RegexMatchStatement": {
+          "RegexString": "OSPROBE_",
+          "FieldToMatch": {
+            "Body": {
+              "OversizeHandling": "CONTINUE"
+            }
+          },
+          "TextTransformations": [
+            {
+              "Priority": 0,
+              "Type": "NONE"
+            }
+          ]
+        }
+      },
+      "Action": {
+        "Count": {}
+      },
+      "RuleLabels": [
+        {
+          "Name": "td:agentic:block:webshell-probe-body"
+        }
+      ],
+      "VisibilityConfig": {
+        "SampledRequestsEnabled": true,
+        "CloudWatchMetricsEnabled": true,
+        "MetricName": "td-webshell-probe-body"
+      }
+    },
+    {
+      "Name": "td-scanner-user-agents",
+      "Priority": 4,
+      "Statement": {
+        "RegexMatchStatement": {
+          "RegexString": "fuzz faster u fool v2\\.1\\.0-dev|mozilla/5\\.0 \\(compatible exploit\\)|reconprobe/1\\.0|norma/0\\.4|azure-toolkit/1\\.0",
+          "FieldToMatch": {
+            "SingleHeader": {
+              "Name": "user-agent"
+            }
+          },
+          "TextTransformations": [
+            {
+              "Priority": 0,
+              "Type": "LOWERCASE"
+            }
+          ]
+        }
+      },
+      "Action": {
+        "Count": {}
+      },
+      "RuleLabels": [
+        {
+          "Name": "td:agentic:challenge:scanner-user-agents"
+        }
+      ],
+      "VisibilityConfig": {
+        "SampledRequestsEnabled": true,
+        "CloudWatchMetricsEnabled": true,
+        "MetricName": "td-scanner-user-agents"
+      }
+    },
+    {
+      "Name": "td-reported-addresses",
+      "Priority": 5,
+      "Statement": {
+        "OrStatement": {
+          "Statements": [
+            {
+              "IPSetReferenceStatement": {
+                "ARN": "${TD_AGENTIC_IPV4_SET_ARN}"
+              }
+            },
+            {
+              "IPSetReferenceStatement": {
+                "ARN": "${TD_AGENTIC_IPV6_SET_ARN}"
+              }
+            }
+          ]
+        }
+      },
+      "Action": {
+        "Count": {}
+      },
+      "RuleLabels": [
+        {
+          "Name": "td:agentic:challenge:reported-addresses"
+        }
+      ],
+      "VisibilityConfig": {
+        "SampledRequestsEnabled": true,
+        "CloudWatchMetricsEnabled": true,
+        "MetricName": "td-reported-addresses"
+      }
+    },
+    {
+      "Name": "td-ai-agent-readers",
+      "Priority": 6,
+      "Statement": {
+        "OrStatement": {
+          "Statements": [
+            {
+              "RegexMatchStatement": {
+                "RegexString": "Claude-User \\(claude-code/",
+                "FieldToMatch": {
+                  "SingleHeader": {
+                    "Name": "user-agent"
+                  }
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "NONE"
+                  }
+                ]
+              }
+            },
+            {
+              "RegexMatchStatement": {
+                "RegexString": "^QwenCode/|^KimiCLI/|^opencode/|^agent-zero/",
+                "FieldToMatch": {
+                  "SingleHeader": {
+                    "Name": "user-agent"
+                  }
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "NONE"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "Action": {
+        "Count": {}
+      },
+      "RuleLabels": [
+        {
+          "Name": "td:agentic:log:ai-agent-readers"
+        }
+      ],
+      "VisibilityConfig": {
+        "SampledRequestsEnabled": true,
+        "CloudWatchMetricsEnabled": true,
+        "MetricName": "td-ai-agent-readers"
+      }
+    },
+    {
+      "Name": "td-hermes-results-path",
+      "Priority": 7,
+      "Statement": {
+        "OrStatement": {
+          "Statements": [
+            {
+              "RegexMatchStatement": {
+                "RegexString": "/hermes-results/",
+                "FieldToMatch": {
+                  "UriPath": {}
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "URL_DECODE"
+                  }
+                ]
+              }
+            },
+            {
+              "RegexMatchStatement": {
+                "RegexString": "/hermes-results/",
+                "FieldToMatch": {
+                  "QueryString": {}
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "URL_DECODE"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "Action": {
+        "Count": {}
+      },
+      "RuleLabels": [
+        {
+          "Name": "td:agentic:log:hermes-results-path"
+        }
+      ],
+      "VisibilityConfig": {
+        "SampledRequestsEnabled": true,
+        "CloudWatchMetricsEnabled": true,
+        "MetricName": "td-hermes-results-path"
+      }
+    },
+    {
+      "Name": "td-wsus-from-internet",
+      "Priority": 8,
+      "Statement": {
+        "OrStatement": {
+          "Statements": [
+            {
+              "RegexMatchStatement": {
+                "RegexString": "/apiremoting30/webservice\\.asmx|/serversyncwebservice/serversyncwebservice\\.asmx|/reportingwebservice/reportingwebservice\\.asmx",
+                "FieldToMatch": {
+                  "UriPath": {}
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "URL_DECODE"
+                  },
+                  {
+                    "Priority": 1,
+                    "Type": "LOWERCASE"
+                  }
+                ]
+              }
+            },
+            {
+              "RegexMatchStatement": {
+                "RegexString": "/apiremoting30/webservice\\.asmx|/serversyncwebservice/serversyncwebservice\\.asmx|/reportingwebservice/reportingwebservice\\.asmx",
+                "FieldToMatch": {
+                  "QueryString": {}
+                },
+                "TextTransformations": [
+                  {
+                    "Priority": 0,
+                    "Type": "URL_DECODE"
+                  },
+                  {
+                    "Priority": 1,
+                    "Type": "LOWERCASE"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "Action": {
+        "Count": {}
+      },
+      "RuleLabels": [
+        {
+          "Name": "td:agentic:opt-in:wsus-from-internet"
+        }
+      ],
+      "VisibilityConfig": {
+        "SampledRequestsEnabled": true,
+        "CloudWatchMetricsEnabled": true,
+        "MetricName": "td-wsus-from-internet"
+      }
+    }
+  ],
+  "VisibilityConfig": {
+    "SampledRequestsEnabled": true,
+    "CloudWatchMetricsEnabled": true,
+    "MetricName": "td-agentic-attack"
+  }
+}

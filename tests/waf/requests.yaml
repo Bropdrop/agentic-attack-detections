@@ -1,0 +1,105 @@
+# Hand-written requests for tests/waf/run_tests.py. Each must fire exactly the groups in `expect` on every
+# platform (Cloudflare, AWS WAF, Application Gateway, Front Door), except those in `skip`.
+# Fields: path, query, ua, headers, body, method, ip. Defaults: GET /, a current Chrome user agent, a clean address.
+
+# Realistic positives
+- name: ARTEX worker probing a placeholder path
+  path: /zzz-nonexistent-xyz123
+  ua: ARTEX-worker/1.0
+  expect: [framework-user-agents, probe-markers]
+- name: ARTEX OAuth callback probe, as a client sends it
+  path: /auth/callback
+  query: code=AAAA&state=notvalidb64%21%21
+  expect: [probe-markers]
+- name: alg none JWT in a bearer token
+  path: /api/me
+  headers: {Authorization: "Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJzdWIiOiJhZG1pbiJ9."}
+  expect: [jwt-alg-none]
+- name: alg none JWT in a query string
+  path: /reset
+  query: token=eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyIjoxfQ.
+  expect: [jwt-alg-none]
+- name: CyberStrikeAI webshell manager posts its OS probe
+  path: /uploads/shell.php
+  method: POST
+  ua: Mozilla/5.0 (compatible; CyberStrikeAI-WebShell/1.0)
+  body: cmd=echo%20OSPROBE_1234
+  expect: [framework-user-agents, webshell-probe-body]
+- name: CyberStrikeAI OS probe in a POST body with a browser user agent
+  path: /uploads/shell.php
+  method: POST
+  body: cmd=echo OSPROBE_abcd
+  expect: [webshell-probe-body]
+- name: HexStrike XSS reflection probe
+  path: /search
+  query: q=%3Cscript%3EhexstrikeXSSTest123%3C/script%3E
+  expect: [probe-markers]
+- name: ARTEX request with its key header
+  path: /api/v1/users
+  headers: {X-Artx-Key: abc123}
+  expect: [probe-markers]
+- name: ARTEX variant user agent reported by the community
+  ua: Mozilla/5.0 (compatible; ArtEx/1.0)
+  expect: [framework-user-agents]
+- name: ARTEX replay header in mixed case
+  path: /api/orders
+  headers: {X-Artex-Replay-Nonce: 7f3a}
+  expect: [probe-markers]
+- name: ffuf from Kali
+  path: /FUZZ
+  ua: Fuzz Faster U Fool v2.1.0-dev
+  expect: [scanner-user-agents]
+- name: Claude Code page reader
+  ua: Claude-User (claude-code/2.1.98; +https://support.anthropic.com/)
+  expect: [ai-agent-readers]
+- name: WSUS sync service from the internet
+  path: /ServerSyncWebService/ServerSyncWebService.asmx
+  method: POST
+  expect: [wsus-from-internet]
+- name: Hermes results folder
+  path: /hermes-results/report.md
+  expect: [hermes-results-path]
+
+# Near misses: must stay silent
+- name: normal browser request
+  path: /products
+  query: page=2
+- name: company name Cartex in the user agent
+  ua: CartexMobile/3.2 (iPhone; iOS 18.1)
+- name: a product whose name ends in artex, at version 1.0
+  ua: Cartex/1.0 (Linux; Android 14)
+- name: the ArtEx variant in lowercase is another product
+  ua: Mozilla/5.0 (compatible; smartex/1.0)
+- name: a header whose value, not name, is the ARTEX replay header
+  headers: {X-Request-Note: x-artex-replay-nonce}
+- name: the bare word artex in a path
+  path: /artex/catalogue
+- name: artex in a search query
+  path: /search
+  query: q=artex+painting+supplies
+- name: signed HS256 JWT in the Authorization header
+  headers: {Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.c2lnbmF0dXJl"}
+- name: alg none JWT lowercased by a log pipeline is not a token
+  headers: {Authorization: "Bearer eyjhbgcioijub25liiwidhlwijoislduin0."}
+- name: OAuth callback with a real code
+  path: /auth/callback
+  query: code=4/0AeanS0b&state=eyJyZXR1cm4iOiIvIn0
+- name: Qwen Code named in the middle of a user agent
+  ua: Mozilla/5.0 (compatible; QwenCode/0.1)
+- name: opencode in a path, not the user agent
+  path: /docs/opencode/setup
+- name: header value that mentions X-ARTX-KEY
+  headers: {X-Debug: X-ARTX-KEY}
+- name: OSPROBE in lowercase in a body
+  method: POST
+  body: text=osprobe_ is a word in this blog post
+- name: WSUS client reporting path is not an admin service
+  path: /ClientWebService/client.asmx
+  method: POST
+- name: hermes as a product name
+  path: /hermes-results-2026/
+  query: sort=price
+- name: a scopeweaver-like word with a space
+  ua: "Scope Weaver/1.0"
+- name: an address next to a listed one
+  ip: 1.14.104.209

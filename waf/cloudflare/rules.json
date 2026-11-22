@@ -1,0 +1,65 @@
+[
+  {
+    "ref": "td_framework_user_agents",
+    "description": "TD block: Agentic framework user agents",
+    "expression": "(lower(http.user_agent) contains \"artex-readonly/\" or lower(http.user_agent) contains \"artex-pentest/\" or lower(http.user_agent) contains \"artex-audit/\" or lower(http.user_agent) contains \"artex-verify/\" or lower(http.user_agent) contains \"artex-spawn/\" or lower(http.user_agent) contains \"artex-enrich/\" or lower(http.user_agent) contains \"artex-worker/\" or lower(http.user_agent) contains \"artex-i21861-canary\" or lower(http.user_agent) contains \"artex-authorized-pentest\" or lower(http.user_agent) contains \"mozilla/5.0 artex\" or lower(http.user_agent) contains \"mozilla/5.0 (artex)\" or lower(http.user_agent) contains \"scopeweaver\" or lower(http.user_agent) contains \"spa-api-recon\" or lower(http.user_agent) contains \"antifox-enrich/\" or lower(http.user_agent) contains \"hexstrike-http-framework/\" or lower(http.user_agent) contains \"hexstrike-browseragent/\" or lower(http.user_agent) contains \"cyberstrikeai-webshell/\" or http.user_agent contains \"ArtExVerify/1.0\" or http.user_agent contains \"ArtEx/1.0\" or starts_with(http.user_agent, \"CyberStrikeAI/\") or starts_with(http.user_agent, \"artex-agent\") or starts_with(http.user_agent, \"artex-judge-\"))",
+    "action": "block",
+    "enabled": true
+  },
+  {
+    "ref": "td_probe_markers",
+    "description": "TD block: Framework probe markers in the URL and framework request headers",
+    "expression": "(lower(http.request.uri) contains \"zzz-nonexistent-xyz123\" or lower(http.request.uri) contains \"zzz_nonexistent_abc.txt\" or lower(http.request.uri) contains \"notexist-xyz\" or lower(http.request.uri) contains \"artex_write_probe\" or lower(http.request.uri) contains \"artx_persist_ok\" or lower(http.request.uri) contains \"artex_control_marker_zz9q\" or lower(http.request.uri) contains \"artex-probe-\" or lower(http.request.uri) contains \"code=aaaa&state=notvalidb64!!\" or lower(http.request.uri) contains \"code=aaaa&state=notvalidb64%21%21\" or lower(http.request.uri) contains \"hexstrikexsstest123\" or lower(http.request.uri) contains \"osprobe_\" or lower(http.request.uri) contains \"osprobe%5f\" or any(lower(http.request.headers.names[*])[*] == \"x-artx-key\") or any(lower(http.request.headers.names[*])[*] == \"x-artex-replay-nonce\"))",
+    "action": "block",
+    "enabled": true
+  },
+  {
+    "ref": "td_jwt_alg_none",
+    "description": "TD block: Unsigned alg none JWT in the URL or Authorization header",
+    "expression": "(http.request.uri contains \"eyJhbGciOiJub25lI\" or http.request.uri contains \"eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lI\" or http.request.uri contains \"eyJhbGciOiJOb25lI\" or http.request.uri contains \"eyJhbGciOiJOT05FI\" or any(http.request.headers[\"authorization\"][*] contains \"eyJhbGciOiJub25lI\") or any(http.request.headers[\"authorization\"][*] contains \"eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lI\") or any(http.request.headers[\"authorization\"][*] contains \"eyJhbGciOiJOb25lI\") or any(http.request.headers[\"authorization\"][*] contains \"eyJhbGciOiJOT05FI\"))",
+    "action": "block",
+    "enabled": true
+  },
+  {
+    "ref": "td_webshell_probe_body",
+    "description": "TD block: CyberStrikeAI webshell OS probe in the request body",
+    "expression": "http.request.body.raw contains \"OSPROBE_\"",
+    "action": "block",
+    "enabled": false
+  },
+  {
+    "ref": "td_scanner_user_agents",
+    "description": "TD challenge: Attack tool user agents seen with agentic frameworks (medium confidence)",
+    "expression": "(lower(http.user_agent) contains \"fuzz faster u fool v2.1.0-dev\" or lower(http.user_agent) contains \"mozilla/5.0 (compatible exploit)\" or lower(http.user_agent) contains \"reconprobe/1.0\" or lower(http.user_agent) contains \"norma/0.4\" or lower(http.user_agent) contains \"azure-toolkit/1.0\")",
+    "action": "managed_challenge",
+    "enabled": true
+  },
+  {
+    "ref": "td_reported_addresses",
+    "description": "TD challenge: Addresses reported in agentic framework intrusions (low and medium confidence)",
+    "expression": "ip.src in $td_agentic_attack_ips",
+    "action": "managed_challenge",
+    "enabled": true
+  },
+  {
+    "ref": "td_ai_agent_readers",
+    "description": "TD log: AI agent page readers (also legitimate use)",
+    "expression": "(http.user_agent contains \"Claude-User (claude-code/\" or starts_with(http.user_agent, \"QwenCode/\") or starts_with(http.user_agent, \"KimiCLI/\") or starts_with(http.user_agent, \"opencode/\") or starts_with(http.user_agent, \"agent-zero/\"))",
+    "action": "log",
+    "enabled": false
+  },
+  {
+    "ref": "td_hermes_results_path",
+    "description": "TD log: Hermes results folder requested",
+    "expression": "http.request.uri contains \"/hermes-results/\"",
+    "action": "log",
+    "enabled": false
+  },
+  {
+    "ref": "td_wsus_from_internet",
+    "description": "TD opt-in: WSUS administration and sync web services requested from the internet",
+    "expression": "(lower(http.request.uri) contains \"/apiremoting30/webservice.asmx\" or lower(http.request.uri) contains \"/serversyncwebservice/serversyncwebservice.asmx\" or lower(http.request.uri) contains \"/reportingwebservice/reportingwebservice.asmx\")",
+    "action": "block",
+    "enabled": false
+  }
+]
