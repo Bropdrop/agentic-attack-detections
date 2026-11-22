@@ -11,6 +11,7 @@ No detection changes. This release makes the repository easier to start with and
 - ARTEX file headers now read "Agentic attack detections by ThreatDefence (ARTEX)", like the other folders. They still carried the repository's first name.
 - `LICENSE` copyright line now includes contributors.
 - `CODE_OF_CONDUCT.md`: the Contributor Covenant, with conduct reports sent privately through the Security tab.
+- A pull request template with the checks to run, and a default template for blank issues.
 - The ARTEX Splunk app is now `TA-agentic-attack-detections`, labeled "Agentic Attack Detections (ARTEX)" (was `TA-artex-detections`). If you installed it under the old folder name, remove that folder before copying the new one, or Splunk will load both.
 
 ## 2.7.0, November 22, 2026
