@@ -1,0 +1,7 @@
+{
+  "Name": "td-agentic-attack-ipv6",
+  "Scope": "REGIONAL",
+  "IPAddressVersion": "IPV6",
+  "Description": "Agentic attack detections: reported IPv6 addresses",
+  "Addresses": []
+}

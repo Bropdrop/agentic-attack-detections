@@ -14,7 +14,7 @@ Free to use under the MIT license. Fixes, false-positive reports and new indicat
 - **Shared behaviors.** Rules for what these frameworks have in common, whatever the tool or the model behind it.
 - **Indicators and feeds.** One CSV of 516 sourced indicators, and the feeds generated from it.
 
-Formats: KQL for Microsoft Sentinel and Defender XDR, Sigma, Suricata, Zeek, YARA and STIX 2.1. Splunk and Elastic are covered by a Splunk app and Elastic rules for ARTEX, and by Sigma conversions for everything else.
+Formats: KQL for Microsoft Sentinel and Defender XDR, Sigma, Suricata, Zeek, YARA and STIX 2.1, plus WAF rules for Cloudflare, AWS WAF and Azure WAF. Splunk and Elastic are covered by a Splunk app and Elastic rules for ARTEX, and by Sigma conversions for everything else.
 
 ## Try it in a minute
 
@@ -49,6 +49,7 @@ The capture is test traffic written from the framework source code and published
 | YARA | Scan container layers, home folders, `/tmp` and web roots with `frameworks/*/yara/` |
 | Any SIEM with Sigma | Convert `frameworks/*/sigma/` and `behaviors/sigma/` with `sigma convert`, or take the conversions in [`generated/`](generated) |
 | Splunk or Elastic | The ARTEX folder has a Splunk app and Elastic rules. For the other frameworks use [`generated/`](generated) |
+| A WAF: Cloudflare, AWS WAF or Azure WAF | Deploy the rules in [`waf/`](waf): framework user agents, probe markers and unsigned JWT probes to block, and reported addresses to challenge. A WAF is optional. It adds blocking at the edge to the detections, it doesn't replace them |
 | A threat intelligence platform | Import `feeds/stix2.1-bundle.json`, or the per-framework lists in `feeds/by-framework/` |
 
 ## Coverage
@@ -107,7 +108,8 @@ The ARTEX folder also carries behavior hunts that apply to every framework: user
 | [`iocs/indicators.csv`](iocs/indicators.csv) | 516 indicators. Each row has its source, confidence, a review date for addresses and the framework it belongs to. This file is the single source for every feed |
 | [`feeds/`](feeds) | Generated from the CSV: a STIX 2.1 bundle, a Sentinel watchlist, and plain lists of addresses, domains, URLs, user agents and hashes. [`feeds/by-framework/`](feeds/by-framework) has the lists per framework |
 | [`generated/`](generated) | Every Sigma rule converted to Splunk SPL, Sentinel and Defender XDR KQL, and Elastic ES\|QL and Lucene. [`SUMMARY.md`](generated/SUMMARY.md) shows which rule converted to which backend |
-| [`tools/`](tools) | Feed builder, Sigma converter and validator |
+| [`waf/`](waf) | Cloudflare, AWS WAF and Azure WAF rules built from [`waf/signatures.yaml`](waf/signatures.yaml) and the CSV. The [README](waf/README.md) covers when a WAF helps and how to deploy |
+| [`tools/`](tools) | Feed builder, WAF builder, Sigma converter and validator |
 | [`docs/`](docs) | [Adding a framework](docs/adding-a-framework.md) |
 
 Each framework folder also has a Zeek intel file and Suricata address rules, generated from the same CSV.
@@ -137,6 +139,8 @@ Addresses from cloud and VPS providers are reassigned. Every address has a `revi
 pip install -r tools/requirements.txt
 python3 tools/validate.py                              # Sigma, KQL, ES|QL, TOML, Splunk, Suricata SIDs, YARA, Zeek, osquery, feeds
 python3 tools/convert.py                               # regenerate generated/
+python3 tools/build_waf.py                             # regenerate waf/
+python3 tests/waf/run_tests.py                         # offline checks of the WAF rules on every platform
 python3 tests/suricata/run_tests.py                    # one flow per Suricata rule; needs suricata and openssl
 bash frameworks/artex/tests/run_network_tests.sh       # needs zeek and suricata on the PATH
 bash behaviors/zeek/tests/run_tests.sh                 # needs zeek on the PATH

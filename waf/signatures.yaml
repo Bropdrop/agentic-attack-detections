@@ -1,0 +1,207 @@
+# WAF signatures: the single source for every file under waf/.
+#
+#   python3 tools/build_waf.py      # regenerate waf/cloudflare, waf/aws and waf/azure
+#   python3 tests/waf/run_tests.py  # check every generated rule against the test requests
+#
+# Only inbound, request-side signals belong here. Response-side, outbound, host and cloud-audit rules stay in the
+# Suricata, Sigma, KQL and Zeek content. Each group mirrors existing rules; `suricata` lists the SIDs it mirrors and
+# the WAF tests replay those SIDs' Suricata test flows to keep the two in step.
+#
+# tier     block      safe to block: framework fingerprints with no legitimate use
+#          challenge  hostile or scanner tooling at medium confidence: challenge or count, block as an opt-in
+#          log        dual use (AI agents people run for real work): log only, feed the SIEM hunts
+#          opt-in     block-grade, but only for sites that match the situation; shipped disabled or as count
+#
+# Matchers in one group are OR'ed. Fields:
+#   user_agent      User-Agent header
+#   uri             path and query string, URL-decoded where the platform can
+#   authorization   Authorization header
+#   header_name     a request header with this name is present (case-insensitive by nature)
+#   body            raw request body (Cloudflare: Enterprise only)
+#   ip              addresses from iocs/indicators.csv (type ipv4/ipv6), dropping rows past review_by on `as_of`
+# op: contains or starts_with. nocase: values are compared lowercased (write them lowercase here).
+
+as_of: "2026-11-22"   # date used to drop expired addresses; bump it with each release
+
+groups:
+  - id: framework-user-agents
+    title: Agentic framework user agents
+    tier: block
+    frameworks: [artex, hexstrike, cyberstrikeai]
+    suricata: [9726001, 9726002, 9726003, 9726009, 9726004, 9726005, 9726006, 9726007, 9726008, 9729001, 9729002, 9730001]
+    sigma: [web_artex_user_agent.yml, web_hexstrike_user_agent_or_xss_probe.yml, web_cyberstrikeai_webshell_manager.yml]
+    matchers:
+      - field: user_agent
+        op: contains
+        nocase: true
+        values:
+          - artex-readonly/
+          - artex-pentest/
+          - artex-audit/
+          - artex-verify/
+          - artex-spawn/
+          - artex-enrich/
+          - artex-worker/
+          - artex-i21861-canary
+          - artex-authorized-pentest
+          - mozilla/5.0 artex
+          - mozilla/5.0 (artex)
+          - scopeweaver
+          - spa-api-recon
+          - antifox-enrich/
+          - hexstrike-http-framework/
+          - hexstrike-browseragent/
+          - cyberstrikeai-webshell/
+      - field: user_agent
+        op: contains
+        nocase: false
+        values:
+          # Case-sensitive, like Suricata 9726006. Lowercased, "artex/1.0" would also block any product whose
+          # name ends in "artex", such as "Cartex/1.0".
+          - ArtExVerify/1.0
+          - ArtEx/1.0
+      - field: user_agent
+        op: starts_with
+        nocase: false
+        values:
+          - CyberStrikeAI/
+          # Dragos saw both as the whole user agent in CloudTrail (2.7.2). Anchored at the start because
+          # Cloudflare has no regex below Business, and "smartex-agent/2.0" must not match.
+          - artex-agent
+          - artex-judge-
+
+  - id: probe-markers
+    title: Framework probe markers in the URL and framework request headers
+    tier: block
+    frameworks: [artex, hexstrike, cyberstrikeai]
+    suricata: [9726020, 9726021, 9726022, 9726025, 9726026, 9726027, 9729004, 9730002]
+    sigma: [web_artex_placeholder_probe_paths.yml, web_artex_probe_header.yml, web_oauth_callback_probe.yml, web_hexstrike_user_agent_or_xss_probe.yml, web_cyberstrikeai_webshell_manager.yml]
+    matchers:
+      - field: uri
+        op: contains
+        nocase: true
+        values:
+          - zzz-nonexistent-xyz123
+          - zzz_nonexistent_abc.txt
+          - notexist-xyz
+          - artex_write_probe
+          - artx_persist_ok
+          - artex_control_marker_zz9q
+          - artex-probe-
+          - code=aaaa&state=notvalidb64!!
+          - hexstrikexsstest123
+          - osprobe_
+          - osprobe%5f
+      - field: header_name
+        values:
+          - x-artx-key
+          - x-artex-replay-nonce
+
+  - id: jwt-alg-none
+    title: Unsigned alg none JWT in the URL or Authorization header
+    tier: block
+    frameworks: [artex]
+    suricata: [9726023, 9726024, 9726030, 9726031, 9726032, 9726033]
+    sigma: [web_jwt_alg_none_probe.yml]
+    note: Blocks every unsigned token, whoever sends it. If one of your applications accepts unsigned JWTs by design, keep this rule in log or count.
+    matchers:
+      # base64 is case-sensitive: never lowercase these
+      - field: uri
+        op: contains
+        nocase: false
+        values: &jwt_none
+          - eyJhbGciOiJub25lI
+          - eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lI
+          - eyJhbGciOiJOb25lI
+          - eyJhbGciOiJOT05FI
+      - field: authorization
+        op: contains
+        nocase: false
+        values: *jwt_none
+
+  - id: webshell-probe-body
+    title: CyberStrikeAI webshell OS probe in the request body
+    tier: block
+    frameworks: [cyberstrikeai]
+    suricata: [9730003]
+    note: Body inspection. On Cloudflare it needs an Enterprise plan with Advanced application security, so the rule ships disabled there.
+    matchers:
+      - field: body
+        op: contains
+        nocase: false
+        values:
+          - OSPROBE_
+
+  - id: scanner-user-agents
+    title: Attack tool user agents seen with agentic frameworks (medium confidence)
+    tier: challenge
+    frameworks: [artex, cairn, hexstrike]
+    suricata: [9727011, 9729003]
+    matchers:
+      - field: user_agent
+        op: contains
+        nocase: true
+        values:
+          - fuzz faster u fool v2.1.0-dev
+          - mozilla/5.0 (compatible exploit)
+          - reconprobe/1.0
+          - norma/0.4
+          - azure-toolkit/1.0
+
+  - id: reported-addresses
+    title: Addresses reported in agentic framework intrusions (low and medium confidence)
+    tier: challenge
+    frameworks: [all]
+    note: Hosting addresses get reused, so these are never blocked by default. Expired rows (review_by before as_of) are left out.
+    matchers:
+      - field: ip
+
+  - id: ai-agent-readers
+    title: AI agent page readers (also legitimate use)
+    tier: log
+    frameworks: [cairn, agent-zero]
+    suricata: [9727010, 9727012, 9727013, 9727014]
+    sigma: [web_claude_code_webfetch_user_agent.yml]
+    note: People use these agents for real work. Log them so the SIEM hunt that pairs a page reader with attack traffic from the same address can run. Never block by default.
+    matchers:
+      - field: user_agent
+        op: contains
+        nocase: false
+        values:
+          - Claude-User (claude-code/
+      - field: user_agent
+        op: starts_with
+        nocase: false
+        values:
+          - QwenCode/
+          - KimiCLI/
+          - opencode/
+          - agent-zero/
+
+  - id: hermes-results-path
+    title: Hermes results folder requested
+    tier: log
+    frameworks: [hermes]
+    suricata: [9732012]
+    matchers:
+      - field: uri
+        op: contains
+        nocase: false
+        values:
+          - /hermes-results/
+
+  - id: wsus-from-internet
+    title: WSUS administration and sync web services requested from the internet
+    tier: opt-in
+    frameworks: [cairn]
+    suricata: [9727040]
+    sigma: [web_wsus_admin_api_from_internet.yml]
+    note: Turn on for sites that front a WSUS server. These services should never be reachable from the internet.
+    matchers:
+      - field: uri
+        op: contains
+        nocase: true
+        values:
+          - /apiremoting30/webservice.asmx
+          - /serversyncwebservice/serversyncwebservice.asmx
+          - /reportingwebservice/reportingwebservice.asmx

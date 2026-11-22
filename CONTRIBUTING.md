@@ -31,6 +31,8 @@ python3 tools/build_feeds.py           # rebuild feeds/ and the per-framework li
 python3 tools/convert.py               # rebuild generated/ from the Sigma rules
 python3 tools/validate.py              # Sigma, KQL, Elastic, Splunk, Suricata, YARA, Zeek, feeds
 python3 tests/suricata/run_tests.py    # one flow per Suricata rule
+python3 tools/build_waf.py             # rebuild waf/ from waf/signatures.yaml and iocs/indicators.csv
+python3 tests/waf/run_tests.py         # every WAF signature on Cloudflare, AWS WAF and Azure WAF
 ```
 
 CI runs the same checks on every pull request.
