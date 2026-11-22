@@ -19,5 +19,6 @@ rule AgentZero_Hacker_Profile
         $c = "utilize kali hacking tools for job" ascii
         $d = "agent zero framework is python project in /a0 folder" ascii
     condition:
-        filesize < 64KB and 2 of them
+        // $a and $d are also in the default profile, so require a line only the hacker profile has
+        filesize < 64KB and 2 of them and ($b or $c)
 }

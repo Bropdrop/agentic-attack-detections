@@ -81,7 +81,7 @@ Suricata counts are hand-written rules; each framework also has address rules ge
 | [Hermes Agent](frameworks/hermes) | A legitimate general-purpose agent turned into an attack console: approvals off, a bundled jailbreak skill, red-team personas | The Gambit retail operator, the Carbonato Docker botnet, and Thailand's Ministry of Finance |
 | [Agent Zero](frameworks/agent-zero) | General-purpose agent in a Kali container with a built-in hacker profile and an open web UI | Threat-actor experimentation GTIG reported, with no published indicators |
 
-Each folder has a README, the hunts and rules, and (except Agent Zero) a `source-code-signals.md` that explains what the framework leaves behind and where in its code each signal comes from.
+Each folder has a README, the hunts and rules, and a `source-code-signals.md` that explains what the framework leaves behind and where in its code each signal comes from.
 
 ## Behaviors shared by agentic frameworks
 

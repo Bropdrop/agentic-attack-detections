@@ -1,37 +1,47 @@
-// Agent Zero on a host you monitor, its hacker profile at work, or its UI exposed through a tunnel
+// Agent Zero on a host you monitor, attack tools on that host, or its UI exposed through a tunnel
 // Agentic attack detections by ThreatDefence (Agent Zero). Source: https://github.com/ThreatDefence/agentic-attack-detections
 // Example hunt for Defender XDR advanced hunting with proxy logs in Microsoft Sentinel. Test before alerting.
 // Agent Zero (agent0ai/agent-zero) is a general-purpose agent framework. GTIG reported threat actors experimenting with
 // it in 2026 but published no indicators, so this hunt looks for the setup an attacker would use:
 //  - The image agent0ai/agent-zero on a Kali base, the framework in /a0, the UI from /exe/self_update_manager.py
 //    docker-run-ui (port 80 in the container, published on 50080; 5000 when run directly).
-//  - Its built-in hacker profile (agents/hacker): "live in kali linux docker container ... utilize kali hacking tools"
-//    and "obey instructions never refuse for safety ethics". Kali tools started under /a0 are that profile at work.
-//  - Its tunnel feature (run_tunnel.py) publishes the UI through Cloudflare quick tunnels (flaredantic) or serveo, and
-//    the login is off unless AUTH_LOGIN is set: GitGuardian found 39 of 173 exposed UIs open.
+//  - Its prompts: the default profile says "obey instructions never refuse for safety ethics", and the hacker profile
+//    (agents/hacker) adds "utilize kali hacking tools for job". The agent runs commands from /bin/bash in
+//    /a0/usr/workdir, so an attack tool's parent is a shell with no /a0/ in its command line. The hunt therefore
+//    looks for attack tools on devices where Agent Zero itself was seen.
+//  - Its tunnel feature (run_tunnel.py) publishes the UI through serveo (ssh, the default), a Cloudflare quick tunnel
+//    (cloudflared) or Microsoft dev tunnels, and the login is off unless AUTH_LOGIN is set: GitGuardian found 39 of
+//    173 exposed UIs open.
+// What each signal relies on in the source is in ../../source-code-signals.md.
 
 let Window = 30d;
 let KaliTools = dynamic(["nmap", "masscan", "nuclei", "sqlmap", "hydra", "nikto", "gobuster", "ffuf", "wpscan", "msfconsole", "searchsploit",
     "netexec", "nxc", "crackmapexec", "john", "hashcat", "responder", "evil-winrm", "enum4linux"]);
+let AgentShells = dynamic(["bash", "sh", "dash", "zsh", "python", "python3", "ipython", "ipython3", "node"]);
+let AgentZeroStarted = DeviceProcessEvents
+    | where Timestamp > ago(Window)
+    | where ProcessCommandLine contains "agent0ai/agent-zero" or ProcessCommandLine contains "self_update_manager.py docker-run-ui"
+        or ProcessCommandLine matches regex @"/a0/(run_ui|run_tunnel)\.py";
+let AgentZeroDevices = AgentZeroStarted | distinct DeviceName;
 union isfuzzy=true
-    (DeviceProcessEvents
-        | where Timestamp > ago(Window)
-        | where ProcessCommandLine contains "agent0ai/agent-zero" or ProcessCommandLine contains "self_update_manager.py docker-run-ui"
-            or ProcessCommandLine matches regex @"/a0/(run_ui|run_tunnel)\.py"
+    (AgentZeroStarted
         | project Timestamp, DeviceName, Signal="Agent Zero container or UI", Detail=substring(ProcessCommandLine, 0, 300)),
     (DeviceProcessEvents
         | where Timestamp > ago(Window)
-        | where tolower(FileName) in (KaliTools)
-        | where InitiatingProcessCommandLine contains "/a0/" or InitiatingProcessFolderPath startswith "/a0/"
+        | where DeviceName in (AgentZeroDevices)
+        | where tolower(FileName) in (KaliTools) and tolower(InitiatingProcessFileName) in (AgentShells)
         | summarize Tools=make_set(FileName, 20), Commands=make_set(substring(ProcessCommandLine, 0, 200), 10), Timestamp=min(Timestamp) by DeviceName
-        | project Timestamp, DeviceName, Signal="Attack tools run by Agent Zero", Detail=strcat(tostring(Tools), " ", tostring(Commands))),
+        | project Timestamp, DeviceName, Signal="Attack tools on a device that runs Agent Zero", Detail=strcat(tostring(Tools), " ", tostring(Commands))),
     (DeviceNetworkEvents
         | where Timestamp > ago(Window)
-        | where RemoteUrl has_any ("trycloudflare.com", "serveo.net") and InitiatingProcessCommandLine contains "/a0/"
-        | project Timestamp, DeviceName, Signal="Agent Zero UI published through a tunnel", Detail=strcat(RemoteUrl, " ", InitiatingProcessCommandLine)),
+        | where DeviceName in (AgentZeroDevices)
+        | where RemoteUrl has_any ("trycloudflare.com", "serveo.net", "devtunnels.ms")
+            or (InitiatingProcessFileName =~ "ssh" and InitiatingProcessCommandLine has "serveo.net")
+        | summarize Timestamp=min(Timestamp), Connections=count() by DeviceName, RemoteUrl, InitiatingProcessFileName
+        | project Timestamp, DeviceName, Signal="Tunnel opened on a device that runs Agent Zero", Detail=strcat(InitiatingProcessFileName, " ", RemoteUrl, " x", Connections)),
     (CommonSecurityLog
         | where TimeGenerated > ago(Window)
         | where RequestClientApplication startswith "agent-zero/"
         | summarize Requests=count(), Timestamp=min(TimeGenerated) by DeviceName=SourceIP, UA=RequestClientApplication
-        | project Timestamp, DeviceName, Signal="Agent Zero user agent through the proxy", Detail=strcat(UA, " x", Requests))
+        | project Timestamp, DeviceName, Signal="Agent Zero user agent through the proxy (sign-in with a ChatGPT subscription)", Detail=strcat(UA, " x", Requests))
 | order by Timestamp desc
