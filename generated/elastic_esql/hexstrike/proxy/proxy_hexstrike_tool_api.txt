@@ -1,3 +1,3 @@
 # HexStrike Tool API Requested Through a Proxy
 # Sigma id c4520661-3276-5c29-932a-38a5620eea04, pipeline ecs
-from * metadata _id, _index, _version | where `c-uri` like "*:8888/api/tools/*" or `c-uri` like "*:8888/api/command*"
+from * metadata _id, _index, _version | where url.original like "*:8888/api/tools/*" or url.original like "*:8888/api/command*"

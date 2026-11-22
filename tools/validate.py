@@ -8,7 +8,7 @@ Checks:
     Sigma       pySigma parses every rule and correlation, ids are unique, no validator issues
     Sentinel    analytics YAML parses and has the required keys, hunts are non-empty
     KQL         every hunt and analytics query parses, and its tables and columns exist (when dotnet is installed)
-    Elastic     TOML rules parse, rule_ids are unique, ES|QL files start with FROM
+    Elastic     TOML rules parse, rule_ids are unique, ES|QL files start with FROM, generated queries use ECS DNS and web fields
     Splunk      .conf files parse, every saved search ships disabled
     Suricata    SIDs are unique across both rule files
     YARA        rules compile (when yara-python is installed)
@@ -103,6 +103,12 @@ def check_elastic():
         body = [l for l in p.read_text(encoding="utf-8").splitlines() if l.strip() and not l.startswith("//")]
         if not body or not body[0].upper().startswith("FROM"):
             err(f"{p.name}: ES|QL must start with FROM")
+    sigma_fields = re.compile(r"(?<![\w.-])(QueryName|c-uri|cs-uri-query|cs-uri-stem|c-useragent|cs-user-agent|cs-host)(?![\w.-])")
+    for p in sorted(ROOT.glob("generated/elastic_*/**/*.txt")):
+        query = "\n".join(l for l in p.read_text(encoding="utf-8").splitlines() if not l.startswith("#"))
+        found = sorted(set(sigma_fields.findall(query)))
+        if found:
+            err(f"{p.relative_to(ROOT).as_posix()}: Sigma field names instead of ECS: {', '.join(found)}")
     print(f"elastic: {len(ids)} rules")
 
 
