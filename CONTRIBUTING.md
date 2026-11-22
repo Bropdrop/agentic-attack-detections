@@ -62,4 +62,6 @@ CI runs the same checks on every pull request.
 
 We aim to reply to issues and pull requests within two working days. If a change does not fit the project, we will say so and explain why.
 
+Everyone taking part is expected to follow the [code of conduct](CODE_OF_CONDUCT.md).
+
 By contributing you agree that your contribution is released under the [MIT license](LICENSE).
