@@ -1,6 +1,6 @@
 {
  "type": "bundle",
- "id": "bundle--d48ce98e-7b83-585f-8982-990616028a99",
+ "id": "bundle--926f41f1-30bd-574c-90fe-08c7f531db75",
  "objects": [
   {
    "type": "identity",
@@ -844,6 +844,80 @@
    "modified": "2026-11-21T00:00:00.000Z",
    "relationship_type": "indicates",
    "source_ref": "indicator--d561bf07-145c-58b9-9a83-7bd8b10c6c68",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--93b71d3e-32ce-5087-b1fe-4f1d135622dc",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX user_agent: artex-agent",
+   "description": "User agent ARTEX sent in AWS CloudTrail while checking stolen keys that Dragos had planted as canary tokens; the attacker added ARTEX on November 1, 2026. Not in the public ARTEX code. Reported to this repository in issue 8. Reported by Dragos.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'artex-agent']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-19T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "artex",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Dragos",
+     "url": "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--50b6119b-fc32-5ad4-94c8-c59b73eb1cb6",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--93b71d3e-32ce-5087-b1fe-4f1d135622dc",
+   "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
+  },
+  {
+   "type": "indicator",
+   "spec_version": "2.1",
+   "id": "indicator--c646df2e-0677-5236-a8c2-3941bbfc3be7",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
+   "name": "ARTEX user_agent: artex-judge-r121",
+   "description": "User agent ARTEX sent in AWS CloudTrail while checking stolen keys that Dragos had planted as canary tokens; the attacker added ARTEX on November 1, 2026. Not in the public ARTEX code. Reported to this repository in issue 8. Reported by Dragos.",
+   "indicator_types": [
+    "malicious-activity"
+   ],
+   "pattern": "[network-traffic:extensions.'http-request-ext'.request_header.'User-Agent' = 'artex-judge-r121']",
+   "pattern_type": "stix",
+   "valid_from": "2026-11-19T00:00:00Z",
+   "confidence": 85,
+   "labels": [
+    "artex",
+    "high"
+   ],
+   "external_references": [
+    {
+     "source_name": "Dragos",
+     "url": "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens"
+    }
+   ]
+  },
+  {
+   "type": "relationship",
+   "spec_version": "2.1",
+   "id": "relationship--dbe9a97a-fcc4-5d89-9e95-0f05a7e3327a",
+   "created": "2026-11-21T00:00:00.000Z",
+   "modified": "2026-11-21T00:00:00.000Z",
+   "relationship_type": "indicates",
+   "source_ref": "indicator--c646df2e-0677-5236-a8c2-3941bbfc3be7",
    "target_ref": "tool--0f9509c5-a733-5dc8-864c-0afd7bd3c84c"
   },
   {

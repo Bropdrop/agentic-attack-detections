@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.7.2, November 22, 2026
+
+- Two ARTEX user agents added: `artex-agent` and `artex-judge-r121`. Dragos saw them in AWS CloudTrail when ARTEX checked stolen keys it had planted as canary tokens. Reported in #8 by @Assaf-tal.
+- New Suricata rule 9726009 for both, and the names are added to the ARTEX user-agent rules for Sigma, Microsoft Sentinel, Elastic, Splunk and Zeek. The rules match `artex-judge-` followed by any run name, since `r121` reads as a run number.
+- 516 indicators in total.
+
 ## 2.7.1, November 22, 2026
 
 No detection changes. This release makes the repository easier to start with and to contribute to.

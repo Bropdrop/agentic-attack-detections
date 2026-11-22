@@ -65,6 +65,7 @@ Every one of them stays in `iocs/indicators.csv` with the publication it first a
 | Strings | First published by | Context |
 |---|---|---|
 | `artex-readonly/1.0`, `artex-pentest/1.0`, `artex-audit/1.0`, `artex-verify/1.0`, `artex-spawn/1`, `ARTEX-worker/1.0`, `artex-i21861-canary`, `Mozilla/5.0 ARTeX`, `Mozilla/5.0 (Windows NT 10.0; Win64; x64) ARTeX-authorized-pentest`, `Mozilla/5.0 (X11; Linux x86_64) artex-verify/1.0` | Datadog Security Labs, "On the hunt for ARTEX: understanding agentic attacks in AWS environments", November 9, 2026 | IOC table from AWS intrusions. `Mozilla/5.0 ARTeX` was also on Cognito SignUp calls from 154.64.252.77 on October 26 and 27 |
+| `artex-agent`, `artex-judge-r121` | Dragos, "AI Supply Chain Security: What Canary Tokens Found", November 19, 2026 | User agents in CloudTrail when ARTEX checked stolen AWS keys planted as canary tokens |
 | `zzz_nonexistent_abc.txt`, `Notexist-xyz` | Datadog Security Labs, November 9, 2026 | Placeholder S3 object names requested before guessing |
 | `/zzz-nonexistent-xyz123` | Wiz Research, "ARTEX in the Wild: Storm-0940 Expands Targeting of IT and Software Vendors", October 22, 2026 | Requested before every fuzzing run to learn what not found looks like |
 | `ReconProbe/1.0` | Wiz Research, October 22, 2026 | Named in the text as a self-describing user agent, not in the IOC table |

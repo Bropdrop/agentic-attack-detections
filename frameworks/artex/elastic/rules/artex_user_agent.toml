@@ -24,7 +24,7 @@ query = '''
 any where
   // EQL's : operator ignores case, so ScopeWeaver/1.0 and ARTEX-PENTEST/1.0 match. KQL wildcards on a keyword field do not.
   user_agent.original : ("*artex-readonly/*", "*artex-pentest/*", "*artex-audit/*", "*artex-verify/*", "*artex-spawn/*", "*artex-worker/*",
-                         "*artex-enrich/*", "*artex-i21861-canary*", "*mozilla/5.0 (artex)*", "*artexverify/*", "*artex/1.0*", "*scopeweaver*", "*spa-api-recon*") or
+                         "*artex-enrich/*", "*artex-i21861-canary*", "*artex-agent*", "*artex-judge-*", "*mozilla/5.0 (artex)*", "*artexverify/*", "*artex/1.0*", "*scopeweaver*", "*spa-api-recon*") or
   // ARTeX is an indicator only in this exact mixed case, so it uses like, which is case-sensitive.
   user_agent.original like "*ARTeX*"
 '''

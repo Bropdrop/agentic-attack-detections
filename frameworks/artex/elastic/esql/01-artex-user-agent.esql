@@ -5,7 +5,7 @@
 // ARTeX is the exception: the bare token is an indicator only in that exact mixed case, so it is matched as written.
 FROM logs-*
 | WHERE @timestamp > NOW() - 30 days
-| WHERE TO_LOWER(user_agent.original) RLIKE ".*(artex-(readonly|pentest|audit|verify|spawn|enrich|worker)/|artex-i21861-canary|mozilla/5.0 \\(artex\\)|artexverify/|artex/1\\.0|scopeweaver|spa-api-recon).*"
+| WHERE TO_LOWER(user_agent.original) RLIKE ".*(artex-(readonly|pentest|audit|verify|spawn|enrich|worker)/|artex-i21861-canary|artex-agent|artex-judge-|mozilla/5.0 \\(artex\\)|artexverify/|artex/1\\.0|scopeweaver|spa-api-recon).*"
     OR user_agent.original LIKE "*ARTeX*"
 | STATS events = COUNT(*), first_seen = MIN(@timestamp), last_seen = MAX(@timestamp), datasets = VALUES(event.dataset)
     BY source.ip, user_agent.original

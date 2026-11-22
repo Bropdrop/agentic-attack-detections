@@ -26,9 +26,11 @@ ReconProbe/1.0
 agent-zero/
 antifox-enrich/1.0
 antifox-selfupdate
+artex-agent
 artex-audit/1.0
 artex-enrich/1.0
 artex-i21861-canary
+artex-judge-r121
 artex-pentest/1.0
 artex-readonly/1.0
 artex-spawn/1

@@ -34,6 +34,7 @@ export {
     const user_agents: pattern =
         /(?i:artex-(readonly|pentest|audit|verify|spawn|enrich)\/)/ |
         /(?i:artex-worker\/)/ | /(?i:artex-i21861-canary)/ |
+        /(?i:artex-agent)/ | /(?i:artex-judge-)/ |
         /(?i:Mozilla\/5\.0 \(ARTEX\))/ | /(?i:artexverify\/)/ |
         /^(?i:artex\/1\.0)/ | /(?i:[^a-z0-9]artex\/1\.0)/ |
         /(?i:scopeweaver)/ | /(?i:spa-api-recon)/ &redef;

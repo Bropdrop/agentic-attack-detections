@@ -30,6 +30,8 @@ detection:
         - 'ARTEX-worker/'
         - 'artex-enrich/'
         - 'artex-i21861-canary'
+        - 'artex-agent'
+        - 'artex-judge-'
         - 'ARTeX-authorized-pentest'
         - 'Mozilla/5.0 ARTeX'
         - 'Mozilla/5.0 (ARTEX)'

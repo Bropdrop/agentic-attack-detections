@@ -22,7 +22,7 @@ relevantTechniques:
   - T1595
   - T1078
 query: |
-  let ArtexUA = dynamic(["artex-readonly/","artex-pentest/","artex-audit/","artex-verify/","artex-spawn/","ARTEX-worker/","artex-enrich/","artex-i21861-canary","ARTeX-authorized-pentest","Mozilla/5.0 ARTeX","Mozilla/5.0 (ARTEX)","ArtExVerify/","ArtEx/1.0","scopeweaver","spa-api-recon"]);
+  let ArtexUA = dynamic(["artex-readonly/","artex-pentest/","artex-audit/","artex-verify/","artex-spawn/","ARTEX-worker/","artex-enrich/","artex-i21861-canary","artex-agent","artex-judge-","ARTeX-authorized-pentest","Mozilla/5.0 ARTeX","Mozilla/5.0 (ARTEX)","ArtExVerify/","ArtEx/1.0","scopeweaver","spa-api-recon"]);
   union isfuzzy=true
       (SigninLogs | where UserAgent has_any (ArtexUA) | project TimeGenerated, Source="SigninLogs", Account=UserPrincipalName, IPAddress, UserAgent),
       (AADNonInteractiveUserSignInLogs | where UserAgent has_any (ArtexUA) | project TimeGenerated, Source="AADNonInteractiveUserSignInLogs", Account=UserPrincipalName, IPAddress, UserAgent),

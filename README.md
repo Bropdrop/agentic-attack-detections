@@ -12,7 +12,7 @@ Free to use under the MIT license. Fixes, false-positive reports and new indicat
 
 - **Framework folders.** ARTEX and its AntiFox fork, Cairn, PentAGI, HexStrike, CyberStrikeAI, Strix, Hermes Agent and Agent Zero. Each folder is built from a review of the framework's source code and the public reporting on its use.
 - **Shared behaviors.** Rules for what these frameworks have in common, whatever the tool or the model behind it.
-- **Indicators and feeds.** One CSV of 514 sourced indicators, and the feeds generated from it.
+- **Indicators and feeds.** One CSV of 516 sourced indicators, and the feeds generated from it.
 
 Formats: KQL for Microsoft Sentinel and Defender XDR, Sigma, Suricata, Zeek, YARA and STIX 2.1. Splunk and Elastic are covered by a Splunk app and Elastic rules for ARTEX, and by Sigma conversions for everything else.
 
@@ -55,7 +55,7 @@ The capture is test traffic written from the framework source code and published
 
 | | KQL hunts | Sentinel analytics | Sigma | Suricata | YARA | Zeek | Indicators |
 |---|---|---|---|---|---|---|---|
-| [ARTEX](frameworks/artex) | 31 | 7 | 36 | 43 | 4 | script, intel | 244 |
+| [ARTEX](frameworks/artex) | 31 | 7 | 36 | 43 | 4 | script, intel | 246 |
 | [Cairn](frameworks/cairn) | 6 | 2 | 3 | 26 | 6 | intel | 73 |
 | [PentAGI](frameworks/pentagi) | 5 | 2 | 3 | 10 | 3 | intel | 39 |
 | [HexStrike](frameworks/hexstrike) | 4 | 2 | 3 | 7 | 3 | intel | 22 |
@@ -104,7 +104,7 @@ The ARTEX folder also carries behavior hunts that apply to every framework: user
 
 | Path | Contents |
 |---|---|
-| [`iocs/indicators.csv`](iocs/indicators.csv) | 514 indicators. Each row has its source, confidence, a review date for addresses and the framework it belongs to. This file is the single source for every feed |
+| [`iocs/indicators.csv`](iocs/indicators.csv) | 516 indicators. Each row has its source, confidence, a review date for addresses and the framework it belongs to. This file is the single source for every feed |
 | [`feeds/`](feeds) | Generated from the CSV: a STIX 2.1 bundle, a Sentinel watchlist, and plain lists of addresses, domains, URLs, user agents and hashes. [`feeds/by-framework/`](feeds/by-framework) has the lists per framework |
 | [`generated/`](generated) | Every Sigma rule converted to Splunk SPL, Sentinel and Defender XDR KQL, and Elastic ES\|QL and Lucene. [`SUMMARY.md`](generated/SUMMARY.md) shows which rule converted to which backend |
 | [`tools/`](tools) | Feed builder, Sigma converter and validator |
