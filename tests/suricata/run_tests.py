@@ -300,7 +300,9 @@ def main():
     (work / "all.rules").write_text("\n".join(p.read_text(encoding="utf-8") for p in files), encoding="utf-8")
     written = {int(s) for p in files if not p.name.endswith("-ip.rules") for s in re.findall(r"\bsid:(\d+);", p.read_text(encoding="utf-8"))}
     r = subprocess.run(["suricata", "-r", str(work / "cases.pcap"), "-S", str(work / "all.rules"), "-l", str(work), "-k", "none",
-                        "--init-errors-fatal", "--set", "vars.address-groups.HOME_NET=[10.0.0.0/8]"], capture_output=True, text=True)
+                        "--init-errors-fatal", "--set", "vars.address-groups.HOME_NET=[10.0.0.0/8]",
+                        # A packaged Suricata service may already hold the command socket; a pcap run does not need one.
+                        "--set", "unix-command.enabled=no"], capture_output=True, text=True)
     if r.returncode:
         sys.exit("suricata failed to load the rules or read the pcap:\n" + r.stdout[-3000:] + r.stderr[-3000:])
     fired = {}
