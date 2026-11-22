@@ -1,5 +1,5 @@
 // ARTEX user agent in any source
-// ARTEX detections by ThreatDefence. https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+// Agentic attack detections by ThreatDefence (ARTEX). https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 // ES|QL hunt using ECS fields. Change the index pattern to match your data streams and baseline before alerting.
 // The match ignores case (TO_LOWER with a lower-case pattern), so ScopeWeaver/1.0 and ARTEX-PENTEST/1.0 are caught.
 // ARTeX is the exception: the bare token is an indicator only in that exact mixed case, so it is matched as written.

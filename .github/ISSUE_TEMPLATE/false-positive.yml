@@ -1,0 +1,33 @@
+name: False positive
+description: A rule fired on something harmless.
+title: "False positive: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Do not paste customer data, real user names, internal host names or internal addresses. Describe the shape of the event.
+  - type: input
+    id: rule
+    attributes:
+      label: Rule
+      description: File path, Suricata SID, Sigma title or Zeek notice name.
+      placeholder: behaviors/suricata/behaviors.rules, SID 9727057
+    validations:
+      required: true
+  - type: textarea
+    id: event
+    attributes:
+      label: What it fired on
+      description: The kind of software or traffic, and the fields that matched, with real values replaced.
+    validations:
+      required: true
+  - type: input
+    id: volume
+    attributes:
+      label: How often
+      placeholder: about 40 a day from 3 hosts
+  - type: textarea
+    id: fix
+    attributes:
+      label: Suggested fix
+      description: Optional. An exclusion or a tighter condition.

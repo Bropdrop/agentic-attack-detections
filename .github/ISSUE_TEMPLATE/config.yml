@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a security problem privately
+    url: https://github.com/ThreatDefence/agentic-attack-detections/security/advisories/new
+    about: For a problem in the repository itself, not a false positive.

@@ -5,7 +5,7 @@ description: |
   "norma/0.4" from the WebFetch tool (BaaRai/Norma v0.4.11, tool/webfetch.go:236) or "artex-update-check" from the
   console's update check (server/update_check.go:69). A real norma client only sends GET and never fetches static assets,
   so web rows that break that pattern are dropped. Other agents built on norma share its user agent: treat a match as a lead.
-  ARTEX detections by ThreatDefence: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+  Agentic attack detections by ThreatDefence (ARTEX): https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 severity: Medium
 requiredDataConnectors:
   - connectorId: AzureActiveDirectory

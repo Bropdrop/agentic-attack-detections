@@ -1,0 +1,28 @@
+name: New framework
+description: An agentic attack framework that should be covered.
+title: "Framework: "
+labels: ["enhancement"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Framework
+    validations:
+      required: true
+  - type: input
+    id: code
+    attributes:
+      label: Source code
+      description: A link to the repository, if it is public.
+  - type: textarea
+    id: reporting
+    attributes:
+      label: Reporting on real use
+      description: Links to public reports of the framework in intrusions. Say so if there are none.
+    validations:
+      required: true
+  - type: textarea
+    id: signals
+    attributes:
+      label: What it leaves behind
+      description: Optional. User agents, command lines, paths, network behavior.

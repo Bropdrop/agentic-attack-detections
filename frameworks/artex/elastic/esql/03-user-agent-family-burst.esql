@@ -1,5 +1,5 @@
 // User agent family burst from one source, after Elastic Security Labs (November 13, 2026)
-// ARTEX detections by ThreatDefence. https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+// Agentic attack detections by ThreatDefence (ARTEX). https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 // ES|QL hunt using ECS fields. Change the index pattern to match your data streams and baseline before alerting.
 // RLIKE takes Lucene regular expressions, which have no inline flags such as (?i). Lower-case the field and keep the pattern lower case.
 FROM logs-*

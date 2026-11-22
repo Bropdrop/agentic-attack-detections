@@ -1,5 +1,5 @@
 // Metronomic request rates that match the ARTEX noise profiles
-// ARTEX detections by ThreatDefence. Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+// Agentic attack detections by ThreatDefence (ARTEX). Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 // Example hunt for Microsoft Sentinel. Test and baseline before alerting.
 // From the ARTEX source code. An operator who wants to stay quiet turns on a noise profile (ARTEX_NOISE_PROFILE or the
 // Target noise card). The egress governor then paces requests per host with a token bucket and a small uniform jitter of

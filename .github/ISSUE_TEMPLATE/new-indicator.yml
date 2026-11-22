@@ -1,0 +1,36 @@
+name: New indicator
+description: An address, domain, hash or string from a published report.
+title: "Indicator: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: values
+    attributes:
+      label: Indicators
+      description: One per line, with its type (ipv4, domain, url, sha256, md5, user_agent, string).
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: A link to the report. The value must appear in it.
+    validations:
+      required: true
+  - type: input
+    id: reported
+    attributes:
+      label: Date reported
+      placeholder: "2026-11-22"
+  - type: dropdown
+    id: framework
+    attributes:
+      label: Framework
+      options: [ARTEX or AntiFox, Cairn, PentAGI, HexStrike, CyberStrikeAI, Strix, Hermes Agent, Agent Zero, Several, Not sure]
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What the indicator was used for, in a sentence.

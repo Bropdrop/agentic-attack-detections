@@ -1,5 +1,5 @@
 // ARTEX running on a host you monitor: agent shells, the recording proxy, resolver fan-out and archives
-// ARTEX detections by ThreatDefence. Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+// Agentic attack detections by ThreatDefence (ARTEX). Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 // Example hunt for Defender XDR advanced hunting and Microsoft Sentinel. Test before alerting. Refines hunt 20.
 // From the ARTEX source code. Signals the binary leaves on the machine it runs on, for an insider, an intruder staging
 // from your network, or a tester you did not know about:

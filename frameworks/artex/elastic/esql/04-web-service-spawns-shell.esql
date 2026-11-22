@@ -1,5 +1,5 @@
 // Web or database service starting a shell or download tool (Elastic Defend, Auditbeat or Sysmon via Elastic Agent)
-// ARTEX detections by ThreatDefence. https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+// Agentic attack detections by ThreatDefence (ARTEX). https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 // ES|QL hunt using ECS fields. Change the index pattern to match your data streams and baseline before alerting.
 FROM logs-endpoint.events.process-*, logs-windows.sysmon_operational-*, auditbeat-*
 | WHERE @timestamp > NOW() - 14 days AND event.type == "start"

@@ -1,69 +1,125 @@
 # Agentic Attack Detections
 
-Detection rules, hunting queries and indicators for agentic attack frameworks (ARTEX and its AntiFox fork, Cairn, PentAGI, HexStrike, CyberStrikeAI, Strix, Hermes Agent and Agent Zero so far): open-source tools that hand an intrusion to AI agents, which plan, run real attack tools and keep going until they reach a goal. Each framework gets its own folder, built from a review of its source code and the public reporting on its use. The behaviors they share, such as AI agents running attack tools with their approval prompts off, servers calling Chinese model APIs, bursts of tools from one source and probing through rotating proxies, have their own folder, so one rule covers every framework.
+[![validate](https://github.com/ThreatDefence/agentic-attack-detections/actions/workflows/validate.yml/badge.svg)](https://github.com/ThreatDefence/agentic-attack-detections/actions/workflows/validate.yml)
+[![release](https://img.shields.io/github/v/release/ThreatDefence/agentic-attack-detections)](https://github.com/ThreatDefence/agentic-attack-detections/releases)
+[![license](https://img.shields.io/github/license/ThreatDefence/agentic-attack-detections)](LICENSE)
 
-Maintained by [ThreatDefence](https://threatdefence.com).
+Open-source detection rules, hunting queries and indicators for security teams. They cover agentic attack frameworks: tools that hand an intrusion to AI agents, which plan, run real attack tools and keep going until they reach a goal.
 
-> This repository was `artex-detections`. GitHub redirects the old address. The ARTEX rules moved from the root to [`frameworks/artex/`](frameworks/artex); `iocs/indicators.csv` and `feeds/` kept their paths.
+Free to use under the MIT license. Fixes, false-positive reports and new indicators are welcome.
+
+## What is here
+
+- **Framework folders.** ARTEX and its AntiFox fork, Cairn, PentAGI, HexStrike, CyberStrikeAI, Strix, Hermes Agent and Agent Zero. Each folder is built from a review of the framework's source code and the public reporting on its use.
+- **Shared behaviors.** Rules for what these frameworks have in common, whatever the tool or the model behind it.
+- **Indicators and feeds.** One CSV of 514 sourced indicators, and the feeds generated from it.
+
+Formats: KQL for Microsoft Sentinel and Defender XDR, Sigma, Suricata, Zeek, YARA and STIX 2.1. Splunk and Elastic are covered by a Splunk app and Elastic rules for ARTEX, and by Sigma conversions for everything else.
+
+## Try it in a minute
+
+With Suricata installed, run the ARTEX rules over the sample capture in this repository:
+
+```bash
+git clone https://github.com/ThreatDefence/agentic-attack-detections
+cd agentic-attack-detections
+mkdir -p out
+suricata -r frameworks/artex/tests/artex-sample.pcap -S frameworks/artex/suricata/artex.rules -l out -k none
+cat out/fast.log
+```
+
+You should see alerts such as:
+
+```text
+[1:9726001:1] TD ARTEX user agent artex-<role>/1.0
+[1:9726020:1] TD ARTEX placeholder probe path
+[1:9726023:2] TD Unsigned alg none JWT in URI
+```
+
+The capture is test traffic written from the framework source code and published reports. It is not a recorded intrusion.
+
+## Start here
+
+| You have | Do this |
+|---|---|
+| Microsoft Sentinel | Upload `feeds/sentinel-watchlist.csv` as a watchlist with the alias `AGENTIC_IOCs` and the search key `value`. Import the analytics rules from `frameworks/*/sentinel/analytics/` and `behaviors/sentinel/analytics/`. Run the hunts in each folder's `hunting-order.md` order |
+| Defender XDR | Run the hunts from `frameworks/*/sentinel/hunting/` in advanced hunting. They work where the tables exist |
+| Suricata | Add the `.rules` files from `frameworks/*/suricata/` and `behaviors/suricata/`. HTTP rules need cleartext or decrypted traffic. DNS and TLS SNI rules work on encrypted traffic |
+| Zeek | Load `behaviors/zeek/agentic-behaviors/`, set `server_nets` to your server ranges ([setup](behaviors/zeek/README.md)), load `frameworks/artex/zeek/artex/`, and feed `frameworks/*/zeek/intel/*.intel` to the Intel framework |
+| YARA | Scan container layers, home folders, `/tmp` and web roots with `frameworks/*/yara/` |
+| Any SIEM with Sigma | Convert `frameworks/*/sigma/` and `behaviors/sigma/` with `sigma convert`, or take the conversions in [`generated/`](generated) |
+| Splunk or Elastic | The ARTEX folder has a Splunk app and Elastic rules. For the other frameworks use [`generated/`](generated) |
+| A threat intelligence platform | Import `feeds/stix2.1-bundle.json`, or the per-framework lists in `feeds/by-framework/` |
+
+## Coverage
+
+| | KQL hunts | Sentinel analytics | Sigma | Suricata | YARA | Zeek | Indicators |
+|---|---|---|---|---|---|---|---|
+| [ARTEX](frameworks/artex) | 31 | 7 | 36 | 43 | 4 | script, intel | 244 |
+| [Cairn](frameworks/cairn) | 6 | 2 | 3 | 26 | 6 | intel | 73 |
+| [PentAGI](frameworks/pentagi) | 5 | 2 | 3 | 10 | 3 | intel | 39 |
+| [HexStrike](frameworks/hexstrike) | 4 | 2 | 3 | 7 | 3 | intel | 22 |
+| [CyberStrikeAI](frameworks/cyberstrikeai) | 5 | 2 | 7 | 11 | 4 | intel | 73 |
+| [Strix](frameworks/strix) | 3 | 1 | 3 | 5 | 3 | intel | 49 |
+| [Hermes Agent](frameworks/hermes) | 4 | 2 | 3 | 7 | 4 | intel | 75 |
+| [Agent Zero](frameworks/agent-zero) | 2 | | 1 | 3 | 1 | intel | 8 |
+| [Shared behaviors](behaviors) | 9 | 2 | 5 | 16 | | package | |
+
+Suricata counts are hand-written rules; each framework also has address rules generated from its indicators. Some indicators belong to more than one framework. ARTEX also has a Splunk app, Elastic rules and ES\|QL queries, and an osquery pack.
 
 ## Frameworks
 
-| Framework | What it is | Folder | Reporting |
-|---|---|---|---|
-| ARTEX | Go planner and worker agents with a web console, released July 2026 (AntiFox is the same code renamed), used by Storm-0940, Storm-3358, VAPOR PANDA and criminal groups against Microsoft 365, Okta, AWS, Azure, web applications and Active Directory | [`frameworks/artex/`](frameworks/artex) | [ARTEX advisory](https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting), [ARTEX deep hunting](https://threatdefence.com/article/artex-source-code-signals-deep-hunting) |
-| Cairn | Python engine that drives Claude Code, Codex and Pi coding agents in Kali containers, used against online retailers, payment sites, Japanese web applications and WSUS servers | [`frameworks/cairn/`](frameworks/cairn) | [What Cairn leaves behind](frameworks/cairn/source-code-signals.md) |
-| PentAGI | Go multi-agent platform from VXControl that runs Kali tools in a container per engagement, seen by GTIG and Mandiant in intrusions since August 2026 and on a PaperCut exploitation operator's infrastructure | [`frameworks/pentagi/`](frameworks/pentagi) | [What PentAGI leaves behind](frameworks/pentagi/source-code-signals.md) |
-| HexStrike | Python MCP tool server that gives any AI assistant about 150 security tools over an unauthenticated API on port 8888, discussed for NetScaler exploitation in 2025 and seen by GTIG and Mandiant in intrusions | [`frameworks/hexstrike/`](frameworks/hexstrike) | [What HexStrike leaves behind](frameworks/hexstrike/source-code-signals.md) |
-| CyberStrikeAI | Go operator console whose agents run about 90 tools and which builds its own implants, C2 listeners and webshell manager, tied to the FortiGate mass-exploitation infrastructure, an AWS intrusion and attacks on education organizations in Africa and Latin America | [`frameworks/cyberstrikeai/`](frameworks/cyberstrikeai) | [What CyberStrikeAI leaves behind](frameworks/cyberstrikeai/source-code-signals.md) |
-| Strix | Python AI pentest agent that runs teams of agents in a Kali sandbox through a Caido proxy, on any model; found the flaws Cairn exploited in the retail card-theft campaign Gambit reported | [`frameworks/strix/`](frameworks/strix) | [What Strix leaves behind](frameworks/strix/source-code-signals.md) |
-| Hermes Agent | Legitimate general-purpose agent turned into an attack console: approvals off, a bundled jailbreak skill, red-team personas and Telegram control. Used by knaithe/KnYuan, the Gambit retail operator, the Carbonato Docker botnet and inside Thailand's Ministry of Finance | [`frameworks/hermes/`](frameworks/hermes) | [What Hermes leaves behind](frameworks/hermes/source-code-signals.md) |
-| Agent Zero | General-purpose agent in a Kali container with a built-in hacker profile and an open web UI; GTIG reported threat-actor experimentation | [`frameworks/agent-zero/`](frameworks/agent-zero) | [Agent Zero folder](frameworks/agent-zero/README.md) |
+| Framework | What it is | Seen in |
+|---|---|---|
+| [ARTEX](frameworks/artex) | Go planner and worker agents with a web console. AntiFox is the same code renamed | Storm-0940, Storm-3358, VAPOR PANDA and criminal groups, against Microsoft 365, Okta, AWS, Azure, web applications and Active Directory |
+| [Cairn](frameworks/cairn) | Python engine that drives Claude Code, Codex and Pi coding agents in Kali containers | Online retailers, payment sites, Japanese web applications and WSUS servers |
+| [PentAGI](frameworks/pentagi) | Go multi-agent platform that runs Kali tools in a container per engagement | Intrusions GTIG and Mandiant reported since August 2026, and a PaperCut exploitation operator's infrastructure |
+| [HexStrike](frameworks/hexstrike) | Python MCP server that gives any AI assistant about 150 security tools over an unauthenticated API | NetScaler exploitation discussion in 2025, and intrusions GTIG and Mandiant reported |
+| [CyberStrikeAI](frameworks/cyberstrikeai) | Go operator console whose agents run about 90 tools, with its own implants, C2 listeners and webshell manager | FortiGate mass-exploitation infrastructure, an AWS intrusion, and education organizations in Africa and Latin America |
+| [Strix](frameworks/strix) | Python AI pentest agent that runs teams of agents in a Kali sandbox, on any model | The retail card-theft campaign Gambit reported, where it found the flaws Cairn exploited |
+| [Hermes Agent](frameworks/hermes) | A legitimate general-purpose agent turned into an attack console: approvals off, a bundled jailbreak skill, red-team personas | The Gambit retail operator, the Carbonato Docker botnet, and Thailand's Ministry of Finance |
+| [Agent Zero](frameworks/agent-zero) | General-purpose agent in a Kali container with a built-in hacker profile and an open web UI | Threat-actor experimentation GTIG reported, with no published indicators |
+
+Each folder has a README, the hunts and rules, and (except Agent Zero) a `source-code-signals.md` that explains what the framework leaves behind and where in its code each signal comes from.
 
 ## Behaviors shared by agentic frameworks
 
-[`behaviors/`](behaviors) holds rules that do not depend on any one framework:
+[`behaviors/`](behaviors) holds rules that do not depend on any one framework.
 
 | Behavior | Rules |
 |---|---|
-| An attack tool started under an AI agent CLI (Claude Code, Qwen Code, Kimi CLI, Codex, opencode, Hermes, Cairn's workers), found from the process tree, whatever model is behind it | KQL hunt, Sentinel analytics rule, Sigma |
+| An attack tool started under an AI agent CLI (Claude Code, Qwen Code, Kimi CLI, Codex, opencode, Hermes, Cairn's workers), found from the process tree | KQL hunt, Sentinel analytics rule, Sigma |
 | Servers calling AI model APIs: Chinese models (DeepSeek, Qwen, GLM, Kimi, MiniMax, Doubao), gateways such as OpenRouter, and Western APIs | KQL hunt, Sigma, Zeek |
-| An AI agent's page reader (Qwen Code, Kimi CLI, opencode, Claude Code) on your application next to attack traffic from the same address | KQL hunt, Sigma, Suricata, Zeek |
+| An AI agent's page reader on your application next to attack traffic from the same address | KQL hunt, Sigma, Suricata, Zeek |
 | One site probed through hundreds of rotating proxy addresses | KQL hunt, Zeek |
 | Configuration and backup file theft, and probes of WSUS administration services | KQL hunt, Sentinel analytics rule, Sigma, Suricata, Zeek |
 | Kerberos user enumeration and SMB or WinRM fan-out from one address | KQL hunt, Zeek |
-| A server calling back to the address that was probing it, including PentAGI's worker ports 28000 to 29999 | KQL hunt, Suricata (PentAGI ports), Zeek |
-| AWS credentials used at machine speed: several identities checked from one address, bulk user data reads, instance role keys used from outside | KQL hunt |
-| Servers looking up out-of-band testing domains (interactsh `oast.*`, Burp Collaborator, dnslog.cn): a blind injection, SSRF or XXE payload ran on them | KQL hunt, Sigma, Suricata, Zeek |
+| A server calling back to the address that was probing it | KQL hunt, Suricata (PentAGI worker ports), Zeek |
+| AWS credentials used at machine speed from one outside address | KQL hunt |
+| Servers looking up out-of-band testing domains (interactsh, Burp Collaborator, dnslog.cn), which means a blind payload ran on them | KQL hunt, Sigma, Suricata, Zeek |
 
-The ARTEX folder also carries behavior hunts written before this split: user agent family bursts (hunt 17), web and database services starting shells (hunt 11), servers calling webhook and tunnel services (hunt 12), scripts written into web folders (hunt 13) and Kerberoasting, DCSync and WinRM fan-out (hunt 16). They apply to every framework.
+The ARTEX folder also carries behavior hunts that apply to every framework: user agent family bursts (hunt 17), web and database services starting shells (hunt 11), servers calling webhook and tunnel services (hunt 12), scripts written into web folders (hunt 13), and Kerberoasting, DCSync and WinRM fan-out (hunt 16).
 
-## Shared indicators and feeds
+## Indicators and feeds
 
 | Path | Contents |
 |---|---|
-| [`iocs/indicators.csv`](iocs/indicators.csv) | 514 indicators across all frameworks. Each row has its source, confidence, a review date for addresses and a `framework` column (`artex`, `cairn`, `pentagi`, `hexstrike`, `cyberstrikeai`, `strix`, `hermes`, `agent-zero`, or several). This file is the single source for every feed |
-| [`feeds/`](feeds) | Generated from the CSV for all frameworks: STIX 2.1 bundle with one tool per framework, Sentinel watchlist and plain lists of IPv4 and IPv6 addresses, domains, URLs, user agents and SHA-256 and MD5 hashes. [`feeds/by-framework/`](feeds/by-framework) has the plain lists per framework |
-| [`generated/`](generated) | Every Sigma rule converted to Splunk SPL, Sentinel and Defender XDR KQL, and Elastic ES\|QL and Lucene, by framework. [`SUMMARY.md`](generated/SUMMARY.md) shows which rule converted to which backend |
+| [`iocs/indicators.csv`](iocs/indicators.csv) | 514 indicators. Each row has its source, confidence, a review date for addresses and the framework it belongs to. This file is the single source for every feed |
+| [`feeds/`](feeds) | Generated from the CSV: a STIX 2.1 bundle, a Sentinel watchlist, and plain lists of addresses, domains, URLs, user agents and hashes. [`feeds/by-framework/`](feeds/by-framework) has the lists per framework |
+| [`generated/`](generated) | Every Sigma rule converted to Splunk SPL, Sentinel and Defender XDR KQL, and Elastic ES\|QL and Lucene. [`SUMMARY.md`](generated/SUMMARY.md) shows which rule converted to which backend |
 | [`tools/`](tools) | Feed builder, Sigma converter and validator |
 | [`docs/`](docs) | [Adding a framework](docs/adding-a-framework.md) |
 
-Each framework folder has its own Zeek intel file and Suricata address rules, generated from the same CSV.
+Each framework folder also has a Zeek intel file and Suricata address rules, generated from the same CSV.
 
-## Quick start
+## How the rules are built and checked
 
-**Microsoft Sentinel.** Upload `feeds/sentinel-watchlist.csv` as a watchlist with the alias `AGENTIC_IOCs` and the search key `value`. The watchlist sweep in each framework folder filters it to that framework's rows. Import the analytics rules from `frameworks/*/sentinel/analytics/` and `behaviors/sentinel/analytics/`. The hunts also run in Defender XDR advanced hunting where the tables exist.
+- **From source.** A signature string comes from the framework's code at a named commit, or from a report that published it. `source-code-signals.md` gives the file and line.
+- **From reports.** Every indicator names the report it came from, and each value was checked against that report.
+- **Tested.** Each Suricata rule has a test flow and a near miss. Every KQL query is parsed with Microsoft's parser and its columns checked. The Zeek packages run against test captures. CI runs the validator and the Suricata tests on every push.
+- **Run on real data.** Version 2.7.0 was run over 30 days of production telemetry to remove rules that could not fire and to quiet rules that were noisy.
 
-**Suricata.** Add the `.rules` files from `frameworks/*/suricata/` and `behaviors/suricata/`. HTTP rules need cleartext or decrypted traffic. DNS and TLS SNI rules work on encrypted traffic.
-
-**Zeek.** Load the behavior package in `behaviors/zeek/agentic-behaviors/` and set `server_nets` to your server ranges ([setup](behaviors/zeek/README.md)). Also load the ARTEX script in `frameworks/artex/zeek/artex/`, and `frameworks/*/zeek/intel/*.intel` through the Intel framework.
-
-**YARA.** Scan container layers, home folders, `/tmp` and web roots with the files in `frameworks/*/yara/`.
-
-**Sigma.** Convert the rules in `frameworks/*/sigma/` and `behaviors/sigma/` with `sigma convert`, or use the conversions in `generated/`.
-
-**Splunk and Elastic.** The ARTEX folder has a Splunk app and Elastic rules. For the other frameworks use the conversions in `generated/`.
-
-**Threat intelligence platforms.** Import `feeds/stix2.1-bundle.json`, or the per-framework lists in `feeds/by-framework/`.
+No rule has been tested against a captured intrusion. Treat every rule as experimental until it has run on your own data.
 
 ## Confidence
 
@@ -88,11 +144,13 @@ bash behaviors/zeek/tests/run_tests.sh                 # needs zeek on the PATH
 
 `validate.py` checks KQL with Microsoft's parser when `dotnet` is installed, and Zeek scripts when `zeek` is.
 
-The test traffic is written from the framework source code and from published reports. It is not captured attack traffic. Version 2.7.0 was also run over 30 days of production telemetry to find rules that could not fire and rules that were noisy. No rule has been tested against a captured intrusion, so treat every rule as experimental until it has run on your own data.
-
 ## Contributing
 
-Pull requests are welcome. Add new indicators to `iocs/indicators.csv` with their source and framework, run `python3 tools/build_feeds.py` and `python3 tools/validate.py`, and commit the regenerated files. To add a framework, follow [docs/adding-a-framework.md](docs/adding-a-framework.md). Report false positives as issues, with the rule name and the shape of the event (no customer data).
+Pull requests are welcome. The most useful contributions are false-positive reports, missed detections and new indicators with a source. See [CONTRIBUTING.md](CONTRIBUTING.md) for the checks to run, and [docs/adding-a-framework.md](docs/adding-a-framework.md) to add a framework.
+
+## Getting help
+
+Open an [issue](https://github.com/ThreatDefence/agentic-attack-detections/issues). There are forms for a false positive, a missed detection, a new indicator and a new framework. Describe the shape of the event; never paste customer data. For a security problem in the repository itself, see [SECURITY.md](SECURITY.md).
 
 ## License
 
@@ -101,3 +159,11 @@ MIT. See [LICENSE](LICENSE). Each indicator names its source in `iocs/indicators
 ## Disclaimer
 
 Provided as is, without warranty. A match is a lead, not a verdict. Absence of a match does not mean absence of compromise.
+
+## Credits
+
+Started and maintained by [ThreatDefence](https://threatdefence.com), with fixes from [@jack51706](https://github.com/jack51706). Background on ARTEX: the [advisory](https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting) and the [source code signals article](https://threatdefence.com/article/artex-source-code-signals-deep-hunting).
+
+## History
+
+This repository was `artex-detections`. GitHub redirects the old address. The ARTEX rules moved from the root to [`frameworks/artex/`](frameworks/artex); `iocs/indicators.csv` and `feeds/` kept their paths.

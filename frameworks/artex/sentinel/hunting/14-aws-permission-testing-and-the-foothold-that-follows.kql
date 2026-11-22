@@ -1,5 +1,5 @@
 // AWS permission testing and the foothold that follows
-// ARTEX detections by ThreatDefence. Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+// Agentic attack detections by ThreatDefence (ARTEX). Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 // Example hunt for Microsoft Sentinel and Defender XDR advanced hunting. Test and baseline before alerting.
 // Check `GetCallerIdentity` from the same identity just before either result. It is the first call most stolen keys make.
 

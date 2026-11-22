@@ -5,7 +5,7 @@ description: |
   (server/execpriv.go, server/execpriv_unix.go:539-575), the MCP launcher argument "__artex-exec-drop", or the recording
   proxy credential "artex-pace:artex-pace" that ARTEX puts in every agent shell's HTTP_PROXY (egress/pace.go:20).
   Someone is running ARTEX on this host: an authorized tester, an insider or an intruder staging from your network.
-  ARTEX detections by ThreatDefence: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+  Agentic attack detections by ThreatDefence (ARTEX): https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 severity: High
 requiredDataConnectors:
   - connectorId: MicrosoftThreatProtection

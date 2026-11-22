@@ -1,4 +1,4 @@
-##! ARTEX detections by ThreatDefence
+##! Agentic attack detections by ThreatDefence (ARTEX)
 ##! https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 ##!
 ##! Raises notices for ARTEX user agents, request headers and probe markers, the placeholder paths and

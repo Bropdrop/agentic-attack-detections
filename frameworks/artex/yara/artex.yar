@@ -1,5 +1,5 @@
 /*
-   ARTEX detections by ThreatDefence
+   Agentic attack detections by ThreatDefence (ARTEX)
    https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 
    Experimental. Built from strings published by researchers, not tested against a sample corpus.

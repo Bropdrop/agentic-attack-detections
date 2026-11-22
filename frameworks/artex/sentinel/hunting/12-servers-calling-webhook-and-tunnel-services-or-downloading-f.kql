@@ -1,5 +1,5 @@
 // Servers calling webhook and tunnel services, or downloading from a bare address
-// ARTEX detections by ThreatDefence. Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+// Agentic attack detections by ThreatDefence (ARTEX). Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 // Example hunt for Microsoft Sentinel and Defender XDR advanced hunting. Test and baseline before alerting.
 // Microsoft's own hunt for Storm-3358 follows the same idea: list the addresses curl downloaded from in the last day that it did not use in the week before.
 

@@ -1,4 +1,4 @@
-# CyberStrikeAI Detections
+# CyberStrikeAI Detection Rules and IOCs
 
 Part of [Agentic Attack Detections](../../README.md). Shared indicators and feeds live at the repository root; the rules for behaviors that every agentic framework shows are in [`behaviors/`](../../behaviors).
 

@@ -1,5 +1,5 @@
 // Accounts registered by a source that is also probing the application
-// ARTEX detections by ThreatDefence. Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+// Agentic attack detections by ThreatDefence (ARTEX). Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 // Example hunt for Microsoft Sentinel. Test and baseline before alerting.
 // From the ARTEX source code. Workers are told to test on objects they own first and to touch at most three objects that
 // belong to someone else (agent/worker.go:285). In practice they register their own accounts on the target with a strong

@@ -1,4 +1,4 @@
-# ARTEX detections by ThreatDefence
+# Agentic attack detections by ThreatDefence (ARTEX)
 # https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 # Suricata 7 and 8. SID range 9726001-9726199. Indicator-based IP rules live in artex-ip.rules (generated).
 # HTTP rules need cleartext HTTP or TLS decryption. TLS SNI and DNS rules work on encrypted traffic.

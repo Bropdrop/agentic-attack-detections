@@ -1,4 +1,4 @@
-# Cairn Detections
+# Cairn Detection Rules and IOCs
 
 Part of [Agentic Attack Detections](../../README.md). Shared indicators and feeds live at the repository root; the rules for behaviors that every agentic framework shows are in [`behaviors/`](../../behaviors), including the coding-agent, model gateway, rotating proxy, configuration theft and Kerberos hunts first written for Cairn.
 

@@ -1,5 +1,5 @@
 // Scripts written into web directories
-// ARTEX detections by ThreatDefence. Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+// Agentic attack detections by ThreatDefence (ARTEX). Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 // Example hunt for Microsoft Sentinel and Defender XDR advanced hunting. Test and baseline before alerting.
 // A script file created by `mysqld`, `sqlservr.exe`, `java` or `w3wp.exe` itself deserves attention first. In MySQL, also check whether `general_log_file` or `slow_query_log_file` points into a web directory.
 

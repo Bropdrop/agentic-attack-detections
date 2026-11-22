@@ -1,5 +1,5 @@
 // Applications changing their own access
-// ARTEX detections by ThreatDefence. Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+// Agentic attack detections by ThreatDefence (ARTEX). Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 // Example hunt for Microsoft Sentinel and Defender XDR advanced hunting. Test and baseline before alerting.
 // Storm-0940's agents added credentials to applications and one application assigned itself Global Administrator.
 // Check every row against a change record. Automation accounts will appear here, so build a list of the ones you expect.

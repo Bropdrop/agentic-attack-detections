@@ -1,5 +1,5 @@
 // An ARTEX console or a backdoored ARTEX image inside your network
-// ARTEX detections by ThreatDefence. Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+// Agentic attack detections by ThreatDefence (ARTEX). Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 // Example hunt for Defender XDR advanced hunting. Test before alerting.
 // Someone running ARTEX on your own hosts is either an authorized tester, an insider or an intruder. Backdoored
 // container images (tomicdd/artex, congdonglinux/artex) also hand the host to a third party: BadByte reported

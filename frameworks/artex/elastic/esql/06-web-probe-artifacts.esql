@@ -1,5 +1,5 @@
 // Web probe artifacts: placeholder paths, alg none JWTs and the OAuth callback probe
-// ARTEX detections by ThreatDefence. https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+// Agentic attack detections by ThreatDefence (ARTEX). https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 // ES|QL hunt using ECS fields. Change the index pattern to match your data streams and baseline before alerting.
 // The JWT prefixes are base64 of {"alg":"none" (alone or before typ), typ before alg, and the None and NONE spellings.
 // Base64 is case-sensitive and LIKE matches case exactly, so do not lower-case the field or the prefixes.

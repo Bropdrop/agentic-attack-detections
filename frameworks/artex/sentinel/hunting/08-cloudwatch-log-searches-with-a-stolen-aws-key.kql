@@ -1,5 +1,5 @@
 // CloudWatch log searches with a stolen AWS key
-// ARTEX detections by ThreatDefence. Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+// Agentic attack detections by ThreatDefence (ARTEX). Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 // Example hunt for Microsoft Sentinel and Defender XDR advanced hunting. Test and baseline before alerting.
 // Read the search patterns in the result. Company names combined with words like Fund, Invoice, Billing and LLC match what Datadog saw.
 

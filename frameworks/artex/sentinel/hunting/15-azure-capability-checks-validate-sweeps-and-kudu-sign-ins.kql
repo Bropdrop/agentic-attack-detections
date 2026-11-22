@@ -1,5 +1,5 @@
 // Azure capability checks, validate sweeps and Kudu sign-ins
-// ARTEX detections by ThreatDefence. Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
+// Agentic attack detections by ThreatDefence (ARTEX). Source: https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting
 // Example hunt for Microsoft Sentinel and Defender XDR advanced hunting. Test and baseline before alerting.
 // Normal backup and deployment tools also write and delete test blobs, so start with callers you cannot name.
 

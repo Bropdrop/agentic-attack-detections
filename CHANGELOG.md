@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.7.1, November 22, 2026
+
+No detection changes. This release makes the repository easier to start with and to contribute to.
+
+- README: a one-command "Try it in a minute" that runs the ARTEX Suricata rules over the sample capture, a "Start here" table by what you run, a coverage table of frameworks against formats, and a section on how the rules are built and checked.
+- `CONTRIBUTING.md` with the checks to run and the rules for indicators, Suricata, KQL and Sigma content.
+- `SECURITY.md`, and issue forms for a false positive, a missed detection, a new indicator and a new framework.
+- Framework folder READMEs are titled "<Framework> Detection Rules and IOCs".
+- ARTEX file headers now read "Agentic attack detections by ThreatDefence (ARTEX)", like the other folders. They still carried the repository's first name.
+- `LICENSE` copyright line now includes contributors.
+
 ## 2.7.0, November 22, 2026
 
 A correctness release. Every rule was reviewed against the framework source and its cited report, the rules were run over 30 days of production telemetry, and two test suites were added. Nothing new is detected; a lot now works that did not.
