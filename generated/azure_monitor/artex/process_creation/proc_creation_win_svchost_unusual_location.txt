@@ -1,0 +1,4 @@
+# Svchost Running Outside the Windows System Folder
+# Sigma id eae4b702-9723-5393-8d23-37295c6d40ea, pipeline azure_monitor
+SecurityEvent
+| where NewProcessName endswith "\\svchost.exe" and (not((NewProcessName startswith "C:\\Windows\\System32\\" or NewProcessName startswith "C:\\Windows\\SysWOW64\\" or NewProcessName startswith "C:\\Windows\\WinSxS\\")))

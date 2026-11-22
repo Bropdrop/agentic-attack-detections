@@ -1,6 +1,6 @@
 {
  "type": "bundle",
- "id": "bundle--cec8599c-a4c5-559f-bcc1-c3af77418f75",
+ "id": "bundle--d48ce98e-7b83-585f-8982-990616028a99",
  "objects": [
   {
    "type": "identity",
@@ -1224,7 +1224,7 @@
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX user_agent: azure-toolkit/1.0",
-   "description": "User agent in Storm-0940 sign-ins and Graph activity through compromised ConnectWise applications (Microsoft IOC table). Not in the public ARTEX code. Reported by Microsoft Threat Intelligence.",
+   "description": "User agent in Storm-0940 sign-ins and Graph activity through compromised ConnectWise applications (Microsoft IOC table). Not in the public ARTEX code. Reported by Microsoft.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -1238,7 +1238,7 @@
    ],
    "external_references": [
     {
-     "source_name": "Microsoft Threat Intelligence",
+     "source_name": "Microsoft",
      "url": "https://www.microsoft.com/en-us/security/blog/2026/10/21/storm-0940-uses-artex-agentic-ai-connectwise-supply-chain-compromise/"
     }
    ]
@@ -1483,13 +1483,13 @@
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX uri_string: callback?code=AAAA&state=notvalidb64!!",
-   "description": "OAuth callback probe. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "OAuth callback probe. Reported by Wiz Research.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[url:value LIKE '%callback?code=AAAA&state=notvalidb64!!%']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-10-22T00:00:00Z",
    "confidence": 85,
    "labels": [
     "artex",
@@ -1497,8 +1497,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Wiz Research",
+     "url": "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors"
     }
    ]
   },
@@ -1520,13 +1520,13 @@
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX uri_string: eyJhbGciOiJub25lIn0.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20ifQ.",
-   "description": "Unsigned alg:none JWT sprayed across SSO routes. Reported by Multiple reports, compiled by ThreatDefence.",
+   "description": "Unsigned alg:none JWT sprayed across SSO routes. Reported by Wiz Research.",
    "indicator_types": [
     "malicious-activity"
    ],
    "pattern": "[url:value LIKE '%eyJhbGciOiJub25lIn0.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20ifQ.%']",
    "pattern_type": "stix",
-   "valid_from": "2026-11-16T00:00:00Z",
+   "valid_from": "2026-10-22T00:00:00Z",
    "confidence": 85,
    "labels": [
     "artex",
@@ -1534,8 +1534,8 @@
    ],
    "external_references": [
     {
-     "source_name": "Multiple reports, compiled by ThreatDefence",
-     "url": "https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"
+     "source_name": "Wiz Research",
+     "url": "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors"
     }
    ]
   },
@@ -2266,7 +2266,7 @@
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX ipv4: 104.194.150.21",
-   "description": "Attacks on IT and software vendors. Reported by Wiz.",
+   "description": "Attacks on IT and software vendors. Reported by Wiz Research.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -2280,7 +2280,7 @@
    ],
    "external_references": [
     {
-     "source_name": "Wiz",
+     "source_name": "Wiz Research",
      "url": "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors"
     }
    ],
@@ -2304,7 +2304,7 @@
    "modified": "2026-11-21T00:00:00.000Z",
    "created_by_ref": "identity--cfb32124-d0d1-5d3a-8537-b5b8d8c30a0d",
    "name": "ARTEX ipv4: 167.88.172.97",
-   "description": "Attacks on IT and software vendors. Reported by Wiz.",
+   "description": "Attacks on IT and software vendors. Reported by Wiz Research.",
    "indicator_types": [
     "malicious-activity"
    ],
@@ -2318,7 +2318,7 @@
    ],
    "external_references": [
     {
-     "source_name": "Wiz",
+     "source_name": "Wiz Research",
      "url": "https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors"
     }
    ],

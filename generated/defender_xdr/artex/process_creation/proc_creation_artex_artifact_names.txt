@@ -1,0 +1,4 @@
+# ARTEX Artifact Names in Command Lines
+# Sigma id a939cd68-134a-5626-a4b7-c84fc55788fa, pipeline microsoft_xdr
+DeviceProcessEvents
+| where ProcessCommandLine contains "artex-probe-" or ProcessCommandLine contains "ArtexProbe" or ProcessCommandLine contains "\\ProgramData\\artx5v" or ProcessCommandLine contains "art18-" or ProcessCommandLine contains "ARTEX_WRITE_PROBE" or ProcessCommandLine contains "ARTX_PERSIST_OK" or ProcessCommandLine contains "artex_control_marker_zz9q"

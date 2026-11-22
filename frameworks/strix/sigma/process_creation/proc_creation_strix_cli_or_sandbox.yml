@@ -17,11 +17,12 @@ logsource:
     category: process_creation
 detection:
     selection_cli:
-        CommandLine|re: '(^|[/\\\s])strix(\.exe)?\s.*\s(--target|-t|--target-list|--scan-mode|--resume)[\s=]'
+        CommandLine|re: '(^|[/\\\s])strix(\.exe)?["'']?\s(.*\s)?(--target|-t|--target-list|--scan-mode|--resume)[\s=]'
     selection_install:
-        CommandLine|contains:
-            - 'strix-agent'
-            - 'usestrix/strix-sandbox'
+        # Install commands only: uv and pip also name strix-agent when they probe an installed copy's interpreter
+        CommandLine|re: '((pip|pip3|pipx)\s+install|uv\s+(tool\s+install|tool\s+run|pip\s+install)|uvx)\s(.*\s)?[\"'']?strix-agent'
+    selection_sandbox:
+        CommandLine|contains: 'usestrix/strix-sandbox'
     selection_caido:
         CommandLine|contains|all:
             - 'caido-cli'

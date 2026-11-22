@@ -25,11 +25,18 @@ detection:
             - '\\w3wp.exe'
             - '\\httpd.exe'
             - '\\tomcat.exe'
-            - '\\java.exe'
-            - '\\node.exe'
             - '\\php-cgi.exe'
             - '\\sqlservr.exe'
             - '\\mysqld.exe'
+    selection_runtime:
+        # java.exe and node.exe also run Jenkins, npm and AI agent CLIs, so they only count under a service account
+        ParentImage|endswith:
+            - '\\java.exe'
+            - '\\node.exe'
+        User|contains:
+            - 'IIS APPPOOL'
+            - 'NETWORK SERVICE'
+            - 'LOCAL SERVICE'
     selection_child:
         Image|endswith:
             - '\\cmd.exe'
@@ -40,7 +47,7 @@ detection:
             - '\\bitsadmin.exe'
             - '\\whoami.exe'
             - '\\tasklist.exe'
-    condition: selection_parent and selection_child
+    condition: (selection_parent or selection_runtime) and selection_child
 falsepositives:
     - Line-of-business applications that call scripts. Baseline per server
 level: medium

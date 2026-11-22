@@ -18,7 +18,7 @@ union isfuzzy=true
     (DeviceProcessEvents
         | where Timestamp > ago(Window)
         | where (ProcessCommandLine matches regex @"(^|[/\\\s])strix(\.exe)?\s" and ProcessCommandLine matches regex @"\s(--target|-t|--target-list|--scan-mode|--resume)[\s=]")
-            or ProcessCommandLine contains "strix-agent" or ProcessCommandLine contains "usestrix/strix-sandbox"
+            or ProcessCommandLine matches regex @"((pip|pip3|pipx)\s+install|uv\s+(tool\s+install|tool\s+run|pip\s+install)|uvx)\s(.*\s)?[""']?strix-agent" or ProcessCommandLine contains "usestrix/strix-sandbox"
             or (ProcessCommandLine contains "caido-cli" and ProcessCommandLine contains "--allow-guests")
         | project Timestamp, DeviceName, Signal="Strix command, install or sandbox", Detail=substring(ProcessCommandLine, 0, 300),
             Parent=strcat(InitiatingProcessFileName, " ", substring(InitiatingProcessCommandLine, 0, 150))),

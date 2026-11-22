@@ -30,8 +30,11 @@ detection:
             - '.dnslog.cn'
             - '.ceye.io'
             - '.requestrepo.com'
-    condition: selection
+    filter_burp_polling:
+        # Burp Suite's own client polling for results, not a payload firing on a server
+        QueryName|startswith: 'polling.'
+    condition: selection and not filter_burp_polling
 falsepositives:
     - Authorized penetration tests and bug bounty research against your servers
     - Security engineers testing interactsh or Burp from workstations
-level: high
+level: medium

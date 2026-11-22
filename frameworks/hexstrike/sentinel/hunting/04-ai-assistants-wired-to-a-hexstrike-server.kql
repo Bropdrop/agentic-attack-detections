@@ -12,12 +12,12 @@ let Window = 30d;
 union isfuzzy=true
     (DeviceProcessEvents
         | where Timestamp > ago(Window)
-        | where ProcessCommandLine has "hexstrike_mcp.py" or (ProcessCommandLine has "--server" and ProcessCommandLine contains ":8888")
+        | where ProcessCommandLine has "hexstrike_mcp.py" or (ProcessCommandLine has "--server" and ProcessCommandLine contains ":8888" and ProcessCommandLine has_any ("hexstrike", "mcp"))
         | project Timestamp, DeviceName, Account=AccountName, Signal="HexStrike MCP client",
             Detail=substring(ProcessCommandLine, 0, 300), Parent=InitiatingProcessFileName),
     (CommonSecurityLog
         | where TimeGenerated > ago(Window)
-        | where (RequestURL contains "/api/tools/" or RequestURL contains "/api/command" or RequestURL endswith "/health")
+        | where (RequestURL contains "/api/tools/" or RequestURL contains "/api/command")
             and (DestinationPort == 8888 or RequestURL contains ":8888/")
         | summarize Requests=count(), Tools=make_set(extract(@"/api/tools/([\w-]+)", 1, RequestURL), 20), Timestamp=min(TimeGenerated)
             by SourceIP, SourceUserName, DestinationIP, DestinationHostName

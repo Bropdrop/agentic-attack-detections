@@ -12,6 +12,11 @@ let Tools = dynamic(["cmd.exe", "powershell.exe", "pwsh.exe", "sh", "bash", "das
 DeviceProcessEvents
 | where Timestamp >= datetime(2026-08-01)
 | where InitiatingProcessFileName in~ (ServiceProcesses) and FileName in~ (Tools)
+// java and node also run Jenkins, npm and AI agent CLIs: count them only under a service account
+| where InitiatingProcessFileName !in~ ("java", "java.exe", "node", "node.exe")
+    or AccountName in~ ("www-data", "apache", "nginx", "http", "tomcat", "tomcat9", "jetty", "jboss", "wildfly", "node", "nodejs", "nobody", "daemon",
+        "network service", "local service", "iusr")
+    or AccountDomain =~ "iis apppool"
 | summarize Commands=count(), Distinct=dcount(ProcessCommandLine), Sample=make_set(ProcessCommandLine, 15),
             FirstSeen=min(Timestamp), LastSeen=max(Timestamp)
     by DeviceName, InitiatingProcessFileName, AccountName, bin(Timestamp, 10m)

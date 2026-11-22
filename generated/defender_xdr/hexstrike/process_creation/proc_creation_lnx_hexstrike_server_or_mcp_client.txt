@@ -1,0 +1,4 @@
+# HexStrike Server or MCP Client Process
+# Sigma id 23f271ff-3e26-57ca-81ec-347c96db618e, pipeline microsoft_xdr
+DeviceProcessEvents
+| where (ProcessCommandLine contains "hexstrike_server.py" or ProcessCommandLine contains "hexstrike_mcp.py") or InitiatingProcessCommandLine contains "hexstrike_server.py"

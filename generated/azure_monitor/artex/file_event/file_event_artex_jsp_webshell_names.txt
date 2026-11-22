@@ -1,0 +1,4 @@
+# JSP Web Shell Names Seen in ARTEX Intrusions
+# Sigma id da2a1f27-1099-5c19-ab6f-820c9b3b1e6a, pipeline azure_monitor
+SecurityEvent
+| where ObjectName endswith "/cl1217.jsp" or ObjectName endswith "/f1219a.jsp" or ObjectName endswith "/z1219.jsp" or ObjectName endswith "\\cl1217.jsp" or ObjectName endswith "\\f1219a.jsp" or ObjectName endswith "\\z1219.jsp"

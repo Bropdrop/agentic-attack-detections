@@ -28,12 +28,19 @@ export {
         Console_Page,
     };
 
-    ## User agents that name ARTEX, its forks and renamed builds.
+    ## User agents that name ARTEX, its forks and renamed builds. The name is the indicator, so case is ignored:
+    ## ARTEX-PENTEST/1.0 and ScopeWeaver/1.0 match. "artex/1.0" must start the string or follow a character that
+    ## is not a letter or digit, so a longer word that ends in "artex" does not match.
     const user_agents: pattern =
-        /artex-(readonly|pentest|audit|verify|spawn|enrich)\// |
-        /ARTEX-worker\// | /artex-i21861-canary/ | /ARTeX/ |
-        /Mozilla\/5\.0 \(ARTEX\)/ | /ArtExVerify\// | /ArtEx\/1\.0/ |
-        /scopeweaver/ | /spa-api-recon/ &redef;
+        /(?i:artex-(readonly|pentest|audit|verify|spawn|enrich)\/)/ |
+        /(?i:artex-worker\/)/ | /(?i:artex-i21861-canary)/ |
+        /(?i:Mozilla\/5\.0 \(ARTEX\))/ | /(?i:artexverify\/)/ |
+        /^(?i:artex\/1\.0)/ | /(?i:[^a-z0-9]artex\/1\.0)/ |
+        /(?i:scopeweaver)/ | /(?i:spa-api-recon)/ &redef;
+
+    ## User agents where the case is the indicator, matched exactly. "ARTeX" was seen on its own and in
+    ## "ARTeX-authorized-pentest"; with case ignored, "artex" is inside ordinary words such as SmartExplorer.
+    const user_agents_exact: pattern = /ARTeX/ &redef;
 
     ## Placeholder paths and probe values in request URIs.
     const probe_paths: pattern =
@@ -45,10 +52,11 @@ export {
         /ARTEX_WRITE_PROBE/ | /ARTX_PERSIST_OK/ | /artex_control_marker_zz9q/ |
         /ARTEX-PROBE-/ | /artex-probe-/ &redef;
 
-    ## Base64url headers of unsigned JWTs ({"alg":"none"} and common variants).
+    ## Base64url header prefixes of unsigned JWTs: {"alg":"none" with or without typ after it, typ first, and
+    ## the None and NONE spellings. Base64 is case-sensitive, so these are matched exactly.
     const alg_none_jwt: pattern =
-        /eyJhbGciOiJub25lIn0\./ | /eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0\./ |
-        /eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0\./ &redef;
+        /eyJhbGciOiJub25lI/ | /eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lI/ |
+        /eyJhbGciOiJOb25lI/ | /eyJhbGciOiJOT05FI/ &redef;
 
     ## Console page titles: ARTEX, renamed builds ScopeWeaver and LUCK.
     const console_titles: pattern =
@@ -87,7 +95,7 @@ event http_all_headers(c: connection, is_orig: bool, hlist: mime_header_list)
         {
         local h = hlist[i];
 
-        if ( h$name == "USER-AGENT" && user_agents in h$value )
+        if ( h$name == "USER-AGENT" && ( user_agents in h$value || user_agents_exact in h$value ) )
             raise(c, User_Agent, fmt("ARTEX user agent from %s", c$id$orig_h), h$value);
 
         else if ( h$name == "X-ARTX-KEY" )

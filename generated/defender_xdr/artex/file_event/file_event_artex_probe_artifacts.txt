@@ -1,0 +1,4 @@
+# ARTEX Probe Artifact Created
+# Sigma id c5af5255-c664-5237-9359-34a102f431d1, pipeline microsoft_xdr
+DeviceFileEvents
+| where FolderPath contains "artex-probe-" or FolderPath contains "\\ProgramData\\artx5v\\" or FolderPath contains "zzartx0000.php"

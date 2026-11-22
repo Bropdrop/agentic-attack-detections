@@ -1,7 +1,7 @@
 [metadata]
 creation_date = "2026/11/20"
 maturity = "development"
-updated_date = "2026/11/20"
+updated_date = "2026/11/22"
 
 [rule]
 author = ["ThreatDefence"]
@@ -10,7 +10,7 @@ A request, sign-in or cloud API call carried a user agent that names the ARTEX f
 """
 from = "now-9m"
 index = ["logs-*", "filebeat-*"]
-language = "kuery"
+language = "eql"
 license = "MIT"
 name = "ARTEX Agentic Attack Framework User Agent"
 references = ["https://threatdefence.com/article/artex-agentic-attack-framework-detection-hunting"]
@@ -18,10 +18,15 @@ risk_score = 73
 rule_id = "b3e702f7-98bd-5dac-a260-b75e2967c54f"
 severity = "high"
 tags = ["Threat: ARTEX", "Data Source: Multiple", "Use Case: Threat Detection"]
-type = "query"
+type = "eql"
 
 query = '''
-user_agent.original : (*artex-readonly/* or *artex-pentest/* or *artex-audit/* or *artex-verify/* or *artex-spawn/* or *ARTEX-worker/* or *artex-enrich/* or *artex-i21861-canary* or *ARTeX* or *ArtExVerify/* or *ArtEx/1.0* or *scopeweaver* or *spa-api-recon*)
+any where
+  // EQL's : operator ignores case, so ScopeWeaver/1.0 and ARTEX-PENTEST/1.0 match. KQL wildcards on a keyword field do not.
+  user_agent.original : ("*artex-readonly/*", "*artex-pentest/*", "*artex-audit/*", "*artex-verify/*", "*artex-spawn/*", "*artex-worker/*",
+                         "*artex-enrich/*", "*artex-i21861-canary*", "*mozilla/5.0 (artex)*", "*artexverify/*", "*artex/1.0*", "*scopeweaver*", "*spa-api-recon*") or
+  // ARTeX is an indicator only in this exact mixed case, so it uses like, which is case-sensitive.
+  user_agent.original like "*ARTeX*"
 '''
 
 [[rule.threat]]

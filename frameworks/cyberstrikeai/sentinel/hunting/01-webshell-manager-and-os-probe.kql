@@ -16,7 +16,7 @@ union isfuzzy=true
         | where TimeGenerated > ago(Window)
         | extend UA = replace_string(csUserAgent, "+", " ")
         | where UA has "CyberStrikeAI" or csUriQuery contains "OSPROBE_" or (csUriQuery matches regex @"(^|&)pass=" and csUriQuery matches regex @"(^|&)cmd=")
-        | summarize Requests=count(), Paths=make_set(csUriStem, 10), Timestamp=min(TimeGenerated) by Src=cIP, Target=sComputerName, UA
+        | summarize Requests=count(), Paths=make_set(csUriStem, 10), Timestamp=min(TimeGenerated) by Src=cIP, Target=Computer, UA
         | project Timestamp, Src, Target, Signal="CyberStrikeAI webshell request in IIS logs (or pass and cmd parameters in the query)", Detail=strcat(UA, " ", tostring(Paths), " x", Requests)),
     (CommonSecurityLog
         | where TimeGenerated > ago(Window)

@@ -1,0 +1,4 @@
+# SQL Server Spawns a Shell Through xp_cmdshell
+# Sigma id 5a82242d-3e20-5373-9852-830e386a2253, pipeline azure_monitor
+SecurityEvent
+| where ParentProcessName endswith "\\sqlservr.exe" and (NewProcessName endswith "\\cmd.exe" or NewProcessName endswith "\\powershell.exe" or NewProcessName endswith "\\pwsh.exe" or NewProcessName endswith "\\certutil.exe" or NewProcessName endswith "\\bitsadmin.exe")

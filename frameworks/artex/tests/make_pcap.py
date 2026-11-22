@@ -45,6 +45,11 @@ ATT, WEB, CONSOLE = "203.0.113.10", "10.0.0.5", "10.0.0.9"
 session(ATT, WEB, 40001, 80, req("/zzz-nonexistent-xyz123", "artex-pentest/1.0", "X-ARTX-KEY: k1\r\n"), resp("not found"))
 session(ATT, WEB, 40002, 80, req("/sso/login?jwt=eyJhbGciOiJub25lIn0.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20ifQ.", "python-requests/2.31.0"), resp("denied", status="401 Unauthorized"))
 session(ATT, WEB, 40003, 80, req("/auth/callback?code=AAAA&state=notvalidb64!!", "Mozilla/5.0 (spa-api-recon)"), resp("bad state", status="400 Bad Request"))
+# User agent names in another case, and alg:none tokens with typ after alg and with the NONE spelling
+session(ATT, WEB, 40010, 80, req("/api/me?token=eyJhbGciOiJOT05FIn0.e30.", "python-requests/2.31.0"), resp("denied", status="401 Unauthorized"))
+session(ATT, WEB, 40007, 80, req("/", "ScopeWeaver/1.0"), resp("ok", status="200 OK"))
+session(ATT, WEB, 40008, 80, req("/", "ARTEX-PENTEST/1.0"), resp("ok", status="200 OK"))
+session(ATT, WEB, 40009, 80, req("/api/me?token=eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.e30.", "python-requests/2.31.0"), resp("denied", status="401 Unauthorized"))
 session("10.0.0.20", CONSOLE, 40004, 8787, req("/", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"),
         resp('<html><head><title>ARTEX - Agentic Pentest</title><script src="/_next/static/chunks/main.js"></script></head></html>', status="200 OK"))
 session("198.51.100.7", WEB, 40005, 80, req("/", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36"),

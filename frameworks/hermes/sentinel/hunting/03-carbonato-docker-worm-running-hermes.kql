@@ -15,7 +15,8 @@ let Window = 30d;
 union isfuzzy=true
     (DeviceProcessEvents
         | where Timestamp > ago(Window)
-        | where (ProcessCommandLine contains "nsenter" and ProcessCommandLine matches regex @"-t\s+1\s" and ProcessCommandLine contains "-m")
+        | where (ProcessCommandLine contains "nsenter" and ProcessCommandLine matches regex @"-t\s+1\s" and ProcessCommandLine contains "-m"
+            and ProcessCommandLine has_any ("curl", "wget", "crontab", "chattr", "authorized_keys", "systemctl", "rc.local", ".hermes"))
             or ProcessCommandLine matches regex @"netns-probe|net-setup|system/resolved|docker-network-monitor|/opt/gh0st/|CARBONATO_API_KEY"
             or (FileName startswith "kworker" and isnotempty(FolderPath))
             or (FolderPath =~ "/usr/sbin/systemd-logind")

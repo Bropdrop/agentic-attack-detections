@@ -1,0 +1,4 @@
+# Cairn Agent Worker or Dispatcher Command Line
+# Sigma id 47a4767c-bd74-5162-82ff-286d6b159e35, pipeline microsoft_xdr
+DeviceProcessEvents
+| where ProcessCommandLine contains "model_provider=\"cairn\"" or ProcessCommandLine contains "model_providers.cairn.base_url" or ProcessCommandLine contains "--provider cairn" or ProcessCommandLine contains "/tmp/cairn-pi/" or ProcessCommandLine contains "/tmp/cairn-prompts/" or ProcessCommandLine contains "cairn dispatch --config" or ProcessCommandLine contains "cairn-dispatch-" or ProcessCommandLine contains "cairn-worker-container"

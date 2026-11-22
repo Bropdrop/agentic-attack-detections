@@ -1,5 +1,47 @@
 # Changelog
 
+## 2.7.0, November 22, 2026
+
+A correctness release. Every rule was reviewed against the framework source and its cited report, the rules were run over 30 days of production telemetry, and two test suites were added. Nothing new is detected; a lot now works that did not.
+
+Rules that could not fire
+
+- `tools/convert.py` reused the same rule objects for every backend, so each Elastic conversion carried Microsoft field names and only 1 of 64 rules converted for Defender XDR. Each backend now gets its own copy: 25 rules convert for Defender XDR, and Elastic output uses ECS fields, including `process.*` for Linux process rules. Everything in `generated/` was rebuilt.
+- AI agent starts an attack tool (behaviors hunt 1, its analytics rule and Sigma rule) looked for an auto-approve flag on the tool's parent. The parent is the agent's shell, so the flag was never there, and Windows `.exe` names were missing. The rules now follow the process tree: Claude Code's shell (`shell-snapshots`, `CLAUDE_CODE_SHELL_LAUNCHER_SCRIPT`), an agent binary as parent or grandparent, or an agent found by its command line. The flag is a context column, because staff use it too and an agent can run a tool without it. Severity is medium. The analytics rule reads agent processes from the last day instead of the last hour.
+- Suricata: Cairn 9727002 matched a port in `http.host`, which never holds one; it now matches the project list fields in the response. 9726068 looked for a host name inside Gh0st RAT traffic and is retired. `ARTX_PERSIST_OK` has its own rule (9726027). BLOODALCHEMY, toolkit and card-theft campaign domains match subdomains. Unsigned JWT rules cover `typ` and the None and NONE spellings (9726030 to 9726033). 9726067 allows a query string. Hermes 9732001 and 9732004 accept spaced JSON and `sh -c`, and 9732001 no longer needs an outside source. `dnslog.cn` and `webhook.site` match any case.
+- KQL: `sComputerName` is not a `W3CIISLog` column (CyberStrikeAI hunt 1 and its analytics rule), `FileUrl` is not a `DeviceFileEvents` column (ARTEX hunt 22), and `TicketEncryptionType` is not a `SecurityEvent` column (ARTEX hunt 16).
+- CyberStrikeAI's `.bashrc` line is written to the file, not run as a command, so the `# cs` command-line branch is gone from the hunt, the analytics rule and the Sigma rule. The file-event branch and the YARA rule cover it.
+- Strix Sigma rule: `strix --target x` and `strix -t x` now match.
+- Elastic: two ES|QL queries used `(?i)`, which Elastic's regex does not support, and the ARTEX user-agent rule was case-sensitive. Splunk: the user-agent search dropped rows with no `src` field.
+- The certificate rules for CyberStrikeAI and PentAGI only see a certificate in a TLS 1.2 handshake. The rule files said otherwise.
+
+Rules that were noisy
+
+- Out-of-band lookups: Burp's own client polling (`polling.oastify.com`) is left out everywhere, Suricata alerts once per source per hour, and the Sigma rule is medium.
+- Strix: only install commands count, not uv or pip probing an installed copy.
+- Web service starts a shell (Sigma, KQL, Splunk): `java` and `node` count only under a service account, because they also run Jenkins, npm and AI agent CLIs.
+- Carbonato: `nsenter -t 1` alone is also what Kubernetes node-debug tools do, so the rule needs an install or persistence command with it.
+- ARTEX hunt 10 no longer matches the bare word `artex`, which is also a real company's name. HexStrike's port 8888 hunt leaves out Jupyter.
+- Suricata: every rule that inspects content has a fast pattern, so none runs on every transaction. Multi-domain regular expressions are now one rule per domain.
+- Splunk: searches read `artex_indexes` instead of `index=*`, and each has alert suppression.
+
+Zeek
+
+- On a cluster, `Kerberos_Enumeration`, `AI_Agent_Attacking_Site` and `Callback_To_Prober` kept their state on one worker and did not fire when related connections reached another. They now share state through SumStats or the manager. Checked on a local manager with two workers.
+- With `server_nets` unset the package treated every local host as a server, so laptops calling model APIs and Burp polling raised notices. The server-only notices now stay off until `server_nets` is set, with a warning at startup.
+- `Rotating_Proxy_Probing` checked its ratio once per window and now checks it on every request. It needs a payload or a refused login, so a normal login page no longer raises it.
+- `Backup_File_Served` needs a real file body, so a site that answers 200 to everything no longer raises it. `Callback_To_Prober` ignores requests that came through a CDN. `SMB_WinRM_Fan_Out` counts connections where both sides sent data, not half-open scans. `Out_Of_Band_Lookup` skips Burp polling and fires once per source per hour.
+- Two scripts kept an entry for every visitor for up to a day. They now keep only addresses that already showed the first half of a pattern, for an hour.
+- The ARTEX script matches user agent names in any case (`ScopeWeaver/1.0`, `ARTEX-PENTEST/1.0`) and every unsigned JWT header form.
+- The test capture now carries Kerberos requests Zeek parses; before, the Kerberos notice fired from error replies alone.
+- Changed settings: `prober_min_conns` is now `prober_min_requests`, `prober_memory` and `page_reader_window` default to 1 hour, and `Callback_To_Prober` needs cleartext HTTP for the probe half.
+
+Tests
+
+- `tests/suricata/run_tests.py` replays one flow per hand-written Suricata rule, with near misses, and fails if a rule has no case or fires where it should not. CI runs it.
+- `tools/validate.py` parses every KQL hunt and analytics query with Microsoft's Kusto.Language and checks table and column names against Microsoft's table reference (`tools/kqlcheck/`).
+- Every indicator was checked against the report it cites. Three rows that cited our own article now cite Wiz Research, where the values were published.
+
 ## 2.6.1, November 22, 2026
 
 - Removed the SHA-256 of the Windows Hades sample (`dwm_33b7.exe`) from the Thai Ministry of Finance case. Hunt.io printed it 63 characters long, so it could never match a file, and no other source has the full value. Reported in #1.

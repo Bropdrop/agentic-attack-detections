@@ -7,6 +7,7 @@
 Checks:
     Sigma       pySigma parses every rule and correlation, ids are unique, no validator issues
     Sentinel    analytics YAML parses and has the required keys, hunts are non-empty
+    KQL         every hunt and analytics query parses, and its tables and columns exist (when dotnet is installed)
     Elastic     TOML rules parse, rule_ids are unique, ES|QL files start with FROM
     Splunk      .conf files parse, every saved search ships disabled
     Suricata    SIDs are unique across both rule files
@@ -66,6 +67,29 @@ def check_sentinel():
         if not re.search(r"^\s*[A-Za-z_(]", "\n".join(l for l in p.read_text(encoding="utf-8").splitlines() if not l.startswith("//")), re.M):
             err(f"{p.name}: no query body")
     print(f"sentinel: {len(hunts)} hunts")
+
+
+def check_kql():
+    """Parse every hunt and analytics query with Microsoft's Kusto.Language and check table and column names."""
+    import shutil
+    import tempfile
+    if not shutil.which("dotnet"):
+        print("kql: skipped (dotnet not installed)")
+        return
+    files = [str(p) for p in sorted(ROOT.glob("*/**/sentinel/hunting/*.kql"))]
+    with tempfile.TemporaryDirectory() as tmp:
+        for p in sorted(ROOT.glob("*/**/sentinel/analytics/*.yaml")):
+            out = Path(tmp) / ("analytics__" + "__".join(p.relative_to(ROOT).parts).replace(".yaml", ".kql"))
+            out.write_text(yaml.safe_load(p.read_text(encoding="utf-8"))["query"], encoding="utf-8")
+            files.append(str(out))
+        tool = ROOT / "tools" / "kqlcheck"
+        r = subprocess.run(["dotnet", "run", "--project", str(tool), "-c", "Release", "--", str(tool / "schema.json"), *files],
+                           capture_output=True, text=True)
+    lines = [l.replace(str(ROOT) + "/", "") for l in r.stdout.strip().splitlines()]
+    if r.returncode:
+        err("kql:\n" + "\n".join(lines or [r.stderr.strip()[-2000:]]))
+    else:
+        print(lines[-1])
 
 
 def check_elastic():
@@ -148,7 +172,7 @@ def check_feeds():
         print("feeds: up to date")
 
 
-for check in (check_sigma, check_sentinel, check_elastic, check_splunk, check_suricata, check_yara, check_zeek, check_osquery, check_feeds):
+for check in (check_sigma, check_sentinel, check_kql, check_elastic, check_splunk, check_suricata, check_yara, check_zeek, check_osquery, check_feeds):
     try:
         check()
     except Exception as exc:  # noqa: BLE001

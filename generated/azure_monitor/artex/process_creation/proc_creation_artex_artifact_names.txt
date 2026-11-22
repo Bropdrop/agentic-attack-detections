@@ -1,0 +1,4 @@
+# ARTEX Artifact Names in Command Lines
+# Sigma id a939cd68-134a-5626-a4b7-c84fc55788fa, pipeline azure_monitor
+SecurityEvent
+| where CommandLine contains "artex-probe-" or CommandLine contains "ArtexProbe" or CommandLine contains "\\ProgramData\\artx5v" or CommandLine contains "art18-" or CommandLine contains "ARTEX_WRITE_PROBE" or CommandLine contains "ARTX_PERSIST_OK" or CommandLine contains "artex_control_marker_zz9q"

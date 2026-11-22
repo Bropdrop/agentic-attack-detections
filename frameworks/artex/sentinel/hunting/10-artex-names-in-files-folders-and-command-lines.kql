@@ -13,7 +13,10 @@ union isfuzzy=true
              Command = InitiatingProcessCommandLine),
   (DeviceProcessEvents
    | where Timestamp >= datetime(2026-08-01)
-   | where ProcessCommandLine matches regex @"(?i)(^|[\s\\/""'=_-])(artex|artx)[\w.-]*" or ProcessCommandLine has "art18-"
+   // artex-<name>, artex_<name>, artx<digit> and a binary called artex. The bare word is left out: Artex Risk Solutions is a real company
+   | where ProcessCommandLine matches regex @"(?i)((^|[\s\\/""'=])(artex|artx)[-_][\w.-]+|(^|[\s\\/""'=])artx\d\w*|(^|[\s\\/""'])artex(\.exe)?(\s|""|$))"
+       or ProcessCommandLine has "art18-"
+   | where not(ProcessCommandLine matches regex @"(?i)artex[\s_-]?risk")
    | project Timestamp, DeviceName, Kind = "process", Detail = FolderPath, Actor = InitiatingProcessFileName,
              Command = ProcessCommandLine)
 | order by Timestamp asc

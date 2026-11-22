@@ -1,0 +1,4 @@
+# SQL Server Spawns a Shell Through xp_cmdshell
+# Sigma id 5a82242d-3e20-5373-9852-830e386a2253, pipeline microsoft_xdr
+DeviceProcessEvents
+| where InitiatingProcessFolderPath endswith "\\sqlservr.exe" and (FolderPath endswith "\\cmd.exe" or FolderPath endswith "\\powershell.exe" or FolderPath endswith "\\pwsh.exe" or FolderPath endswith "\\certutil.exe" or FolderPath endswith "\\bitsadmin.exe")

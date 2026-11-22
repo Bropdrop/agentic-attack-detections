@@ -19,7 +19,6 @@ union isfuzzy=true
         | where (ProcessCommandLine contains @"CurrentVersion\Run" and ProcessCommandLine matches regex @'(?i)/v\s+"?SystemUpdate\b')
             or (ProcessCommandLine has "schtasks" and ProcessCommandLine matches regex @'(?i)/tn\s+"?\\?SystemUpdate\b')
             or (ProcessCommandLine contains "@reboot" and ProcessCommandLine contains "sort -u | crontab -")
-            or ProcessCommandLine contains "&>/dev/null &) # cs"
         | project Timestamp, DeviceName, Signal="CyberStrikeAI persistence command", Detail=substring(ProcessCommandLine, 0, 300),
             Parent=strcat(InitiatingProcessFileName, " ", InitiatingProcessFolderPath)),
     (DeviceRegistryEvents

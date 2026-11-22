@@ -2,7 +2,7 @@ id: 89f1eee2-554b-5edc-a383-2ea50cc40b61
 name: CyberStrikeAI implant persistence
 description: |
   A host created the persistence the CyberStrikeAI implant uses: a Run value or scheduled task named SystemUpdate
-  (schtasks /sc onlogon /rl highest), an @reboot crontab entry piped through sort -u, a .bashrc line ending in "# cs",
+  (schtasks /sc onlogon /rl highest), an @reboot crontab entry piped through sort -u, 
   or a com.apple.systemupdate LaunchAgent. Kaspersky saw the SystemUpdate task and Run value in real attacks.
   Agentic attack detections by ThreatDefence: https://github.com/ThreatDefence/agentic-attack-detections
 severity: High
@@ -27,7 +27,6 @@ query: |
           | where (ProcessCommandLine contains @"CurrentVersion\Run" and ProcessCommandLine matches regex @'(?i)/v\s+"?SystemUpdate\b')
               or (ProcessCommandLine has "schtasks" and ProcessCommandLine matches regex @'(?i)/tn\s+"?\\?SystemUpdate\b')
               or (ProcessCommandLine contains "@reboot" and ProcessCommandLine contains "sort -u | crontab -")
-              or ProcessCommandLine contains "&>/dev/null &) # cs"
           | project TimeGenerated, DeviceName, AccountName, Detail=ProcessCommandLine),
       (DeviceRegistryEvents
           | where RegistryKey endswith @"\CurrentVersion\Run" and RegistryValueName =~ "SystemUpdate"

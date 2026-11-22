@@ -1,0 +1,4 @@
+# Cairn Task Snapshot, Pi Provider Key or Competition Skill Written
+# Sigma id 3bcec7f8-c193-525d-9b3f-aa20c3e369d8, pipeline azure_monitor
+SecurityEvent
+| where ObjectName contains "/tmp/cairn-prompts/" or ObjectName contains "/tmp/cairn-pi/" or ObjectName contains "/skills/tsec-actions/SKILL.md"

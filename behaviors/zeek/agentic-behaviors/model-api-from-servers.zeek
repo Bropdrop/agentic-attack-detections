@@ -5,7 +5,10 @@
 ##! and GLM, Kimi, MiniMax, Doubao, SiliconFlow and OpenRouter are all one setting away. A server, container host or build
 ##! agent opening TLS to one of these is an AI agent running on it, whatever the client. Seen by TLS server name, so no
 ##! decryption is needed. Endpoints are taken from the provider lists in Qwen Code, Kimi CLI and opencode.
-##! Set server_nets and allowed_ai_nets (main.zeek) with redef.
+##! Set server_nets and allowed_ai_nets (main.zeek) with redef. With server_nets empty this check is off: laptops call
+##! model APIs all day.
+##!
+##! Cluster: each TLS handshake is judged on its own, so no state is shared.
 
 @load base/protocols/ssl
 @load ./main

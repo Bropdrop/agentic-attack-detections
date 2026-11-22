@@ -30,6 +30,8 @@ union isfuzzy=true
     (DeviceNetworkEvents
         | where Timestamp > ago(Window)
         | where ActionType == "ListeningConnectionCreated" and LocalPort == 8888 and InitiatingProcessFileName startswith "python"
+        // Jupyter and TensorBoard use 8888 too
+        | where not(InitiatingProcessCommandLine has_any ("jupyter", "ipykernel", "notebook", "jupyterlab", "voila", "tensorboard"))
         | project Timestamp, DeviceName, Signal="Python listening on 8888", Detail=LocalIP, Parent=InitiatingProcessCommandLine),
     (DeviceFileEvents
         | where Timestamp > ago(Window)

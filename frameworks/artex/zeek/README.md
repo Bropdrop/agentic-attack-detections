@@ -9,4 +9,4 @@
 redef Intel::read_files += { "/path/to/frameworks/artex/zeek/intel/artex.intel" };
 ```
 
-User agents in the intel file are exact matches (Intel::SOFTWARE). The script in `artex/` matches substrings, so it catches variants the intel file misses.
+User agents in the intel file are exact matches (Intel::SOFTWARE). The script in `artex/` matches substrings and ignores case where the name is the indicator (`ARTEX-PENTEST/1.0`, `ScopeWeaver/1.0`), so it catches variants the intel file misses. `ARTeX` stays an exact match: its case is the indicator.

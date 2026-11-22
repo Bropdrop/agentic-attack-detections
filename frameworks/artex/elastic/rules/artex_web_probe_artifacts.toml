@@ -1,7 +1,7 @@
 [metadata]
 creation_date = "2026/11/20"
 maturity = "development"
-updated_date = "2026/11/20"
+updated_date = "2026/11/22"
 
 [rule]
 author = ["ThreatDefence"]
@@ -21,7 +21,7 @@ tags = ["Threat: ARTEX", "Data Source: Multiple", "Use Case: Threat Detection"]
 type = "query"
 
 query = '''
-url.original : (*zzz-nonexistent-xyz123* or *zzz_nonexistent_abc.txt* or *Notexist-xyz* or *eyJhbGciOiJub25lIn0.* or *code=AAAA&state=notvalidb64!!*)
+url.original : (*zzz-nonexistent-xyz123* or *zzz_nonexistent_abc.txt* or *Notexist-xyz* or *eyJhbGciOiJub25lI* or *eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lI* or *eyJhbGciOiJOb25lI* or *eyJhbGciOiJOT05FI* or *code=AAAA&state=notvalidb64!!*)
 '''
 
 [[rule.threat]]

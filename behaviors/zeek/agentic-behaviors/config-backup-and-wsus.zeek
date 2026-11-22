@@ -2,7 +2,11 @@
 ##!
 ##! JPCERT/CC's Case E describes Cairn, CyberStrikeAI and ARTEX stealing configuration and backup files and attacking
 ##! internet-facing WSUS servers. Scutum saw the agents request .git/HEAD, .env, .env.bak, backup.zip and database dumps
-##! across hundreds of folders, some with a Range header that returns 206. A 200 or 206 answer means the file left.
+##! across hundreds of folders, some with a Range header that returns 206. A 200 or 206 answer with a body that is
+##! not a web page means the file left. Status alone is not enough: sites that answer 200 to every path send their
+##! home or error page, so the body's type (sniffed from its first bytes, not the Content-Type header) and size count.
+##!
+##! Cluster: the sweep count is a SumStats stream; the other notices need one connection only.
 
 @load base/frameworks/sumstats
 @load base/protocols/http
@@ -32,15 +36,31 @@ export {
 
     const wsus_ports: set[port] = { 8530/tcp, 8531/tcp } &redef;
 
-    ## Distinct backup paths from one address before a sweep notice.
+    ## Distinct backup paths from one address within backup_sweep_window before a sweep notice.
     const backup_sweep_paths: count = 5 &redef;
+    const backup_sweep_window: interval = 1hr &redef;
+
+    ## Body types that are a web page or an API answer, not a configuration or backup file.
+    const backup_page_types: pattern = /^(text\/html|application\/xhtml\+xml|text\/json|application\/json)/ &redef;
+    ## Paths that must come back as an archive, so a text body is not the file either.
+    const backup_archive_uri: pattern = /(?i:\.(zip|tar|gz|tgz|bz2|7z|rar)($|\?))/ &redef;
+    ## Smallest body that can be a real file. A .git/HEAD is 21 bytes or more.
+    const backup_min_bytes: count = 16 &redef;
 }
+
+## True when the body sent for a backup path can be the file and not a catch-all page.
+function backup_body_plausible(uri: string, mime: string, size: count): bool
+    {
+    if ( size < backup_min_bytes || backup_page_types in mime )
+        return F;
+    return ! ( backup_archive_uri in uri && /^text\// in mime );
+    }
 
 event zeek_init()
     {
     local r = SumStats::Reducer($stream="agentic.backup.paths", $apply=set(SumStats::UNIQUE));
     SumStats::create([$name="agentic-backup-sweep",
-                      $epoch=1hr,
+                      $epoch=backup_sweep_window,
                       $reducers=set(r),
                       $threshold_val(key: SumStats::Key, result: SumStats::Result): double =
                           { return result["agentic.backup.paths"]$unique + 0.0; },
@@ -64,12 +84,18 @@ event http_request(c: connection, method: string, original_URI: string, unescape
         SumStats::observe("agentic.backup.paths", [$host=c$id$orig_h], [$str=original_URI]);
     }
 
-event http_reply(c: connection, version: string, code: count, reason: string)
+event http_message_done(c: connection, is_orig: bool, stat: http_message_stat)
     {
-    if ( Site::is_local_addr(c$id$orig_h) || ! c?$http || ! c$http?$uri )
+    # Runs at the end of the answer, when its status, body size and sniffed type are all known.
+    if ( is_orig || Site::is_local_addr(c$id$orig_h) || ! c?$http || ! c$http?$uri || ! c$http?$status_code )
         return;
-    if ( (code == 200 || code == 206) && backup_uri in c$http$uri )
-        raise(c, Backup_File_Served, fmt("%s served %s to %s (%d)", c$id$resp_h, c$http$uri, c$id$orig_h, code),
+    local code = c$http$status_code;
+    if ( (code != 200 && code != 206) || backup_uri !in c$http$uri )
+        return;
+    local mime = (c$http?$resp_mime_types && |c$http$resp_mime_types| > 0) ? c$http$resp_mime_types[0] : "";
+    if ( backup_body_plausible(c$http$uri, mime, stat$body_length) )
+        raise(c, Backup_File_Served,
+              fmt("%s served %s to %s (%d, %d bytes)", c$id$resp_h, c$http$uri, c$id$orig_h, code, stat$body_length),
               c$http$uri, cat(c$id$orig_h, c$id$resp_h, c$http$uri));
     }
 

@@ -1,0 +1,4 @@
+# Agent Zero Container, UI or Tunnel Started
+# Sigma id 454f6966-95ee-57f4-9ab3-d7d6798ab637, pipeline microsoft_xdr
+DeviceProcessEvents
+| where ProcessCommandLine contains "agent0ai/agent-zero" or ProcessCommandLine contains "self_update_manager.py docker-run-ui" or ProcessCommandLine contains "/a0/run_tunnel.py"

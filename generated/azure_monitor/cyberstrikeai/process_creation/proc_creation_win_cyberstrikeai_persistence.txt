@@ -1,0 +1,4 @@
+# CyberStrikeAI Implant Windows Persistence Named SystemUpdate
+# Sigma id a8da8a64-d5a3-597d-a8a7-9a968b5896a7, pipeline azure_monitor
+SecurityEvent
+| where (CommandLine contains "reg" and CommandLine contains " add " and CommandLine contains "\\CurrentVersion\\Run" and CommandLine contains "SystemUpdate") or (CommandLine contains "schtasks" and CommandLine contains "/create" and CommandLine contains "SystemUpdate")

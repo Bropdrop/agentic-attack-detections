@@ -8,7 +8,7 @@ CommonSecurityLog
 | where TimeGenerated >= datetime(2026-08-01)
 | extend Marker = case(
     RequestURL has "zzz-nonexistent" or RequestURL has "zzz_nonexistent" or RequestURL has "Notexist-xyz", "not-found canary",
-    RequestURL has "eyJhbGciOiJub25lIn0", "unsigned token",
+    RequestURL has_any ("eyJhbGciOiJub25lI", "eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lI", "eyJhbGciOiJOb25lI", "eyJhbGciOiJOT05FI"), "unsigned token",
     RequestURL has "code=AAAA" or RequestURL has "notvalidb64", "forged OAuth callback",
     RequestURL endswith ".js.map", "source map",
     RequestURL has "/env.js" or RequestURL has "/assets/config.json", "runtime config",

@@ -8,6 +8,8 @@
 SecurityEvent
 | where TimeGenerated >= datetime(2026-08-01)
 | where EventID == 4769
+// TicketEncryptionType is not a SecurityEvent column: read it from the event XML
+| extend TicketEncryptionType = extract(@'TicketEncryptionType">([^<]+)<', 1, EventData)
 | where TicketEncryptionType =~ "0x17" and ServiceName !endswith "$" and TargetUserName !has "$@"
 | summarize Tickets=count(), Services=dcount(ServiceName), Sample=make_set(ServiceName, 15)
     by TargetUserName, IpAddress, bin(TimeGenerated, 10m)

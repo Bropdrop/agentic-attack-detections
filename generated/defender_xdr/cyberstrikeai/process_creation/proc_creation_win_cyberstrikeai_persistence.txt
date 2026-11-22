@@ -1,0 +1,4 @@
+# CyberStrikeAI Implant Windows Persistence Named SystemUpdate
+# Sigma id a8da8a64-d5a3-597d-a8a7-9a968b5896a7, pipeline microsoft_xdr
+DeviceProcessEvents
+| where (ProcessCommandLine contains "reg" and ProcessCommandLine contains " add " and ProcessCommandLine contains "\\CurrentVersion\\Run" and ProcessCommandLine contains "SystemUpdate") or (ProcessCommandLine contains "schtasks" and ProcessCommandLine contains "/create" and ProcessCommandLine contains "SystemUpdate")

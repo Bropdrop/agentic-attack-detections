@@ -1,0 +1,4 @@
+# PentAGI Agent Command Wrapper
+# Sigma id eb9c13d9-3bf1-59c9-9201-c1a85e1bd94c, pipeline azure_monitor
+SecurityEvent
+| where CommandLine contains "trap \"\" HUP" and CommandLine contains "/proc/self/oom_score_adj" and CommandLine contains "exec sh -c \"$0\""

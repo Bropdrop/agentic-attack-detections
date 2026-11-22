@@ -25,8 +25,6 @@ detection:
             - 'sort -u | crontab -'
     selection_beacon:
         CommandLine|contains: 'X-Implant-Token'
-    selection_bashrc:
-        CommandLine|contains: '&>/dev/null &) # cs'
     condition: 1 of selection_*
 falsepositives:
     - Administrators adding @reboot jobs the same way (cron selection only)

@@ -25,6 +25,6 @@ union isfuzzy=true
         | project Timestamp, DeviceName, Signal="process", Detail=FolderPath, Process=FileName, CommandLine=ProcessCommandLine),
     (DeviceFileEvents | where Timestamp > ago(30d)
         | where SHA256 in (Hashes) or (FileName =~ "WinRing0x64.sys" and FolderPath has_any (@"\Users\", @"\ProgramData\", @"\Temp\"))
-            or FileUrl has_any (Hosts)
+            or FileOriginUrl has_any (Hosts)
         | project Timestamp, DeviceName, Signal="file", Detail=FolderPath, Process=InitiatingProcessFileName, CommandLine=InitiatingProcessCommandLine)
 | order by Timestamp desc

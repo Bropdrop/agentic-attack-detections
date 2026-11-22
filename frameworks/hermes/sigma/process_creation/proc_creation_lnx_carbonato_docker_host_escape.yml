@@ -25,6 +25,17 @@ detection:
             - 'nsenter'
             - '-t 1'
             - '-m -u -n -i'
+    selection_nsenter_payload:
+        # nsenter into PID 1 is also how kubectl node-shell and debug tools work; the worm uses it to install and persist
+        CommandLine|contains:
+            - 'curl '
+            - 'wget '
+            - 'crontab'
+            - 'chattr'
+            - 'authorized_keys'
+            - 'systemctl enable'
+            - 'rc.local'
+            - '.hermes'
     selection_names:
         CommandLine|contains:
             - 'netns-probe'
@@ -34,7 +45,7 @@ detection:
             - 'CARBONATO_API_KEY'
     selection_fake_logind:
         Image: '/usr/sbin/systemd-logind'
-    condition: 1 of selection_*
+    condition: (selection_nsenter and selection_nsenter_payload) or selection_names or selection_fake_logind
 falsepositives:
-    - Administrators using nsenter to debug containers (nsenter selection only)
+    - Node maintenance scripts that enter the host namespaces and download or schedule something
 level: high

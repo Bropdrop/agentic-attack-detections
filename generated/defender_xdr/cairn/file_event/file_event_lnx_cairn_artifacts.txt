@@ -1,0 +1,4 @@
+# Cairn Task Snapshot, Pi Provider Key or Competition Skill Written
+# Sigma id 3bcec7f8-c193-525d-9b3f-aa20c3e369d8, pipeline microsoft_xdr
+DeviceFileEvents
+| where FolderPath contains "/tmp/cairn-prompts/" or FolderPath contains "/tmp/cairn-pi/" or FolderPath contains "/skills/tsec-actions/SKILL.md"

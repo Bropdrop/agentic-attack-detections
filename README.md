@@ -25,7 +25,7 @@ Maintained by [ThreatDefence](https://threatdefence.com).
 
 | Behavior | Rules |
 |---|---|
-| AI agent CLIs in auto-approve mode starting attack tools (Qwen Code, Kimi CLI, Claude Code, Codex, Pi), whatever model is behind them | KQL hunt, Sentinel analytics rule, Sigma |
+| An attack tool started under an AI agent CLI (Claude Code, Qwen Code, Kimi CLI, Codex, opencode, Hermes, Cairn's workers), found from the process tree, whatever model is behind it | KQL hunt, Sentinel analytics rule, Sigma |
 | Servers calling AI model APIs: Chinese models (DeepSeek, Qwen, GLM, Kimi, MiniMax, Doubao), gateways such as OpenRouter, and Western APIs | KQL hunt, Sigma, Zeek |
 | An AI agent's page reader (Qwen Code, Kimi CLI, opencode, Claude Code) on your application next to attack traffic from the same address | KQL hunt, Sigma, Suricata, Zeek |
 | One site probed through hundreds of rotating proxy addresses | KQL hunt, Zeek |
@@ -43,7 +43,7 @@ The ARTEX folder also carries behavior hunts written before this split: user age
 |---|---|
 | [`iocs/indicators.csv`](iocs/indicators.csv) | 514 indicators across all frameworks. Each row has its source, confidence, a review date for addresses and a `framework` column (`artex`, `cairn`, `pentagi`, `hexstrike`, `cyberstrikeai`, `strix`, `hermes`, `agent-zero`, or several). This file is the single source for every feed |
 | [`feeds/`](feeds) | Generated from the CSV for all frameworks: STIX 2.1 bundle with one tool per framework, Sentinel watchlist and plain lists of IPv4 and IPv6 addresses, domains, URLs, user agents and SHA-256 and MD5 hashes. [`feeds/by-framework/`](feeds/by-framework) has the plain lists per framework |
-| [`generated/`](generated) | Every Sigma rule converted to Splunk SPL, Sentinel ASIM KQL and Elastic ES\|QL and Lucene, by framework. [`SUMMARY.md`](generated/SUMMARY.md) shows which rule converted to which backend |
+| [`generated/`](generated) | Every Sigma rule converted to Splunk SPL, Sentinel and Defender XDR KQL, and Elastic ES\|QL and Lucene, by framework. [`SUMMARY.md`](generated/SUMMARY.md) shows which rule converted to which backend |
 | [`tools/`](tools) | Feed builder, Sigma converter and validator |
 | [`docs/`](docs) | [Adding a framework](docs/adding-a-framework.md) |
 
@@ -55,7 +55,7 @@ Each framework folder has its own Zeek intel file and Suricata address rules, ge
 
 **Suricata.** Add the `.rules` files from `frameworks/*/suricata/` and `behaviors/suricata/`. HTTP rules need cleartext or decrypted traffic. DNS and TLS SNI rules work on encrypted traffic.
 
-**Zeek.** Load the behavior package in `behaviors/zeek/agentic-behaviors/` ([setup](behaviors/zeek/README.md)), the ARTEX script in `frameworks/artex/zeek/artex/`, and `frameworks/*/zeek/intel/*.intel` through the Intel framework.
+**Zeek.** Load the behavior package in `behaviors/zeek/agentic-behaviors/` and set `server_nets` to your server ranges ([setup](behaviors/zeek/README.md)). Also load the ARTEX script in `frameworks/artex/zeek/artex/`, and `frameworks/*/zeek/intel/*.intel` through the Intel framework.
 
 **YARA.** Scan container layers, home folders, `/tmp` and web roots with the files in `frameworks/*/yara/`.
 
@@ -79,13 +79,16 @@ Addresses from cloud and VPS providers are reassigned. Every address has a `revi
 
 ```bash
 pip install -r tools/requirements.txt
-python3 tools/validate.py                              # Sigma, KQL, ES|QL, TOML, Splunk, Suricata SIDs, YARA, osquery, feeds
+python3 tools/validate.py                              # Sigma, KQL, ES|QL, TOML, Splunk, Suricata SIDs, YARA, Zeek, osquery, feeds
 python3 tools/convert.py                               # regenerate generated/
+python3 tests/suricata/run_tests.py                    # one flow per Suricata rule; needs suricata and openssl
 bash frameworks/artex/tests/run_network_tests.sh       # needs zeek and suricata on the PATH
 bash behaviors/zeek/tests/run_tests.sh                 # needs zeek on the PATH
 ```
 
-No rule in this repository has been tested against a captured intrusion, so treat every rule as experimental until it has run on your own data.
+`validate.py` checks KQL with Microsoft's parser when `dotnet` is installed, and Zeek scripts when `zeek` is.
+
+The test traffic is written from the framework source code and from published reports. It is not captured attack traffic. Version 2.7.0 was also run over 30 days of production telemetry to find rules that could not fire and rules that were noisy. No rule has been tested against a captured intrusion, so treat every rule as experimental until it has run on your own data.
 
 ## Contributing
 

@@ -1,0 +1,4 @@
+# Carbonato Docker Worm Host Escape or Persistence
+# Sigma id 59355a64-b6fd-5c50-8370-eea0f297294c, pipeline microsoft_xdr
+DeviceProcessEvents
+| where ((ProcessCommandLine contains "nsenter" and ProcessCommandLine contains "-t 1" and ProcessCommandLine contains "-m -u -n -i") and (ProcessCommandLine contains "curl " or ProcessCommandLine contains "wget " or ProcessCommandLine contains "crontab" or ProcessCommandLine contains "chattr" or ProcessCommandLine contains "authorized_keys" or ProcessCommandLine contains "systemctl enable" or ProcessCommandLine contains "rc.local" or ProcessCommandLine contains ".hermes")) or (ProcessCommandLine contains "netns-probe" or ProcessCommandLine contains "system/resolved" or ProcessCommandLine contains ".docker-network-monitor" or ProcessCommandLine contains "/opt/gh0st/" or ProcessCommandLine contains "CARBONATO_API_KEY") or FolderPath =~ "/usr/sbin/systemd-logind"

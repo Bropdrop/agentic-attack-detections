@@ -11,6 +11,7 @@ hand-written native query in sentinel/, splunk/ or elastic/ instead.
 Generated queries use the field names of the chosen pipeline. Check them against your own data model.
 """
 import os
+import copy
 import sys
 from pathlib import Path
 
@@ -47,13 +48,24 @@ def pipelines():
     from sigma.pipelines.splunk import splunk_windows_pipeline
     from sigma.pipelines.elasticsearch.windows import ecs_windows
 
+    def ecs():
+        # ecs_windows only maps Windows rules. Linux and product-less process rules get the same ECS process fields.
+        from sigma.processing.conditions import LogsourceCondition
+        from sigma.processing.pipeline import ProcessingItem
+        from sigma.processing.transformations import FieldMappingTransformation
+        process_fields = {"CommandLine": "process.command_line", "Image": "process.executable", "ParentImage": "process.parent.executable",
+                          "ParentCommandLine": "process.parent.command_line", "User": "user.name", "CurrentDirectory": "process.working_directory"}
+        return ecs_windows() + ProcessingPipeline(name="ECS process fields for non-Windows rules", priority=30, items=[
+            ProcessingItem(identifier="ecs_process_fields", transformation=FieldMappingTransformation(process_fields),
+                           rule_conditions=[LogsourceCondition(category="process_creation")])])
+
     return {
         "splunk": (SplunkBackend, [("splunk_windows", splunk_windows_pipeline()), ("raw fields", None)]),
         "sentinel_asim": (KustoBackend, [("sentinel_asim", sentinel_asim_pipeline())]),
         "defender_xdr": (KustoBackend, [("microsoft_xdr", microsoft_xdr_pipeline())]),
         "azure_monitor": (KustoBackend, [("azure_monitor", azure_monitor_pipeline())]),
-        "elastic_esql": (ESQLBackend, [("ecs_windows", ecs_windows()), ("raw fields", None)]),
-        "elastic_lucene": (LuceneBackend, [("ecs_windows", ecs_windows()), ("raw fields", None)]),
+        "elastic_esql": (ESQLBackend, [("ecs", ecs()), ("raw fields", None)]),
+        "elastic_lucene": (LuceneBackend, [("ecs", ecs()), ("raw fields", None)]),
     }
 
 
@@ -78,7 +90,8 @@ def main():
             done = None
             for label, pipe in plist:
                 try:
-                    out = convert_one(cls, pipe, coll)
+                    # A pipeline rewrites field names on the rule objects it is given, so every backend gets its own copy.
+                    out = convert_one(cls, pipe, copy.deepcopy(coll))
                     if out:
                         done = (label, out[-1] if isinstance(rule, SigmaCorrelationRule) else "\n".join(map(str, out)))
                         break

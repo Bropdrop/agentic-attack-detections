@@ -1,0 +1,4 @@
+# Strix AI Pentest Agent CLI or Sandbox
+# Sigma id f15a6887-4f5c-590b-bfe3-829a57781f3b, pipeline microsoft_xdr
+DeviceProcessEvents
+| where ProcessCommandLine matches regex "(^|[/\\\\\\s])strix(\\.exe)?[\"']?\\s(.*\\s)?(--target|-t|--target-list|--scan-mode|--resume)[\\s=]" or ProcessCommandLine matches regex "((pip|pip3|pipx)\\s+install|uv\\s+(tool\\s+install|tool\\s+run|pip\\s+install)|uvx)\\s(.*\\s)?[\\\"']?strix-agent" or ProcessCommandLine contains "usestrix/strix-sandbox" or (ProcessCommandLine contains "caido-cli" and ProcessCommandLine contains "--allow-guests")

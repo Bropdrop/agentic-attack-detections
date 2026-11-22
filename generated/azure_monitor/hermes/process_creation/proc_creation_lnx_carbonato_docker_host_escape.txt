@@ -1,0 +1,4 @@
+# Carbonato Docker Worm Host Escape or Persistence
+# Sigma id 59355a64-b6fd-5c50-8370-eea0f297294c, pipeline azure_monitor
+SecurityEvent
+| where ((CommandLine contains "nsenter" and CommandLine contains "-t 1" and CommandLine contains "-m -u -n -i") and (CommandLine contains "curl " or CommandLine contains "wget " or CommandLine contains "crontab" or CommandLine contains "chattr" or CommandLine contains "authorized_keys" or CommandLine contains "systemctl enable" or CommandLine contains "rc.local" or CommandLine contains ".hermes")) or (CommandLine contains "netns-probe" or CommandLine contains "system/resolved" or CommandLine contains ".docker-network-monitor" or CommandLine contains "/opt/gh0st/" or CommandLine contains "CARBONATO_API_KEY") or NewProcessName =~ "/usr/sbin/systemd-logind"

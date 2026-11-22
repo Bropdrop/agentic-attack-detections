@@ -19,7 +19,10 @@ logsource:
 detection:
     selection:
         cs-uri-query|contains:
-            - 'eyJhbGciOiJub25lIn0.'
+            - 'eyJhbGciOiJub25lI'  # {"alg":"none"} with or without typ
+            - 'eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lI'  # typ first
+            - 'eyJhbGciOiJOb25lI'  # None
+            - 'eyJhbGciOiJOT05FI'  # NONE
             - 'eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.'
             - 'eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.'
     condition: selection

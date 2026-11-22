@@ -1,0 +1,4 @@
+# JSP Web Shell Names Seen in ARTEX Intrusions
+# Sigma id da2a1f27-1099-5c19-ab6f-820c9b3b1e6a, pipeline microsoft_xdr
+DeviceFileEvents
+| where FolderPath endswith "/cl1217.jsp" or FolderPath endswith "/f1219a.jsp" or FolderPath endswith "/z1219.jsp" or FolderPath endswith "\\cl1217.jsp" or FolderPath endswith "\\f1219a.jsp" or FolderPath endswith "\\z1219.jsp"

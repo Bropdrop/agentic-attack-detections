@@ -13,9 +13,14 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install tools
-        run: pip install -r tools/requirements.txt
+        run: |
+          pip install -r tools/requirements.txt
+          sudo apt-get update
+          sudo apt-get install -y suricata
       - name: Validate rules, queries and feeds
         run: python tools/validate.py
+      - name: Replay test flows through Suricata
+        run: python tests/suricata/run_tests.py
       - name: Convert Sigma to Splunk, Sentinel and Elastic
         run: python tools/convert.py
       - name: Check generated conversions are committed

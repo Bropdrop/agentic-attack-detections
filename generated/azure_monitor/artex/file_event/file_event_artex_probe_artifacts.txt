@@ -1,0 +1,4 @@
+# ARTEX Probe Artifact Created
+# Sigma id c5af5255-c664-5237-9359-34a102f431d1, pipeline azure_monitor
+SecurityEvent
+| where ObjectName contains "artex-probe-" or ObjectName endswith "\\ProgramData\\artx5v*" or ObjectName contains "zzartx0000.php"

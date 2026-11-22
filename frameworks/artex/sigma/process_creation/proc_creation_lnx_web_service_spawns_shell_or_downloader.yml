@@ -26,11 +26,28 @@ detection:
             - '/httpd'
             - '/apache2'
             - '/php-fpm'
-            - '/java'
-            - '/node'
             - '/mysqld'
             - '/mariadbd'
             - '/postgres'
+    selection_runtime:
+        # java and node also run Jenkins, npm and AI agent CLIs, so they only count under a service account
+        ParentImage|endswith:
+            - '/java'
+            - '/node'
+        User:
+            - 'www-data'
+            - 'apache'
+            - 'nginx'
+            - 'http'
+            - 'tomcat'
+            - 'tomcat9'
+            - 'jetty'
+            - 'jboss'
+            - 'wildfly'
+            - 'node'
+            - 'nodejs'
+            - 'nobody'
+            - 'daemon'
     selection_parent_php:
         ParentImage|contains: '/php-fpm'
     selection_child:
@@ -44,7 +61,7 @@ detection:
             - '/ncat'
             - '/socat'
             - '/busybox'
-    condition: 1 of selection_parent* and selection_child
+    condition: (1 of selection_parent* or selection_runtime) and selection_child
 falsepositives:
     - Application servers that run shell scripts by design. Baseline each service before alerting
 level: medium

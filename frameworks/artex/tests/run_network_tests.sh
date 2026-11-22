@@ -24,6 +24,15 @@ echo "notices: $notices"
 for n in ARTEX::User_Agent ARTEX::Probe_Marker ARTEX::Probe_Path ARTEX::JWT_Alg_None ARTEX::Console_Page; do
   if ! grep -q "$n" "$work/notice.log"; then echo "MISSING zeek notice $n"; fail=1; fi
 done
+# User agent names match in any case, and alg:none tokens with typ after alg and with the NONE spelling are caught.
+notice_has() { { grep "$1" "$work/notice.log" 2>/dev/null || true; } | grep -qF -- "$2"; }
+for ua in "artex-pentest/1.0" "ScopeWeaver/1.0" "ARTEX-PENTEST/1.0"; do
+  if ! notice_has ARTEX::User_Agent "$ua"; then echo "MISSING zeek user agent notice for $ua"; fail=1; fi
+done
+for jwt in "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.e30." "eyJhbGciOiJOT05FIn0.e30."; do
+  if ! notice_has ARTEX::JWT_Alg_None "$jwt"; then echo "MISSING zeek alg:none notice for $jwt"; fail=1; fi
+done
+if grep -q "198.51.100.7" "$work/notice.log"; then echo "FALSE POSITIVE zeek notice on benign browser request"; fail=1; fi
 
 echo "== Zeek intel"
 # The Intel framework reads files asynchronously, so a short pcap can finish before the file loads.
