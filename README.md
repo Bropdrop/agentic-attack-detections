@@ -109,10 +109,30 @@ The ARTEX folder also carries behavior hunts that apply to every framework: user
 | [`feeds/`](feeds) | Generated from the CSV: a STIX 2.1 bundle, a Sentinel watchlist, and plain lists of addresses, domains, URLs, user agents and hashes. [`feeds/by-framework/`](feeds/by-framework) has the lists per framework |
 | [`generated/`](generated) | Every Sigma rule converted to Splunk SPL, Sentinel and Defender XDR KQL, and Elastic ES\|QL and Lucene. [`SUMMARY.md`](generated/SUMMARY.md) shows which rule converted to which backend |
 | [`waf/`](waf) | Cloudflare, AWS WAF and Azure WAF rules built from [`waf/signatures.yaml`](waf/signatures.yaml) and the CSV. The [README](waf/README.md) covers when a WAF helps and how to deploy |
-| [`tools/`](tools) | Feed builder, WAF builder, Sigma converter and validator |
+| [`tools/`](tools) | Feed builder, WAF builder, release file builder, Sigma converter and validator |
 | [`docs/`](docs) | [Adding a framework](docs/adding-a-framework.md) |
 
 Each framework folder also has a Zeek intel file and Suricata address rules, generated from the same CSV.
+
+### Downloads
+
+Each [release](https://github.com/ThreatDefence/agentic-attack-detections/releases) carries the same content as ready-made files. These links always point at the newest release:
+
+| File | Contents |
+|---|---|
+| [`agentic-attack-detections.rules`](https://github.com/ThreatDefence/agentic-attack-detections/releases/latest/download/agentic-attack-detections.rules) | Every Suricata rule in one file |
+| [`agentic-attack-detections-yara.zip`](https://github.com/ThreatDefence/agentic-attack-detections/releases/latest/download/agentic-attack-detections-yara.zip) | The YARA rules, one file per framework |
+| [`agentic-attack-detections-stix2.1.json`](https://github.com/ThreatDefence/agentic-attack-detections/releases/latest/download/agentic-attack-detections-stix2.1.json) | The STIX 2.1 bundle |
+| [`agentic-attack-detections-indicators.zip`](https://github.com/ThreatDefence/agentic-attack-detections/releases/latest/download/agentic-attack-detections-indicators.zip) | `iocs/indicators.csv` and every feed |
+| [`agentic-attack-detections-waf.zip`](https://github.com/ThreatDefence/agentic-attack-detections/releases/latest/download/agentic-attack-detections-waf.zip) | The WAF rules for Cloudflare, AWS WAF and Azure WAF |
+| [`SHA256SUMS.txt`](https://github.com/ThreatDefence/agentic-attack-detections/releases/latest/download/SHA256SUMS.txt) | SHA-256 of each file |
+
+To keep the Suricata rules current with `suricata-update`:
+
+```bash
+suricata-update add-source agentic-attack-detections https://github.com/ThreatDefence/agentic-attack-detections/releases/latest/download/agentic-attack-detections.rules
+suricata-update
+```
 
 ## How the rules are built and checked
 
@@ -141,6 +161,7 @@ python3 tools/validate.py                              # Sigma, KQL, ES|QL, TOML
 python3 tools/convert.py                               # regenerate generated/
 python3 tools/build_waf.py                             # regenerate waf/
 python3 tests/waf/run_tests.py                         # offline checks of the WAF rules on every platform
+python3 tools/build_release.py                         # build the release downloads into dist/
 python3 tests/suricata/run_tests.py                    # one flow per Suricata rule; needs suricata and openssl
 bash frameworks/artex/tests/run_network_tests.sh       # needs zeek and suricata on the PATH
 bash behaviors/zeek/tests/run_tests.sh                 # needs zeek on the PATH

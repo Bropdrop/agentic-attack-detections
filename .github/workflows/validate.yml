@@ -33,6 +33,11 @@ jobs:
         run: python tests/waf/run_tests.py
       - name: Lint the CloudFormation template
         run: cfn-lint waf/aws/cloudformation.yaml
+      - name: Build the release files and load the combined Suricata rules
+        run: |
+          python tools/build_release.py --out dist
+          (cd dist && sha256sum -c SHA256SUMS.txt)
+          suricata -T -S dist/agentic-attack-detections.rules -l /tmp --init-errors-fatal --set unix-command.enabled=no
 
   waf-iac:
     runs-on: ubuntu-24.04

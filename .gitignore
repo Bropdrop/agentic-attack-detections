@@ -5,3 +5,4 @@ venv/
 .DS_Store
 tools/kqlcheck/bin/
 tools/kqlcheck/obj/
+dist/

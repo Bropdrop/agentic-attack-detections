@@ -1,0 +1,27 @@
+name: release files
+
+# When a release is published, build the downloadable files and attach them to it.
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  attach:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Build the release files
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: python tools/build_release.py --version "${TAG#v}" --out dist
+      - name: Attach them to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$TAG" dist/* --clobber --repo "$GITHUB_REPOSITORY"

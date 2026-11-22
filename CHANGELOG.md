@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.8.1, November 22, 2026
+
+No detection changes. Releases now come with ready-made downloads.
+
+- Each release carries the Suricata rules in one file, the YARA rules, the STIX 2.1 bundle, the indicators and feeds, the WAF rules, and a `SHA256SUMS.txt`. The file names stay the same from release to release, so `releases/latest/download/<name>` always gives the newest one.
+- `tools/build_release.py` builds them, with the same bytes for the same commit and version. A workflow attaches them when a release is published, and CI builds them on every push and loads the combined Suricata file.
+- README: a Downloads table and the `suricata-update` command.
+
 ## 2.8.0, November 22, 2026
 
 WAF rules (#10). The detections stay the same; this release adds a way to block part of them at the edge.
