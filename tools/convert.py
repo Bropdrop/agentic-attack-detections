@@ -55,9 +55,18 @@ def pipelines():
         from sigma.processing.transformations import FieldMappingTransformation
         process_fields = {"CommandLine": "process.command_line", "Image": "process.executable", "ParentImage": "process.parent.executable",
                           "ParentCommandLine": "process.parent.command_line", "User": "user.name", "CurrentDirectory": "process.working_directory"}
+        network_fields = {
+            "dns_query": {"QueryName": "dns.question.name"},
+            "proxy": {"c-uri": "url.original", "c-useragent": "user_agent.original", "cs-host": "url.domain"},
+            "webserver": {"cs-uri-stem": "url.path", "cs-uri-query": "url.query", "cs-user-agent": "user_agent.original"},
+        }
+        network_pipeline = ProcessingPipeline(name="ECS DNS, proxy and web server fields", priority=30, items=[
+            ProcessingItem(identifier=f"ecs_{category}_fields", transformation=FieldMappingTransformation(fields),
+                           rule_conditions=[LogsourceCondition(category=category)])
+            for category, fields in network_fields.items()])
         return ecs_windows() + ProcessingPipeline(name="ECS process fields for non-Windows rules", priority=30, items=[
             ProcessingItem(identifier="ecs_process_fields", transformation=FieldMappingTransformation(process_fields),
-                           rule_conditions=[LogsourceCondition(category="process_creation")])])
+                           rule_conditions=[LogsourceCondition(category="process_creation")])]) + network_pipeline
 
     return {
         "splunk": (SplunkBackend, [("splunk_windows", splunk_windows_pipeline()), ("raw fields", None)]),

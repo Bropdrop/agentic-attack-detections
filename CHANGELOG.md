@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.7.3, November 22, 2026
+
+- Elastic conversions of DNS, proxy and web server rules now use ECS field names: `dns.question.name`, `url.original`, `url.domain`, `url.path`, `url.query` and `user_agent.original`. Before, they kept the Sigma names and matched nothing in an ECS index. Contributed by @tridev-tej in #9, closing #4.
+- `tools/validate.py` fails if a generated Elastic query still uses one of those Sigma field names.
+
 ## 2.7.2, November 22, 2026
 
 - Two ARTEX user agents added: `artex-agent` and `artex-judge-r121`. Dragos saw them in AWS CloudTrail when ARTEX checked stolen keys it had planted as canary tokens. Reported in #8 by @Assaf-tal.

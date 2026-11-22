@@ -1,3 +1,3 @@
 # CyberStrikeAI User Agents or Implant Check-in in Proxy Logs
 # Sigma id f8900a2b-5be3-5f5b-b701-c0f420ecef95, pipeline ecs
-from * metadata _id, _index, _version | where starts_with(`c-useragent`, "CyberStrikeAI/") or starts_with(`c-useragent`, "CyberStrikeAI-Docker-build") or `c-useragent` like "*CyberStrikeAI-WebShell/*" or `c-useragent`=="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+from * metadata _id, _index, _version | where starts_with(user_agent.original, "CyberStrikeAI/") or starts_with(user_agent.original, "CyberStrikeAI-Docker-build") or user_agent.original like "*CyberStrikeAI-WebShell/*" or user_agent.original=="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
